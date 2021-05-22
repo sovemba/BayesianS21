@@ -1,0 +1,234 @@
+# Binomial
+
+```{r echo = FALSE, message = FALSE}
+rm(list=ls());  set.seed(20210504);
+knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
+```
+
+
+<tt>The following notes are from transcribed from Neath(0504, 2021) lecture which summarizes Section 3.1 of Hoff(2009).</tt>
+
+
+
+## Example - Exchangeable binary data
+
+The quantity of interest is the proportion of women that rate themselves as generally happy. Denote this quantity as $\theta$, $0 < \theta < 1$. Our data is $n=129$ women surveyed.
+$$
+Y_i = \begin{cases}
+1 \text{ if } i\text{th woman answered yes}\\
+0 \text{ otherwise}
+\end{cases}
+$$
+
+$\sum{y_i} =118$(number of $1$s). We describe our prior belief (before observing the data) by a prior probability distribution $p(\theta)$. In this example we're saying $\theta \sim \text{Uniform}(0, 1)$ prior density $\implies p(\theta) = 1$.
+
+Let $\theta =$ proportion of ALL women age 65+ who would answer yes. Binary means same thing as Bernoulli $(1$ with probability $\theta$, $0$ with probability $1-\theta)$. Conditonal on $\theta$ the probability of any particular sequence of $0$s and $1$s is $\theta^{\sum{y_i}} \times (1-\theta)^{n-\sum{y_i}}.$ 
+
+What do we know about $\theta?$ Our belief about $Y_1, …, Y_n$ are determined by our beliefs about $(1)~\theta = \sum_{i=1}^NY_i/N \text{ and  }~ (2) ~ p(y_1, \ldots, y_n|\theta)$. The second one would be the bernoulli distribution! The first one is not resolved. What do we believe about $\theta$ prior to observing data? We know $0 < \theta < 1.$ Our belief about where between $0$ and $1$ is most likely to be is correctly described by some probability distribution on the interval $[0, 1]$. So Let's say $\theta \sim \text{Uniform}(0, 1).$ This would say $Pr(a < \theta < b) = b-a$ for any $0 < a < b < 1.$ 
+
+Okay fine. The prior density is $p(\theta) = 1, ~ 0 < \theta < 1.$ Do Bayes' rule to get the posterior $p(\theta | y_1, y_2, \ldots, y_n) =p(y | \theta)p(\theta)/p(y) = c \times p(y | \theta)$. The denominator is constant because it doesn't depend on $\theta$!
+
+We have a general result here: Under a uniform prior distribution the posterior is proportional to the likelihood. Let's proceed.
+
+The data are: $n = 129, ~118$ answered Yes I am generally happy $11$ did not. The probability of the specific sequence of values observed $($conditional on the value of $\theta)$ i.e., $p(y|\theta)= \theta^{118} \times (1 - \theta)^{11}.$ Note here $y_1, y_2, …, y_{129}$ represents a particular sequence of 118   1s and 11  0s. So we have $p(\theta | y) = c \times p(y | \theta)  = c \times \theta^{118} \times (1 - \theta)^{11}$ so a plot of $p(y | \theta)$ versus $\theta$ tells us what the posterior distribution looks like!
+
+```{r fig.cap = "unnormalized posterior"}
+n     <- 129
+sum.y <- 118
+theta <- seq(0, 1, .001)
+x = expression(theta)
+y = expression(p(y*'|'*theta))
+plot(theta, theta^sum.y * (1-theta)^(n-sum.y), 
+     type="l", lwd=2, col="red", ylab=y, xlab = x); 
+grid(); abline(v = 118/129) #118 yeses -- the mode
+```
+
+Our belief about $\theta$ based on 118 yeses out of 129 asked is; $0.80 < \theta < 1$
+
+Note: The shape here is correct for the posterior distribution, but the values on the y-axis is not as we are missing the constant factor in $p(\theta | y) = c \times p(y | \theta).$ This curve does not integrate to 1 so it's not a probability density but it does uniquely define a probability density by its shape and THAT probability density is indeed the posterior of $\theta.$
+
+If the prior is uniform, we get a similar conclusion as a frequentist statistician although the interpretations are not the same.
+
+
+## The beta distribution
+
+The Beta distribution is a probability distribution on $[0, 1].$ Hey! $\theta$ lives on $[0, 1]$. We can use the beta distribution as our prior for $\theta$ !
+
+Remember the Gamma function? For integer - value $x,~\text{Gamma}(x) = (x-1)!$
+For noninteger it effectively interpolates between those factorials .
+
+### Properties of the beta distribution
+
+It has two parameters $a$ and $b, ~a$ describes tendency toward 1, $b$ describes tendency toward 0, mean of this distribution is $a / (a+b)$ variance is
+$ab/(a+b+1)(a+b)^2.$ If $a$ and $b$ are big, the beta distribution is has a low variance (has a high peak). If $a$ and $b$ are not big then the beta distribution is more spread out. Mode is the value that maximizes our posterior belief! So if you want to report a single - number best guess at $\theta$ this would be a sensible choice. 
+
+A plot of the posterior, $\theta | y_1, …, y_n \sim \text{Beta}(119, 12)$
+
+```{r fig.cap = "the posterior density, with uniform(0,1){ Beta(1,1) } prior also shown"}
+post <- dbeta(theta, sum.y+1, n-sum.y+1)
+plot(theta, post, type="l", lty=1, lwd=2, ylab="", xlab = x);
+lines(theta, rep(1, length(theta)), col="gray", lwd=2);
+legend("topleft", inset=.05, lwd=2, col=c("gray","black"),
+       legend=c("Prior", "Posterior"));grid()
+```
+
+This curve is the same as the first one above. But this one is a probability density. It has area under curve = 1. The light gray curve (the flat line) is the uniform density. That's our prior belief about $\theta$. So we purposely chose a prior that did not make any super strong assumptions. We don't want to pretend we know more than we do. With a uniform prior, the posterior will depend mostly on the data. In the prior our belief about $\theta$ was weak, in the posterior we have pretty strong beliefs! Based on the data observed!
+
+Our posterior belief about $\theta$ is entirely contained in ratios $p(\theta_a | y_1,\ldots,y_n) / p(\theta_b | y_1,\ldots,y_n)$, because you can do this for any two values, if you have a way to compare any two possible values of $\theta$ you have a way to do complete inference about $\theta$.
+$$
+\frac{p(\theta_a | \boldsymbol{y})}{p(\theta_b | \boldsymbol{y})} = \bigg(\frac{\theta_a}{\theta_b}\bigg)^{\sum y_i} \bigg(\frac{1-\theta_a}{1-\theta_b}\bigg)^{n-\sum y_i} \frac{p(\theta_a)}{p(\theta_b)}
+$$
+
+
+
+Look what happens to this ratio. It depends on the data $y_1, …, y_n$ only through their sum, $\sum{ y_i }$. Any posterior belief about $\theta$ depends on the data only through the total value $\sum{y_i}$, This means that $\sum{y_i}$ is a sufficient statistic for the bernoulli sampling model (likelihood) and uniform prior. Another way to say this; If you observe $y = (1, 0, 0)$ and I observe $y = (0, 0, 1)$ and we use the same prior and likelihood our inference will be exactly the same because these two data sets have the same $\sum{y_i}$. If inference about $\theta$ depends on the data only through the total value let's just call that our data.
+
+Notation: $Y_i = 1$ or $0$ for the $i$th observation, $Y = Y_1 + … + Y_n$. Then conditionally on $\theta, ~~ Y | \theta \sim \text{Binomial}( n, \theta)$. 
+
+## Binomial distribution
+
+$Pr(\sum{Y_i} = y) = \binom{n}{y} \times \theta^y \times (1-\theta)^{n-y}$
+
+Without the ${n \choose y}$ we have the probability of any particular sequence of $y$ 1s and $n-$y 0s. But what we want is just the probability of one of those.
+
+$E(Y | \theta) = n \times \theta$
+
+var$(Y | \theta) = n \times \theta \times (1-\theta)$
+
+### Posterior inference for a binomial sampling model
+
+So we have a prior density $p(\theta)$ we have a sampling model $Pr(Y = y | \theta) =$ `dbinom`$(y , n , \theta)$. From these we use Bayes' rule to compute the posterior!
+
+$$
+\begin{aligned}
+p(\theta \mid y) &=\frac{p(y \mid \theta) p(\theta)}{p(y)} \\
+&=\frac{\left(\begin{array}{l}
+n \\
+y
+\end{array}\right) \theta^{y}(1-\theta)^{n-y} p(\theta)}{p(y)} \\
+&=c(y) \theta^{y}(1-\theta)^{n-y} p(\theta)
+\end{aligned}
+$$
+
+$c(y) = {n \choose y} / p(y)$,which is a function of $y$. Can we evaluate this? The answer is yes. But it would involve hard calculus. But we don't need to. The key point here is: $c(y)$ does not depend on $\theta, \implies p(\theta | y) \propto \theta^y (1-\theta)^{n-y} p(\theta).$
+
+
+We know the shape of the posterior density! we don't know it exactly i.e, the scale but we know the shape.
+
+Let's take the uniform prior distribution $p(\theta) = 1$. We now have $c(y)$ in an explicit form involving gamma functions( 03a slide 15 ) therefore we have the exact form of $p(\theta | y)$. We have just demonstrated $\theta | y \sim \text{Beta}( y+1, n-y+1)$.
+
+Recall what we noted about the Beta$(a, b)$ dist. $a$ measures a tendency toward 1, $b$ measures a tendency toward $0 ~($or more accurately, $a/(a+b)$   and   $b/(a+b))$. We've seen that this posterior results from the "independent  Bernoulli's" model it also results from the Binomial model. Thus confirming the sufficiency result.
+
+Intuitively speaking, you can make a note of who answered yes and who answered no in the happiness question but it doesn't matter because all we need is the sum of the yeses. 
+
+Uniform$(0, 1) = \text{Beta}(1,1)=$ `dbeta`$(\theta, 1, 1) = 1, ~~ \forall ~ 0 < \theta < 1$.
+
+We've demonstrated that if $\theta \sim \text{Beta}(1,1), ~~ Y | \theta \sim \text{Binomial}(n, \theta),$ then $\theta | y \sim \text{Beta}(1 + y , 1 + n - y)$.
+
+It looks like the Beta$(1, 1)$ prior combines with $y$ successes and $(n-y)$ failures to give a Beta posterior with $1+y$ and $1+n-y$ parameters $\implies p(\theta|y) \sim \text{Beta}(a+y, b+n-y) =$ `dbeta`$(\theta, a+y, b+n-y).$
+
+### Conjugacy
+
+**Key result:**
+
+If $\theta \sim \text{Beta}(a, b)$ and $Y | \theta \sim \text{Binomial}(n , \theta)$ then $\theta | y \sim \text{Beta}(a + y,  b + n-y)$.
+
+This situation where the posterior distribution is of the same family of distributions as the prior is called conjugacy. Specifically we say *the conjugate prior for a Binomial sampling model is the Beta distribution.* Conjugate distributions are characterized by nice math. Things work out nicely for conjugate priors, things cancel out etc. Priors should reflect our prior belief. If that's well described by a conjugate distribution GREAT otherwise no reason to restrict attention to conjugate priors in Bayesian analyses.
+
+## Combining information
+
+The prior $p(\theta)$ is what we believed before we saw the data. The likelihood $p(y|\theta)$ contains what we learn from the data. Therefore the posterior should in some sense combine what we knew before with what we just learned. It does! Posterior combines prior and likelihood; $p(\theta | y) = c \times p(\theta) \times p(y | \theta)$. Let's demonstrate this for the "beta-binomial" model where  $\theta | y \sim \text{Beta}( a + y , b + n-y).$
+
+$$\begin{aligned}
+\text{Prior mean } = E(\theta) &= \frac{a}{a+b}\\
+\text{Sample average is } & y/n
+\end{aligned}$$ 
+
+$$\text{Posterior mean } = \frac{a+y}{a + b  + n} = \frac{a+b}{a+b+n} \cdot\frac{a}{a + b} + \frac{n} {a+b+n} \cdot \frac{y}{n}$$
+
+What this equation demonstrates is that posterior expectation = weighted average of prior expectation and sample average. $a + b$ is the weight given to the prior, $n$ is the weight given to the data. Data contributes $y$ successes and $n-y$ failures (in $n$ trials). $a$ plays the exact same role as $y, ~b$ plays the exact same role as $n-y.$ Thus we can say the Beta$(a, b)$ prior contributes $a$ "successes" and $b$ "failures" in $a + b$ "prior trials". So the bigger is $n$ relative to $a+b$ the less the prior matters.
+
+### Example
+
+Happiness example with a uniform prior. $a + b = 2, ~ n = 129$. Thus the posterior distribution mostly depends on the data.
+```{r include = FALSE}
+# labelings
+ylab  <-   expression(p(theta*'|'*y))
+x     <-  expression(theta)
+b1    <- expression(paste("beta(1,1) prior,  ", italic("n"),"=5  ",
+      italic(sum(y[i])),"=1",sep=""))
+b2    <- expression(paste("beta(3,2) prior,  ", italic("n"),"=5  ",
+      italic(sum(y[i])),"=1",sep=""))
+b3    <- expression(paste("beta(1,1) prior,  ", italic("n"),"=100  ",
+      italic(sum(y[i])),"=20",sep=""))
+b4    <- expression(paste("beta(3,2) prior,  ", italic("n"),"=100  ",
+      italic(sum(y[i])),"=20",sep=""))
+```
+
+```{r fig.cap = "Beta posterior distributions under two diﬀerent sample sizes and two different prior distributions. Look across a row to see the effect of the prior distribution, and down a column to see the eﬀect of the sample size"}
+
+# Reproduce Figure 3.4 in Hoff (2009)
+par(mar=c(3,3,1,1),mgp=c(1.75,.75,0),oma=c(0,0,.5,0))
+par(mfrow=c(2,2))
+theta <- seq(0, 1, .01)
+a     <- 1; b <- 1; n <- 5; y <- 1;
+plot(theta, dbeta(theta, a+y, b+n-y), type="l",lwd=2, ylab=ylab,
+     main=mtext(b1, side=3,line=.1), xlab = x)
+lines(theta, dbeta(theta, a, b), lwd=2, col="gray")
+legend("topright", inset=.05, lty=1, lwd=2,col=c("gray","black"),
+       legend=c("Prior", "Posterior"), bty="n")
+a <- 3;  b <- 2;  n <- 5;  y <- 1;
+plot(theta, dbeta(theta, a+y, b+n-y), type="l",lwd=2, ylab=ylab,
+     main=mtext(b2, side=3,line=.1), xlab = x)
+lines(theta, dbeta(theta, a, b), lwd=2, col="gray")
+a <- 1;  b <- 1;  n <- 100;  y <- 20;
+plot(theta, dbeta(theta, a+y, b+n-y), type="l",lwd=2, ylab=ylab,
+     main=mtext(b3, side=3,line=.1), xlab = x)
+lines(theta, dbeta(theta, a, b), lwd=2, col="gray")
+a <- 3;  b <- 2;  n <- 100;  y <- 20;
+plot(theta, dbeta(theta, a+y, b+n-y), type="l",lwd=2, ylab=ylab,
+     main=mtext(b4, side=3,line=.1), xlab = x)
+lines(theta, dbeta(theta, a, b), lwd=2, col="gray")
+```
+
+In the top row $n=5$ prior matters! In the bottom row, $n=100$ prior does not matter.
+
+## Prediction {#prediction}
+
+Suppose we have $n+1$ trials $Y_1, Y_2, …, Y_n, Y_{n+1}.$ We will observe $n$ of them and make our best prediction for the $(n+1)$st.
+
+The model says $\{Y_1, …, Y_n, Y_{n+1} | \theta\} \sim \text{iid  Binary}(\theta)$. Under Bayesian, we have a distribution for our predictions. 
+
+$$
+\begin{aligned}
+Pr(\tilde Y = 1|y_1,...,y_n)=E(\theta|y_1,...,y_n)&=\frac{a+\sum y_i}{a+b+n}\\
+Pr(\tilde Y = 0|y_1,...,y_n)=1-E(\theta|y_1,...,y_n)&=\frac{b+\sum(1-y_i)}{a+b+n}
+\end{aligned}
+$$
+
+$a$ and $b$ are called hyperparameters. The predictive distribution depends on hyperparameters which are known, and on the data which is observed. If the predictive distribution did not depend on $y_1, …, y_n$ that would suggest $\tilde Y$ was independent  of $(Y_1, .., Y_n)$. Also note that the predictive distribution does not depend on any unknown quantities.
+
+The Beta(1,1) prior $\equiv$ Uniform(0, 1) is equivalent to two prior observations (one success one failure). Does this seem right? Is this a 'noninformative' prior? Wouldn't it be even more uninformative to take $a = b = 0.5?$ What does this density look like?
+
+```{r out.width="80%", out.height="80%", fig.cap = "Beta(0.5, 0.5) density"}
+teta  <- seq(0, 1, 0.01)
+prior <- dbeta(teta, 0.5, 0.5)
+plot(teta, prior, type = "l", xlab = x, ylab = 
+     expression(p(theta)), lwd = 2)
+```
+
+
+It is more uninformative to take Beta(0.5, 0.5)
+
+So although the 1 extra success and 1 extra failure in the Beta(1,1) feels like something kind of noninformative to some people it leads to a more sensible prediction as we will illustrate here; 
+
+Under uniform prior, the posterior of the predictive probability for $\tilde Y$ has the posterior mean $(y+1)/(n+2)$. Suppose $y=0$ then the posterior mean becomes $1/(n+2)$ which is reasonable. Suppose $y=n$, then it is $(n+1)/(n+2)$ which is also reasonable. Whereas the posterior mode of $y/n$ doesn't make sense as a predictive probability. Just because you observed $n$ successes in $n$ trials doesn't mean you are 100% certain the next trial will be a success! Hence the posterior mean makes more sense as a predictive probability than the posterior mode and those two extra trials coming from the uniform prior seem sensible also.
+
+
+
+
+
+
+
+
+

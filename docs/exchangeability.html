@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lecture 2 Exchangeability | Bayesian Statistics notes from summer 2021</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lecture 2 Exchangeability | Bayesian Statistics notes from summer 2021" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lecture 2 Exchangeability | Bayesian Statistics notes from summer 2021" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Chisom Onyishi" />
+
+
+<meta name="date" content="2021-05-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="binomial-1.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
+<li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
+<li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>5</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="5.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>5.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>5.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>5.2.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>6</b> Poisson model</a><ul>
+<li class="chapter" data-level="6.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>6.1</b> Posterior inference for the Poisson model</a></li>
+<li class="chapter" data-level="6.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>6.2</b> Posterior predictive distribution</a></li>
+<li class="chapter" data-level="6.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>6.3</b> Example: Birth rates</a></li>
+<li class="chapter" data-level="6.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>6.4</b> Explaining the parameters of the gamma distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>7</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="7.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>7.1</b> Example: birth rate</a></li>
+<li class="chapter" data-level="7.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>7.2</b> The Monte Carlo method</a></li>
+<li class="chapter" data-level="7.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>7.3</b> Example: Numerical evaluation</a></li>
+<li class="chapter" data-level="7.4" data-path="monte-carlo.html"><a href="monte-carlo.html#posterior-inference-for-arbitrary-functions"><i class="fa fa-check"></i><b>7.4</b> Posterior inference for arbitrary functions</a></li>
+<li class="chapter" data-level="7.5" data-path="monte-carlo.html"><a href="monte-carlo.html#example-log-odds"><i class="fa fa-check"></i><b>7.5</b> Example: Log-odds</a></li>
+<li class="chapter" data-level="7.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>7.6</b> Example: Functions of two parameters</a></li>
+<li class="chapter" data-level="7.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>7.7</b> How many Monte Carlo samples are needed?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>8</b> Predictive</a><ul>
+<li class="chapter" data-level="8.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>8.1</b> Sampling for predictive distribution</a></li>
+<li class="chapter" data-level="8.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>8.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
+<li class="chapter" data-level="8.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>8.3</b> Posterior predictive model checking</a></li>
+<li class="chapter" data-level="8.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-for-group"><i class="fa fa-check"></i><b>8.4</b> Posterior predictive model checking for group</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics notes from summer 2021</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exchangeability" class="section level1">
+<h1><span class="header-section-number">Lecture 2</span> Exchangeability</h1>
+<p><tt>The following notes are from transcribed from Neath(0504, 2021) lecture which summarizes Sections(2.5-2.8) of Hoff(2009).</tt></p>
+<div id="discrete-joint-distributions" class="section level2">
+<h2><span class="header-section-number">2.1</span> Discrete joint distributions</h2>
+<p>We will talk about joint probability distributions. <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are two discrete random variables. We can define a joint probability density function (joint pdf) <span class="math inline">\(p_{Y_1Y_2}(y_1, y_2) = Pr(Y_1 = y_1 \text{ and } Y_2 = y_2)\)</span>. We will also be interested in the marginal distributions e.g., the pdf of <span class="math inline">\(Y_1\)</span> only. We will use subscripts on the <span class="math inline">\(p\)</span> to be clear what density we’re talking about. I get the marginal of <span class="math inline">\(Y_1\)</span> from the joint of <span class="math inline">\((Y_1, Y_2)\)</span> by summing over the values that <span class="math inline">\(Y_2\)</span> can take.</p>
+<p>We can also speak of the conditional density of <span class="math inline">\(Y_2\)</span> given <span class="math inline">\(Y_1\)</span> which follows immediately from the definition of conditional probability! Recall that <span class="math inline">\(Pr( B | A ) = Pr(A \text{ and } B) / Pr(A)\)</span>. Conditional density of <span class="math inline">\(Y_2 | Y_1=y_1\)</span> equal the joint density of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> divided by the marginal of <span class="math inline">\(Y_1\)</span>.</p>
+<p>Given the joint density one can derive both marginals and both conditionals. Given the marginal of <span class="math inline">\(Y_1\)</span> and the conditional of <span class="math inline">\(Y_2\)</span> given <span class="math inline">\(Y_1\)</span> one can construct the joint density of <span class="math inline">\((Y_1, Y_2)\)</span>. <em>Given the two marginals, marginal of <span class="math inline">\(Y_1\)</span>, marginal of <span class="math inline">\(Y_2\)</span>, it is not possible to construct the joint density</em> (knowing the row and columns totals doesn’t mean you know how to complete a contingency table). The joint distribution contains all the information the marginals do not! All the joint probabilities, all the marginal probabilities, and all possible conditional probabilities.</p>
+<p>We will not always use these subscripts on our <span class="math inline">\(p\)</span>’s. We will just use a lower case <span class="math inline">\(p\)</span> to denote a probability density. We’ll know the ‘density of what’ by the argument to the function!</p>
+<p>If we are talking about a pair of continuous random variables then the pdf’s really are probability DENSITY functions they’re not actually probabilities at all. We get probabilities from them by solving integrals.</p>
+<p><strong>Proposition:</strong> <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are two arbitrary rvs (random variables) with a joint distribution. That joint distribution is completely specified by the joint cdf. The ‘rigorous’ definition of a joint distribution starts with the joint cdf. The joint pdf is the function whose integral gives the joint cdf.</p>
+<p>Given a joint distribution of (<span class="math inline">\(Y_1, Y_2\)</span>), the marginal distribution of <span class="math inline">\(Y_1\)</span> is found by (summing over <span class="math inline">\(Y_2\)</span> values in the discrete case) (in the continuous case it’s integrating over all the <span class="math inline">\(Y_2\)</span> values). Although probability densities are not strictly probabilities, conditional densities can be defined analogously. The conditional density of <span class="math inline">\(Y_2 | Y_1 = y_1\)</span> is found by joint density of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> divided by marginal density of <span class="math inline">\(Y_1\)</span>.</p>
+<p>We can define a pair of rvs so that <span class="math inline">\(Y_1\)</span> is discrete and <span class="math inline">\(Y_2\)</span> is continuous. We still have <span class="math inline">\(p(y_1, y_2) = p(y_1) p(y_2 | y_1)\)</span> and <span class="math inline">\(p(y_1, y_2) = p(y_2) p(y_1 | y_2)\)</span>. Probabilities are found by summing over values of the discrete one and integrating over values of the continuous one.</p>
+</div>
+<div id="bayesrule" class="section level2">
+<h2><span class="header-section-number">2.2</span> Bayes’ rule and parameter estimation</h2>
+<p>Let <span class="math inline">\(\theta =\)</span> proportion of people who have a certain characteristic.</p>
+<p>E.g., public opinion poll: Approve of performance of President Biden? Yes or No? <span class="math inline">\(\theta\)</span> would be the proportion of people who would answer yes, <span class="math inline">\(0 &lt; \theta &lt; 1\)</span></p>
+<p>Is <span class="math inline">\(\theta\)</span> discrete or continuous? If there are 300 million people in the population of interest then the possible values are 0, 1/300,000,000, 2/300,000,000, …, 299,999,999/300,000,000, 1. But that’s kind of stupid. It’s continuous. It makes most sense to treat <span class="math inline">\(\theta\)</span> as continuous, <span class="math inline">\(0 &lt; \theta &lt; 1\)</span>.</p>
+<p>What if <span class="math inline">\(Y =\)</span> number of people sampled who answer YES to “Approve of President Biden?”. The population size is millions the sample size is hundreds? Here it does make sense to use a discrete probability model for <span class="math inline">\(Y\)</span>.</p>
+<p><span class="math inline">\(\theta\)</span> is the value we want to know, <span class="math inline">\(Y = y\)</span> is the quantity we’re able to observe. <em>Statistical inference</em> is making induction about <span class="math inline">\(\theta\)</span> based on observation of <span class="math inline">\(Y = y\)</span>. For a classical (non-Bayesian) analysis this requires a probability model for <span class="math inline">\(Y\)</span> that depends on <span class="math inline">\(\theta\)</span>. In Bayesian statistics it requires a joint probability model for <span class="math inline">\((Y , \theta)\)</span>!</p>
+<p>Where frequentist statistics treats <span class="math inline">\(\theta\)</span> as fixed (unknown but fixed) Bayesian statistics treats it as a random variable. The justification for this? Our belief about the value of <span class="math inline">\(\theta\)</span> is measured by a probability dist! Start with what we believe about <span class="math inline">\(\theta\)</span> before we’ve observed any data. Those beliefs determine the marginal distribution <span class="math inline">\(p(\theta)\)</span>. We call this the <em>prior distribution</em>. Then we have (just as in non-Bayesian statistics) probability distribution for <span class="math inline">\(Y\)</span> that depends on <span class="math inline">\(\theta\)</span>. In Bayesian statistics we make it explicit that this is a CONDITIONAL probability, conditional on the value of <span class="math inline">\(\theta\)</span>. After data are observed we want to update our beliefs about <span class="math inline">\(\theta\)</span>. Use Bayes’ rule! <span class="math inline">\(p(\theta | y) = p(\theta, y) / p(y) = p(\theta) p(y | \theta) / p(y)\)</span>. This is called the posterior distribution (because it comes after observing the data).</p>
+<p>If <span class="math inline">\(\theta_a\)</span> and <span class="math inline">\(\theta_b\)</span> are two possible values of <span class="math inline">\(\theta\)</span> our belief in <span class="math inline">\(\theta_a\)</span> versus <span class="math inline">\(\theta_b\)</span> is defined by the ratio of their posterior probabilities (or posterior densities). That ratio depends on <span class="math inline">\(p(\theta_a) / p(\theta_b)\)</span> ratio of ‘prior probabilities’ and <span class="math inline">\(p(y | \theta_a) / p(y | \theta_b)\)</span> which is the ratio of the ‘likelihoods’.</p>
+<p>Note! One need not calculate the marginal probability <span class="math inline">\(p(y)\)</span> to calculate this ratio! That’s an important observation! Bayes’ rule tells us <span class="math inline">\(p(\theta | y) = p(\theta) p(y | \theta) / p(y)\)</span>. Thinking of this thing as a function of <span class="math inline">\(\theta\)</span> we can write <span class="math inline">\(p(\theta | y) = c \times p(\theta) \times p(y | \theta)\)</span>.</p>
+<p>Are you familiar with this “proportional to” symbol? You will be! We say <span class="math inline">\(f(x) \propto g(x)\)</span> if there exists a constant <span class="math inline">\(c &gt; 0\)</span> such that
+<span class="math inline">\(f(x) = c \times g(x) ~\forall ~x\)</span>. <span class="math inline">\(p(\theta | y)\)</span> is a probability density. It integrates to 1. The function <span class="math inline">\(p(\theta) p(y | \theta)\)</span>
+(a function of <span class="math inline">\(\theta\)</span>) integrates to something positive. Dividing by that positive thing would give us the normalized posterior density. Not dividing by that thing gives us an unnormalized posterior density which is just as good. Often solving for <span class="math inline">\(p(y)\)</span> explicitly is impossible (or nearly impossible) :( But we’ll see in this course, turns out that doesn’t really matter the important information about the posterior is contained in the numerator of the posterior expression that is <span class="math inline">\(p(\theta ) p(y | \theta)\)</span> which are not hard to solve :)</p>
+</div>
+<div id="independent-random-variables" class="section level2">
+<h2><span class="header-section-number">2.3</span> Independent random variables</h2>
+<p>Continuing with probability review.</p>
+<p><span class="math inline">\(Y_1, Y_2, \ldots , Y_n\)</span> are independent if their joint probability density factors into the product of their marginal probability densities. If these densities are specified conditionally on the value of <span class="math inline">\(\theta\)</span> (where <span class="math inline">\(\theta\)</span> is a random variable) we say <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> are conditionally independent given <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> are generated from a common process, then the marginal densities of the <span class="math inline">\(Y_i\)</span> (conditional on <span class="math inline">\(\theta\)</span>) are all the same. If <span class="math inline">\(\theta =\)</span> Biden’s true approval rate <span class="math inline">\(Pr(Y_1 = 1 | \theta) = Pr(Y_2 = 1 | \theta) = … = \theta\)</span>. In such a case we’ll say <span class="math inline">\(Y_1, Y_2, …,\)</span> are conditionally iid.</p>
+</div>
+<div id="exchangeability-1" class="section level2">
+<h2><span class="header-section-number">2.4</span> Exchangeability</h2>
+<p>In Bayesian statistical models we generally assume conditional independence which does not imply independence it implies a different condition called exchangeability.</p>
+<p><span class="math display">\[
+Y_i= 
+\begin{cases}
+1 \text{ if subject answers yes }\\
+0 \text{ if subject answers no (or doesn&#39;t answer) }
+\end{cases}
+\]</span></p>
+<p>We will pick 10 survey respondents out of very very many (thousands) at random <span class="math inline">\(Y_i = 1\)</span> if the <span class="math inline">\(i\)</span>th one answers yes. There are <span class="math inline">\(2^{10} = 1024\)</span> possible realizations of <span class="math inline">\((y_1, y_2, …, y_{10})\)</span>. What’s the probability for each? Here are 3 of those 1024 possible sequences
+<span class="math display">\[
+\begin{array}{l}
+p(1, 0, 0, 1, 0, 1, 1, 0, 1, 1) = ?\\
+p(1, 0, 1, 0, 1, 1, 0, 1, 1, 0) = ?\\
+p(1, 1, 0, 0, 1, 1, 0, 0, 1, 1) = ?\\
+\end{array}
+\]</span></p>
+<p>I’m thinking their probabilities should all be equal. Note that each of these sequences contains six <span class="math inline">\(1&#39;\)</span>s and four <span class="math inline">\(0&#39;\)</span>s. Does it seem reasonable to assume Pr(yes, yes, no) = Pr(yes, no, yes) = Pr(no, yes, yes)? I’d say it does! The technical term for this condition is <strong>exchangeability</strong>. <span class="math inline">\(y_1, y_2, …, y_n\)</span> are a sequence of values then the probability of observing <span class="math inline">\(Y_1 = y_1, Y_2 = y_2, … , Y_n = y_n\)</span> and the probability of observing <span class="math inline">\(Y_1 = y_2, Y_2 = y_1\)</span>, etc are the same. This is called exchangeability. Exchangeability holds in models where the subscript label contains no information about the outcome.</p>
+<p><em>Does exchangeability imply independence?</em> NO.</p>
+<p><span class="math inline">\(Y_1, Y_2 , …\)</span> are conditionally independent given <span class="math inline">\(\theta\)</span>, but unconditionally they’re not independent. Think about <span class="math inline">\(Pr(Y_{10} = 1).\)</span> My answer to this would be whatever is my best guess of the overall success proportion <span class="math inline">\(\theta\)</span>. What about <span class="math inline">\(Pr(Y_{10} = 1 | Y_1 = Y_2 = … = Y_9 = 1)?\)</span></p>
+<p>Suppose first probability is <span class="math inline">\(a\)</span>, second probability is <span class="math inline">\(b\)</span>. I don’t think we want <span class="math inline">\(a = b\)</span>! In fact, <span class="math inline">\(a&lt;b\)</span>.</p>
+<p>What about conditionally on <span class="math inline">\(\theta\)</span>, given that <span class="math inline">\(\theta\)</span> is the true success probability (for the population)?</p>
+<ul>
+<li><p><span class="math inline">\(Pr(Y_{10} = 1 | \theta) \approx \theta?\)</span> yes</p></li>
+<li><p><span class="math inline">\(Pr(Y_{10} = 1 | Y_1, …, Y_9 , \theta) \approx \theta?\)</span> yes</p></li>
+</ul>
+<p>These are 10 independent draws from a large population. Imagine a huge bowl of jelly beans, green ones and red ones. I know the proportion that are green is <span class="math inline">\(\theta.\)</span> <span class="math inline">\(Pr(10\)</span>th pick is green | <span class="math inline">\(\theta) = \theta,~ Pr(10\)</span>th pick is green | first <span class="math inline">\(9\)</span> picks, <span class="math inline">\(\theta)\)</span> is about <span class="math inline">\(\theta\)</span>. It’s a huge bowl so sampling without replacement is essentially the same thing as sampling with replacement. Given that 80% of this population is happy. If only 4 of the first 9 answered yes that doesn’t change my probability for the 10th, it’s still going to be .80.</p>
+<p>True or false: <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> and … and <span class="math inline">\(Y_9\)</span> and <span class="math inline">\(Y_{10}\)</span> are independent. We’re gonna see in a minute this statement is false. The true statement is <span class="math inline">\(Y_1, Y_2, … , Y_9, Y_{10}\)</span> are CONDITIONALLY independent given <span class="math inline">\(\theta.\)</span> <span class="math inline">\(Pr(Y_i = 1 | \theta , Y_j,~ j \neq i) = \theta.\)</span> Probability of zero is <span class="math inline">\(1-\theta.\)</span> That’s the joint probability conditionally on <span class="math inline">\(\theta.\)</span> Unconditionally it’s… You take the conditional probability multiply by the marginal of <span class="math inline">\(\theta\)</span> integrate <span class="math inline">\(\theta\)</span> out of it!</p>
+<p>So we see <span class="math inline">\(Y_1, Y_2, ... Y_n\)</span> are exchangeable. They are not iid because they’re not independent, because unconditionally on <span class="math inline">\(\theta,\)</span> <span class="math inline">\(Y_{10}\)</span> is not marginally independent of <span class="math inline">\(Y_1, Y_2, …, Y_9\)</span> because <span class="math inline">\(Y_{10}\)</span> depends on <span class="math inline">\(\theta\)</span> and <span class="math inline">\(Y_1, Y_2, …, Y_9\)</span> contain information about <span class="math inline">\(\theta\)</span>. We do not have <span class="math inline">\(a=b\)</span> above, but we do have exchangeability. That is, joint distribution is preserved under re-labeling of the subscripts (permutation of labels).</p>
+<p><strong>Proposition:</strong></p>
+<p>If <span class="math inline">\(\theta \sim p(\theta),\)</span> <span class="math inline">\(Y_1, … Y_n | \theta\)</span> are iid then <span class="math inline">\(Y_1, …, Y_n\)</span> are exchangeable. The proof is straightforward it’s given in Section 2.7 or 2.8 of Hoff.</p>
+<p>The converse is also true. i.e., If <span class="math inline">\(Y_1, …, Y_n\)</span> are an exchangeable sequence of rvs then there exists a prior distribution <span class="math inline">\(\theta\)</span> and conditional distribution <span class="math inline">\(Y_i | \theta\)</span> such that <span class="math inline">\(Y_1, …, Y_n | \theta\)</span> are iid <span class="math inline">\(p(y_i | \theta)\)</span> where <span class="math inline">\(\theta \sim p(\theta)\)</span>. That result is known as di Finetti’s theorem.</p>
+<p><em>Why is this important</em>? This means that any situation where modeling observed values as being exchangeable is appropriate then a Bayesian statistical analysis is also appropriate.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="binomial-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bayesianS21.pdf", "bayesianS21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

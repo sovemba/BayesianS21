@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lecture 7 Monte Carlo | Bayesian Statistics notes from summer 2021</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lecture 7 Monte Carlo | Bayesian Statistics notes from summer 2021" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lecture 7 Monte Carlo | Bayesian Statistics notes from summer 2021" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Chisom Onyishi" />
+
+
+<meta name="date" content="2021-05-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="poisson-model.html"/>
+<link rel="next" href="predictive.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
+<li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
+<li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>5</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="5.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>5.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>5.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>5.2.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>6</b> Poisson model</a><ul>
+<li class="chapter" data-level="6.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>6.1</b> Posterior inference for the Poisson model</a></li>
+<li class="chapter" data-level="6.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>6.2</b> Posterior predictive distribution</a></li>
+<li class="chapter" data-level="6.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>6.3</b> Example: Birth rates</a></li>
+<li class="chapter" data-level="6.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>6.4</b> Explaining the parameters of the gamma distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>7</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="7.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>7.1</b> Example: birth rate</a></li>
+<li class="chapter" data-level="7.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>7.2</b> The Monte Carlo method</a></li>
+<li class="chapter" data-level="7.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>7.3</b> Example: Numerical evaluation</a></li>
+<li class="chapter" data-level="7.4" data-path="monte-carlo.html"><a href="monte-carlo.html#posterior-inference-for-arbitrary-functions"><i class="fa fa-check"></i><b>7.4</b> Posterior inference for arbitrary functions</a></li>
+<li class="chapter" data-level="7.5" data-path="monte-carlo.html"><a href="monte-carlo.html#example-log-odds"><i class="fa fa-check"></i><b>7.5</b> Example: Log-odds</a></li>
+<li class="chapter" data-level="7.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>7.6</b> Example: Functions of two parameters</a></li>
+<li class="chapter" data-level="7.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>7.7</b> How many Monte Carlo samples are needed?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>8</b> Predictive</a><ul>
+<li class="chapter" data-level="8.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>8.1</b> Sampling for predictive distribution</a></li>
+<li class="chapter" data-level="8.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>8.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
+<li class="chapter" data-level="8.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>8.3</b> Posterior predictive model checking</a></li>
+<li class="chapter" data-level="8.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-for-group"><i class="fa fa-check"></i><b>8.4</b> Posterior predictive model checking for group</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics notes from summer 2021</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="monte-carlo" class="section level1">
+<h1><span class="header-section-number">Lecture 7</span> Monte Carlo</h1>
+
+<p><tt>The following notes are transcribed from Neath(0510,2021) lecture which summarizes sections(4.1 and 4.2) of Hoff(2009). </tt></p>
+<div id="example-birth-rate" class="section level2">
+<h2><span class="header-section-number">7.1</span> Example: birth rate</h2>
+<p>Let’s continue with the example from last time in which <span class="math inline">\(\theta_1 =\)</span> true birthrate (children per woman) among children with no college degree (less than bachelors degree), and <span class="math inline">\(\theta_2\)</span> is the true birthrate among women with a bachelor’s degree or higher. <em>A birthrate of 2 would be a society with a steady population</em>.</p>
+<p>In our data, among those women with less than bachelors degrees there were <span class="math inline">\(n_1 = 111\)</span> such women with a total of 217 children<span class="math inline">\((\sum y_{i,1} = 217)\)</span>, so that’s <span class="math inline">\(1.95\)</span> children per woman. Among those women with bachelors or higher <span class="math inline">\(n_2 = 44,~ \sum{y_{i,2}} = 66\)</span>, so that’s <span class="math inline">\(1.50\)</span> children per woman.</p>
+<p>The prior we used was independent gamma<span class="math inline">\((2,1),\)</span> with a prior mean of <span class="math inline">\(2\)</span>(representing steady growth). <span class="math inline">\(b =\)</span> prior sample size of <span class="math inline">\(1.\)</span> The data sample sizes were <span class="math inline">\(44\)</span> and <span class="math inline">\(111\)</span> so the prior won’t have a lot of influence on our inference (which is usually how we want it). We are interested in the posterior probability that <span class="math inline">\(\theta_1 &gt; \theta_2,\)</span> <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> are independent gammas in this posterior distribution. <span class="math inline">\(Pr(\theta_1 &gt; \theta_2 | y) = Pr( \theta_2 &lt; \theta_1 | y) = \int{Pr(\theta_2 &lt; \theta_1 | \theta_1, y) p(\theta_1 | y) d\theta_1}\)</span>; An application of “a law of total probability”.</p>
+<p>Note on using R:</p>
+<ul>
+<li><code>dgamma</code> returns a gamma density value</li>
+<li><code>pgamma</code> returns a gamma cdf value</li>
+<li><code>qgamma</code> returns a gamma quantile</li>
+<li><code>rgamma</code> simulates a random draw from a gamma dist</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="monte-carlo.html#cb23-1"></a>integrand &lt;-<span class="st"> </span><span class="cf">function</span>(x)</span>
+<span id="cb23-2"><a href="monte-carlo.html#cb23-2"></a>  {<span class="kw">pgamma</span>(x, <span class="dv">68</span>, <span class="dv">45</span>) <span class="op">*</span><span class="st"> </span><span class="kw">dgamma</span>(x, <span class="dv">219</span>, <span class="dv">112</span>)}</span>
+<span id="cb23-3"><a href="monte-carlo.html#cb23-3"></a><span class="kw">integrate</span>(<span class="dt">f=</span>integrand, <span class="dt">lower=</span><span class="dv">0</span>, <span class="dt">upper=</span><span class="ot">Inf</span>) </span></code></pre></div>
+<pre><code>## 0.9725601 with absolute error &lt; 6.5e-06</code></pre>
+<p>Our posterior belief that the birthrate is lower among women with bachelors degrees is 0.973. This was cool! We got the right answer. Exact answers are cool, But this really only worked because it was such a “nice” problem. The gamma distribution is nice. Having a dimension of only 2 made it nice. Numerical integration is great in low-dimensional problems but does not work so well in high dimensional ones. Today (the subject of Chapter 4) we take up a general approach that does continue to work in high dimensional problems. This method, known as Monte Carlo approximation, is based on random sampling, and its implementation does not require a deep knowledge of calculus or numerical analysis.</p>
+</div>
+<div id="the-monte-carlo-method" class="section level2">
+<h2><span class="header-section-number">7.2</span> The Monte Carlo method</h2>
+<p>Why is the method of Monte Carlo called Monte Carlo? It’s a resort on the
+French Riviera with casinos (people go gambling there). Monte Carlo was the code name for a project by allied scientists in World War II.</p>
+<p><span class="math inline">\(p(\theta | y_1, …, y_n)\)</span> or just <span class="math inline">\(p(\theta | y)\)</span> for short is the posterior density function which uniquely identifies the posterior distribution so we say <span class="math inline">\(p(\theta | y)\)</span> defines the posterior. In the Monte Carlo method we let <span class="math inline">\(\theta^{(s)}\)</span> (we’re using a superscript rather than subscript because we use subscripts to indicate a position in a vector parameter) be a random draw from the posterior distribution for <span class="math inline">\(s = 1, …, S\)</span>. For this to work <span class="math inline">\(S\)</span> must be reasonably large. In statistics we have an unknown population distribution but if we observe data that are a random sample from that distribution we can use the data to make inference about the population distribution. When we do Monte Carlo approximations to a posterior probability distribution we’re doing “an inference problem within the inference problem”. If <span class="math inline">\(S\)</span> is a big enough number a histogram of the <span class="math inline">\(\theta^{(s)}\)</span> will be a decent representation of the probability density <span class="math inline">\(p(\theta | y).\)</span></p>
+<p>
+ 
+</p>
+<p><span class="math inline">\(\theta_2 \sim \text{gamma}(68,45)\)</span> (the posterior for the birth rate among college grads in our earlier example)</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="monte-carlo.html#cb25-1"></a><span class="co"># Reproduce Figure 4.1 in Hoff </span></span>
+<span id="cb25-2"><a href="monte-carlo.html#cb25-2"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">mgp=</span><span class="kw">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
+<span id="cb25-3"><a href="monte-carlo.html#cb25-3"></a>a &lt;-<span class="st"> </span><span class="dv">2</span>; b &lt;-<span class="st"> </span><span class="dv">1</span>;  n &lt;-<span class="st"> </span><span class="dv">44</span>; sum.y &lt;-<span class="st"> </span><span class="dv">66</span>;</span>
+<span id="cb25-4"><a href="monte-carlo.html#cb25-4"></a></span>
+<span id="cb25-5"><a href="monte-carlo.html#cb25-5"></a><span class="co">#simulating draws</span></span>
+<span id="cb25-6"><a href="monte-carlo.html#cb25-6"></a>theta.sim1 &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">10</span>, a<span class="op">+</span>sum.y, b<span class="op">+</span>n)</span>
+<span id="cb25-7"><a href="monte-carlo.html#cb25-7"></a>theta.sim2 &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">100</span>, a<span class="op">+</span>sum.y, b<span class="op">+</span>n)</span>
+<span id="cb25-8"><a href="monte-carlo.html#cb25-8"></a>theta.sim3 &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">1000</span>, a<span class="op">+</span>sum.y, b<span class="op">+</span>n)</span>
+<span id="cb25-9"><a href="monte-carlo.html#cb25-9"></a></span>
+<span id="cb25-10"><a href="monte-carlo.html#cb25-10"></a>theta   &lt;-<span class="st"> </span><span class="kw">seq</span>(.<span class="dv">75</span>, <span class="fl">2.25</span>, <span class="fl">.01</span>)</span>
+<span id="cb25-11"><a href="monte-carlo.html#cb25-11"></a>p.theta &lt;-<span class="st"> </span><span class="kw">dgamma</span>(theta, a<span class="op">+</span>sum.y, b<span class="op">+</span>n)</span>
+<span id="cb25-12"><a href="monte-carlo.html#cb25-12"></a></span>
+<span id="cb25-13"><a href="monte-carlo.html#cb25-13"></a>xlim=<span class="kw">c</span>(.<span class="dv">75</span>, <span class="fl">2.25</span>);  ylim=<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">2.5</span>)</span>
+<span id="cb25-14"><a href="monte-carlo.html#cb25-14"></a></span>
+<span id="cb25-15"><a href="monte-carlo.html#cb25-15"></a>op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb25-16"><a href="monte-carlo.html#cb25-16"></a><span class="kw">hist</span>(theta.sim1, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">xlim=</span>xlim, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb25-17"><a href="monte-carlo.html#cb25-17"></a>  <span class="dt">ylim=</span>ylim, <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="dt">breaks=</span><span class="dv">20</span>)</span>
+<span id="cb25-18"><a href="monte-carlo.html#cb25-18"></a><span class="kw">lines</span>(theta, p.theta, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb25-19"><a href="monte-carlo.html#cb25-19"></a></span>
+<span id="cb25-20"><a href="monte-carlo.html#cb25-20"></a><span class="kw">hist</span>(theta.sim2, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">xlim=</span>xlim, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb25-21"><a href="monte-carlo.html#cb25-21"></a>  <span class="dt">ylim=</span>ylim, <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="dt">breaks=</span><span class="dv">20</span>)</span>
+<span id="cb25-22"><a href="monte-carlo.html#cb25-22"></a><span class="kw">lines</span>(theta, p.theta, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb25-23"><a href="monte-carlo.html#cb25-23"></a></span>
+<span id="cb25-24"><a href="monte-carlo.html#cb25-24"></a><span class="kw">hist</span>(theta.sim3, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">xlim=</span>xlim, <span class="dt">main=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb25-25"><a href="monte-carlo.html#cb25-25"></a>  <span class="dt">ylim=</span>ylim, <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="dt">breaks=</span><span class="dv">20</span>)</span>
+<span id="cb25-26"><a href="monte-carlo.html#cb25-26"></a><span class="kw">lines</span>(theta, p.theta, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb25-27"><a href="monte-carlo.html#cb25-27"></a></span>
+<span id="cb25-28"><a href="monte-carlo.html#cb25-28"></a><span class="kw">plot</span>(theta, p.theta, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, </span>
+<span id="cb25-29"><a href="monte-carlo.html#cb25-29"></a>  <span class="dt">xlim=</span>xlim, <span class="dt">ylim=</span>ylim, <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>)</span>
+<span id="cb25-30"><a href="monte-carlo.html#cb25-30"></a><span class="kw">lines</span>(<span class="kw">density</span>(theta.sim1), <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb25-31"><a href="monte-carlo.html#cb25-31"></a></span>
+<span id="cb25-32"><a href="monte-carlo.html#cb25-32"></a><span class="kw">plot</span>(theta, p.theta, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, </span>
+<span id="cb25-33"><a href="monte-carlo.html#cb25-33"></a>  <span class="dt">xlim=</span>xlim, <span class="dt">ylim=</span>ylim, <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>)</span>
+<span id="cb25-34"><a href="monte-carlo.html#cb25-34"></a><span class="kw">lines</span>(<span class="kw">density</span>(theta.sim2), <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb25-35"><a href="monte-carlo.html#cb25-35"></a></span>
+<span id="cb25-36"><a href="monte-carlo.html#cb25-36"></a><span class="kw">plot</span>(theta, p.theta, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, </span>
+<span id="cb25-37"><a href="monte-carlo.html#cb25-37"></a>  <span class="dt">xlim=</span>xlim, <span class="dt">ylim=</span>ylim, <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="st">&quot;density&quot;</span>)</span>
+<span id="cb25-38"><a href="monte-carlo.html#cb25-38"></a><span class="kw">lines</span>(<span class="kw">density</span>(theta.sim3), <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:MC"></span>
+<img src="bayesianS21_files/figure-html/MC-1.png" alt="Successive Monte Carlo approximations to the density of the gamma(68,45)  distribution, along with the true density function for comparison." width="672" />
+<p class="caption">
+Figure 7.1: Successive Monte Carlo approximations to the density of the gamma(68,45) distribution, along with the true density function for comparison.
+</p>
+</div>
+<ul>
+<li><p>Row 1: histogram with true density for comparison. The gray curve is the true gamma(68, 45) density</p></li>
+<li><p>Row 2: “kernel density estimates” with true density for comparison</p></li>
+</ul>
+<p>As Monte Carlo sample size increases the agreement between the empirical distribution of the random samples and the target distribution gets better and better. “Empirical distribution” is a fancy name for the histogram. As if the population consisted of <span class="math inline">\(S\)</span> different values each with equal probability and those values are the simulated draws. That’s what we mean by “empirical distribution”. This is a <em>toy problem</em> (we know the answer).</p>
+<p>A <strong>toy problem</strong> is the name we give to exercises where we use a method like Monte Carlo despite Monte Carlo not being necessary (the exact answer is readily available). We study the performance of a method like Monte Carlo in problems where the answer is known(i.e., toy problems) so that we have confidence in the method when applied to problems where the exact answer isn’t known (non-toy problems). The “empirical distribution approaches the target distribution” argument can be made a bit more formal by the Law of Large Numbers.</p>
+<p><strong>LLN</strong>: As your flip a coin more and more times the proportion of observed heads will converge to the true heads probability with probability 1. Or more generally as the sample size increases the sample mean converges to the population mean with probability 1.</p>
+<p>As Monte Carlo sample size (number of simulations) increases i.e., as <span class="math inline">\(S \rightarrow \infty\)</span></p>
+<ul>
+<li><em>sample average</em> converges to the posterior mean</li>
+<li><em>sample variance</em> converges to the posterior variance</li>
+<li><em>sample proportions</em> converge to posterior probabilities.</li>
+<li>The empirical distribution of <span class="math inline">\(\{\theta^{(1)},...,\theta^{(S)}\} \rightarrow p(\theta|y_1,...,y_n)\)</span></li>
+<li>A point where the proportion of <span class="math inline">\(\theta^{(s)} &lt;\)</span> this point is <span class="math inline">\(\alpha\)</span> converges to the <span class="math inline">\(\alpha\)</span>-quantile of the posterior distribution</li>
+</ul>
+<p>Unlike other numerical approximations, with Monte Carlo we know “If we run the computer long enough we’ll eventually get the right answer”(i.e., desired level of precision).</p>
+</div>
+<div id="example-numerical-evaluation" class="section level2">
+<h2><span class="header-section-number">7.3</span> Example: Numerical evaluation</h2>
+<p>Let’s keep studying this toy problem. This will demonstrate what happens when we go from 10 samples to 100 samples to 1000 samples – we get a better and better approximation to the true</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="monte-carlo.html#cb26-1"></a>(a<span class="op">+</span>sum.y) <span class="op">/</span><span class="st"> </span>(b<span class="op">+</span>n)  <span class="co">#  true posterior mean</span></span></code></pre></div>
+<pre><code>## [1] 1.511111</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="monte-carlo.html#cb28-1"></a><span class="co"># Monte Carlo means</span></span>
+<span id="cb28-2"><a href="monte-carlo.html#cb28-2"></a><span class="kw">c</span>(<span class="kw">mean</span>(theta.sim1),<span class="kw">mean</span>(theta.sim2),<span class="kw">mean</span>(theta.sim3))</span></code></pre></div>
+<pre><code>## [1] 1.653986 1.522461 1.508636</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="monte-carlo.html#cb30-1"></a><span class="kw">pgamma</span>(<span class="fl">1.75</span>, a<span class="op">+</span>sum.y, b<span class="op">+</span>n) <span class="co">#  Pr(theta &lt; 1.75 | y)</span></span></code></pre></div>
+<pre><code>## [1] 0.8998286</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="monte-carlo.html#cb32-1"></a><span class="co"># Monte Carlo approximations</span></span>
+<span id="cb32-2"><a href="monte-carlo.html#cb32-2"></a><span class="kw">c</span>(<span class="kw">mean</span>(theta.sim1 <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.75</span>), <span class="kw">mean</span>(theta.sim2 <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.75</span>), </span>
+<span id="cb32-3"><a href="monte-carlo.html#cb32-3"></a>  <span class="kw">mean</span>(theta.sim3 <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.75</span>))</span></code></pre></div>
+<pre><code>## [1] 0.700 0.890 0.907</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="monte-carlo.html#cb34-1"></a><span class="co"># true quantile</span></span>
+<span id="cb34-2"><a href="monte-carlo.html#cb34-2"></a><span class="kw">qgamma</span>(<span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>), a<span class="op">+</span>sum.y, b<span class="op">+</span>n)</span></code></pre></div>
+<pre><code>## [1] 1.173437 1.890836</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="monte-carlo.html#cb36-1"></a><span class="co"># Monte Carlo quantiles</span></span>
+<span id="cb36-2"><a href="monte-carlo.html#cb36-2"></a><span class="kw">c</span>(<span class="kw">quantile</span>(theta.sim1, <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>)),</span>
+<span id="cb36-3"><a href="monte-carlo.html#cb36-3"></a>  <span class="kw">quantile</span>(theta.sim2, <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>)),</span>
+<span id="cb36-4"><a href="monte-carlo.html#cb36-4"></a>  <span class="kw">quantile</span>(theta.sim3, <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>)))</span></code></pre></div>
+<pre><code>##     2.5%    97.5%     2.5%    97.5%     2.5%    97.5% 
+## 1.276212 2.144389 1.229435 1.923309 1.190959 1.895615</code></pre>
+<p>We can also look at trace plot of successively better approximations to the quantity of interest</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="monte-carlo.html#cb38-1"></a><span class="co"># Reproduce Figure 4.2</span></span>
+<span id="cb38-2"><a href="monte-carlo.html#cb38-2"></a>theta.mc  &lt;-<span class="st"> </span>theta.sim3</span>
+<span id="cb38-3"><a href="monte-carlo.html#cb38-3"></a>S         &lt;-<span class="st"> </span><span class="kw">length</span>(theta.mc)</span>
+<span id="cb38-4"><a href="monte-carlo.html#cb38-4"></a>theta.bar &lt;-<span class="st"> </span><span class="kw">cumsum</span>(theta.mc) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span>S) <span class="co">#running average</span></span>
+<span id="cb38-5"><a href="monte-carlo.html#cb38-5"></a>Prob.hat  &lt;-<span class="st"> </span><span class="kw">cumsum</span>(theta.mc <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.75</span>) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">:</span>S)</span>
+<span id="cb38-6"><a href="monte-carlo.html#cb38-6"></a>quant.hat &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, S)</span>
+<span id="cb38-7"><a href="monte-carlo.html#cb38-7"></a></span>
+<span id="cb38-8"><a href="monte-carlo.html#cb38-8"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>S)</span>
+<span id="cb38-9"><a href="monte-carlo.html#cb38-9"></a>{ </span>
+<span id="cb38-10"><a href="monte-carlo.html#cb38-10"></a> quant.hat[s] &lt;-<span class="st"> </span><span class="kw">quantile</span>(theta.mc[<span class="dv">1</span><span class="op">:</span>s], <span class="fl">.975</span>)</span>
+<span id="cb38-11"><a href="monte-carlo.html#cb38-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="monte-carlo.html#cb39-1"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">mgp=</span><span class="kw">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
+<span id="cb39-2"><a href="monte-carlo.html#cb39-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb39-3"><a href="monte-carlo.html#cb39-3"></a></span>
+<span id="cb39-4"><a href="monte-carlo.html#cb39-4"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, theta.bar, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;No. samples&quot;</span>, </span>
+<span id="cb39-5"><a href="monte-carlo.html#cb39-5"></a>  <span class="dt">ylab=</span><span class="st">&quot;cumulative mean&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb39-6"><a href="monte-carlo.html#cb39-6"></a><span class="kw">abline</span>(<span class="dt">h=</span>(a<span class="op">+</span>sum.y)<span class="op">/</span>(b<span class="op">+</span>n), <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb39-7"><a href="monte-carlo.html#cb39-7"></a></span>
+<span id="cb39-8"><a href="monte-carlo.html#cb39-8"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, Prob.hat, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;No. samples&quot;</span>, </span>
+<span id="cb39-9"><a href="monte-carlo.html#cb39-9"></a>  <span class="dt">ylab=</span><span class="st">&quot;cumulative ecdf at 1.75&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb39-10"><a href="monte-carlo.html#cb39-10"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">pgamma</span>(<span class="fl">1.75</span>, a<span class="op">+</span>sum.y, b<span class="op">+</span>n), <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb39-11"><a href="monte-carlo.html#cb39-11"></a></span>
+<span id="cb39-12"><a href="monte-carlo.html#cb39-12"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, quant.hat, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;No. samples&quot;</span>, </span>
+<span id="cb39-13"><a href="monte-carlo.html#cb39-13"></a>  <span class="dt">ylab=</span><span class="st">&quot;cumulative .975-quantile&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>) </span>
+<span id="cb39-14"><a href="monte-carlo.html#cb39-14"></a><span class="kw">abline</span>(<span class="dt">h=</span><span class="kw">qgamma</span>(.<span class="dv">975</span>, a<span class="op">+</span>sum.y, b<span class="op">+</span>n), <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-24-1.png" alt="Estimates of the posterior mean, Pr(theta &lt; 1.75|y) and the 97.5% posterior quantile as a function of the number of Monte Carlo samples. Horizontal gray lines are the true values." width="672" />
+<p class="caption">
+Figure 7.2: Estimates of the posterior mean, Pr(theta &lt; 1.75|y) and the 97.5% posterior quantile as a function of the number of Monte Carlo samples. Horizontal gray lines are the true values.
+</p>
+</div>
+<p>The behaviour of the sample quantile is weird. A couple samples push us way off and then we get back to the right thing.</p>
+</div>
+<div id="posterior-inference-for-arbitrary-functions" class="section level2">
+<h2><span class="header-section-number">7.4</span> Posterior inference for arbitrary functions</h2>
+<p>A cool thing about the Monte Carlo method is this; suppose I know the distribution of <span class="math inline">\(\theta,\)</span> the posterior <span class="math inline">\(p(\theta | y)\)</span>. The quantity I’m interested in
+is <span class="math inline">\(\gamma = g(\theta)\)</span> for some possibly complicated function <span class="math inline">\(g.\)</span> Ex: If <span class="math inline">\(\theta\)</span> is a probability <span class="math inline">\(\theta /(1 -\theta)\)</span> is an odds <span class="math inline">\(\log( \theta / (1-\theta) ) = \text{logit}(\theta)\)</span> is a log-odds. We may be interested in posterior inference about the log odds! Monte Carlo makes this super easy. If <span class="math inline">\(\theta^{(s)}\)</span> is a random draw from <span class="math inline">\(p(\theta | y)\)</span> and <span class="math inline">\(\gamma^{(s)} = g( \theta^{(s)} )\)</span> then <span class="math inline">\(\gamma^{(s)}\)</span> is a random draw from <span class="math inline">\(p(\gamma | y)\)</span> the posterior of <span class="math inline">\(\gamma\)</span> regardless of how complicated a function <span class="math inline">\(g(\theta)\)</span> may be. This is particularly important when <span class="math inline">\(\theta\)</span> is high dimensional. If I can simulate random draws from a probability distribution, I can learn anything I want about that probability distribution (as long as I’m patient enough to let the simulation run).</p>
+<p><strong>The algorithm:</strong></p>
+<ul>
+<li>sample <span class="math inline">\(\theta^{(1)} \sim p(\theta|y_1,...,y_n)\)</span>, compute <span class="math inline">\(\gamma^{(1)} = g(\theta^{(1)})\)</span>;</li>
+<li>sample <span class="math inline">\(\theta^{(2)} \sim p(\theta|y_1,...,y_n)\)</span>, compute <span class="math inline">\(\gamma^{(2)} = g(\theta^{(2)})\)</span>;</li>
+<li>etc</li>
+<li>sample <span class="math inline">\(\theta^{(S)} \sim p(\theta|y_1,...,y_n)\)</span>, compute <span class="math inline">\(\gamma^{(S)} = g(\theta^{(S)})\)</span>;</li>
+</ul>
+<p>with each draw sampled independently</p>
+</div>
+<div id="example-log-odds" class="section level2">
+<h2><span class="header-section-number">7.5</span> Example: Log-odds</h2>
+<p>This is from a General Social Survey in 1998. Respondents in a General Social Survey were asked if they agreed with a Supreme Court ruling that prohibited state or local governments from requiring the reading of religious texts in public schools.</p>
+<p>Let <span class="math inline">\(\theta =\)</span> true proportion of population that would answer YES. Of the 860 respondents in the sample(860 trials) there were <span class="math inline">\(y=441\)</span> successes. Given a Uniform<span class="math inline">\((0, 1)\)</span> prior the posterior distribution of <span class="math inline">\(\theta\)</span> is Beta<span class="math inline">\((1 + 441, 1 + 860 - 441) =\)</span> Beta<span class="math inline">\(( 442, 420 )\)</span>. This a pretty tight posterior distribution centered around <span class="math inline">\(a/a+b= 442/862 =0.513\)</span>.</p>
+<p>Using the Monte Carlo algorithm described above, we can obtain samples of the log-odds, <span class="math inline">\(\gamma= \log[\theta/(1−\theta)]\)</span>, from both the prior distribution and the posterior distribution of <span class="math inline">\(\gamma\)</span>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="monte-carlo.html#cb40-1"></a><span class="co"># Example: Inference about log-odds</span></span>
+<span id="cb40-2"><a href="monte-carlo.html#cb40-2"></a><span class="kw">rm</span>(<span class="dt">list=</span><span class="kw">ls</span>());  <span class="kw">set.seed</span>(<span class="dv">20210506</span>);</span>
+<span id="cb40-3"><a href="monte-carlo.html#cb40-3"></a>a &lt;-<span class="st"> </span><span class="dv">1</span>;  b &lt;-<span class="st"> </span><span class="dv">1</span>;</span>
+<span id="cb40-4"><a href="monte-carlo.html#cb40-4"></a></span>
+<span id="cb40-5"><a href="monte-carlo.html#cb40-5"></a>theta.sim.prior &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">1000</span>, a, b)</span>
+<span id="cb40-6"><a href="monte-carlo.html#cb40-6"></a>gamma.sim.prior &lt;-<span class="st"> </span><span class="kw">log</span>( theta.sim.prior <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta.sim.prior) )</span>
+<span id="cb40-7"><a href="monte-carlo.html#cb40-7"></a></span>
+<span id="cb40-8"><a href="monte-carlo.html#cb40-8"></a>n &lt;-<span class="st"> </span><span class="dv">860</span>;    y &lt;-<span class="st"> </span><span class="dv">441</span>;</span>
+<span id="cb40-9"><a href="monte-carlo.html#cb40-9"></a>theta.sim.post &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">1000</span>, a<span class="op">+</span>y, b<span class="op">+</span>n<span class="op">-</span>y)</span>
+<span id="cb40-10"><a href="monte-carlo.html#cb40-10"></a>gamma.sim.post &lt;-<span class="st"> </span><span class="kw">log</span>( theta.sim.post <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta.sim.post) )</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="monte-carlo.html#cb41-1"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">mgp=</span><span class="kw">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
+<span id="cb41-2"><a href="monte-carlo.html#cb41-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb41-3"><a href="monte-carlo.html#cb41-3"></a></span>
+<span id="cb41-4"><a href="monte-carlo.html#cb41-4"></a><span class="kw">plot</span>(<span class="kw">density</span>(gamma.sim.prior), <span class="dt">xlab=</span><span class="kw">expression</span>(gamma), </span>
+<span id="cb41-5"><a href="monte-carlo.html#cb41-5"></a>    <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">p</span>(gamma)),<span class="dt">xlim=</span><span class="kw">range</span>(gamma.sim.prior),<span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb41-6"><a href="monte-carlo.html#cb41-6"></a></span>
+<span id="cb41-7"><a href="monte-carlo.html#cb41-7"></a><span class="kw">plot</span>(<span class="kw">density</span>(gamma.sim.post), <span class="dt">xlab=</span><span class="kw">expression</span>(gamma),</span>
+<span id="cb41-8"><a href="monte-carlo.html#cb41-8"></a>    <span class="dt">ylab=</span>ylab, <span class="dt">xlim=</span><span class="kw">range</span>(gamma.sim.prior),<span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb41-9"><a href="monte-carlo.html#cb41-9"></a><span class="kw">lines</span>(<span class="kw">density</span>(gamma.sim.prior), <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-27-1.png" alt="Monte Carlo approximations to the prior and posterior distributions of the log-odds." width="672" />
+<p class="caption">
+Figure 7.3: Monte Carlo approximations to the prior and posterior distributions of the log-odds.
+</p>
+</div>
+<p><code>theta.sim.prior</code> is just <code>runif</code>(1000). A uniform prior is flat on [0, 1]. What sort of distribution does this imply for <span class="math inline">\(\log( \theta / (1-\theta) )\)</span>? Well it’s centered at 0 (probability = 0.5 means odds=1 means log-odds = 0). It’s symmetric. It’s not a normal distribution but it is a roughly bell shaped curve.</p>
+<p>What about the posterior? Well the posterior distribution of <span class="math inline">\(\theta \sim\)</span> Beta<span class="math inline">\(( 442, 420 )\)</span> is very tightly clustered around the value <span class="math inline">\(\theta = 0.513\)</span> or so. So the posterior distribution of the log odds is very tightly clustered around <span class="math inline">\(0\)</span> or just <span class="math inline">\(&gt; 0\)</span> or so.</p>
+<p>Why are we doing this? We are doing this now as a toy problem to prepare ourselves for later in the course when we encounter analytically intractable and high-dimensional posterior distributions. What we’ll see in these problems is posterior moments? Posterior probabilities? Posterior quantiles? Good luck with anything other than Monte Carlo.</p>
+</div>
+<div id="example-functions-of-two-parameters" class="section level2">
+<h2><span class="header-section-number">7.6</span> Example: Functions of two parameters</h2>
+<p>Returning to the birthrates example, <span class="math inline">\(\theta_1 =\)</span> birthrate for women with less than bachelor’s <span class="math inline">\(\theta_2 =\)</span> birthrate for women with at least a bachelor’s degree.</p>
+<p><span class="math inline">\(\theta_1|y_{i,j}\sim \text{gamma}(219,112)\)</span> and <span class="math inline">\(\theta_2|y_{i,j}\sim \text{gamma}(68,45)\)</span></p>
+<p>There are a variety of ways to describe our knowledge about the difference between <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span>. For example, we may be interested in the numerical value of <span class="math inline">\(Pr(\theta_1 &gt; \theta_2|y_{i,j})\)</span>, or in the posterior distribution of <span class="math inline">\(\gamma = \theta_1/ \theta_2.\)</span> Both of these quantities can be obtained with Monte Carlo sampling:</p>
+<p>This expression: <span class="math inline">\(\frac{1}{S}\sum_{s=1}^S \mathbf{1}(\theta_1^{(s)}&gt;\theta_2^{(s)})\)</span> is kinda sorta similar to: #{ <span class="math inline">\(\theta^{(s)} \le c\)</span> }<span class="math inline">\(/S\)</span>. We can say “average of indicator functions” or # { successes } divided by <span class="math inline">\(S\)</span> mean the same thing.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="monte-carlo.html#cb42-1"></a><span class="co"># Return to the birthrates example</span></span>
+<span id="cb42-2"><a href="monte-carlo.html#cb42-2"></a>a  &lt;-<span class="st"> </span><span class="dv">2</span>;    b      &lt;-<span class="st"> </span><span class="dv">1</span>;</span>
+<span id="cb42-3"><a href="monte-carlo.html#cb42-3"></a>n1 &lt;-<span class="st"> </span><span class="dv">111</span>;  sum.y1 &lt;-<span class="st"> </span><span class="dv">217</span>;</span>
+<span id="cb42-4"><a href="monte-carlo.html#cb42-4"></a>n2 &lt;-<span class="st"> </span><span class="dv">44</span>;   sum.y2 &lt;-<span class="st"> </span><span class="dv">66</span>;</span>
+<span id="cb42-5"><a href="monte-carlo.html#cb42-5"></a></span>
+<span id="cb42-6"><a href="monte-carlo.html#cb42-6"></a>theta1.sim &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">10000</span>, a<span class="op">+</span>sum.y1, b<span class="op">+</span>n1)</span>
+<span id="cb42-7"><a href="monte-carlo.html#cb42-7"></a>theta2.sim &lt;-<span class="st"> </span><span class="kw">rgamma</span>(<span class="dv">10000</span>, a<span class="op">+</span>sum.y2, b<span class="op">+</span>n2)</span>
+<span id="cb42-8"><a href="monte-carlo.html#cb42-8"></a></span>
+<span id="cb42-9"><a href="monte-carlo.html#cb42-9"></a><span class="kw">mean</span>(theta1.sim <span class="op">&gt;</span><span class="st"> </span>theta2.sim) </span></code></pre></div>
+<pre><code>## [1] 0.9726</code></pre>
+<p>Our Monte Carlo approximation to <span class="math inline">\(Pr( \theta_1 &gt; \theta_2 | y )\)</span> is 0.9726. The “exact value” is also 0.9726. This is not typical.</p>
+<p>
+ 
+</p>
+<p>Now suppose we want to do inference about the ratio <span class="math inline">\(\gamma = \theta_1/ \theta_2.\)</span> In your 4203/5203 (probability) class you may have studied bivariate transformations of random variables where you calculate the back-transformation then solve the “Jacobian” matrix (of partial derivatives). We could solve this problem that way OR we can get an arbitrarily precise numerical approximation with no difficult math required whatsoever.</p>
+<p>Take a random sample of : <span class="math inline">\(\theta_1^{(s)}, ~\theta_2^{(s)}\)</span> and let <span class="math inline">\(\gamma^{(s)} = \theta_1^{(s)} / \theta_2^{(s)}\)</span> for <span class="math inline">\(s = 1, … S.\)</span></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="monte-carlo.html#cb44-1"></a>gamma.sim &lt;-<span class="st"> </span>theta1.sim <span class="op">/</span><span class="st"> </span>theta2.sim</span>
+<span id="cb44-2"><a href="monte-carlo.html#cb44-2"></a></span>
+<span id="cb44-3"><a href="monte-carlo.html#cb44-3"></a><span class="kw">hist</span>(gamma.sim, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">breaks=</span><span class="dv">30</span>, </span>
+<span id="cb44-4"><a href="monte-carlo.html#cb44-4"></a>  <span class="dt">xlab=</span><span class="kw">expression</span>(gamma), <span class="dt">ylab=</span>ylab, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb44-5"><a href="monte-carlo.html#cb44-5"></a><span class="kw">lines</span>(<span class="kw">density</span>(gamma.sim))</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/gammasim-1.png" width="672" style="display: block; margin: auto;" />
+Here is the posterior distribution of <span class="math inline">\(\gamma = \theta_1 / \theta_2.\)</span> It’s mostly <span class="math inline">\(&gt; 1\)</span>. I show a histogram and kernel density estimate on the same axes. This is not a theoretical density curve it’s the empirical one with <span class="math inline">\(S=10000\)</span> and it’s pretty smooth. The posterior distribution of <span class="math inline">\(\gamma = \theta_1 / \theta_2.\)</span></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="monte-carlo.html#cb45-1"></a><span class="kw">quantile</span>( gamma.sim, <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>) )</span></code></pre></div>
+<pre><code>##      2.5%     97.5% 
+## 0.9960863 1.7111331</code></pre>
+<p>The .025 and .975 quantiles are .996 and 1.715. I have 95% confidence that the birth rate for non-college grads is between .996 and 1.715 times that of women with college degree.</p>
+</div>
+<div id="how-many-monte-carlo-samples-are-needed" class="section level2">
+<h2><span class="header-section-number">7.7</span> How many Monte Carlo samples are needed?</h2>
+<p>We use Monte Carlo as an approximation tool. <em>The Monte Carlo sample size does not determine posterior uncertainty.</em></p>
+<p>The posterior distribution <span class="math inline">\(p(\theta | y)\)</span>, the posterior mean <span class="math inline">\(E(\theta | y)\)</span> and posterior variance <span class="math inline">\(\text{Var}(\theta | y)\)</span> are what they are based on the prior distribution <span class="math inline">\(p(\theta)\)</span>, and the data we observed. If the prior distribution is “vague” and the data set is not huge, the posterior variance <span class="math inline">\(\text{Var}(\theta | y)\)</span> will be big. If the posterior distribution is approximately normal a 95% confidence will be approximately <span class="math inline">\(E(\theta|y) \pm 2 \sqrt{ \text{Var}(\theta|y) }\)</span>, because with the normal distribution, mean <span class="math inline">\(\pm\)</span> 2 SD’s contains 95% of the distribution. None of that has anything to do with Monte Carlo.</p>
+<p>Monte Carlo comes in when the posterior distribution is not known analytically and we will approximate it by simulating draws from the posterior distribution and using that empirical distribution to approximate the posterior. Using Monte Carlo to approximate posteriors in Bayesian inference is “an inference problem within the inference problem”. We have uncertainty about <span class="math inline">\(\theta\)</span> that’s measured by Var<span class="math inline">\((\theta | y)\)</span>, the posterior variance. How we use Monte Carlo is; <span class="math inline">\(E(\theta | y)\)</span> is only our best guess for <span class="math inline">\(\theta\)</span>, it’s not the truth (it’s an estimator). What if we can’t even calculate <span class="math inline">\(E(\theta | y)\)</span> exactly, then we will approximate it using Monte Carlo. The bigger is the Monte Carlo sample size the better will be our approximation to <span class="math inline">\(E(\theta | y)\)</span>. But the uncertainty about <span class="math inline">\(\theta\)</span> can’t be eliminated. In the birth rate example, our data consist of 111 women without college degree 44 women with college degree 155 women total. However precisely, we can estimate <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> based on these sample sizes is what it is. We can’t improve that by increasing Monte Carlo sample size.</p>
+<p>As to the question of: How big a Monte Carlo sample to take? One formal approach to this is; Take a big enough Monte Carlo sample size to estimate <span class="math inline">\(E(\theta | y)\)</span> to a desired level of precision that the mean of the empirical density (the dashed curve in figure <a href="monte-carlo.html#fig:MC">7.1</a>) is within epsilon of the mean of the population curve (gray curve) which is unknown. This solution is an Intro Stat problem!</p>
+<p>Let <span class="math inline">\(S\)</span> equal Monte Carlo sample size. In terms of Monte Carlo error, <span class="math inline">\(\bar \theta\)</span>(the sample mean of the simulated draws) has approximately a Normal distribution because <span class="math inline">\(S\)</span> is big. Its mean is <span class="math inline">\(E(\theta|y)\)</span>. Its variance is Var<span class="math inline">\((\theta|y)/S\)</span>. A 95% Monte Carlo CI for <span class="math inline">\(E(\theta|y)\)</span> is <span class="math inline">\(\bar \theta \pm 2\sqrt{ \text{Var}(\theta|y) / S }\)</span>. Now suppose we want the Monte Carlo sample size big enough so that the Monte Carlo error <span class="math inline">\(|\bar \theta - E(\theta|y )|\)</span> is &lt; .01 with 95% confidence. Then we need <span class="math inline">\(2 \sqrt{ \text{Var}(\theta|y) / S } &lt; .01\)</span> (could use <span class="math inline">\(1.96 = \texttt{qnorm(0.975)}\)</span> in place of 2). Solve <span class="math inline">\(2 \sqrt{\text{Var}(\theta|y) / S} &lt; .01\)</span> for <span class="math inline">\(S\)</span>. Of course the posterior variance is unknown so use an estimate in its place an estimate such as the sample variance in its place. Here the sample is !Monte Carlo sample! not the actual data!.</p>
+<p>In general we don’t really do this. We use <span class="math inline">\(S = 1000\)</span> or <span class="math inline">\(S = 10000\)</span>. But this is still a thing we should know about. May be the basis for a homework 2 exercise.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="poisson-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="predictive.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bayesianS21.pdf", "bayesianS21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

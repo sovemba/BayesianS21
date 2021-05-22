@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lecture 3 Binomial | Bayesian Statistics notes from summer 2021</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lecture 3 Binomial | Bayesian Statistics notes from summer 2021" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lecture 3 Binomial | Bayesian Statistics notes from summer 2021" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Chisom Onyishi" />
+
+
+<meta name="date" content="2021-05-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exchangeability.html"/>
+<link rel="next" href="applications.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
+<li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
+<li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>5</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="5.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>5.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="5.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>5.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>5.2.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>6</b> Poisson model</a><ul>
+<li class="chapter" data-level="6.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>6.1</b> Posterior inference for the Poisson model</a></li>
+<li class="chapter" data-level="6.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>6.2</b> Posterior predictive distribution</a></li>
+<li class="chapter" data-level="6.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>6.3</b> Example: Birth rates</a></li>
+<li class="chapter" data-level="6.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>6.4</b> Explaining the parameters of the gamma distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>7</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="7.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>7.1</b> Example: birth rate</a></li>
+<li class="chapter" data-level="7.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>7.2</b> The Monte Carlo method</a></li>
+<li class="chapter" data-level="7.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>7.3</b> Example: Numerical evaluation</a></li>
+<li class="chapter" data-level="7.4" data-path="monte-carlo.html"><a href="monte-carlo.html#posterior-inference-for-arbitrary-functions"><i class="fa fa-check"></i><b>7.4</b> Posterior inference for arbitrary functions</a></li>
+<li class="chapter" data-level="7.5" data-path="monte-carlo.html"><a href="monte-carlo.html#example-log-odds"><i class="fa fa-check"></i><b>7.5</b> Example: Log-odds</a></li>
+<li class="chapter" data-level="7.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>7.6</b> Example: Functions of two parameters</a></li>
+<li class="chapter" data-level="7.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>7.7</b> How many Monte Carlo samples are needed?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>8</b> Predictive</a><ul>
+<li class="chapter" data-level="8.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>8.1</b> Sampling for predictive distribution</a></li>
+<li class="chapter" data-level="8.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>8.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
+<li class="chapter" data-level="8.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>8.3</b> Posterior predictive model checking</a></li>
+<li class="chapter" data-level="8.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-for-group"><i class="fa fa-check"></i><b>8.4</b> Posterior predictive model checking for group</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics notes from summer 2021</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="binomial-1" class="section level1">
+<h1><span class="header-section-number">Lecture 3</span> Binomial</h1>
+<p><tt>The following notes are from transcribed from Neath(0504, 2021) lecture which summarizes Section 3.1 of Hoff(2009).</tt></p>
+<div id="example---exchangeable-binary-data" class="section level2">
+<h2><span class="header-section-number">3.1</span> Example - Exchangeable binary data</h2>
+<p>The quantity of interest is the proportion of women that rate themselves as generally happy. Denote this quantity as <span class="math inline">\(\theta\)</span>, <span class="math inline">\(0 &lt; \theta &lt; 1\)</span>. Our data is <span class="math inline">\(n=129\)</span> women surveyed.
+<span class="math display">\[
+Y_i = \begin{cases}
+1 \text{ if } i\text{th woman answered yes}\\
+0 \text{ otherwise}
+\end{cases}
+\]</span></p>
+<p><span class="math inline">\(\sum{y_i} =118\)</span>(number of <span class="math inline">\(1\)</span>s). We describe our prior belief (before observing the data) by a prior probability distribution <span class="math inline">\(p(\theta)\)</span>. In this example we’re saying <span class="math inline">\(\theta \sim \text{Uniform}(0, 1)\)</span> prior density <span class="math inline">\(\implies p(\theta) = 1\)</span>.</p>
+<p>Let <span class="math inline">\(\theta =\)</span> proportion of ALL women age 65+ who would answer yes. Binary means same thing as Bernoulli <span class="math inline">\((1\)</span> with probability <span class="math inline">\(\theta\)</span>, <span class="math inline">\(0\)</span> with probability <span class="math inline">\(1-\theta)\)</span>. Conditonal on <span class="math inline">\(\theta\)</span> the probability of any particular sequence of <span class="math inline">\(0\)</span>s and <span class="math inline">\(1\)</span>s is <span class="math inline">\(\theta^{\sum{y_i}} \times (1-\theta)^{n-\sum{y_i}}.\)</span></p>
+<p>What do we know about <span class="math inline">\(\theta?\)</span> Our belief about <span class="math inline">\(Y_1, …, Y_n\)</span> are determined by our beliefs about <span class="math inline">\((1)~\theta = \sum_{i=1}^NY_i/N \text{ and  }~ (2) ~ p(y_1, \ldots, y_n|\theta)\)</span>. The second one would be the bernoulli distribution! The first one is not resolved. What do we believe about <span class="math inline">\(\theta\)</span> prior to observing data? We know <span class="math inline">\(0 &lt; \theta &lt; 1.\)</span> Our belief about where between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> is most likely to be is correctly described by some probability distribution on the interval <span class="math inline">\([0, 1]\)</span>. So Let’s say <span class="math inline">\(\theta \sim \text{Uniform}(0, 1).\)</span> This would say <span class="math inline">\(Pr(a &lt; \theta &lt; b) = b-a\)</span> for any <span class="math inline">\(0 &lt; a &lt; b &lt; 1.\)</span></p>
+<p>Okay fine. The prior density is <span class="math inline">\(p(\theta) = 1, ~ 0 &lt; \theta &lt; 1.\)</span> Do Bayes’ rule to get the posterior <span class="math inline">\(p(\theta | y_1, y_2, \ldots, y_n) =p(y | \theta)p(\theta)/p(y) = c \times p(y | \theta)\)</span>. The denominator is constant because it doesn’t depend on <span class="math inline">\(\theta\)</span>!</p>
+<p>We have a general result here: Under a uniform prior distribution the posterior is proportional to the likelihood. Let’s proceed.</p>
+<p>The data are: <span class="math inline">\(n = 129, ~118\)</span> answered Yes I am generally happy <span class="math inline">\(11\)</span> did not. The probability of the specific sequence of values observed <span class="math inline">\((\)</span>conditional on the value of <span class="math inline">\(\theta)\)</span> i.e., <span class="math inline">\(p(y|\theta)= \theta^{118} \times (1 - \theta)^{11}.\)</span> Note here <span class="math inline">\(y_1, y_2, …, y_{129}\)</span> represents a particular sequence of 118 1s and 11 0s. So we have <span class="math inline">\(p(\theta | y) = c \times p(y | \theta) = c \times \theta^{118} \times (1 - \theta)^{11}\)</span> so a plot of <span class="math inline">\(p(y | \theta)\)</span> versus <span class="math inline">\(\theta\)</span> tells us what the posterior distribution looks like!</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="binomial-1.html#cb4-1"></a>n     &lt;-<span class="st"> </span><span class="dv">129</span></span>
+<span id="cb4-2"><a href="binomial-1.html#cb4-2"></a>sum.y &lt;-<span class="st"> </span><span class="dv">118</span></span>
+<span id="cb4-3"><a href="binomial-1.html#cb4-3"></a>theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">.001</span>)</span>
+<span id="cb4-4"><a href="binomial-1.html#cb4-4"></a>x =<span class="st"> </span><span class="kw">expression</span>(theta)</span>
+<span id="cb4-5"><a href="binomial-1.html#cb4-5"></a>y =<span class="st"> </span><span class="kw">expression</span>(<span class="kw">p</span>(y<span class="op">*</span><span class="st">&#39;|&#39;</span><span class="op">*</span>theta))</span>
+<span id="cb4-6"><a href="binomial-1.html#cb4-6"></a><span class="kw">plot</span>(theta, theta<span class="op">^</span>sum.y <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta)<span class="op">^</span>(n<span class="op">-</span>sum.y), </span>
+<span id="cb4-7"><a href="binomial-1.html#cb4-7"></a>     <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">ylab=</span>y, <span class="dt">xlab =</span> x); </span>
+<span id="cb4-8"><a href="binomial-1.html#cb4-8"></a><span class="kw">grid</span>(); <span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">118</span><span class="op">/</span><span class="dv">129</span>) <span class="co">#118 yeses -- the mode</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-8-1.png" alt="unnormalized posterior" width="672" />
+<p class="caption">
+Figure 3.1: unnormalized posterior
+</p>
+</div>
+<p>Our belief about <span class="math inline">\(\theta\)</span> based on 118 yeses out of 129 asked is; <span class="math inline">\(0.80 &lt; \theta &lt; 1\)</span></p>
+<p>Note: The shape here is correct for the posterior distribution, but the values on the y-axis is not as we are missing the constant factor in <span class="math inline">\(p(\theta | y) = c \times p(y | \theta).\)</span> This curve does not integrate to 1 so it’s not a probability density but it does uniquely define a probability density by its shape and THAT probability density is indeed the posterior of <span class="math inline">\(\theta.\)</span></p>
+<p>If the prior is uniform, we get a similar conclusion as a frequentist statistician although the interpretations are not the same.</p>
+</div>
+<div id="the-beta-distribution" class="section level2">
+<h2><span class="header-section-number">3.2</span> The beta distribution</h2>
+<p>The Beta distribution is a probability distribution on <span class="math inline">\([0, 1].\)</span> Hey! <span class="math inline">\(\theta\)</span> lives on <span class="math inline">\([0, 1]\)</span>. We can use the beta distribution as our prior for <span class="math inline">\(\theta\)</span> !</p>
+<p>Remember the Gamma function? For integer - value <span class="math inline">\(x,~\text{Gamma}(x) = (x-1)!\)</span>
+For noninteger it effectively interpolates between those factorials .</p>
+<div id="properties-of-the-beta-distribution" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Properties of the beta distribution</h3>
+<p>It has two parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b, ~a\)</span> describes tendency toward 1, <span class="math inline">\(b\)</span> describes tendency toward 0, mean of this distribution is <span class="math inline">\(a / (a+b)\)</span> variance is
+<span class="math inline">\(ab/(a+b+1)(a+b)^2.\)</span> If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are big, the beta distribution is has a low variance (has a high peak). If <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are not big then the beta distribution is more spread out. Mode is the value that maximizes our posterior belief! So if you want to report a single - number best guess at <span class="math inline">\(\theta\)</span> this would be a sensible choice.</p>
+<p>A plot of the posterior, <span class="math inline">\(\theta | y_1, …, y_n \sim \text{Beta}(119, 12)\)</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="binomial-1.html#cb5-1"></a>post &lt;-<span class="st"> </span><span class="kw">dbeta</span>(theta, sum.y<span class="op">+</span><span class="dv">1</span>, n<span class="op">-</span>sum.y<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb5-2"><a href="binomial-1.html#cb5-2"></a><span class="kw">plot</span>(theta, post, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>, <span class="dt">xlab =</span> x);</span>
+<span id="cb5-3"><a href="binomial-1.html#cb5-3"></a><span class="kw">lines</span>(theta, <span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">length</span>(theta)), <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>);</span>
+<span id="cb5-4"><a href="binomial-1.html#cb5-4"></a><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="dt">inset=</span>.<span class="dv">05</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;gray&quot;</span>,<span class="st">&quot;black&quot;</span>),</span>
+<span id="cb5-5"><a href="binomial-1.html#cb5-5"></a>       <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Posterior&quot;</span>));<span class="kw">grid</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-9-1.png" alt="the posterior density, with uniform(0,1){ Beta(1,1) } prior also shown" width="672" />
+<p class="caption">
+Figure 3.2: the posterior density, with uniform(0,1){ Beta(1,1) } prior also shown
+</p>
+</div>
+<p>This curve is the same as the first one above. But this one is a probability density. It has area under curve = 1. The light gray curve (the flat line) is the uniform density. That’s our prior belief about <span class="math inline">\(\theta\)</span>. So we purposely chose a prior that did not make any super strong assumptions. We don’t want to pretend we know more than we do. With a uniform prior, the posterior will depend mostly on the data. In the prior our belief about <span class="math inline">\(\theta\)</span> was weak, in the posterior we have pretty strong beliefs! Based on the data observed!</p>
+<p>Our posterior belief about <span class="math inline">\(\theta\)</span> is entirely contained in ratios <span class="math inline">\(p(\theta_a | y_1,\ldots,y_n) / p(\theta_b | y_1,\ldots,y_n)\)</span>, because you can do this for any two values, if you have a way to compare any two possible values of <span class="math inline">\(\theta\)</span> you have a way to do complete inference about <span class="math inline">\(\theta\)</span>.
+<span class="math display">\[
+\frac{p(\theta_a | \boldsymbol{y})}{p(\theta_b | \boldsymbol{y})} = \bigg(\frac{\theta_a}{\theta_b}\bigg)^{\sum y_i} \bigg(\frac{1-\theta_a}{1-\theta_b}\bigg)^{n-\sum y_i} \frac{p(\theta_a)}{p(\theta_b)}
+\]</span></p>
+<p>Look what happens to this ratio. It depends on the data <span class="math inline">\(y_1, …, y_n\)</span> only through their sum, <span class="math inline">\(\sum{ y_i }\)</span>. Any posterior belief about <span class="math inline">\(\theta\)</span> depends on the data only through the total value <span class="math inline">\(\sum{y_i}\)</span>, This means that <span class="math inline">\(\sum{y_i}\)</span> is a sufficient statistic for the bernoulli sampling model (likelihood) and uniform prior. Another way to say this; If you observe <span class="math inline">\(y = (1, 0, 0)\)</span> and I observe <span class="math inline">\(y = (0, 0, 1)\)</span> and we use the same prior and likelihood our inference will be exactly the same because these two data sets have the same <span class="math inline">\(\sum{y_i}\)</span>. If inference about <span class="math inline">\(\theta\)</span> depends on the data only through the total value let’s just call that our data.</p>
+<p>Notation: <span class="math inline">\(Y_i = 1\)</span> or <span class="math inline">\(0\)</span> for the <span class="math inline">\(i\)</span>th observation, <span class="math inline">\(Y = Y_1 + … + Y_n\)</span>. Then conditionally on <span class="math inline">\(\theta, ~~ Y | \theta \sim \text{Binomial}( n, \theta)\)</span>.</p>
+</div>
+</div>
+<div id="binomial-distribution" class="section level2">
+<h2><span class="header-section-number">3.3</span> Binomial distribution</h2>
+<p><span class="math inline">\(Pr(\sum{Y_i} = y) = \binom{n}{y} \times \theta^y \times (1-\theta)^{n-y}\)</span></p>
+<p>Without the <span class="math inline">\({n \choose y}\)</span> we have the probability of any particular sequence of <span class="math inline">\(y\)</span> 1s and <span class="math inline">\(n-\)</span>y 0s. But what we want is just the probability of one of those.</p>
+<p><span class="math inline">\(E(Y | \theta) = n \times \theta\)</span></p>
+<p>var<span class="math inline">\((Y | \theta) = n \times \theta \times (1-\theta)\)</span></p>
+<div id="posterior-inference-for-a-binomial-sampling-model" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Posterior inference for a binomial sampling model</h3>
+<p>So we have a prior density <span class="math inline">\(p(\theta)\)</span> we have a sampling model <span class="math inline">\(Pr(Y = y | \theta) =\)</span> <code>dbinom</code><span class="math inline">\((y , n , \theta)\)</span>. From these we use Bayes’ rule to compute the posterior!</p>
+<p><span class="math display">\[
+\begin{aligned}
+p(\theta \mid y) &amp;=\frac{p(y \mid \theta) p(\theta)}{p(y)} \\
+&amp;=\frac{\left(\begin{array}{l}
+n \\
+y
+\end{array}\right) \theta^{y}(1-\theta)^{n-y} p(\theta)}{p(y)} \\
+&amp;=c(y) \theta^{y}(1-\theta)^{n-y} p(\theta)
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(c(y) = {n \choose y} / p(y)\)</span>,which is a function of <span class="math inline">\(y\)</span>. Can we evaluate this? The answer is yes. But it would involve hard calculus. But we don’t need to. The key point here is: <span class="math inline">\(c(y)\)</span> does not depend on <span class="math inline">\(\theta, \implies p(\theta | y) \propto \theta^y (1-\theta)^{n-y} p(\theta).\)</span></p>
+<p>We know the shape of the posterior density! we don’t know it exactly i.e, the scale but we know the shape.</p>
+<p>Let’s take the uniform prior distribution <span class="math inline">\(p(\theta) = 1\)</span>. We now have <span class="math inline">\(c(y)\)</span> in an explicit form involving gamma functions( 03a slide 15 ) therefore we have the exact form of <span class="math inline">\(p(\theta | y)\)</span>. We have just demonstrated <span class="math inline">\(\theta | y \sim \text{Beta}( y+1, n-y+1)\)</span>.</p>
+<p>Recall what we noted about the Beta<span class="math inline">\((a, b)\)</span> dist. <span class="math inline">\(a\)</span> measures a tendency toward 1, <span class="math inline">\(b\)</span> measures a tendency toward <span class="math inline">\(0 ~(\)</span>or more accurately, <span class="math inline">\(a/(a+b)\)</span> and <span class="math inline">\(b/(a+b))\)</span>. We’ve seen that this posterior results from the “independent Bernoulli’s” model it also results from the Binomial model. Thus confirming the sufficiency result.</p>
+<p>Intuitively speaking, you can make a note of who answered yes and who answered no in the happiness question but it doesn’t matter because all we need is the sum of the yeses.</p>
+<p>Uniform<span class="math inline">\((0, 1) = \text{Beta}(1,1)=\)</span> <code>dbeta</code><span class="math inline">\((\theta, 1, 1) = 1, ~~ \forall ~ 0 &lt; \theta &lt; 1\)</span>.</p>
+<p>We’ve demonstrated that if <span class="math inline">\(\theta \sim \text{Beta}(1,1), ~~ Y | \theta \sim \text{Binomial}(n, \theta),\)</span> then <span class="math inline">\(\theta | y \sim \text{Beta}(1 + y , 1 + n - y)\)</span>.</p>
+<p>It looks like the Beta<span class="math inline">\((1, 1)\)</span> prior combines with <span class="math inline">\(y\)</span> successes and <span class="math inline">\((n-y)\)</span> failures to give a Beta posterior with <span class="math inline">\(1+y\)</span> and <span class="math inline">\(1+n-y\)</span> parameters <span class="math inline">\(\implies p(\theta|y) \sim \text{Beta}(a+y, b+n-y) =\)</span> <code>dbeta</code><span class="math inline">\((\theta, a+y, b+n-y).\)</span></p>
+</div>
+<div id="conjugacy" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Conjugacy</h3>
+<p><strong>Key result:</strong></p>
+<p>If <span class="math inline">\(\theta \sim \text{Beta}(a, b)\)</span> and <span class="math inline">\(Y | \theta \sim \text{Binomial}(n , \theta)\)</span> then <span class="math inline">\(\theta | y \sim \text{Beta}(a + y, b + n-y)\)</span>.</p>
+<p>This situation where the posterior distribution is of the same family of distributions as the prior is called conjugacy. Specifically we say <em>the conjugate prior for a Binomial sampling model is the Beta distribution.</em> Conjugate distributions are characterized by nice math. Things work out nicely for conjugate priors, things cancel out etc. Priors should reflect our prior belief. If that’s well described by a conjugate distribution GREAT otherwise no reason to restrict attention to conjugate priors in Bayesian analyses.</p>
+</div>
+</div>
+<div id="combining-information" class="section level2">
+<h2><span class="header-section-number">3.4</span> Combining information</h2>
+<p>The prior <span class="math inline">\(p(\theta)\)</span> is what we believed before we saw the data. The likelihood <span class="math inline">\(p(y|\theta)\)</span> contains what we learn from the data. Therefore the posterior should in some sense combine what we knew before with what we just learned. It does! Posterior combines prior and likelihood; <span class="math inline">\(p(\theta | y) = c \times p(\theta) \times p(y | \theta)\)</span>. Let’s demonstrate this for the “beta-binomial” model where <span class="math inline">\(\theta | y \sim \text{Beta}( a + y , b + n-y).\)</span></p>
+<p><span class="math display">\[\begin{aligned}
+\text{Prior mean } = E(\theta) &amp;= \frac{a}{a+b}\\
+\text{Sample average is } &amp; y/n
+\end{aligned}\]</span></p>
+<p><span class="math display">\[\text{Posterior mean } = \frac{a+y}{a + b  + n} = \frac{a+b}{a+b+n} \cdot\frac{a}{a + b} + \frac{n} {a+b+n} \cdot \frac{y}{n}\]</span></p>
+<p>What this equation demonstrates is that posterior expectation = weighted average of prior expectation and sample average. <span class="math inline">\(a + b\)</span> is the weight given to the prior, <span class="math inline">\(n\)</span> is the weight given to the data. Data contributes <span class="math inline">\(y\)</span> successes and <span class="math inline">\(n-y\)</span> failures (in <span class="math inline">\(n\)</span> trials). <span class="math inline">\(a\)</span> plays the exact same role as <span class="math inline">\(y, ~b\)</span> plays the exact same role as <span class="math inline">\(n-y.\)</span> Thus we can say the Beta<span class="math inline">\((a, b)\)</span> prior contributes <span class="math inline">\(a\)</span> “successes” and <span class="math inline">\(b\)</span> “failures” in <span class="math inline">\(a + b\)</span> “prior trials”. So the bigger is <span class="math inline">\(n\)</span> relative to <span class="math inline">\(a+b\)</span> the less the prior matters.</p>
+<div id="example-1" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Example</h3>
+<p>Happiness example with a uniform prior. <span class="math inline">\(a + b = 2, ~ n = 129\)</span>. Thus the posterior distribution mostly depends on the data.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="binomial-1.html#cb6-1"></a><span class="co"># Reproduce Figure 3.4 in Hoff (2009)</span></span>
+<span id="cb6-2"><a href="binomial-1.html#cb6-2"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">mgp=</span><span class="kw">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
+<span id="cb6-3"><a href="binomial-1.html#cb6-3"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb6-4"><a href="binomial-1.html#cb6-4"></a>theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">.01</span>)</span>
+<span id="cb6-5"><a href="binomial-1.html#cb6-5"></a>a     &lt;-<span class="st"> </span><span class="dv">1</span>; b &lt;-<span class="st"> </span><span class="dv">1</span>; n &lt;-<span class="st"> </span><span class="dv">5</span>; y &lt;-<span class="st"> </span><span class="dv">1</span>;</span>
+<span id="cb6-6"><a href="binomial-1.html#cb6-6"></a><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, a<span class="op">+</span>y, b<span class="op">+</span>n<span class="op">-</span>y), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">ylab=</span>ylab,</span>
+<span id="cb6-7"><a href="binomial-1.html#cb6-7"></a>     <span class="dt">main=</span><span class="kw">mtext</span>(b1, <span class="dt">side=</span><span class="dv">3</span>,<span class="dt">line=</span>.<span class="dv">1</span>), <span class="dt">xlab =</span> x)</span>
+<span id="cb6-8"><a href="binomial-1.html#cb6-8"></a><span class="kw">lines</span>(theta, <span class="kw">dbeta</span>(theta, a, b), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb6-9"><a href="binomial-1.html#cb6-9"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">inset=</span>.<span class="dv">05</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>,<span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;gray&quot;</span>,<span class="st">&quot;black&quot;</span>),</span>
+<span id="cb6-10"><a href="binomial-1.html#cb6-10"></a>       <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Posterior&quot;</span>), <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb6-11"><a href="binomial-1.html#cb6-11"></a>a &lt;-<span class="st"> </span><span class="dv">3</span>;  b &lt;-<span class="st"> </span><span class="dv">2</span>;  n &lt;-<span class="st"> </span><span class="dv">5</span>;  y &lt;-<span class="st"> </span><span class="dv">1</span>;</span>
+<span id="cb6-12"><a href="binomial-1.html#cb6-12"></a><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, a<span class="op">+</span>y, b<span class="op">+</span>n<span class="op">-</span>y), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">ylab=</span>ylab,</span>
+<span id="cb6-13"><a href="binomial-1.html#cb6-13"></a>     <span class="dt">main=</span><span class="kw">mtext</span>(b2, <span class="dt">side=</span><span class="dv">3</span>,<span class="dt">line=</span>.<span class="dv">1</span>), <span class="dt">xlab =</span> x)</span>
+<span id="cb6-14"><a href="binomial-1.html#cb6-14"></a><span class="kw">lines</span>(theta, <span class="kw">dbeta</span>(theta, a, b), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb6-15"><a href="binomial-1.html#cb6-15"></a>a &lt;-<span class="st"> </span><span class="dv">1</span>;  b &lt;-<span class="st"> </span><span class="dv">1</span>;  n &lt;-<span class="st"> </span><span class="dv">100</span>;  y &lt;-<span class="st"> </span><span class="dv">20</span>;</span>
+<span id="cb6-16"><a href="binomial-1.html#cb6-16"></a><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, a<span class="op">+</span>y, b<span class="op">+</span>n<span class="op">-</span>y), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">ylab=</span>ylab,</span>
+<span id="cb6-17"><a href="binomial-1.html#cb6-17"></a>     <span class="dt">main=</span><span class="kw">mtext</span>(b3, <span class="dt">side=</span><span class="dv">3</span>,<span class="dt">line=</span>.<span class="dv">1</span>), <span class="dt">xlab =</span> x)</span>
+<span id="cb6-18"><a href="binomial-1.html#cb6-18"></a><span class="kw">lines</span>(theta, <span class="kw">dbeta</span>(theta, a, b), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb6-19"><a href="binomial-1.html#cb6-19"></a>a &lt;-<span class="st"> </span><span class="dv">3</span>;  b &lt;-<span class="st"> </span><span class="dv">2</span>;  n &lt;-<span class="st"> </span><span class="dv">100</span>;  y &lt;-<span class="st"> </span><span class="dv">20</span>;</span>
+<span id="cb6-20"><a href="binomial-1.html#cb6-20"></a><span class="kw">plot</span>(theta, <span class="kw">dbeta</span>(theta, a<span class="op">+</span>y, b<span class="op">+</span>n<span class="op">-</span>y), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">ylab=</span>ylab,</span>
+<span id="cb6-21"><a href="binomial-1.html#cb6-21"></a>     <span class="dt">main=</span><span class="kw">mtext</span>(b4, <span class="dt">side=</span><span class="dv">3</span>,<span class="dt">line=</span>.<span class="dv">1</span>), <span class="dt">xlab =</span> x)</span>
+<span id="cb6-22"><a href="binomial-1.html#cb6-22"></a><span class="kw">lines</span>(theta, <span class="kw">dbeta</span>(theta, a, b), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-11-1.png" alt="Beta posterior distributions under two diﬀerent sample sizes and two different prior distributions. Look across a row to see the effect of the prior distribution, and down a column to see the eﬀect of the sample size" width="672" />
+<p class="caption">
+Figure 3.3: Beta posterior distributions under two diﬀerent sample sizes and two different prior distributions. Look across a row to see the effect of the prior distribution, and down a column to see the eﬀect of the sample size
+</p>
+</div>
+<p>In the top row <span class="math inline">\(n=5\)</span> prior matters! In the bottom row, <span class="math inline">\(n=100\)</span> prior does not matter.</p>
+</div>
+</div>
+<div id="prediction" class="section level2">
+<h2><span class="header-section-number">3.5</span> Prediction</h2>
+<p>Suppose we have <span class="math inline">\(n+1\)</span> trials <span class="math inline">\(Y_1, Y_2, …, Y_n, Y_{n+1}.\)</span> We will observe <span class="math inline">\(n\)</span> of them and make our best prediction for the <span class="math inline">\((n+1)\)</span>st.</p>
+<p>The model says <span class="math inline">\(\{Y_1, …, Y_n, Y_{n+1} | \theta\} \sim \text{iid  Binary}(\theta)\)</span>. Under Bayesian, we have a distribution for our predictions.</p>
+<p><span class="math display">\[
+\begin{aligned}
+Pr(\tilde Y = 1|y_1,...,y_n)=E(\theta|y_1,...,y_n)&amp;=\frac{a+\sum y_i}{a+b+n}\\
+Pr(\tilde Y = 0|y_1,...,y_n)=1-E(\theta|y_1,...,y_n)&amp;=\frac{b+\sum(1-y_i)}{a+b+n}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are called hyperparameters. The predictive distribution depends on hyperparameters which are known, and on the data which is observed. If the predictive distribution did not depend on <span class="math inline">\(y_1, …, y_n\)</span> that would suggest <span class="math inline">\(\tilde Y\)</span> was independent of <span class="math inline">\((Y_1, .., Y_n)\)</span>. Also note that the predictive distribution does not depend on any unknown quantities.</p>
+<p>The Beta(1,1) prior <span class="math inline">\(\equiv\)</span> Uniform(0, 1) is equivalent to two prior observations (one success one failure). Does this seem right? Is this a ‘noninformative’ prior? Wouldn’t it be even more uninformative to take <span class="math inline">\(a = b = 0.5?\)</span> What does this density look like?</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="binomial-1.html#cb7-1"></a>teta  &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>)</span>
+<span id="cb7-2"><a href="binomial-1.html#cb7-2"></a>prior &lt;-<span class="st"> </span><span class="kw">dbeta</span>(teta, <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb7-3"><a href="binomial-1.html#cb7-3"></a><span class="kw">plot</span>(teta, prior, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">xlab =</span> x, <span class="dt">ylab =</span> </span>
+<span id="cb7-4"><a href="binomial-1.html#cb7-4"></a>     <span class="kw">expression</span>(<span class="kw">p</span>(theta)), <span class="dt">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-12-1.png" alt="Beta(0.5, 0.5) density" width="80%" height="80%" />
+<p class="caption">
+Figure 3.4: Beta(0.5, 0.5) density
+</p>
+</div>
+<p>It is more uninformative to take Beta(0.5, 0.5)</p>
+<p>So although the 1 extra success and 1 extra failure in the Beta(1,1) feels like something kind of noninformative to some people it leads to a more sensible prediction as we will illustrate here;</p>
+<p>Under uniform prior, the posterior of the predictive probability for <span class="math inline">\(\tilde Y\)</span> has the posterior mean <span class="math inline">\((y+1)/(n+2)\)</span>. Suppose <span class="math inline">\(y=0\)</span> then the posterior mean becomes <span class="math inline">\(1/(n+2)\)</span> which is reasonable. Suppose <span class="math inline">\(y=n\)</span>, then it is <span class="math inline">\((n+1)/(n+2)\)</span> which is also reasonable. Whereas the posterior mode of <span class="math inline">\(y/n\)</span> doesn’t make sense as a predictive probability. Just because you observed <span class="math inline">\(n\)</span> successes in <span class="math inline">\(n\)</span> trials doesn’t mean you are 100% certain the next trial will be a success! Hence the posterior mean makes more sense as a predictive probability than the posterior mode and those two extra trials coming from the uniform prior seem sensible also.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exchangeability.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bayesianS21.pdf", "bayesianS21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

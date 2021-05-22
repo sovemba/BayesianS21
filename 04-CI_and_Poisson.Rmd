@@ -1,0 +1,210 @@
+# Confidence Intervals {#CI}
+
+```{r echo = FALSE, message = FALSE}
+rm(list=ls());  set.seed(20210504);
+knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
+```
+
+<tt>The following notes are transcribed from Neath(2021) lecture which summarizes Sections(3.1.2 and 3.2) of Hoff(2009).</tt>
+
+<p>&nbsp;</p>
+
+In classical statistics you assume a probability model for a population of values based on the observation of a sample from that population. You estimate parameters of that probability model. A point estimate represents our best guess at that value, but we know it's not right. Same thing is true with Bayesian inference. We can formulate a prior distribution, collect data, and compute the posterior using Bayes' rule and from that take the posterior mean, $E(\theta | y)$, or posterior mode, $p(\theta | y)$, or posterior median as a point estimate and that value would represent our best guess. But if for example $\theta$ is a probability, $0 < \theta < 1$, whatever our best guess for $\theta$ is, our confidence in its correctness is 0%. 
+
+$E(\theta | y), p(\theta | y)$ are point estimates of $\theta$, NOT $\theta$ itself! There is a true $\theta$! When we speak of $\theta$ as a random variable and give it a prior distribution and update that using the data and from that get a posterior distribution. We only involve probability in this discussion because we don't know what $\theta$ is. 
+
+Let's use the percent of 'happy women' as an example. $\theta =$ proportion of women age 65+ who would call themselves "generally happy" $(0 < \theta < 1).$ In classical statistics we resolve this issue (point estimate is our best guess but we know it's wrong) by computing a standard error as well as a point estimate and reporting a 95% confidence interval. In Bayesian inference we're gonna do the same thing.
+
+## Confidence Intervals
+
+Observe the data $Y = y$. Compute $l(y) < \theta <u(y)$, $l$ and $u$ stand for lower and upper. The interval $[l(y), u(y)]$ is a 95% (Bayesian) confidence interval if $Pr[ l(y) < \theta < u(y) | Y = y ] = 0.95$. This is not the usual (frequentist) definition of 95% confidence interval.
+
+*What does "95% confident" mean to a frequentist?* It doesn't mean true with 95% probability because a frequentist doesn't allow "probability" to be interpreted like that. To a frequentist the statement $l(y) < \theta < u(y)$ is either true or false and we don't know which it is but we know that prior to the data collection based on the likelihood(sampling model $p(y | \theta)$),  this is true: $Pr[ l(Y) < \theta < u(Y) | \theta] \ge .95$ for all values of $\theta ~ ($this is a random interval, also notice conditioning on $\theta)$ So before we collect the data, we agree on a data collection mechanism, we agree on a formula for computing the interval based on the observed data, and we can say that there is a 95% chance that the interval will contain the value of $\theta$ and a 5% chance that is misses. 
+
+Once you observe $Y = y$ and you plug this data into your conﬁdence interval formula $[l(y), u(y)]$, then
+
+$$
+\operatorname{Pr}(l(y)<\theta<u(y) \mid \theta)=\left\{\begin{array}{ll}
+0 & \text { if } \theta \notin[l(y), u(y)] \\
+1 & \text { if } \theta \in[l(y), u(y)]
+\end{array}\right.
+$$
+
+This statement makes sense: $Pr[ l(Y) < \theta < u(Y) | \theta] = 0.95.$ We observe the data $Y= y$ and $y$ is a number and suppose our CI is $l(y) = .58, ~u(y) = .63$.
+
+Then to say:
+$Pr[ .58 < \theta < .63 ] = 0.95$ ??????? That doesn't make any sense! After we have observed the data, $\theta$ is either between 0.58 and 0.63 or it's not. But to a Bayesian this makes perfect sense. 
+
+Again, *What does the frequentist 95% confidence mean?* When a frequentist says: I'm 95% confident that $.58 < \theta < .63$ it means this interval [.58, .63] was computed using a method that would, in the long run, give correct results 95% of the time. This particular instance may be one of the 95% of cases we're right or one of the 5% of cases where we get it wrong and we don't which it is. We summarize this by saying we're 95% confident in this particular interval. But that "95% confidence" statement to a frequentist is a verbal shorthand for this much more complicated interpretation. To a Bayesian 95% confidence is a perfectly direct statement.
+
+## How do we compute intervals?
+
+That's easy! (conceptually easy). I have a probability distribution for $\theta,$ $p(\theta | y)$ is its density. I find numbers $l$ and $u$ such that $Pr( \theta < l | y) + Pr( \theta > u | y) = .05$. That means there's a 95% chance that $\theta$ is between those limits and thus $[l, u]$ give a 95% Bayesian confidence interval. There is not a unique solution. The most straightforward thing to do is to put $\alpha/2$ probability to to the left of $l$ and $\alpha /2$ probability to the right of $u,$ leaving $1 - \alpha$ probability in the middle (eg. for 95% confidence, $\alpha = .05$). Our notation for quantiles is $\theta_p, ~ \theta_a, ~ \theta_q$ means $Pr[ \theta < \theta_q | y ] = q$ and $Pr[ \theta > \theta_q | y ] = 1-q$ (I'm assuming our parameter spaces are all continuous).
+
+### Example
+
+2 successes in 10 trials. Find a 95% posterior interval for $\theta$ (posterior interval, Bayesian confidence interval, credible interval, credible set, posterior probability interval) all mean the same thing.
+
+$$\theta | Y = 2 \sim \text{Beta}(1+2, 1+8)$$
+```{r}
+a <- 1; b <- 1;  # prior 
+n <- 10; y <- 2; # data 
+qbeta(c(.025, .975), a+y, b+n-y)
+```
+These quantiles are 0.06 and 0.52, respectively, and so the posterior probability that $\theta \in [0.06, 0.52]$ is 95%.
+
+```{r fig.cap = "Posterior interval"}
+theta <- seq(0, 1, .001)
+plot(theta, dbeta(theta, a+y, b+n-y), type="l", 
+     ylab=expression(p(theta*'|'*y)), lwd=2, 
+     xlab = expression(theta))
+CI <- qbeta(c(.025, .975), a+y, b+n-y)
+abline(v=CI, lty=2, lwd=2)
+legend("topright", inset=.05, lty=c(1,2), lwd=2, 
+       legend=c("Posterior dist", "95% CI"))
+```
+
+
+There is 95% posterior probability that $.06 < \theta < .52$. A thing to note about this interval. Putting .025 in the left tail and .025 in the right tail is not the only way to get .95 in the middle. In this case we could move the lower bound down a little and get to move the upper bound down by a little more. Some people (quite reasonably) would like to report the shortest possible 95% interval. In general the equal-tail interval that we just described is not that. There is a way to get a shorter interval. The term for this is the HPD(highest posterior density) interval. In most problems it does not make a huge difference (I think I heard there's an R package that makes it pretty easy). But ok, look into this if you're interested. In our case we'll make it our standard to always report equal-tailed posterior probability intervals $\alpha/2$ to the left $\alpha/2$ to the right leaving $1-\alpha$ in the middle.
+
+
+
+
+# Poisson model
+
+<tt>The following notes are transcribed from Neath(2021) lecture which summarizes Sections(3.1.2 and 3.2) of Hoff(2009).</tt>
+
+<p>&nbsp;</p>
+
+
+Suppose $Y =$ number of facebook friends your neighbor has. There are a large number of people in the world. Some of them are your neighbors facebook friends and some are not.
+$$
+Y_i = \begin{cases}  1 \text{ if the }i\text{th person in the world is a facebook friend of your neighbors}\\
+ 0 \text{ otherwise}
+\end{cases}
+$$
+
+$Y_i \sim ~$Binomial(size = number of people in the world). probability = proportion of those people who are facebook friends with your neighbor. This is not a good probability model for this variable, because the size is too big and the probability is too small. What works better in cases like this is the Poisson distribution.
+
+Sample space is { $0, 1, 2, ...$ }. 
+
+probability function is $e^{-\theta} \times \theta^y / y!, ~  y \in \{~0, 1, 2,...\},$  $\theta$ is the mean, i.e., expected value of $Y$.
+
+The Poisson model is a good first thing to think of and first thing to try for count data. A property of the Poisson distribution is; variance = $\theta$ = mean. When the variance is a little bigger than the mean, Poisson probabilities may still match the observed proportions reasonably closely but when variance is a lot bigger than the mean Poisson distribution is not such a good model. 
+
+Let $Y_i =$ count for $i$th unit, { $i = 1, 2, …, n$ }. If $Y_i | \theta$ are iid Poisson($\theta$) then the joint probability of $(y_1, y_2, …, y_n)$ depends on the data only though the total value $\sum{y_i}$. We say the $\sum{y_i}$ is a sufficient statistic. If you observe the data $n=3, y =$ <tt>c</tt>( 1 , 2, 3 ) and I observe $n = 3,~ y =$ <tt>c</tt>( 4, 1, 1 ) our inference about $\theta$ will be exactly the same. It is also a property of Poisson random variables that sums of independent Poisson random variables are distributed as Poisson. 
+
+Posterior of $\theta$ satisfies 
+$$
+p(\theta | y_1, ..., y_n) = c_0 \times p(\theta) \times p(y|\theta)=c \times p(\theta) \times \theta^{\sum{y_i}}e^{-n \theta }
+$$
+
+We'll work with a conjugate prior because it makes things simple. Looking at $p(\theta)\times\theta^{\sum{y_i}} e^{-n\theta }$, what could we plug in for $p(\theta)$ such that $p(\theta | y)$ will have the same parametric form? well $p(\theta | y)$ is gonna have a $\theta^{\text{something}}$ and a something$^{\theta}$ so the prior can have those things too! What probability distribution for $\theta > 0$ allows $\theta^{\text{something}}$ and something$^{\theta}$? That would be the gamma distribution $= \tilde c\times\theta^{a-1} e^{-b \theta}$. In this parameterization $b$ is the rate parameter, $1/b$ is the scale parameter.
+
+
+## Posterior inference for the Poisson model
+
+For our prior on $\theta$ we'll say $\theta \sim$ gamma$(a, b)$.
+
+*How do you choose a and b?* In general, when considering the question of how to choose a prior look at what the prior leads to in terms of the posterior. Not by peeking at the data though, just by studying the model. i.e., Let's look at what posterior the gamma$(a, b)$ prior will lead to and then come to the question of what $a$ and $b$ should be.
+
+**Key Result:** If $\theta \sim \text{gamma}(a,b)$ and $Y_1,\ldots,Y_n | \theta \sim$ iid Poisson$(\theta)$, then $(\theta | Y_1 = y_1, \ldots, Y_n = y_n) \sim \text{gamma}(a+\sum y_i, b+n)$.
+
+What do $a$ and $b$ contribute to the posterior? $a$ contributes analogously to $\sum{y_i}$ which is the observed total count $b$ contributes analogously to $n$ which is the number of observed counts. Another way to say this: The data consist of $n$ observations with average value $\sum{y_i} / n,$ the prior contributes (effectively) $b$ observations with average value $a/b$.  So in the absence of genuine prior information about $\theta$ just make sure $b$ is small relative to $n$ and it won't matter very much. Make $b$ small relative to $n$ and make $a/b$ or $(a-1)/b$ your prior "best guess".
+
+Student question: What’s the difference, definition wise, between $n$ observations and $b$ observations?
+
+Ans: The $n$ observations are real data. The $b$ observations are not data they're "pseudo-data" or "prior observations" The value of $\sum{y_i}$ is determined by the data. The values of $a$ and $b$ are chosen by us.
+
+
+
+## Posterior predictive distribution
+
+Now suppose we have $n+1$ observations and our job is to predict the $(n+1)$st. Let $\tilde Y$ represent this $(n+1)$st observation. The conditional distribution of $\tilde Y|Y_1 = y_1, …, Y_n = y_n$ is called the *posterior predictive distribution*. Posterior because it depends on the observed data. The distinction between
+"estimation" and "prediction"; If it's an observable (but as yet unobserved) quantity it's a prediction. Like $\tilde Y;$ the $(n+1)$st data point that just hasn't been observed yet. Versus an unknown parameter like $\theta$ is an unobservable quantity. Inference about $\theta$ would be called estimation. 
+$$
+\begin{aligned}
+p(\tilde y | y_1,...,y_n) &= \int p(\tilde y,\theta | y_1,...,y_n)d\theta\\
+&=\int \texttt{dpois}(\tilde y, \theta) \texttt{dgamma}(\theta, a+\sum y_i, b+n)d\theta
+\end{aligned}
+$$
+
+**A general result:** "A gamma mixture of Poissons is negative binomial".
+
+One way the negative binomial distribution arises is; $y =$ number of failures before the $n$th success(in Bernoulli trials). This is the same negative binomial distribution as that but not the same motivation and note the "$n$" parameter need not be an integer. 
+
+$E (\tilde Y) = E [ E(\tilde Y | \theta) ] = E(\theta).$ Simalarly, 
+
+$\text{Var}[ \tilde Y ] = \text{Var}[ E(\tilde Y | \theta) ] + E[\text{Var}(\tilde Y | \theta) ] = \text{Var}( \theta ) + E (\theta )$ but the posteriors!
+
+
+## Example: Birth rates
+
+We are comparing two populations. There's strong evidence that there is a difference between the two populations (see slide 22).
+
+```{r}
+a  <- 2  ; b  <- 1  # prior parameters
+n1 <- 111; sy1<-217 # data in group 1
+
+# posterior mean 
+( a+sy1 )/( b+n1 )
+
+# posterior mode
+( a+sy1-1)/(b+n1 ) 
+
+# posterior 95% CI
+qgamma( c (0.025 , 0.975) , a+sy1 , b+n1 ) 
+
+
+n2 <- 44 ; sy2<-66 # data in group 2
+# posterior mean 
+( a+sy2 )/( b+n2 )
+
+# posterior mode
+( a+sy2-1)/(b+n2 )
+
+# posterior 95% CI
+qgamma( c (0.025 , 0.975) , a+sy2 , b+n2 )
+```
+
+
+
+## Explaining the parameters of the gamma distribution
+
+Poisson
+$$
+f(x|\theta)=e^{-\theta}\,\frac{\theta^x}{x!} \quad \text{ for } x\in\{0,1,...,\},\quad  \theta>0\\
+$$
+
+Gamma
+$$f(x) = \frac{b^a}{\Gamma(a)}x^{a-1}e^{-bx}, \quad x > 1\\[0.6cm]$$
+
+
+In the density function we have $x^a(\exp(-bx).$ If this was an exponential distribution for the waiting time to the next event where the event is occurring according to a Poisson process with rate $b$ it would just be $e^{-bx}$ and would have a mean waiting time of $1/b,$ where $b$ is the rate.
+
+Why is $a$ called the shape parameter? If we change the variable from waiting time till next event to waiting time till $a$th event we get a gamma$(a, b)$ distribution.
+
+In what sense does $a$ govern the shape of a gamma dist? The answer is: When $a = 1$ we have an exponential dist and in the exponential dist $a < 1$ means asymptote at 0, $a=1$ means mode at 0 that's a severely right-skewed dist. When $a > 1$, the mode is at $(a-1) / b$. And the bigger $a$ is the farther away from zero this mode is AND the more bell-shaped is the density curve. Property of the gamma$(a, b)$ dist is; If $a$ is big, it's well-approximated by a normal distribution.
+
+```{r echo = FALSE}
+alpha <- 2:6
+beta  <- 1
+x     <- seq(0, 10, by = .01)
+plot(x, dgamma(x, shape = alpha[1], scale = beta), 
+     col = 1, type = "l", ylab = "f(x)", 
+     main = "Gamma(alpha, 1)", lwd = 2)
+
+for (i in 2:5) {
+  lines(x, dgamma(x, shape = alpha[i], scale = beta), 
+        col = i, lwd = 2) 
+}
+legend <- paste("alpha=", alpha, sep = "")
+legend("topright", legend = legend, fill = 1:5, cex=1)
+```
+
+To the original question in what sense is $b$ a "rate" and in what sense does $a$ determine "shape"? $b$ is a rate in the "Poisson-process-connection to exponential distribution" sense. The closer $a$ is to zero the more right-skewed is the gamma distribution, the bigger $a$ is the more bell-shaped (normal) is the gamma distribution. 
+
+In the Poisson-gamma Bayesian problem the bigger is $\sum{y_i}$ the more data we've observed the more events we've observed. *A general result in Bayesian inference is: The more data you have the more normal will be the posterior dist.* In the case of the Poisson-gamma model having "more data" doesn't just mean $n$ increasing. It actually depends on observing lots of events so "lots of data" in the Poisson gamma model is not just big "exposure" it's lots of events also which is determined by $\sum{y_i}$. The more events we've observed the more data we have the more normal is our posterior dist hence $\sum{y_i}$ (along with $a$ in the prior dist) make the posterior more and more bell-shaped or normal so they drive the shape of the posterior toward the normal dist. 
+
+The rate is there to normalize things. Observing 50 events in 10 days does not mean the same thing ( about $\theta$ ) as observing 50 events in 2 days. So the $n$(the rate) is defined with respect to a unit of time which determines how many units of data we've observed so in that sense $n$ (along with $b$) define the rate parameter in our gamma posterior.
+

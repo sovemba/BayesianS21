@@ -1,0 +1,247 @@
+--- 
+title: "Bayesian Statistics notes from summer 2021"
+author: "Chisom Onyishi"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+---
+
+```{r eval=FALSE, echo=FALSE}
+install.packages("bookdown")
+# or the development version
+# devtools::install_github("rstudio/bookdown")
+```
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+
+# Belief and Probability {#intro}
+
+
+<tt>The following are transcribed from Neath(0503,2021) lecture which summarize Sections(2.1-2.4) of Hoff(2009).</tt>
+
+
+
+* I like to use the chat
+* I will post lecture slides  to Courseworks  before 9am each class day
+* I will share the slides as I talk  and I will  type in the chat as I talk
+* My hope is  that by typing in the chat  as we go along  I will sort of reign myself in  from going too fast. Also,  there's a printed record of the chat  which is nice
+
+
+Gelman is on the third edition  and there's no reason to be looking at  the 2nd or 1st edition  of Gelman. However,  for this course,  I recommend get your hands on the book by  Peter D. Hoff  (2009)  "A First Course in Bayesian Statistical Methods". I will occasionally  reference stuff in the Gelman text  but the Hoff text is  what we're gonna follow. If you access  "Springer link"  using the Columbia network  you can get a free copy of  Hoff's book  by legitimate means!  Gelman's book  is also  (legitimately)  free online  because he has posted it!  Find a link on  [Prof Gelman's Columbia web page](http://www.stat.columbia.edu/~gelman/book/)! 
+
+Again, lecture will follow  Hoff's text.  We're starting in Chapter 2  and we'll finish it or come very close  (maybe skipping a few things along the way). We'll leave some time at the end  to talk about a few things  that aren't in Hoff's book  e.g.  Stan software  (which we'll introduce toward the end of the course).  But we'll be doing computing from the get-go.
+
+Your first assignment  (due next week)  (not posted yet)  will involve computing.  I like R, but  you may use Python if you know it.  The Hoff book  has some examples given in R. 
+
+You know all about probability  from the 'relative frequency' interpretation. If I roll a die  a gazillion times  it will land on the 3-side  one-sixth of those rolls  $Pr(3) = 1/6$.  In Bayesian statistics  we use probability more generally than that.  We use probability  in a way that's consistent  with the  informal use of probability. E.g.,  the probability that there will be  criminal charges brought on former president is x%. In a strict  frequency-based  sense  it doesn't even make sense  to speak of 'probability' for something like this. In a Bayesian sense it does and that is because in Bayesian statistics  we use  a different  (more general)  interpretation of probability  where the probability of an event  represents our degree of belief in that event. In Bayesian statistics  any statement about the world  can have a probability attached to it.  E.g., The probability  that climate change is a hoax  brought by China and the Deep State.  Though we might say this is absurd, some might assign this a probability other than zero. The only rule we'll have  for probabilities in our course  is that they be  internally consistent  i.e., coherent --  that they follow the rules of probability  (mathematical laws of probability).  We will use probability as a measure  of our degree of  belief  in a statement about the world.  
+
+
+Forget about probability for a second  and just think about this idea of  Belief.  Let $F$ be a statement about the world  $Be(F)$  is our degree of belief in that statement as measured by a numerical value. What's a reasonable set  of requirements on $Be()$  for it to be a reasonable belief function? 
+
+The higher the value, the higher the degree of belief.
+
+Let's make this more concrete  by thinking about bets
+
+* $Be(F) > Be(G)$  means  prefer betting on $F$ to betting on $G$
+
+* $Be(F | H) > Be(G | H)$  means  if we know $H$ to be true  we prefer betting on $F$ to betting on $G$  
+
+* $Be(F | G) > Be(F | H)$  means  if forced to bet on $F$ we prefer to do it  under the condition that $G$ is true than that $H$ is true. 
+
+The following **Axioms of belief**  have been proposed as a set of conditions that  any rational belief function  must satisfy  
+
+B1. $Be(\text{not } H | H) \le Be(F|H) \le Be(H | H)$.
+
+If $H$ is known to be true there is no other function that I have higher belief in than $H$ itself, and there is no statement that I have lower belief in other than not $H$.
+
+B2. $Be(F \text{ or } G | H) \ge Be(F | H), ~~  Be(F \text{ or } G | H) \ge Be(G | H)$  
+
+B3. $Be(F \text{ and } G | H)$  can be derived from  $Be(G | H)$  and  $Be(F | G \text{ and } H)$ 
+
+We propose  as Bayesian statisticians  to use probability  as our measure of belief.  Probability has its own set of axioms.  Here they are!  
+
+P1. $0 \le Pr(F | H) \le 1$, where $Pr(\text{ not } H | H) = 0, ~~ Pr( H | H ) = 1$ so that takes care of B1  
+
+P2. If $F$ and $G$ are disjoint events  then  $Pr(F \text{ or } G | H) = Pr(F | H) + Pr(G | H)$  
+
+P3. $Pr(F \text{ and } G | H) = Pr(G | H) \times Pr(F | G \text{ and } H)$  
+
+You can verify  that any probability function  that satisfies the axioms of probability also satisfies the axioms of belief. So  using probability as a language for measuring our belief  in statements about the world is justified. And that's what we do in Bayesian statistics.
+
+
+## Example: 
+
+$H_j =$ the event that { randomly selected person  is in quartile $j$ of income }  $j = 1, 2, 3, 4$  
+
+$H_1 =$ { lower $25\%$ },  $H_4$ = { upper $25\%$ } 
+
+Let $E$ =  event that { randomly selected person has college degree }
+
+From survey data (a very large survey; the General Social Survey for a particular year). We have $Pr(E | H_j)$ for each of $j = 1, 2, 3, 4$  $.11 + .19 + .31 + .53 = 1.14$.  You might think uh oh. However, not uh oh at all. These numbers aren't expected to add to $1.$  These numbers don't add to anything  particularly meaningful. Using Bayes rule, we can obtain  $Pr(H_j | E)$  for each $j = 1, 2, 3, 4$  and those had better add to $1$.
+
+Let's do $Pr(H_3 | E)$; the probability that a person is in the 3rd quartile of income (between $50$th and $75$th percentile) given that they have a college degree. Using Bayes' rule 
+
+$$
+\begin{aligned}
+Pr(H_3 | E)  &= \frac{Pr(H_3 \text{ and } E)}{Pr(E)}\\
+&=\frac{Pr(H_3)Pr(E | H_3)}{Pr(E)}\\
+&= \frac{Pr(H_3)Pr(E | H_3)}{Pr(H_1 \text{ and } E) + Pr(H_2 \text{ and } E) + Pr(H_3 \text{ and } E) + Pr(H_4 \text{ and } E)}\\
+&= \frac{.25 \times .31}{0.28} = \frac{0.0775}{0.28} = 0.272
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+Pr(H_1 \text{ and } E) = Pr(H_1 ) Pr(E | H_1)  = .25 \times .11\\
+Pr(H_2 \text{ and } E) = Pr(H_2 ) Pr(E | H_2)  = .25 \times .19\\
+Pr(H_3 \text{ and } E) = Pr(H_3) Pr(E | H3) = .25 \times .31\\Pr(H_4 \text{ and } E) = Pr(H_4) Pr(E | H_4)  = .25 \times .53
+\end{aligned}
+$$
+
+$Pr(E) =$  the sum of these four products.  I get $Pr(E) = 0.285$  
+
+
+This is a problem in Bayesian inference!  Did you think this was just a fun little probability exercise?  No no no no no, this was serious business. This was our first real Bayesian learning problem.  I tell you I have a randomly selected person from this survey. What is your belief about their income?  You think they're in 1st, 2nd, 3rd or 4th  quartile?  Your belief is  { $.25 , .25 , .25, .25$ }. Now I tell you they have a college degree  so you will update your belief!  *You will update your belief  which is measured by a probability  which is updated using  Bayes rule*. 
+
+**Bayesian inference:** is  the discipline of  updating our belief about the world  based on further observation of the world.
+
+If we know they have college degree  our belief is not  { $.25, .25, .25, .25$ }  anymore  it's skewed more toward the higher income groups  { $.09,  .17,  .27,  .47$ }.
+
+* The $H_k$'s  in this set-up  are usually 'states of nature' and the $E$ in this set-up  is the observed data
+
+
+## Random Variables
+
+In Bayesian statistics a *random variable* is any numerical quantity whose value is uncertain  that includes things like  experimental results  (before the experiment is conducted)  survey results  (before the sample is taken). But it also includes  model parameters  states of nature.
+
+Let $Y$ be a random variable  $\mathcal{Y}$ is the set of possible values.  If the set of possible values is a *countable* set  { $y_1, y_2, \ldots$ }, then $Y$ is a discrete random variable.
+
+We can compute $Pr(Y = y)$  for any value of $y$. We'll define the  pdf  $p(y) = Pr(Y = y)$.  $Y$ is the random variable, $y$ is a possible realized value for $Y$.  Note we are using the  pdf  (density)  terminology  even for a discrete r.v.  (Hoff, 2009). If you know the pdf you know $p(y) = Pr(Y = y)$ for every possible value of $y$ then you know the whole probability distribution.
+
+Two key properties for the pdf of a discrete r.v. 
+
+1. $0 \le p(y) \le 1$
+
+2. They sum to $1$ 
+
+
+The two most important discrete probability distributions are the Binomial and Poisson  distributions. Here are their definitions:
+
+## Binomial distribution {#binomial}
+
+$$
+Pr(Y=y|\theta) = \texttt{dbinom}(y,n,\theta)=\left(\begin{array}{l}n\\y
+\end{array}\right)\theta^y(1-\theta)^{n-y}
+$$
+
+$Y$ counts the number of successes in $n$ independent trials  where the probability of success on each trial is $\theta$.  Then  $Pr(Y = y | \theta)$ is the probability of $y$ successes in $n$ trials = probability of $y$ successes and $n-y$ failures. Well the probability of $y$ successes followed by $n-y$ failures  is $\theta^y \times (1-\theta)^{n-y}$.  But $Pr(Y = y| \theta)$  is the probability of ANY  possible sequence of $y$ successes and $n-y$ failures. There are "$n$ choose $y$"  such sequences; there are "$n$ choose $y$" ways to arrange a sequence of $y$ successes and $n-y$ failures. Each sequence has the same probability $\theta^y \times (1-\theta)^{n-y}$. The probability that it's one of these sequences  is the sum of those probabilities  $\left(\begin{array}{l}n\\y\end{array}\right)\theta^y(1-\theta)^{n-y}$. We'll use this `dbinom` notation  for the binomial probability function which is also the R function to calculate these! Calculating binomial probabilities in R is easy. Suppose $n = 60$  and $\theta = .20$. This is the binomial distribution; the probability distribution for number of successes in $60$ trials  where the success probability is $0.20$. 
+
+## Poisson distribution {#poisson}
+
+$$
+Pr(Y = y|\theta) = \texttt{dpois}(y,\theta) = e^{-\theta} \frac{\theta^y}{y!}
+$$
+
+$\theta =$ mean  (expected value of $Y$).  $Y$ counts the number of events. $\theta$ is the expected number. $y = \{0, 1, 2, \ldots\}$  In R `dpois` does this!  Let's do a Poisson distribution with expected value of $12$  (will look not so different from that  binomial distribution. That's the Poisson distribution with expected value of $12$. 
+
+They're pretty similar. But careful on plots like these. When we make comparative plots like this  we should take care  to put them on the same scale! You can see that the binomial distribution assigns higher probabilities close to the expected value  whereas the Poisson distribution gives more probability mass  farther away  from the expected value. 
+
+
+```{r fig.cap = "Binomial and Poisson Distributions", fig.align = 'center'}
+par(mfrow = c(1,2))
+y <- 0:30
+p <- dbinom(y, size = 60, prob = 0.2)
+plot(y, p, pch=19, main = "Binomial(60, 0.2)",
+     ylim = c(0, 0.13))
+segments(y,0,y,p)
+
+p <- dpois(y, 12)
+plot(y, p, pch = 19, main = "Poisson(12)",
+     ylim = c(0, 0.13))
+segments(y,0,y,p)
+```
+
+
+They're applicable to different situations. The binomial distribution is most appropriate when we have a  fixed number of trials. However, if you're not clear on what $n$ and $\theta$ should be but you know what $n \times \theta$ should be then you can't do  Binomial$(n, \theta)$  but you can do Poisson$(n\times\theta)$.  If there's no upper bound  then the binomial distribution is not appropriate (you can't have $150$ successes in $100$ trials - in this case there's no upper bound, and a Poisson model is more appropriate).
+
+
+## Continuous Random Variables
+
+Where the set of possible values is not a countable set and it's, say,  the whole real line.
+
+$F(y)$ is the cumulative probability up to and including $y$  $F(y) = Pr(Y \le y)$.  If I know the cdf (cumulative distribution function) of a random variable, I know the whole distribution. Because I can find  $Pr( a < Y \le b)  = F(b) - F(a).$ If $Y$ is a discrete random  variable  it's cdf is a step function. If $F$ is a monotone  continuous function then $Y$ is a continuous random variable. In that case (maybe)  there exists a function $p()$  such that  for any set $A,$  $Pr(Y \in A)  = \int_A {  p(y) dy}.$  $p(y)$  is called the  density function or pdf.
+
+If $p()$  is the density function of a continuous random variable  then  $p(y) \ge 0$ for all $y$  and  $\int_{-\infty}^\infty p(y) dy  =  1$.
+
+This is slightly different from the  conditions on the pdf of a  discrete random variable. If $p(y$) is the pdf of a continuous random variable, it is possible that $p(y) > 1$.  $p(y)$ does not represent a probability. The areas under the density curve are probabilities  as long as that total area under the curve is $1$ then it's a valid probability distribution. The most important continuous distribution is the Normal distribution. Let's look at the pdf  and cdf of a Normal dist!  In R  these are computed by `dnorm` (for the density)  and `pnorm` (for the cdf).  
+
+### Example: Normal($\mu = 10.75, \sigma=0.8$)  
+
+```{r fig.cap = "Normal pdf and cdf", fig.align='center'}
+par(mfrow = c(1,2))
+mu    <- 10.75
+sigma <- 0.8
+y     <- seq(7.5, 14, 0.05)
+# pdf
+p <- dnorm(y, mu, sigma)
+plot(y, p, type = "l", lwd = 2,
+     main = "Normalpdf(10.75, 0.8)")
+segments(y,0,y,p)
+#cdf
+F <- pnorm(y, mu, sigma)
+plot(y, F, type = "l", lwd = 2,
+     main = "Normalcdf(10.75, 0.8)")
+segments(y,0,y,F)
+```
+
+
+The "bell curve" describes the density.  The cdf  is an S-curve. The mean of this distribution is $10.75$. The density is symmetric about that value, the mode of this distribution is $\mu  = 10.75$  and the median of this distribution is $\mu = 10.75$.
+
+Speaking of means and modes and medians, let's define these things!
+
+The **mean** is the center of mass. It's the weighted average of the possible values weighted by their probabilities.
+
+The **mode** is the value with the highest probability (or highest probability density for a continuous rv).
+
+The **median** is the  $.50$ quantile. The point where  half the probability is to the left  and half the probability is to the right. 
+
+These are all measures of "location".
+
+If we want a measure of  the "spread"  of a distribution  we can use the standard deviation. Def: The **variance** of a random variable  is defined by  $\text{Var}(Y) = E{ ( Y -E(Y) )^2 }  = E(Y^2) - E(Y)^2$ expected  squared distance  from the mean value. Take the square root of this  (to back to the original scale)  and call that quantity  the standard deviation.
+
+We can also measure location and spread both using quantiles! For discrete distributions  quantiles are weird. The $\alpha$-quantile  of a distribution  is the value $y_{\alpha}$  such that  $F(y_{\alpha}) = \alpha$. Consider the normal cdf below. Where is the $.75$ quantile?
+
+```{r fig.cap = "Normal cdf with quantile", out.width="70%", out.height="70%", fig.align='center'}
+plot(y, F, type = "l", lwd = 2,
+     main = "Normalcdf(10.75, 0.8)")
+abline( h = 0.75)
+abline(v = qnorm(0.75, mu, sigma))
+```
+
+In R, I can find normal quantiles  using the  `qnorm`  function. With discrete distributions the cdf is a step function it jumps, so there's not a  uniquely defined point where the cdf curve passes through  $.75$ say. 
+
+A $50\%$ probability interval for the distribution of $Y$  is $(y_{.25},~y_{.75}).$ A $95\%$ probability interval is $(y_{.025}, ~ y_{.975}),$ where $y_\alpha$ represents $\alpha$ quantile of $y$.
+
+
+
+
+
+
+
+
+
+
+
+
+

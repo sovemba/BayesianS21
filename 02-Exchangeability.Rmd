@@ -1,0 +1,103 @@
+# Exchangeability
+
+```{r include  = FALSE}
+rm(list=ls());  set.seed(20210504)
+```
+
+
+<tt>The following notes are from transcribed from Neath(0504, 2021) lecture which summarizes Sections(2.5-2.8) of Hoff(2009).</tt>
+
+## Discrete joint distributions
+
+We will talk about joint probability distributions. $Y_1$ and $Y_2$ are two discrete random variables. We can define a joint probability density function (joint pdf) $p_{Y_1Y_2}(y_1, y_2) = Pr(Y_1 = y_1  \text{ and }  Y_2 = y_2)$. We will also be interested in the marginal distributions e.g., the pdf of $Y_1$ only. We will use subscripts on the $p$ to be clear what density we’re talking about. I get the marginal of $Y_1$ from the joint of $(Y_1, Y_2)$ by summing over the values that $Y_2$ can take.
+
+We can also speak of the conditional density of $Y_2$ given $Y_1$ which follows immediately from the definition of conditional probability! Recall that $Pr( B | A ) = Pr(A \text{ and } B) / Pr(A)$. Conditional density of $Y_2 | Y_1=y_1$ equal the joint density of $Y_1$ and $Y_2$ divided by the marginal of $Y_1$.
+
+Given the joint density one can derive both marginals and both conditionals. Given the marginal of $Y_1$ and the conditional of $Y_2$ given $Y_1$ one can construct the joint density of $(Y_1, Y_2)$. *Given the two marginals, marginal of $Y_1$, marginal of $Y_2$, it is not possible to construct the joint density* (knowing the row and columns totals doesn't mean you know how to complete a contingency table). The joint distribution contains all the information the marginals do not! All the joint probabilities, all the marginal probabilities, and all possible conditional probabilities.
+
+We will not always use these subscripts on our $p$'s. We will just use a lower case $p$ to denote a probability density. We'll know the 'density of what' by the argument to the function! 
+
+If we are talking about a pair of continuous random variables then the pdf's really are probability DENSITY functions they're not actually probabilities at all. We get probabilities from them by solving integrals.
+
+**Proposition:** $Y_1$ and $Y_2$ are two arbitrary rvs (random variables) with a joint distribution. That joint distribution is completely specified by the joint cdf. The 'rigorous' definition of a joint distribution starts with the joint cdf. The joint pdf is the function whose integral gives the joint cdf.
+
+Given a joint distribution of ($Y_1, Y_2$), the marginal distribution of $Y_1$ is found by (summing over $Y_2$ values in the discrete case) (in the continuous case it's integrating over all the $Y_2$ values). Although probability densities are not strictly probabilities, conditional densities can be defined analogously. The conditional density of $Y_2 | Y_1 = y_1$ is found by joint density of $Y_1$ and $Y_2$ divided by marginal density of $Y_1$. 
+
+We can define a pair of rvs so that $Y_1$ is discrete and $Y_2$ is continuous. We still have $p(y_1, y_2) = p(y_1) p(y_2 | y_1)$ and $p(y_1, y_2) = p(y_2) p(y_1 | y_2)$.  Probabilities are found by summing over values of the discrete one and integrating over values of the continuous one.
+
+## Bayes' rule and parameter estimation {#bayesrule}
+
+Let $\theta =$ proportion of people who have a certain characteristic. 
+
+E.g., public opinion poll: Approve of performance of President Biden? Yes or No? $\theta$ would be the proportion of people who would answer yes, $0 < \theta < 1$
+
+Is $\theta$ discrete or continuous? If there are 300 million people in the population of interest then the possible values are 0, 1/300,000,000, 2/300,000,000, ..., 299,999,999/300,000,000, 1. But that's kind of stupid. It's continuous. It makes most sense to treat $\theta$ as continuous, $0 < \theta < 1$.
+
+What if $Y =$ number of people sampled who answer YES to "Approve of President Biden?". The population size is millions the sample size is hundreds? Here it does make sense to use a discrete probability model for $Y$.
+
+$\theta$ is the value we want to know, $Y = y$ is the quantity we're able to observe. *Statistical inference* is making induction about $\theta$ based on observation of $Y = y$. For a classical (non-Bayesian) analysis this requires a probability model for $Y$ that depends on $\theta$. In Bayesian statistics it requires a joint probability model for $(Y , \theta)$!
+
+Where frequentist statistics treats $\theta$ as fixed (unknown but fixed) Bayesian statistics treats it as a random variable. The justification for this? Our belief about the value of $\theta$ is measured by a probability dist! Start with what we believe about $\theta$ before we've observed any data. Those beliefs determine the marginal distribution $p(\theta)$. We call this the *prior distribution*. Then we have (just as in non-Bayesian statistics) probability distribution for $Y$ that depends on $\theta$. In Bayesian statistics we make it explicit that this is a CONDITIONAL probability, conditional on the value of $\theta$. After data are observed we want to update our beliefs about $\theta$. Use Bayes' rule! $p(\theta | y) = p(\theta, y) / p(y) = p(\theta) p(y | \theta) / p(y)$. This is called the posterior distribution (because it comes after observing the data). 
+
+If $\theta_a$ and $\theta_b$ are two possible values of $\theta$ our belief in $\theta_a$ versus $\theta_b$ is defined by the ratio of their posterior probabilities (or posterior densities). That ratio depends on $p(\theta_a) / p(\theta_b)$ ratio of 'prior probabilities' and $p(y | \theta_a) / p(y | \theta_b)$ which is the ratio of the 'likelihoods'.
+
+Note! One need not calculate the marginal probability $p(y)$ to calculate this ratio! That's an important observation! Bayes' rule tells us $p(\theta | y) = p(\theta) p(y | \theta) / p(y)$. Thinking of this thing as a function of $\theta$ we can write $p(\theta | y) = c \times p(\theta) \times p(y | \theta)$.
+
+Are you familiar with this "proportional to" symbol? You will be! We say $f(x) \propto g(x)$ if there exists a constant $c > 0$ such that
+$f(x) = c \times g(x) ~\forall ~x$. $p(\theta | y)$ is a probability density. It integrates to 1. The function $p(\theta) p(y | \theta)$
+(a function of $\theta$) integrates to something positive. Dividing by that positive thing would give us the normalized posterior density. Not dividing by that thing gives us an unnormalized posterior density which is just as good. Often solving for $p(y)$ explicitly is impossible (or nearly impossible) :( But we'll see in this course, turns out that doesn't really matter the important information about the posterior is contained in the numerator of the posterior expression that is $p(\theta ) p(y | \theta)$ which are not hard to solve :)
+
+## Independent random variables
+
+Continuing with probability review.
+
+$Y_1, Y_2, \ldots , Y_n$ are independent if their joint probability density factors into the product of their marginal probability densities. If these densities are specified conditionally on the value of $\theta$ (where $\theta$ is a random variable) we say  $Y_1, Y_2, \ldots, Y_n$ are conditionally independent given $\theta$. If $Y_1, Y_2, \ldots, Y_n$ are generated from a common process, then the marginal densities of the $Y_i$ (conditional on $\theta$) are all the same. If $\theta =$ Biden's true approval rate $Pr(Y_1 = 1 | \theta) = Pr(Y_2 = 1 | \theta) = … = \theta$. In such a case we'll say $Y_1, Y_2, …,$ are conditionally iid.
+
+## Exchangeability
+
+In Bayesian statistical models we generally assume conditional independence which does not imply independence it implies a different condition called exchangeability.
+
+$$
+Y_i= 
+\begin{cases}
+1 \text{ if subject answers yes }\\
+0 \text{ if subject answers no (or doesn't answer) }
+\end{cases}
+$$
+
+We will pick 10 survey respondents out of very very many (thousands) at random $Y_i = 1$ if the $i$th one answers yes. There are $2^{10} = 1024$ possible realizations of $(y_1, y_2, …, y_{10})$. What's the probability for each? Here are 3 of those 1024 possible sequences
+$$
+\begin{array}{l}
+p(1, 0, 0, 1, 0, 1, 1, 0, 1, 1) = ?\\
+p(1, 0, 1, 0, 1, 1, 0, 1, 1, 0) = ?\\
+p(1, 1, 0, 0, 1, 1, 0, 0, 1, 1) = ?\\
+\end{array}
+$$
+
+I'm thinking their probabilities should all be equal. Note that each of these sequences contains six $1'$s and four $0'$s. Does it seem reasonable to assume Pr(yes, yes, no) = Pr(yes, no, yes) = Pr(no, yes, yes)? I'd say it does! The technical term for this condition is **exchangeability**. $y_1, y_2, …, y_n$ are a sequence of values then the probability of observing $Y_1 = y_1, Y_2 = y_2, … , Y_n = y_n$ and the probability of observing $Y_1 = y_2, Y_2 = y_1$, etc are the same. This is called exchangeability. Exchangeability holds in models where the subscript label contains no information about the outcome.
+
+*Does exchangeability imply independence?* NO.
+
+$Y_1, Y_2 , …$ are conditionally independent given $\theta$, but unconditionally they're not independent. Think about $Pr(Y_{10} = 1).$ My answer to this would be whatever is my best guess of the overall success proportion $\theta$. What about $Pr(Y_{10} = 1 | Y_1 = Y_2 = … = Y_9 = 1)?$
+
+Suppose first probability is $a$, second probability is $b$. I don't think we want $a = b$! In fact, $a<b$.
+
+What about conditionally on $\theta$, given that $\theta$ is the true success probability (for the population)?
+
+* $Pr(Y_{10} = 1 | \theta) \approx \theta?$ yes
+
+* $Pr(Y_{10} = 1 | Y_1, …, Y_9 , \theta) \approx \theta?$ yes
+
+These are 10 independent draws from a large population. Imagine a huge bowl of jelly beans, green ones and red ones. I know the proportion that are green is $\theta.$ $Pr(10$th pick is green | $\theta) = \theta,~ Pr(10$th pick is green | first $9$ picks, $\theta)$ is about $\theta$. It's a huge bowl so sampling without replacement is essentially the same thing as sampling with replacement. Given that 80% of this population is happy. If only 4 of the first 9 answered yes that doesn't change my probability for the 10th, it's still going to be .80.
+
+True or false: $Y_1$ and $Y_2$ and … and $Y_9$ and $Y_{10}$ are independent. We're gonna see in a minute this statement is false. The true statement is $Y_1, Y_2, … , Y_9, Y_{10}$ are CONDITIONALLY independent given $\theta.$ $Pr(Y_i = 1 | \theta , Y_j,~ j \neq i) = \theta.$ Probability of zero is $1-\theta.$ That's the joint probability conditionally on $\theta.$ Unconditionally it's... You take the conditional probability multiply by the marginal of $\theta$ integrate $\theta$ out of it!
+
+So we see $Y_1, Y_2, ... Y_n$ are exchangeable. They are not iid because they're not independent, because unconditionally on $\theta,$ $Y_{10}$ is not marginally independent of $Y_1, Y_2, …, Y_9$ because $Y_{10}$ depends on $\theta$ and $Y_1, Y_2, …, Y_9$ contain information about $\theta$. We do not have $a=b$ above, but we do have exchangeability. That is, joint distribution is preserved under re-labeling of the subscripts (permutation of labels).
+
+**Proposition:**
+
+If $\theta \sim p(\theta),$ $Y_1, … Y_n | \theta$ are iid then $Y_1, …, Y_n$ are exchangeable. The proof is straightforward it's given in Section 2.7 or 2.8 of Hoff. 
+
+The converse is also true. i.e., If $Y_1, …, Y_n$ are an exchangeable sequence of rvs then there exists a prior distribution $\theta$ and conditional distribution $Y_i | \theta$ such that $Y_1, …, Y_n | \theta$ are iid $p(y_i | \theta)$ where $\theta \sim p(\theta)$. That result is known as di Finetti's theorem.
+
+*Why is this important*? This means that any situation where modeling observed values as being exchangeable is appropriate then a Bayesian statistical analysis is also appropriate.
