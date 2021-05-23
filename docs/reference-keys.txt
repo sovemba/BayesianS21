@@ -9,6 +9,9 @@ fig:unnamed-chunk-15
 fig:MC
 fig:unnamed-chunk-24
 fig:unnamed-chunk-27
+fig:unnamed-chunk-32
+fig:unnamed-chunk-34
+fig:unnamed-chunk-36
 intro
 example
 random-variables
@@ -31,9 +34,6 @@ conjugacy
 combining-information
 example-1
 prediction
-applications
-example-one
-example-two
 CI
 confidence-intervals
 how-do-we-compute-intervals
@@ -53,6 +53,15 @@ example-functions-of-two-parameters
 how-many-monte-carlo-samples-are-needed
 predictive
 sampling-for-predictive-distribution
+example-birth-rate-1
 example-let-d-tilde-y_1---tilde-y_2
 posterior-predictive-model-checking
-posterior-predictive-model-checking-for-group
+posterior-predictive-model-checking-1
+normal-mean
+example-womens-height
+inference-for-the-mean-conditional-on-the-variance
+prediction-1
+example-midge-wing-length
+applications
+example-one
+example-two

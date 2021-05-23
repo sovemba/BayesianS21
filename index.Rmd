@@ -7,7 +7,6 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
 ```{r eval=FALSE, echo=FALSE}
@@ -28,7 +27,7 @@ knitr::write_bib(c(
 # Belief and Probability {#intro}
 
 
-<tt>The following are transcribed from Neath(0503,2021) lecture which summarize Sections(2.1-2.4) of Hoff(2009).</tt>
+<tt>The following are transcribed from Neath(0503,2021) lecture which summarize sections(2.1-2.4) of Hoff(2009).</tt>
 
 
 
