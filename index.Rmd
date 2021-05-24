@@ -27,7 +27,7 @@ knitr::write_bib(c(
 # Belief and Probability {#intro}
 
 
-<tt>The following are transcribed from Neath(0503,2021) lecture which summarize sections(2.1-2.4) of Hoff(2009).</tt>
+<tt>The following are 'mostly' transcribed from Neath(0503,2021) lecture which summarizes sections(2.1-2.4) of Hoff(2009).</tt>
 
 
 

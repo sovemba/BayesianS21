@@ -24,7 +24,7 @@
 <meta name="author" content="Chisom Onyishi" />
 
 
-<meta name="date" content="2021-05-23" />
+<meta name="date" content="2021-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="predictive.html"/>
-<link rel="next" href="applications.html"/>
+<link rel="next" href="joint-inference-for-normal-mean-and-variance.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -197,13 +197,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a><ul>
 <li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
-<li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> 5.2 Inference for the mean, conditional on the variance</a></li>
+<li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
 <li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
 <li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>9</b> Applications</a><ul>
-<li class="chapter" data-level="9.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>9.1</b> Example one</a></li>
-<li class="chapter" data-level="9.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>9.2</b> Example two</a></li>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a><ul>
+<li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
+<li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
+<li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#on-the-code"><i class="fa fa-check"></i><b>9.3</b> On the code</a></li>
+<li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.4</b> Monte Carlo sampling</a></li>
+<li class="chapter" data-level="9.5" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.5</b> Summary of Normal formulas</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -227,17 +230,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="normal-mean" class="section level1">
 <h1><span class="header-section-number">Lecture 8</span> Normal Mean</h1>
-<p><tt>The following notes are transcribed from Neath(0512,2021) lecture which summarizes sections(5.1 and 5.2) of Hoff(2009).</tt></p>
+<p><tt>The following notes are ‘mostly’ transcribed from Neath(0512,2021) lecture which summarizes sections(5.1 and 5.2) of Hoff(2009).</tt></p>
 <p>
  
 </p>
-<p>Where we been ? where we going? Binomial model? check! Poisson model? check! Normal model? Next!</p>
-<p>Unlike Binomial and Poisson which are for discrete data, the normal dist
-is a continuous dist. It is completely characterized by the mean and standard deviation. Our notation will be mean <span class="math inline">\(= \mu = \theta\)</span>, standard deviation <span class="math inline">\(= \sigma\)</span>, variance <span class="math inline">\(= \sigma^2\)</span>.</p>
-<p>Normal dist calculatios calculations easy to do in R use</p>
+<p>Where we been? where we going? Binomial model? check! Poisson model? check! Normal model? Next!</p>
+<p>Unlike Binomial and Poisson which are for discrete data, the normal distribution is a continuous distribution. It is completely characterized by the mean and standard deviation. Our notation will be mean <span class="math inline">\(= \mu = \theta\)</span>, standard deviation <span class="math inline">\(= \sigma\)</span>, variance <span class="math inline">\(= \sigma^2\)</span>.</p>
+<p>Normal distribution calculations are easy to do in R use</p>
 <ul>
-<li><code>dnorm</code> for density values</li>
-<li><code>pnorm</code> for cdf-values; <span class="math inline">\(Pr(Y \le y | \theta, \sigma^2) = \texttt{pnorm}(y, \texttt{mean}=\theta, \texttt{sd} =\sqrt{\sigma^2} )\)</span></li>
+<li> for density values</li>
+<li> for cdf-values; <span class="math inline">\(Pr(Y \le y | \theta, \sigma^2) = \texttt{pnorm}(y, \texttt{mean}=\theta, \texttt{sd} =\sqrt{\sigma^2} )\)</span></li>
 </ul>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="normal-mean.html#cb64-1"></a><span class="co"># Reproduce Figure 5.1 of Hoff (2009)</span></span>
 <span id="cb64-2"><a href="normal-mean.html#cb64-2"></a>y &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">.05</span>)</span>
@@ -248,65 +250,103 @@ is a continuous dist. It is completely characterized by the mean and standard de
 <span id="cb64-7"><a href="normal-mean.html#cb64-7"></a><span class="kw">lines</span>(y, <span class="kw">dnorm</span>(y, <span class="dt">mean=</span><span class="dv">7</span>, <span class="dt">sd=</span><span class="dv">1</span>), <span class="dt">lty=</span><span class="dv">3</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)</span>
 <span id="cb64-8"><a href="normal-mean.html#cb64-8"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">inset=</span>.<span class="dv">05</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
 <span id="cb64-9"><a href="normal-mean.html#cb64-9"></a>  <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">legend=</span>legend)</span></code></pre></div>
-<p><img src="bayesianS21_files/figure-html/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Slides 4 through 7 give a justification for the frequency with which the normal dist is encountered in real-world applications. Any variable that is itself a sum or an average of a whole bunch of other variables (not necessarily observable quantities) will be well approximated by a normal distribution that’s because of the Central Limit Theorem.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-40-1.png" alt="Some normal densities." width="672" />
+<p class="caption">
+Figure 8.1: Some normal densities.
+</p>
+</div>
+<p>A justification for the frequency with which the normal distribution is encountered in real-world applications is that any variable that is itself a sum or an average of a whole bunch of other variables (not necessarily observable quantities) will be well approximated by a normal distribution that’s because of the Central Limit Theorem. In practice, this means that the normal sampling model will be appropriate for data that result from the additive effects of a large number of factors.</p>
 <div id="example-womens-height" class="section level2">
 <h2><span class="header-section-number">8.1</span> Example: women’s height</h2>
-<p>1893 through 1989 women’s heights in inches in England end of 19th century.</p>
+<p>1893 through 1989 (end of 19th century) women’s heights in inches in England.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="normal-mean.html#cb65-1"></a><span class="kw">library</span>(alr4)</span>
 <span id="cb65-2"><a href="normal-mean.html#cb65-2"></a>y &lt;-<span class="st"> </span>Heights<span class="op">$</span>dheight</span>
 <span id="cb65-3"><a href="normal-mean.html#cb65-3"></a><span class="kw">c</span>(<span class="kw">mean</span>(y), <span class="kw">sd</span>(y))</span></code></pre></div>
 <pre><code>## [1] 63.751055  2.600053</code></pre>
-<p>You don’t need to have an argument like this(slide 7) at the ready to justify using a normal distribution. If you have enough observations plot the data and see! If the histogram looks like a bell curve (or even better) if the “normal probability plot” or the so-called QQ-plot which stands for quantile-quantile resembles a straight line.</p>
+<p>You don’t need to have an argument like 05a slide 7 at the ready to justify using a normal distribution. If you have enough observations plot the data and see! If the histogram looks like a bell curve or even better if the “normal probability plot” or the so-called QQ-plot which stands for quantile-quantile resembles a straight line then a normal model is appropriate.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="normal-mean.html#cb67-1"></a>yvals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(y)<span class="op">*</span><span class="fl">0.95</span>, <span class="kw">max</span>(y)<span class="op">*</span><span class="fl">1.05</span>, <span class="dt">length=</span><span class="dv">100</span>)</span>
 <span id="cb67-2"><a href="normal-mean.html#cb67-2"></a></span>
 <span id="cb67-3"><a href="normal-mean.html#cb67-3"></a><span class="kw">hist</span>(y, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">breaks=</span><span class="dv">20</span>, <span class="dt">xlab=</span><span class="st">&quot;Height in inches&quot;</span>, </span>
 <span id="cb67-4"><a href="normal-mean.html#cb67-4"></a>  <span class="dt">ylab=</span><span class="st">&quot;&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
 <span id="cb67-5"><a href="normal-mean.html#cb67-5"></a><span class="kw">lines</span>(<span class="kw">density</span>(y), <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb67-6"><a href="normal-mean.html#cb67-6"></a><span class="kw">lines</span>(yvals, <span class="kw">dnorm</span>(yvals, <span class="kw">mean</span>(y), <span class="kw">sd</span>(y)), <span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="bayesianS21_files/figure-html/unnamed-chunk-41-1.png" width="672" style="display: block; margin: auto;" /></p>
+<span id="cb67-6"><a href="normal-mean.html#cb67-6"></a><span class="kw">lines</span>(yvals, <span class="kw">dnorm</span>(yvals, <span class="kw">mean</span>(y), <span class="kw">sd</span>(y)), <span class="dt">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb67-7"><a href="normal-mean.html#cb67-7"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;population&quot;</span>,<span class="st">&quot;sample&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="st">&quot;red&quot;</span>), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-42"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-42-1.png" alt="Height data and a normal density" width="672" />
+<p class="caption">
+Figure 8.2: Height data and a normal density
+</p>
+</div>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="normal-mean.html#cb68-1"></a><span class="kw">qqnorm</span>(y)</span></code></pre></div>
-<p><img src="bayesianS21_files/figure-html/unnamed-chunk-42-1.png" width="40%" height="40%" style="display: block; margin: auto;" /></p>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="inference-for-the-mean-conditional-on-the-variance" class="section level2">
-<h2><span class="header-section-number">8.2</span> 5.2 Inference for the mean, conditional on the variance</h2>
-<p>Our interest in this course is; How do you do Bayesian inference about the mean, <span class="math inline">\(\theta\)</span> and the variance, <span class="math inline">\(\sigma^2\)</span> in a normal model.
+<h2><span class="header-section-number">8.2</span> Inference for the mean, conditional on the variance</h2>
+<p>Our interest in this course is; How do you do Bayesian inference about the mean <span class="math inline">\(\theta\)</span> and the variance <span class="math inline">\(\sigma^2\)</span> in a normal model.
 <span class="math display">\[
-p(y_1,...,y_n|\theta, \sigma^2)=\left(2 \pi \sigma^{2}\right)^{-n / 2} \exp \left\{-\frac{1}{2\sigma^2} \sum\left({y_{i}-\theta}\right)^{2}\right\}
+p(y_1,...,y_n|\theta, \sigma^2)=\left(2 \pi \sigma^{2}\right)^{-n / 2} \exp \left\{-\frac{1}{2} \sum\left(\frac{{y_{i}-\theta}}{\sigma}\right)^{2}\right\}
 \]</span></p>
-<p>From this we can see a two-dimensional sufficient statistic. Because the density only depends on the data set through <span class="math inline">\(\sum y_i\)</span> and <span class="math inline">\(\sum y_i^2\)</span>. That means <span class="math inline">\(\sum y_i\)</span> and <span class="math inline">\(\sum y_i^2\)</span> are a sufficient statistic and since there exists a one to one mapping between these two statistics and <span class="math inline">\((\bar y, s^2)\)</span> that means <span class="math inline">\((\bar y, s^2)\)</span> is a sufficient statistic. This is a feature of the normal distribution. We will take the problem of inference about <span class="math inline">\((\bar y, s^2)\)</span> and break it into two pieces.</p>
-<p>How will we do that? We will write We will write <span class="math inline">\(p(\theta , \sigma^2 | y_1, …, y_n)= p(\theta | \sigma^2, y_1, …, y_n) \times p( \sigma^2 | y_1, …, y_n).\)</span></p>
-<p>Today we will only work on the first one; that is “inference about the mean of a normal dist assuming the variance is known” or equivalently “inference about the normal mean conditional on the variance”.</p>
+<p>From this we can see a two-dimensional sufficient statistic. Because the density only depends on the data set through <span class="math inline">\(\sum y_i\)</span> and <span class="math inline">\(\sum y_i^2\)</span>. That means <span class="math inline">\(\sum y_i\)</span> and <span class="math inline">\(\sum y_i^2\)</span> are a sufficient statistic and since there exists a one to one mapping between these two statistics and <span class="math inline">\((\bar y, s^2)\)</span> that means <span class="math inline">\((\bar y, s^2)\)</span> is a sufficient statistic.
+<span class="math display">\[\bar y=\frac{1}{n}\sum y_i ~; \quad s^2=\frac{1}{n-1}\sum(y_i-\bar y)^2\]</span>
+This is a feature of the normal distribution. We will take the problem of inference about <span class="math inline">\((\bar y, s^2)\)</span> and break it into two pieces.</p>
+<p>How will we do that? We will write</p>
+<p><span class="math inline">\(p(\theta , \sigma^2 | y_1, …, y_n)= p(\theta | \sigma^2, y_1, …, y_n) \times p( \sigma^2 | y_1, …, y_n).\)</span></p>
+<p>Today we will only work on the first one; that is “inference about the mean of a normal distribution assuming the variance is known” or equivalently “inference about the normal mean conditional on the variance”.</p>
 <p><span class="math display">\[
-p(y|\theta,\sigma^2) = c\times e^{-\frac{1}{2\sigma^2}\sum (y_i - \theta)^2}  \propto  e^{c_1(\theta - c_2)^2}
+p(y_1,...,y_n|\theta,\sigma^2) = c\times e^{-\frac{1}{2\sigma^2}\sum (y_i - \theta)^2}  \propto  e^{c_1(\theta - c_2)^2}
 \]</span></p>
-<p>The “likelihood” as a function of <span class="math inline">\(\theta\)</span> is <span class="math inline">\(e^{\text{quadratic in }\theta}.\)</span> So the conjugate prior(<span class="math inline">\(p(\theta|\sigma^2)\)</span>) will be a dist whose density consists of <span class="math inline">\(e^{\text{quadratic in }\theta}\)</span>. What prob dist has a density that is <span class="math inline">\(e^{\text{quadratic thing }}?\)</span> The normal dist! We have just proven the conjugate prior for the mean in a normal sampling model is the normal dist.</p>
-<p>Suppose <span class="math inline">\(\theta \sim \text{Normal}( \mu_0, \tau_0^2 ), ~~ \tau_0^2\)</span> is the prior variance <span class="math inline">\(\tau_0\)</span> is the prior SD. <span class="math inline">\(\{Y_1, …, Y_n | \theta\}\sim\text{iid Normal}( \theta, \sigma^2)\)</span> (where <span class="math inline">\(\sigma^2\)</span> is known) then <span class="math inline">\(\{\theta | y_1, …., y_n\} \sim \text{Normal}\)</span> because it’s a conjugate prior. <span class="math inline">\(p(\theta | y_1, …, y_n, \sigma^2) \propto \exp\{ -(a/2) \times ( \theta - b/a ) ^2 \}\)</span> where <span class="math inline">\(a = (1/\tau_0^2)+(n/\sigma^2) \text{ and } b = (\mu_0/\tau_0^2)+(\sum y_i/\sigma^2).\)</span> Thus <span class="math inline">\(p(\theta | y, \sigma^2)\)</span> has the same shape as a normal density with mean of <span class="math inline">\(b/a\)</span> and a standard deviation of <span class="math inline">\(1/\sqrt a\)</span> therefore <span class="math inline">\(\{\theta | y, \sigma^2\}\)</span> is normally distributed with mean <span class="math inline">\(= b/a\)</span> and sd <span class="math inline">\(= 1/\sqrt a.\)</span> So we have <span class="math inline">\(\{\theta | y_1, …, y_n , \sigma^2\} \sim \text{ Normal}(\mu_n , \tau_n^2)\)</span>.</p>
+<p>The “likelihood” as a function of <span class="math inline">\(\theta\)</span> is <span class="math inline">\(e^{\text{quadratic in }\theta}.\)</span> So the conjugate prior <span class="math inline">\(p(\theta|\sigma^2)\)</span> will be a distribution whose density consists of <span class="math inline">\(e^{\text{quadratic in }\theta}\)</span>. What probability distribution has a density that is <span class="math inline">\(e^{\text{quadratic thing }}?\)</span> The normal distribution! We have just proven the conjugate prior for the mean in a normal sampling model is the normal distribution.</p>
+<p>Suppose <span class="math inline">\(\theta \sim \text{Normal}( \mu_0, \tau_0^2 ),\)</span> where <span class="math inline">\(\tau_0^2\)</span> is the prior variance, <span class="math inline">\(\{Y_1, …, Y_n | \theta\}\sim\text{iid Normal}( \theta, \sigma^2)\)</span> (where <span class="math inline">\(\sigma^2\)</span> is known) then <span class="math inline">\(\{\theta | y_1, …., y_n\} \sim \text{Normal}\)</span> because it’s a conjugate prior. i.e.,</p>
+<p><span class="math display">\[
+p(\theta | y_1, …, y_n, \sigma^2) \propto \exp\bigg\{ -\frac{1}{2} \bigg( \frac{\theta-b/a}{1/\sqrt{a}}\bigg)^2 \bigg\}
+\]</span></p>
+<p>where <span class="math inline">\(a = (1/\tau_0^2)+(n/\sigma^2) \text{ and } b = (\mu_0/\tau_0^2)+(\sum y_i/\sigma^2).\)</span> Thus <span class="math inline">\(p(\theta | y, \sigma^2)\)</span> has the same shape as a normal density with mean of <span class="math inline">\(b/a\)</span> and a standard deviation of <span class="math inline">\(1/\sqrt a\)</span> therefore <span class="math inline">\(\{\theta | y, \sigma^2\}\)</span> is normally distributed with mean <span class="math inline">\(= b/a\)</span> and sd <span class="math inline">\(= 1/\sqrt a.\)</span> So we have <span class="math inline">\(\{\theta | y_1, …, y_n , \sigma^2\} \sim \text{ Normal}(\mu_n , \tau_n^2)\)</span>.</p>
 <p>So there’s a very sensible notational convention being employed here <span class="math inline">\(\mu_0\)</span> is prior mean (after observing 0 data) <span class="math inline">\(\mu_n\)</span> is posterior mean after observing <span class="math inline">\(n\)</span> data points. <span class="math inline">\(\tau_0^2\)</span> is the prior variance prior to observing data (after observing 0 cases), <span class="math inline">\(\tau_n^2\)</span> is the variance after observing the data <span class="math inline">\(n\)</span> observations. <span class="math inline">\(\tau_n^2 &lt; \tau_0^2, ~~\mu_n\)</span> should be an average between <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\bar y\)</span>.</p>
-<p>Let’s interpret these parameters in this posterior dist; <span class="math inline">\(1 / \tau_n^2 = 1 / \tau_0^2 + n / \sigma^2\)</span>. It’s not the variances that add together, it’s the inverses added together, which makes sense bc the uncertainty is decreasing.</p>
-<p><strong>Definition: precision</strong> = 1 / variance. Now think of precision as quantifying information and we have; posterior information = prior information + data information = <span class="math inline">\((1/\tau_0^2)+(n/\sigma^2)=a\)</span>. Where; information = precision = 1 / variance, data information = information in <span class="math inline">\(n\)</span> observations times the information in a single observation. Data information is also the information in a single observation of <span class="math inline">\(\bar y,~ \bar y \sim \text{Normal}(\theta, \sigma^2 / n)\)</span> so the variance of <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(\sigma^2 / n\)</span> so the precision for <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(n / \sigma^2\)</span> so the information contained in <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(n / \sigma^2\)</span>.</p>
+<p>Let’s interpret the parameters in the posterior distribution. First for the posterior variance we have; <span class="math inline">\(1 / \tau_n^2 = 1 / \tau_0^2 + n / \sigma^2\)</span>. It’s not the variances that add together, it’s the inverses added together, which makes sense because the uncertainty is decreasing.</p>
+<p>Definition: <strong>precision</strong> = 1 / variance. Think of precision as quantifying information and we have; posterior information = prior information + data information = <span class="math inline">\((1/\tau_0^2)+(n/\sigma^2)=a\)</span>. Data information = information in <span class="math inline">\(n\)</span> observations times the information in a single observation. Data information is also the information in a single observation of <span class="math inline">\(\bar y,~ \bar y \sim \text{Normal}(\theta, \sigma^2 / n)\)</span> so the variance of <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(\sigma^2 / n\)</span> so the precision for <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(n / \sigma^2\)</span> so the information contained in <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(n / \sigma^2=\)</span> data information.</p>
 <p>What about the posterior mean?
 <span class="math display">\[
 \mu_{n}=\frac{1/{\tau}_{0}^{2}}{1/{\tau}_{0}^{2}+n/{\sigma}^{2}} \mu_{0}+\frac{n/{\sigma}^{2}}{1/{\tau}_{0}^{2}+n /{\sigma}^{2}} \bar{y}
 \]</span></p>
-<p><span class="math inline">\(\mu_n =\)</span> weighted average of <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\bar y\)</span> weight given to <span class="math inline">\(\mu_0\)</span> is proportional to <span class="math inline">\(1/\tau_0^2\)</span>(the prior precision), weight given to <span class="math inline">\(\bar y\)</span> is proportional to <span class="math inline">\(n / \sigma^2\)</span> the “data information”.</p>
+<p><span class="math inline">\(\mu_n =\)</span> weighted average of <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\bar y\)</span>. Weight given to <span class="math inline">\(\mu_0\)</span> is proportional to <span class="math inline">\(1/\tau_0^2\)</span>(the prior precision), weight given to <span class="math inline">\(\bar y\)</span> is proportional to <span class="math inline">\(n / \sigma^2\)</span> the “data information”.</p>
 </div>
 <div id="prediction-1" class="section level2">
 <h2><span class="header-section-number">8.3</span> Prediction</h2>
-<p>Let <span class="math inline">\(\tilde Y\)</span> be an (<span class="math inline">\(n+1\)</span>)st observation that has not as yet been observed but which we wish to predict based on observed values of <span class="math inline">\(Y_1, …, Y_n\)</span>. We show here (slides 16-17) <span class="math inline">\(\{\tilde Y | y_1, …., y_n, \sigma^2\} \sim \text{Normal}(\mu_n, \tau_n^2+\sigma^2).\)</span> There are two ways to make the argument for this mean and variance. One is</p>
-<p><span class="math inline">\(\tilde Y = \theta + \tilde e, ~~E( \tilde Y ) = E [ E(\tilde Y | \theta) ]\)</span> and Var<span class="math inline">\(( \tilde Y ) = \text {Var}[ E(\tilde Y | \theta) ] + E[ \text{Var}( \tilde Y | \theta) ]\)</span></p>
-<p>Now do this all conditional on <span class="math inline">\(y_1, …., y_n\)</span> as well as <span class="math inline">\(\sigma^2\)</span>. We get; <span class="math inline">\(\{\tilde Y |y_1,...,y_n,\sigma^2\} \sim \text{Normal}(\mu_n,\tau_n^2+\sigma^2)\)</span>.</p>
-<p>Two sources of uncertainty in our predictions (1) we don’t know what <span class="math inline">\(\theta\)</span> is! <span class="math inline">\(\theta|y \sim \text{Normal}(\mu_n , \tau_n^2 )\)</span> (2) even if we knew <span class="math inline">\(\theta\)</span> exactly <span class="math inline">\(\tilde Y \sim \text{Normal}( \theta , \sigma^2 )\)</span> won’t equal <span class="math inline">\(\theta\)</span> exactly, it will differ from its expected value.</p>
+<p>Let <span class="math inline">\(\tilde Y\)</span> be an (<span class="math inline">\(n+1\)</span>)st observation that has not as yet been observed but which we wish to predict based on observed values of <span class="math inline">\(Y_1, …, Y_n\)</span>. To find the posterior predictive distribution, we use the fact that</p>
+<p><span class="math display">\[
+\tilde Y|\theta,\sigma^2 \sim N(\theta, \tilde e) \iff \tilde Y=\theta + \tilde e \text{ where } \tilde e \sim N(\theta, \sigma^2)
+\]</span>
+The posterior predictive mean and variance of <span class="math inline">\(\tilde Y\)</span> are</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathrm{E}\left[\tilde{Y} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] &amp;=\mathrm{E}\left[\theta+\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
+&amp;=\mathrm{E}\left[\theta \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right]+\mathrm{E}\left[\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
+&amp;=\mu_{n}+0=\mu_{n}
+\end{aligned}
+\]</span>
+and</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}\left[\tilde{Y} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] &amp;=\operatorname{Var}\left[\theta+\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
+&amp;=\operatorname{Var}\left[\theta \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right]+\operatorname{Var}\left[\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
+&amp;=\tau_{n}^{2}+\sigma^{2}
+\end{aligned}
+\]</span></p>
+<p>So <span class="math inline">\(\{\tilde Y | y_1, …., y_n, \sigma^2\} \sim \text{Normal}(\mu_n, \tau_n^2+\sigma^2).\)</span> Note that there are two sources of uncertainty (variance) in our predictions (1) we don’t know what <span class="math inline">\(\theta\)</span> is! <span class="math inline">\(\theta|y \sim \text{Normal}(\mu_n , \tau_n^2 )\)</span> (2) even if we knew <span class="math inline">\(\theta\)</span> exactly <span class="math inline">\(\tilde Y \sim \text{Normal}( \theta , \sigma^2 )\)</span> won’t equal <span class="math inline">\(\theta\)</span> exactly.</p>
 </div>
 <div id="example-midge-wing-length" class="section level2">
 <h2><span class="header-section-number">8.4</span> Example: Midge wing length</h2>
-<p>Goal is: Estimate the mean wing length for a species of midge (a fly); We wish to make inference about the population mean <span class="math inline">\(\theta\)</span>.</p>
-<p>Prior information : For other similar species the mean wing length is about <span class="math inline">\(1.9\)</span>mm</p>
-<p>Current data: <span class="math inline">\(n = 9\)</span> observations <span class="math inline">\((1.64, 2.08), ~ \bar y = 1.804\)</span></p>
-<p>In this case, <span class="math inline">\(\theta =\)</span> mean wing length, which means <span class="math inline">\(Pr(\theta &gt; 0) = 1\)</span>(not a property of the normal model). Our prior variance on the <span class="math inline">\(1.9\)</span> as our prior best guess is gotten by; back into <span class="math inline">\(\tau\)</span> or <span class="math inline">\(\tau^2\)</span> so that prior prob of <span class="math inline">\(\theta &lt; 0\)</span> is small. We get <span class="math inline">\(\tau_0 = .95\)</span>.</p>
-<p>We have a prior dist <span class="math inline">\(\theta \sim \text{Normal}( \mu_0 = 1.9,\tau_0^2 = .95^2)\)</span>, we have data <span class="math inline">\(\{Y_1, …, Y_9 | \theta\} \sim \text{ iid Normal}(\theta, \sigma^2)\)</span>. The posterior is <span class="math inline">\(\{\theta | y_1, …, y_9, \sigma^2\} \sim \text{Normal}( \mu_n, \tau_n^2 ).\)</span></p>
-<p><span class="math inline">\(1/\tau_n^2 = (1 / \tau_0^2) + (n/\sigma^2)\)</span></p>
-<p>posterior information = prior information + sample information. Information is measured by precision = 1 / variance. We need <span class="math inline">\(\sigma^2\)</span> to finish this problem. Set <span class="math inline">\(\sigma^2 = \text{sample variance} = s^2\)</span>.</p>
+<p>Goal is: Estimate the mean wing length for a species of midge (a fly), i.e., we wish to make inference about the population mean <span class="math inline">\(\theta\)</span>.</p>
+<p>Current data: <span class="math inline">\(n = 9\)</span> observations, <span class="math inline">\(\bar y = 1.804\)</span></p>
+<p>Prior information : For other similar species the mean wing length is about <span class="math inline">\(1.9\)</span>mm so this will be our prior mean <span class="math inline">\(\mu_0\)</span>.</p>
+<p>In this case, <span class="math inline">\(\theta =\)</span> mean wing length, which means <span class="math inline">\(Pr(\theta &gt; 0) = 1.\)</span> This is not a property of the normal model since the normal model spans both negative and positive values. So we need to find a way to get our prior to have mass only on <span class="math inline">\(\theta &gt; 0\)</span>. Our prior variance is gotten by; back into <span class="math inline">\(\tau_0\)</span> so that prior probability of <span class="math inline">\(\theta &lt; 0\)</span> is small. So we want</p>
+<p><span class="math display">\[
+\mu_0-2\tau_0&gt;0\implies1.9&gt;2\tau_0\implies 0.95 &gt; \tau_0
+\]</span></p>
+<p>So we will use <span class="math inline">\(\tau_0 = .95\)</span> as our prior variance.</p>
+<p>We have a prior distribution <span class="math inline">\(\theta \sim \text{Normal}( \mu_0 = 1.9,\tau_0^2 = .95^2)\)</span>, we have data <span class="math inline">\(\{Y_1, …, Y_9 | \theta\} \sim \text{ iid Normal}(\theta, \sigma^2)\)</span>. The posterior is <span class="math inline">\(\{\theta | y_1, …, y_9, \sigma^2\} \sim \text{Normal}( \mu_n, \tau_n^2 )\)</span> where <span class="math inline">\(1/\tau_n^2 = (1 / \tau_0^2) + (n/\sigma^2).\)</span></p>
+<p>We need <span class="math inline">\(\sigma^2\)</span> to finish this problem. Set <span class="math inline">\(\sigma^2 = \text{sample variance} = s^2\)</span>.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="normal-mean.html#cb69-1"></a><span class="kw">options</span>(<span class="dt">digits =</span> <span class="dv">4</span>)</span>
 <span id="cb69-2"><a href="normal-mean.html#cb69-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.64</span>, <span class="fl">1.70</span>, <span class="fl">1.72</span>, <span class="fl">1.74</span>, <span class="fl">1.82</span>, <span class="fl">1.82</span>, <span class="fl">1.82</span>, <span class="fl">1.90</span>, <span class="fl">2.08</span>)</span>
 <span id="cb69-3"><a href="normal-mean.html#cb69-3"></a><span class="co"># Prior </span></span>
@@ -318,27 +358,32 @@ p(y|\theta,\sigma^2) = c\times e^{-\frac{1}{2\sigma^2}\sum (y_i - \theta)^2}  \p
 <span id="cb69-9"><a href="normal-mean.html#cb69-9"></a>sigma  &lt;-<span class="st"> </span><span class="kw">sqrt</span>(s2)</span>
 <span id="cb69-10"><a href="normal-mean.html#cb69-10"></a>mu.n   &lt;-<span class="st"> </span>(mu<span class="fl">.0</span><span class="op">/</span>tau2<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n<span class="op">*</span>ybar<span class="op">/</span>s2) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>tau2<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n<span class="op">/</span>s2) </span>
 <span id="cb69-11"><a href="normal-mean.html#cb69-11"></a>tau2.n &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>tau2<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n<span class="op">/</span>s2) </span>
-<span id="cb69-12"><a href="normal-mean.html#cb69-12"></a><span class="kw">c</span>(ybar, s2, mu.n, tau2.n)</span></code></pre></div>
-<pre><code>## [1] 1.804444 0.016878 1.804643 0.001871</code></pre>
+<span id="cb69-12"><a href="normal-mean.html#cb69-12"></a><span class="kw">c</span>(ybar, s2)</span></code></pre></div>
+<pre><code>## [1] 1.80444 0.01688</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="normal-mean.html#cb71-1"></a><span class="kw">c</span>(mu.n, tau2.n)</span></code></pre></div>
+<pre><code>## [1] 1.804643 0.001871</code></pre>
 <p>So <span class="math inline">\(\{\theta|y_1,...,y_9,\sigma^2=0.017\} \sim \text{Normal}(1.805,0.002)\)</span></p>
-<p>Notice <span class="math inline">\(\bar y = 1.804\)</span> and <span class="math inline">\(\mu_0 = 1.9,\)</span> so we’re giving a lot more weight to the data than to the prior. This makes sense because our 9 observations are from the species we’re interested in. However, our prior was a similar species but not the one we’re interested in.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="normal-mean.html#cb71-1"></a><span class="co"># 95% posterior interval; qnorm(c(.025, .975), mu.n, sqrt(tau2.n))</span></span>
-<span id="cb71-2"><a href="normal-mean.html#cb71-2"></a>(CI &lt;-<span class="st"> </span>mu.n<span class="op">+</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="op">*</span><span class="fl">1.96</span><span class="op">*</span><span class="kw">sqrt</span>(tau2.n))</span></code></pre></div>
+<p>Notice <span class="math inline">\(\bar y = 1.804,\)</span> <span class="math inline">\(\mu_0 = 1.9,\)</span> and <span class="math inline">\(\mu_0 = 1.805.\)</span> So we’re giving a lot more weight to the data than to the prior. This makes sense because our 9 observations are from the species we’re interested in. However, our prior was a similar species but not the one we’re interested in.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="normal-mean.html#cb73-1"></a><span class="co"># 95% posterior interval; qnorm(c(.025, .975), mu.n, sqrt(tau2.n))</span></span>
+<span id="cb73-2"><a href="normal-mean.html#cb73-2"></a>(CI &lt;-<span class="st"> </span>mu.n<span class="op">+</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="op">*</span><span class="fl">1.96</span><span class="op">*</span><span class="kw">sqrt</span>(tau2.n))</span></code></pre></div>
 <pre><code>## [1] 1.720 1.889</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="normal-mean.html#cb73-1"></a><span class="co"># Prior and conditional posterior distributions for </span></span>
-<span id="cb73-2"><a href="normal-mean.html#cb73-2"></a><span class="co"># the population mean wing length in the midge example.</span></span>
-<span id="cb73-3"><a href="normal-mean.html#cb73-3"></a>theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="fl">.01</span>)</span>
-<span id="cb73-4"><a href="normal-mean.html#cb73-4"></a></span>
-<span id="cb73-5"><a href="normal-mean.html#cb73-5"></a><span class="kw">plot</span>(theta, <span class="kw">dnorm</span>(theta, <span class="dt">mean=</span>mu.n, <span class="dt">sd=</span><span class="kw">sqrt</span>(tau2.n)), </span>
-<span id="cb73-6"><a href="normal-mean.html#cb73-6"></a>  <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">ylab=</span><span class="st">&quot;p(theta|y,sigma2=0.017)&quot;</span>)</span>
-<span id="cb73-7"><a href="normal-mean.html#cb73-7"></a><span class="kw">lines</span>(theta, <span class="kw">dnorm</span>(theta, <span class="dt">mean=</span>mu<span class="fl">.0</span>, <span class="dt">sd=</span><span class="kw">sqrt</span>(tau2<span class="fl">.0</span>)), </span>
-<span id="cb73-8"><a href="normal-mean.html#cb73-8"></a>  <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
-<span id="cb73-9"><a href="normal-mean.html#cb73-9"></a><span class="kw">abline</span>(<span class="dt">v=</span>CI, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>)</span>
-<span id="cb73-10"><a href="normal-mean.html#cb73-10"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">inset=</span>.<span class="dv">05</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
-<span id="cb73-11"><a href="normal-mean.html#cb73-11"></a>  <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Posterior&quot;</span>))</span></code></pre></div>
-<p><img src="bayesianS21_files/figure-html/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="normal-mean.html#cb75-1"></a>theta &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="fl">.01</span>)</span>
+<span id="cb75-2"><a href="normal-mean.html#cb75-2"></a></span>
+<span id="cb75-3"><a href="normal-mean.html#cb75-3"></a><span class="kw">plot</span>(theta, <span class="kw">dnorm</span>(theta, <span class="dt">mean=</span>mu.n, <span class="dt">sd=</span><span class="kw">sqrt</span>(tau2.n)), </span>
+<span id="cb75-4"><a href="normal-mean.html#cb75-4"></a>  <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">ylab=</span><span class="st">&quot;p(theta|y,sigma2=0.017)&quot;</span>)</span>
+<span id="cb75-5"><a href="normal-mean.html#cb75-5"></a><span class="kw">lines</span>(theta, <span class="kw">dnorm</span>(theta, <span class="dt">mean=</span>mu<span class="fl">.0</span>, <span class="dt">sd=</span><span class="kw">sqrt</span>(tau2<span class="fl">.0</span>)), </span>
+<span id="cb75-6"><a href="normal-mean.html#cb75-6"></a>  <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb75-7"><a href="normal-mean.html#cb75-7"></a><span class="kw">abline</span>(<span class="dt">v=</span>CI, <span class="dt">lty =</span> <span class="dv">3</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb75-8"><a href="normal-mean.html#cb75-8"></a><span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="dt">inset=</span>.<span class="dv">05</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
+<span id="cb75-9"><a href="normal-mean.html#cb75-9"></a>  <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Posterior&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-46-1.png" alt="Prior and conditional posterior distributions for the population mean wing length." width="672" />
+<p class="caption">
+Figure 8.3: Prior and conditional posterior distributions for the population mean wing length.
+</p>
+</div>
 <p>We have very high posterior belief that the mean wing length is close to 1.8.</p>
-<p>In this example, we were pretending that the population variance <span class="math inline">\(\sigma^2\)</span> (variance of midge wing lengths ) was known to be <span class="math inline">\(s^2 =.017\)</span>. In fact we don’t know it! As a result, it is possible that this interval is narrower than it should be because it fails to account for our uncertainty about the population variance <span class="math inline">\(\sigma^2.\)</span></p>
+<p>In this example, we were pretending that the population variance <span class="math inline">\(\sigma^2\)</span> (variance of midge wing lengths ) was known to be <span class="math inline">\(s^2 =0.017\)</span>. In fact we don’t know it! As a result, it is possible that this interval is narrower than it should be because it fails to account for our uncertainty about the population variance <span class="math inline">\(\sigma^2.\)</span> We deal with this in the next lecture.</p>
 
 </div>
 </div>
@@ -348,7 +393,7 @@ p(y|\theta,\sigma^2) = c\times e^{-\frac{1}{2\sigma^2}\sum (y_i - \theta)^2}  \p
         </div>
       </div>
 <a href="predictive.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="joint-inference-for-normal-mean-and-variance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

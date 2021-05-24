@@ -7,7 +7,7 @@ knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
 
 
-<tt>The following notes are transcribed from Neath(0511,2021) lecture which summarizes sections(4.3 and 4.4) of Hoff(2009). </tt>
+<tt>The following notes are 'mostly' transcribed from Neath(0511,2021) lecture which summarizes sections(4.3 and 4.4) of Hoff(2009). </tt>
 
 
 <p>&nbsp;</p>

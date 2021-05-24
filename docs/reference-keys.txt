@@ -12,6 +12,9 @@ fig:unnamed-chunk-27
 fig:unnamed-chunk-32
 fig:unnamed-chunk-34
 fig:unnamed-chunk-36
+fig:unnamed-chunk-40
+fig:unnamed-chunk-42
+fig:unnamed-chunk-46
 intro
 example
 random-variables
@@ -62,6 +65,9 @@ example-womens-height
 inference-for-the-mean-conditional-on-the-variance
 prediction-1
 example-midge-wing-length
-applications
-example-one
-example-two
+joint-inference-for-normal-mean-and-variance
+marginal-posterior-of-sigma2
+example-midge-wing-length-1
+on-the-code
+monte-carlo-sampling
+summary-of-normal-formulas
