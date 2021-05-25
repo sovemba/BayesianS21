@@ -5,7 +5,7 @@ rm(list=ls());  set.seed(20210504);
 knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
 
-<tt>The following notes are 'mostly' transcribed from Neath(2021) lecture which summarizes sections(3.1.2 and 3.2) of Hoff(2009).</tt>
+<tt>The following notes, mostly transcribed from Neath(2021) lecture, summarize sections(3.1.2 and 3.2) of Hoff(2009).</tt>
 
 <p>&nbsp;</p>
 
