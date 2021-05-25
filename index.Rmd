@@ -23,12 +23,10 @@ knitr::write_bib(c(
 ```
 
 
-
 # Belief and Probability {#intro}
 
 
 <tt>The following notes, mostly transcribed from Neath(0503,2021) lecture, summarize sections(2.1-2.4) of Hoff(2009).</tt>
-
 
 
 * I like to use the chat

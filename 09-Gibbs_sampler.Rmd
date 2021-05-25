@@ -1,7 +1,7 @@
 
 # Gibbs sampler
 
-```{r setup, echo = FALSE, message = FALSE}
+```{r echo = FALSE, message = FALSE}
 rm(list=ls());  set.seed(20210513);
 knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
@@ -10,9 +10,7 @@ knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 <tt>The following notes, mostly transcribed from Neath(0517,2021) lecture, summarize sections(6.1-6.4) of Hoff(2009).</tt>
 
 
-
 <p>&nbsp;</p>
-
 
 
 ## A semiconjugate prior distribution

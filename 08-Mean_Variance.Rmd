@@ -1,14 +1,13 @@
 
 # Joint inference for Normal mean and variance
 
-```{r echo = FALSE, message = FALSE}
+```{r setup, echo = FALSE, message = FALSE}
 rm(list=ls());  set.seed(20210512);
 knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
 
 
 <tt>The following notes, mostly transcribed from Neath(0513,2021) lecture, summarize section(5.3) of Hoff(2009).</tt>
-
 
 
 <p>&nbsp;</p>
@@ -214,8 +213,7 @@ points(theta.sim, sigma2.sim, pch=19, cex=.25,
 
 I actually know the theoretical marginal distribution of $\sigma^2$. But if I didn't I could draw a histogram of the Monte Carlo sample or a kernel density estimate based on the monte carlo samples as below.
 
-```{r fig.cap = "Monte Carlo samples from and estimates of the joint and marginal distributions of the population mean and variance. The vertical lines in the third plot give a 95% quantile-based posterior interval for theta"}
-
+```{r}
 par(mar=c(3,3,1.5,1),mgp=c(1.75,.75,0),oma=c(0,0,.5,0),mfrow=c(1,2))
 
 hist(sigma2.sim, xlim=c(0, .08), main="", freq=F, xlab=ylab1,
@@ -280,6 +278,12 @@ $s^2 = \sum_{i=1}^n (y_i - \bar y)/(n-1) = \texttt{var}(\boldsymbol{y})$ sample 
 $(n-1)s^2$ is the sum of squared observations from the sample mean
 
 $\nu_0 \sigma_0^2 \text{ and } \nu_n\sigma_n^2$ as prior and posterior sum of squares, respectively.
+
+
+
+
+
+
 
 
 

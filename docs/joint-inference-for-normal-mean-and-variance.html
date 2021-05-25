@@ -339,8 +339,8 @@ It’s almost a weighted average of the “prior” variance <span class="math i
 <span id="cb81-4"><a href="joint-inference-for-normal-mean-and-variance.html#cb81-4"></a>  <span class="dt">xlab=</span>xlab, <span class="dt">ylab=</span>ylab2, <span class="dt">main=</span><span class="st">&quot;Mean and precision&quot;</span>)</span>
 <span id="cb81-5"><a href="joint-inference-for-normal-mean-and-variance.html#cb81-5"></a><span class="kw">contour</span>(theta, sigma2, post.V, <span class="dt">levels=</span>contours, <span class="dt">drawlabels=</span>F, </span>
 <span id="cb81-6"><a href="joint-inference-for-normal-mean-and-variance.html#cb81-6"></a>  <span class="dt">xlab=</span>xlab, <span class="dt">ylab=</span>ylab1, <span class="dt">main=</span><span class="st">&quot;Mean and variance&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-53"></span>
-<img src="bayesianS21_files/figure-html/unnamed-chunk-53-1.png" alt="Joint posterior distributions of (theta,precision) and (theta, sigma^2)." width="672" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-52"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-52-1.png" alt="Joint posterior distributions of (theta,precision) and (theta, sigma^2)." width="672" />
 <p class="caption">
 Figure 9.1: Joint posterior distributions of (theta,precision) and (theta, sigma^2).
 </p>
@@ -369,7 +369,7 @@ but possible. But going forward when we get to the really messy problems we’re
 <span id="cb83-3"><a href="joint-inference-for-normal-mean-and-variance.html#cb83-3"></a>  <span class="dt">xlab=</span>xlab, <span class="dt">ylab=</span>ylab1, <span class="dt">main=</span><span class="st">&quot;Mean and variance&quot;</span>)</span>
 <span id="cb83-4"><a href="joint-inference-for-normal-mean-and-variance.html#cb83-4"></a><span class="kw">points</span>(theta.sim, sigma2.sim, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span>.<span class="dv">25</span>, </span>
 <span id="cb83-5"><a href="joint-inference-for-normal-mean-and-variance.html#cb83-5"></a>  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="fl">1.51</span>, <span class="fl">2.11</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.10</span>))</span></code></pre></div>
-<p><img src="bayesianS21_files/figure-html/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="joint-inference-for-normal-mean-and-variance.html#cb84-1"></a><span class="co"># Marginal density estimates, and 95% CI for theta</span></span>
 <span id="cb84-2"><a href="joint-inference-for-normal-mean-and-variance.html#cb84-2"></a>(CI.theta &lt;-<span class="st"> </span><span class="kw">quantile</span>(theta.sim, <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>))) </span></code></pre></div>
 <pre><code>##  2.5% 97.5% 
@@ -385,12 +385,7 @@ but possible. But going forward when we get to the really messy problems we’re
 <span id="cb86-8"><a href="joint-inference-for-normal-mean-and-variance.html#cb86-8"></a>      <span class="dt">ylab=</span>ylab4, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="dt">border=</span><span class="st">&quot;lightpink1&quot;</span>,<span class="dt">col=</span><span class="st">&quot;pink&quot;</span>)</span>
 <span id="cb86-9"><a href="joint-inference-for-normal-mean-and-variance.html#cb86-9"></a><span class="kw">lines</span>(<span class="kw">density</span>(theta.sim), <span class="dt">lwd=</span><span class="dv">2</span>)</span>
 <span id="cb86-10"><a href="joint-inference-for-normal-mean-and-variance.html#cb86-10"></a><span class="kw">abline</span>(<span class="dt">v=</span>CI.theta, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="fl">1.5</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-57"></span>
-<img src="bayesianS21_files/figure-html/unnamed-chunk-57-1.png" alt="Monte Carlo samples from and estimates of the joint and marginal distributions of the population mean and variance. The vertical lines in the third plot give a 95% quantile-based posterior interval for theta" width="672" />
-<p class="caption">
-Figure 9.2: Monte Carlo samples from and estimates of the joint and marginal distributions of the population mean and variance. The vertical lines in the third plot give a 95% quantile-based posterior interval for theta
-</p>
-</div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The 95% Bayesian confidence interval is <span class="math inline">\([1.72, 1.90]\)</span>.</p>
 <p>In the last lecture, when we were pretending <span class="math inline">\(\sigma^2\)</span> was known, the CI was <span class="math inline">\([1.720, 1.889]\)</span>. Furthermore, the frequentist interval based on the t-distribution is <span class="math inline">\([1.70, 1.90]\)</span>.</p>
 <p>Our Bayesian interval brings the lower bound up just a tad (because the prior mean was 1.9 vs data mean of 1.8 or so) and it shortens the CI a bit because our prior counts for one observation so our “Bayesian sample size” was 10 not just 9.</p>
