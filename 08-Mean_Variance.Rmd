@@ -214,7 +214,8 @@ points(theta.sim, sigma2.sim, pch=19, cex=.25,
 
 I actually know the theoretical marginal distribution of $\sigma^2$. But if I didn't I could draw a histogram of the Monte Carlo sample or a kernel density estimate based on the monte carlo samples as below.
 
-```{r}
+```{r fig.cap = "Monte Carlo samples from and estimates of the joint and marginal distributions of the population mean and variance. The vertical lines in the third plot give a 95% quantile-based posterior interval for theta"}
+
 par(mar=c(3,3,1.5,1),mgp=c(1.75,.75,0),oma=c(0,0,.5,0),mfrow=c(1,2))
 
 hist(sigma2.sim, xlim=c(0, .08), main="", freq=F, xlab=ylab1,
