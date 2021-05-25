@@ -1,77 +1,80 @@
 
 # Joint inference for Normal mean and variance
 
-```{r setup, echo = FALSE, message = FALSE}
+```{r echo = FALSE, message = FALSE}
 rm(list=ls());  set.seed(20210512);
 knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
 
 
-<tt>The following notes are 'mostly' transcribed from Neath(0513,2021) lecture which summarizes section(5.3) of Hoff(2009).</tt>
+<tt>The following notes, mostly transcribed from Neath(0513,2021) lecture, summarize section(5.3) of Hoff(2009).</tt>
 
 
 
 <p>&nbsp;</p>
 
-Question: what if we don't really care about the variance? We're only interested in doing inference about the mean anyway? Can we use the methods from the last lesson? NO we should not... Unless of course we genuinely do know the population variance. So even if our inferential goals don't include the variance and we're only interested in the mean we still have to account for the fact that the variance is unknown(uncertainty about the variance) to do valid inference about the mean. In this case we say the variance is a nuisance parameter. So let's talk about how to do that.
+What if we don't really care about the variance? We're only interested in doing inference about the mean anyway? Can we use the methods from the last lesson? NO we should not. Unless of course we genuinely do know the population variance. So even if our inferential goals don't include the variance and we're only interested in the mean we still have to account for the fact that the variance is unknown(there's uncertainty about the variance) to do valid inference about the mean. In this case we say the variance is a **nuisance parameter**. So let's talk about how to do that.
 
 <p>&nbsp;</p>
 
-Model: We have $n$ exchangeable observations from a population that is normal with a mean of $\theta$ and a variance of $\sigma^2$ both of which are unknown. Given a prior dist on $(\theta, \sigma^2)$. We use Bayes rule to compute a posterior dist where the prior describes our belief before observing the sample data the posterior will describe our belief after observing the data. Is there a conjugate distribution for $(\theta, \sigma^2)$ together?
+Model: We have $n$ exchangeable observations from a population that is normal with a mean of $\theta$ and a variance of $\sigma^2$ both of which are unknown. Given a prior distribution on $(\theta, \sigma^2)$, we use Bayes rule to compute a posterior distribution where the prior describes our belief before observing the sample data the posterior will describe our belief after observing the data. Is there a conjugate distribution for $(\theta, \sigma^2)$ together?
 
-Last class we saw that conditional on $\sigma^2$ the conjugate prior for $\theta$ was the normal distribution. Let's use that fact going forward. Let's write our prior dist as the joint density $p(\theta, \sigma^2) =  p(\theta|\sigma^2)p(\sigma^2) = \texttt{dnorm} (\theta|\mu_0,\tau_0^2)p(\sigma^2).$ Since we are conditioning on $\sigma^2$ anyway let's set $\tau_0^2=\sigma^2/\kappa_0,$ where $\kappa_0 =$ number of prior observations. Let's describe(parameterize) our uncertainty about $\theta$ conditionally on $\sigma^2$. 
+Last class we saw that conditional on $\sigma^2$ the conjugate prior for $\theta$ was the normal distribution. Let's use that fact going forward. Let's write our prior distribution as the joint density $p(\theta, \sigma^2) =  p(\theta|\sigma^2)p(\sigma^2) = \texttt{dnorm} (\theta|\mu_0,\tau_0^2)p(\sigma^2).$ Since we are conditioning on $\sigma^2$ anyway let's set $\tau_0^2=\sigma^2/\kappa_0,$ where $\kappa_0 =$ number of prior observations, this way we have described(parameterized) our uncertainty about $\theta$ conditionally on $\sigma^2$. 
 
 If $\theta | \sigma^2 \sim \text{Normal}( \mu_0 , \sigma^2 / \kappa_0 )$ and data are $\{y_1, …, y_n | \theta, \sigma^2\} \sim \text{ iid Normal}( \theta, \sigma^2)$. Equivalently in terms of the sufficient statistic $\{\bar y | \theta, \sigma^2\} \sim \text{Normal}( \theta, \sigma^2 / n)$
 
-Data information: sample mean of $\bar y$ based on $n$ observations (each with variance sigma2)
+The posterior of $\theta, \{\theta | y, \sigma^2\} \sim \text{Normal}$ with mean $\mu_n = (\kappa_0\mu_0+n\bar y)/\kappa_n$ where $\mu_n$ is a weighted average of prior mean $\mu_0$ and data mean $\bar y$ and these two weights are proportional to $\kappa_0$ (prior sample size) and $n$ ("real data" sample size). 
 
-Prior information: "sample mean" of $\mu_0$ based on "sample size" of $\kappa_0$
+From previous lecture we found that the posterior variance $\tau_n^2 = 1/a=1/(1/\tau_0^2+n/\sigma^2)$. Now plug in $\tau_0^2 = \sigma_0^2 / \kappa_0$ and you get $\tau_n^2 = 1 / ( \kappa_0 / \sigma^2 + n / \sigma^2 ) = \sigma^2 / (\kappa_0 + n)=\sigma^2/\kappa_n$. This makes perfect sense! Our data consist of $n$ observations. Our prior consists of $\kappa_0$ "observations".
 
-The posterior of $\theta, \{\theta | y, \sigma^2\} \sim \text{Normal}( \mu_n = w.\text{prior} \times \mu_0 + w.\text{data} \times \bar y)$ where these two weights are proportional to $\kappa_0$ (prior sample size) and $n$ ("real data" sample size). 
+So finally, we have 
+$$\{\theta | y_1,...,y_n, \sigma^2\} \sim \text{Normal}( \mu_n = (\kappa_0\mu_0+n\bar y)/\kappa_n, ~\sigma^2/\kappa_n)$$
 
-From previous lecture we found that the posterior variance $\tau_n^2 = 1/a=1/(1/\tau_0^2+n/\sigma^2)$. Now plug in $\tau_0^2 = \sigma_0^2 / \kappa_0$ and you get $\tau_n^2 = 1 / ( \kappa_0 / \sigma^2 + n / \sigma^2 ) = \sigma^2 / (\kappa_0 + n)$. This makes perfect sense! Our data consist of $n$ observations. Our prior consists of $\kappa_0$ "observations".
+We're half way there. $p(\theta , \sigma^2) = p(\theta | \sigma^2)p(\sigma^2) = \texttt{dnorm}( \theta | \mu_0 ,  \sqrt{\sigma^2/\kappa_0} ) p(\sigma^2)$
 
-We're half way there $p(\theta , \sigma^2) = p(\theta | \sigma^2) \times p(\sigma^2) = \texttt{dnorm}( \theta | \mu_0 ,  \sqrt{\sigma^2/\kappa_0} ) p(\sigma^2)$
 
-What might be the conjugate prior for the variance $\sigma^2?$. The gamma distribution has support (0, infinity). Might this work? It does not. It turns out. The gamma dist is not conjugate for the variance, $\sigma^2$. However, the gamma dist is conjugate for the precision = 1 / variance. 
+**What might be the conjugate prior for the variance $\sigma^2?$** The gamma distribution has support (0, infinity). Might this work? It does not. It turns out. The gamma distribution is not conjugate for the variance, $\sigma^2$. However, the gamma distribution is conjugate for the precision = 1 / variance. 
 
-How did we get this? If you condition on the mean $p(\sigma^2 | y) \propto p(y | \sigma^2) \times p(\sigma^2)$. You look at what the likelihood contributes. Recall, $p(y|\theta,\sigma^2) = (\sqrt{2\pi\sigma^2})^{-1}\text{exp}\{-(1/2\sigma^2)(y-\theta)^2\}.$ So what the likelihood contributes in this case for a normal variance is $(\sigma^2)^{\text{-something}} \times e^{- \text{something} / \sigma^2}.$ Since it's not $(\sigma^2)^{\text{something}} \times e^{- \sigma^2/\text{something} },$ then it's not $\sigma^2$ that has a gamma distribution but rather the precision, $1/\sigma^2$.
+How did we get this?
 
-Definition: If $X \sim \text{gamma}(a, b)\text{ and } Y = 1/X \text{ then } Y \sim \text{InvGamma}( a, b)$.
+Condition on the likelihood $p(\sigma^2 | y) \propto p(y | \sigma^2) p(\sigma^2),$ and look at what the likelihood contributes. Recall, $p(y|\theta,\sigma^2) = (\sqrt{2\pi\sigma^2})^{-1}\text{exp}\{-(1/2\sigma^2)(y-\theta)^2\} \propto (\sigma^2)^{-1}\text{exp}(-1/\sigma^2),$ and the gamma distribution has the form $p(\theta) \propto \theta^{a-1}e^{-b\theta}.$ So what the likelihood contributes in this case for a normal variance is $(\sigma^2)^{\text{-something}} \times e^{- \text{something} / \sigma^2}.$ Since it's not $(\sigma^2)^{\text{something}} \times e^{- \sigma^2/\text{something} },$ then it's not $\sigma^2$ that has a gamma distribution but rather the precision, $1/\sigma^2$.
+
+Definition: If $X \sim$ gamma$(a, b)$ and $Y = 1/X$  then $Y \sim$ InvGamma$(a, b).$
 
 The conjugate prior for the normal variance, $\sigma^2$ is to say $1/\sigma^2 \sim \text{gamma}(a, b)$ and since the parameter $a > 0, ~ b > 0$ are arbitrary we can reparameterize
-this dist to gamma$( \nu_0 / 2 , ~ \nu_0\sigma_0^2 / 2)$. We could do this by $\nu_0 = 2a, ~ \sigma_0^2 = b / a$. But the reason we did this reparameterization is that this gives a more natural way to think about the variance. $\sigma_0^2$ is like our prior best guess and $\nu_0$ is like the "sample size" for which $\sigma_0^2$ was the sample variance. We know the mean and variance of the gamma dist are $a/b$ and $a/b^2$ so we have;
+this distribution to gamma$( \nu_0 / 2 , ~ \nu_0\sigma_0^2 / 2)$. We could do this by $\nu_0 = 2a, ~ \sigma_0^2 = b / a$. The reason we did this reparameterization is that this gives a more natural way to think about the variance. We know the mean and variance of the gamma distribution are $a/b$ and $a/b^2$ so we have;
 
 * $E(1/\sigma^2) = 1/ \sigma_0^2$
 * Var$( 1 / \sigma^2) = 2 / [ \nu_0 \times (\sigma_0^2)^2 ]$
 
-What do all these parameters in this prior dist represent?
+What do all these parameters in this prior distribution represent?
 
 * $\mu_0$ is prior best guess at $\theta$
 * $\kappa_0$ measures the strength of that belief
 * $\sigma^2_0$ is our prior best guess at $\sigma^2$
 * $\nu_0$ measures the strength of that belief
 
-Remember that in inference for the normal dist, inference about the mean and inference about the variance proceed "independently" in a sense $(\bar Y \perp s^2)$. So we're allowed to have different prior sample sizes for the mean and the variance.
+Remember that in inference for the normal distribution, inference about the mean and inference about the variance proceed "independently" in a sense $(\bar Y \perp s^2)$. So we're allowed to have different prior sample sizes for the mean and the variance. Our data consist of $n$ observations from the population so the data will contribute $n$ to both the mean and the variance. The prior contributes $\kappa_0$ to the mean and $\nu_0$ to the variance. No requirement that these be equal.
 
-Our data consist of $n$ observations from the population so the data will contribute $n$ to both the mean and the variance. The prior contributes $\kappa_0$ to the mean and $\nu_0$ to the variance. No requirement that these be equal.
+The posterior density satisfies $p(\theta, \sigma^2 | y) = p(\theta | \sigma^2, y)p(\sigma^2 | y)$. The first piece is already solved! $p(\theta | \sigma^2, y) = \texttt{dnorm}( \theta | \mu_n ,  \sqrt{\sigma^2 / \kappa_n })$. Now for the second piece. 
 
-The posterior density satisfies $p(\theta, \sigma^2 | y) = p(\theta | \sigma^2, y) \times p(\sigma^2 | y)$. The first piece is already solved! $p(\theta | \sigma^2, y) = \texttt{dnorm}( \theta | \mu_n ,  \sqrt{\sigma^2 / \kappa_n } )$. 
 
 ## Marginal posterior of $\sigma^2$
 
-The result is $1/\sigma^2  | y \sim \text{gamma}( \nu_n  / 2 ,  \nu_n \sigma_n^2 / 2 )$. So that's why that reparameterization was so useful. $\nu_0$ in the prior becomes $\nu_n = \nu_0 + n$ in the posterior the $\sigma_0^2$ in the prior becomes $\sigma_n^2$ in the posterior which is:
+
+The result is that $1/\sigma^2  | y \sim \text{gamma}( \nu_n  / 2 ,  \nu_n \sigma_n^2 / 2 )$. 
+So that's why that reparameterization was so useful. $\nu_0$ in the prior becomes $\nu_n = \nu_0 + n$ in the posterior the $\sigma_0^2$ in the prior becomes $\sigma_n^2$ in the posterior which is:
 $$\sigma_n^2 = \frac{1}{\nu_n}[\nu_0\sigma_0^2 + (n-1)s^2+\frac{\kappa_0n} {\kappa_n}(\bar y - \mu_0)^2]$$
-It's almost a weighted average of the "prior" variance $\sigma_0^2$ and the "data var" $s^2$. 
+It's almost a weighted average of the "prior" variance $\sigma_0^2$ and the "data variance" $s^2$. 
 
 $\nu_n = \nu_0 + n = \nu_0 + (n-1) + 1$. The prior variance gets weight proportional to $\nu_0$. The sample variance $s^2$ gets weight proportional to $(n-1)$. That extra piece is weird. It only gets weight of $1 / \nu_n < (n-1) / n$.
 
 
 ## Example: Midge wing length
 
-Our prior best guesses at the mean and variance for this population are $\mu_0 = 1.9$ and $\sigma_0 = .01$ based on studies of other populations.
+Our prior best guesses at the mean and variance for this population are $\mu_0 = 1.9$ and $\sigma_0 = 0.01$ based on studies of other populations.
 
-Our data consist of $n$ observations. Our prior belief is based on not anything we have a whole lot of confidence in, but as long as we set $\kappa_0$ and $\nu_0$ to be small relative to 9 they won't get much weight in the posterior anyway. Set $\nu_0 = 1, ~ \kappa_0 = 1$ so prior gets 10% weight and data gets 90% weight in the posterior. That seems reasonable.
+Our data consist of $n$ observations. Our prior belief is based on not anything we have a whole lot of confidence in, but as long as we set $\kappa_0$ and $\nu_0$ to be small relative to $n=9$ they won't get much weight in the posterior anyway. Set $\nu_0 = 1, ~ \kappa_0 = 1$ so prior gets 10% weight and data gets 90% weight in the posterior. That seems reasonable.
 
 
 ```{r}
@@ -87,7 +90,8 @@ sigma2.n <- (1/nu.n) * (nu.0*sigma2.0 + (n-1)*s2 +
    kappa.0*n*(ybar-mu.0)^2 / kappa.n) 
 c(mu.n,  sigma2.n,  sqrt(sigma2.n))
 ```
-Our posterior belief about $(\theta ,  \sigma^2)$ is described by the joint prob dist:
+
+Our posterior belief about $(\theta ,  \sigma^2)$ is described by the joint probability distribution:
 
 $\{\theta|y_1,...,y_n,\sigma^2\} \sim \text{Normal}(\mu_n, \sigma^2/\kappa_n) = \text{Normal}(1.814, \sigma^2/10)$
 
@@ -95,9 +99,11 @@ $\{1/\sigma^2|y_1,...,y_n\} \sim \text{gamma}(\nu_n/2, \nu_n\sigma^2_n/2)=\text{
 
 <p>&nbsp;</p>
 
+**Joint density of $(\theta, \sigma^2)$**
+
 I want to draw a picture of the joint density $p(\theta, \sigma^2 | y)$ but this is a three-dimensional figure and I have a two-dimensional dimensional monitor on my laptop. There's lots of ways to do this. The one I happen to like is kind of old fashioned and that is the contour plot.
 
-A **contour plot** is defined by; If $f(x, y)$ is a joint density for rvs $(X, Y)$ then find the mode of this density (the peak) and then find all the points $(x, y)$ such that $f(x, y) = 0.95 \times f(x.\text{mode}, y.\text{mode})$. That is all the points where the density is 95% of the peak value. Then draw a line connecting those points. Assuming a unimodal dist, that will be the innermost contour.
+A **contour plot** is defined by; If $f(x, y)$ is a joint density for random variables $(X, Y)$ then find the mode of this density (the peak) and then find all the points $(x, y)$ such that $f(x, y) = 0.95 \times f(x.\text{mode}, y.\text{mode})$. That is all the points where the density is 95% of the peak value. Then draw a line connecting those points. Assuming a unimodal distribution, that will be the innermost contour. Then do this again for 90% of the peak value, and 85% of the peak value down to 0.001% of the peak value.
 
 
 ```{r}
@@ -140,42 +146,49 @@ rm(maxie);rm(log.post)
 
 ```{r include = FALSE}
 xlab <- expression(theta)
+ylab1 <- expression(sigma^2)
+ylab2 <- expression(1/sigma^2)
+ylab3 <- expression(p(sigma^2*"|"*y))
+ylab4 <- expression(p(theta*"|"*y))
 ```
 
-```{r}
-par(mfrow=c(1,2))
+```{r fig.cap = "Joint posterior distributions of (theta,precision) and (theta, sigma^2)."}
+par(mar=c(3,3,2,1),mgp=c(1.75,.75,0),oma=c(0,0,.5,0),mfrow=c(1,2))
 
 contour(theta, I.sig2, post.P, levels=contours, drawlabels=F, 
-  xlab=xlab, ylab="1/sigma2", main="Mean and precision")
+  xlab=xlab, ylab=ylab2, main="Mean and precision")
 contour(theta, sigma2, post.V, levels=contours, drawlabels=F, 
-  xlab=xlab, ylab="sigma2", main="Mean and variance")
+  xlab=xlab, ylab=ylab1, main="Mean and variance")
 ```
 
-The posterior mode of (mean, precision) $(\theta, \sigma^{-2} )$ is at (1.8 and 60) or so. The innermost contour is the set of all points whose joint density is .95 times that peak value. The next contour shows all the points whose joint density is .85 times the max value. There should be 12 contours in this picture. They are the .95, .85, … .15, .05, .01, .001. This is the equivalent of a figure in the book but the author doesn't show as much as I have here there's no .001 contour. I always like to see the tails.
+The posterior mode of (mean, precision) $(\theta, 1/\sigma^{2} )$ is at (1.8 and 60) or so. The innermost contour is the set of all points whose joint density is .95 times that peak value. The next contour shows all the points whose joint density is .85 times the max value. There should be 12 contours in this picture. They are the .95, .85, … .15, .05, .01, .001. This is the equivalent of Fig 5.4 in the book but the author doesn't show as much as I have here there's no .001 contour. I always like to see the tails.
 
-What do we know about this dist? We know that conditional on $\sigma^2, ~ \theta$ is Normal. What that mean is that every horizontal slice from this joint dist is a bell curve. Remember this? If $f(x,y)$ is the joint density of $(X,Y)$ the conditional density of $Y | X=x_0$ is found by taking the vertical slice of the joint density at the point $x=x_0$. I've got in this picture the joint posterior of $(\theta, \sigma^{-2})$ the conditional of $\theta$ given $\sigma^2$ is a horizontal slice. Given that the shape makes perfect sense. The bigger is $\sigma^2$ (smaller is $1/\sigma^2$) the weaker is our belief about $\theta$, hence the wideness of the LHS plot. The smaller is $\sigma^2$ (the bigger is $1/\sigma^2$) the stronger our belief about $\theta$, hence the peak on the LHS plot. What the belief is does not depend on $\sigma^2$ that belief in "$\theta$ is about 1.805 or so".
+What do we know about this distribution? We know that conditional on $\sigma^2, ~ \theta$ is Normal. What that means is that every horizontal slice from this joint distribution is a bell curve. Remember that if $f(x,y)$ is the joint density of $(X,Y)$ the conditional density of $Y | X=x_0$ is found by taking the vertical slice of the joint density at the point $x=x_0$. Similarly, I've got in this picture the joint posterior of $(\theta, \sigma^{-2})$ the conditional of $\theta$ given $\sigma^2$ is a horizontal slice. Given that the shape makes perfect sense. The bigger is $\sigma^2$ (smaller is $1/\sigma^2$) the weaker is our belief about $\theta$, hence the wideness of the LHS plot. The smaller is $\sigma^2$ (the bigger is $1/\sigma^2$) the stronger our belief about $\theta$, hence the peak on the LHS plot. What the belief is does not depend on $\sigma^2$ that belief in "$\theta$ is about 1.805 or so".
 
-## On the code
+**Notes on the code**
 
 I did $800 \times 800$ calculations of the joint density.
 
 For numerical reasons it is a good practice to compute log-densities then subtract the max log-density off of every value THEN exponentiate back.
 
-`post.P` represents joint posterior of mean and precision
+<tt>post.P</tt> represents joint posterior of mean and precision
 
-`post.V` is the joint posterior of mean and variance 
+<tt>post.V</tt> is the joint posterior of mean and variance 
 
 The calculation is;
 
 $p(\theta, \sigma^2) = p(\theta | \sigma^2, y) p(\sigma^2 | y)$ or $\log[ p(\theta, \sigma^2 | y) ] = \log[ p(\theta | \sigma^2, y) ] + \log[ p(\sigma^2 | y) ]$
 
-Homework question: why do we need to subtract off $2 \log(\sigma^2)?$ in the calculation of `post.V`?
+Question: why do we need to subtract off $2 \log(\sigma^2)?$ in the calculation of <tt>post.V</tt>? 
+
+Let $V =$ variance, $P =$ precision, $V = 1/P$, $P = 1/V$. The random variable $P$ has a gamma distribution the random variable $V$ has an inverse-gamma distribution. The probability density of $V$ is the gamma pdf evaluated at $1/v \times 1/v^2$ because that's the Jacobian. Look at "nonlinear transformations of random variables" from probability theory for more insight.
+
 
 
 ## Monte Carlo sampling 
 
-Of course, In this problem these calculations were not easy
-but possible. But going forward when we get to the really messy problems we're gonna have no choice but to do Monte Carlo. I want a Monte carlo sample that is $\theta^{(1)} , ..., \theta^{(S)}$ such that $\theta^{(s)} \sim p(\theta |y)$. The problem is; I don't know the marginal posterior of $\theta$. I don't know $p(\theta | y).$  I know $p(\theta | y, \sigma^2)$ and I know $p(\sigma^2 | y)$. And that's enough. It just means each simulation is gonna require two steps. The result is $(\sigma^{2(s)} , \theta^{(s)}) \sim p(\theta , \sigma^2 | y)$ which means marginally $\theta^{(s)} \sim p(\theta | y)$
+Of course, In the above problem the calculations were not easy
+but possible. But going forward when we get to the really messy problems we're gonna have no choice but to do Monte Carlo. I want a Monte carlo sample that is $\theta^{(1)} , ..., \theta^{(S)}$ such that $\theta^{(s)} \sim p(\theta |y)$. The problem is; I don't know the marginal posterior of $\theta$, $p(\theta | y).$  I know $p(\theta | y, \sigma^2)$ and I know $p(\sigma^2 | y)$, and that's enough. It just means each simulation is gonna require two steps. First simulate $\sigma^{2(s)}$ and then simulate $\theta^{(s)} \sim p(\theta |y, \sigma^{2(s)}).$ The result is $(\sigma^{2(s)} , \theta^{(s)}) \sim p(\theta , \sigma^2 | y)$ which means marginally $\theta^{(s)} \sim p(\theta | y).$
 
 
 ```{r}
@@ -186,9 +199,9 @@ theta.sim  <- rnorm(S, mu.n, sqrt(sigma2.sim/kappa.n))
 
 
 ```{r}
-# Scatterplot (empirical joint distribution of MC sample)
+# Scatterplot; empirical joint distribution of MC sample
 contour(theta, sigma2, post.V, levels=contours, drawlabels=F, 
-  xlab=xlab, ylab="sigma2", main="Mean and variance")
+  xlab=xlab, ylab=ylab1, main="Mean and variance")
 points(theta.sim, sigma2.sim, pch=19, cex=.25, 
   xlim=c(1.51, 2.11), ylim=c(0, .10))
 ```
@@ -199,34 +212,33 @@ points(theta.sim, sigma2.sim, pch=19, cex=.25,
 (CI.theta <- quantile(theta.sim, c(.025, .975))) 
 ```
 
-```{r}
-par(mfrow=c(1,2))
+I actually know the theoretical marginal distribution of $\sigma^2$. But if I didn't I could draw a histogram of the Monte Carlo sample or a kernel density estimate based on the monte carlo samples as below.
 
-hist(sigma2.sim, xlim=c(0, .08), main="", freq=F, xlab="sigma2",
-     ylab="p(sigma2|y)", ylim=c(0,60), border=gray(0.5))
+```{r}
+par(mar=c(3,3,1.5,1),mgp=c(1.75,.75,0),oma=c(0,0,.5,0),mfrow=c(1,2))
+
+hist(sigma2.sim, xlim=c(0, .08), main="", freq=F, xlab=ylab1,
+     ylab=ylab3, ylim=c(0,60), border="lightpink1",col="pink")
 lines(density(sigma2.sim), lwd = 2)
 
-hist(theta.sim, freq=F, xlim=c(1.6, 2.0), main="", xlab="theta",
-      ylab="p(theta|y)", ylim=c(0,10), border=gray(0.5))
+hist(theta.sim, freq=F, xlim=c(1.6, 2.0), main="", xlab=xlab,
+      ylab=ylab4, ylim=c(0,10), border="lightpink1",col="pink")
 lines(density(theta.sim), lwd=2)
-abline(v=CI.theta, lty=2)
+abline(v=CI.theta, lty=2, lwd=1.5)
 ```
 
 
-I actually know the theoretical marginal dist of $\sigma^2$. But if I didn't I could draw a histogram of the Monte Carlo sample or a kernel density estimate based on the monte carlo samples.
 
-95% Bayesian confidence interval is 1.72 to 1.90.
+The 95% Bayesian confidence interval is $[1.72, 1.90]$.
 
-When we were pretending $\sigma^2$ was known, the CI was [1.720, 1.889].
-
-The frequentist interval based on the t-dist is [1.70, 1.90].
+In the last lecture, when we were pretending $\sigma^2$ was known, the CI was $[1.720, 1.889]$. Furthermore, the frequentist interval based on the t-distribution is $[1.70, 1.90]$.
 
 Our Bayesian interval brings the lower bound up just a tad (because the prior mean was 1.9 vs data mean of 1.8 or so) and it shortens the CI a bit because our prior counts for one observation so our "Bayesian sample size" was 10 not just 9.
 
 
 ## Summary of Normal formulas
 
-$p(\theta,\sigma^2 | y_1,...,y_n) = p(y_1,...,y_n| \theta,\sigma^2) p(\theta,\sigma^2)/p(y_1,...,y_n)$
+$p(\theta,\sigma^2 | y_1,...,y_n) \propto p(\theta,\sigma^2) p(y_1,...,y_n| \theta,\sigma^2)$
 
 $p(\theta,\sigma^2)=p(\theta|\sigma^2)p(\sigma^2) = \texttt{dnorm} (\theta,\mu_0,\tau_0 = \sigma/\sqrt{\kappa_0})p(\sigma^2)$
 
@@ -256,6 +268,7 @@ $$\sigma_n^2 = \frac{1}{\nu_n}[\nu_0\sigma_0^2 + (n-1)s^2+\frac{\kappa_0n} {\kap
 
 $\{\tilde Y|\sigma^2, y_1,...,y_n\} \sim \text{normal}(\mu_n,\tau_n^2+\sigma^2) \equiv \texttt{rnorm}(S, \theta_{mc}, \sqrt{\sigma^2_{mc}})$
 
+<p>&nbsp;</p>
 
 $\mu_0 \text{ and }\kappa_0$ is the mean and sample size from a prior set of observations.
 
@@ -266,12 +279,6 @@ $s^2 = \sum_{i=1}^n (y_i - \bar y)/(n-1) = \texttt{var}(\boldsymbol{y})$ sample 
 $(n-1)s^2$ is the sum of squared observations from the sample mean
 
 $\nu_0 \sigma_0^2 \text{ and } \nu_n\sigma_n^2$ as prior and posterior sum of squares, respectively.
-
-
-
-
-
-
 
 
 

@@ -15,6 +15,7 @@ fig:unnamed-chunk-36
 fig:unnamed-chunk-40
 fig:unnamed-chunk-42
 fig:unnamed-chunk-46
+fig:unnamed-chunk-53
 intro
 example
 random-variables
@@ -68,6 +69,11 @@ example-midge-wing-length
 joint-inference-for-normal-mean-and-variance
 marginal-posterior-of-sigma2
 example-midge-wing-length-1
-on-the-code
 monte-carlo-sampling
 summary-of-normal-formulas
+gibbs-sampler
+a-semiconjugate-prior-distribution
+gibbs-sampling
+example-midge-wing-length-2
+discrete-approximation-of-posterior-distribution
+example-3
