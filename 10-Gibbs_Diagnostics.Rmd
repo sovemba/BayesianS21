@@ -1,0 +1,315 @@
+
+# MCMC diagnostics
+
+```{r echo = FALSE, message = FALSE}
+rm(list=ls());  set.seed(20210517);
+knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
+```
+
+<tt>The following notes are transcribed from Neath(0518,2021) lecture which summarizes Sections(6.5-6.6) of Hoff(2009).</tt>
+
+## The Gibbs sampler
+
+We had a posterior distribution $p(\theta, \sigma^2 | y)$ where $p(\theta | \sigma^2, y)$ took a convenient form and $p(\sigma^2 | \theta, y)$ took a convenient but neither marginal distribution did. In a Gibbs sampler you alternately draw from both "full conditional" distributions and the result is; as $s$ increases the sampling distribution of $(\theta, \sigma^2)^{(s)}$ approaches the target distribution (which is the posterior). The Gibbs sampler we saw last time was very simple, just two parameters, but the idea extends to $p$ parameters. Let $\boldsymbol{\phi} = (\phi_1,\phi_2,...,\phi_p)$ be a vector of parameters. 
+
+Let $p(\phi_1,\phi_2,...,\phi_p)$ be the target distribution and the goal is to approximate probabilities and moments and quantiles etc with respect to this target distribution. In Bayesian statistics the target distribution is generally the posterior distribution $p(\boldsymbol{\phi} | y)$. Often in today's class you'll notice we're just writing $p(\boldsymbol{\phi})$ to denote a generic target distribution. But it's probably (in practical application) the posterior not the prior.
+
+We are using subscripts to denote the position in a vector $\boldsymbol{\phi}  = (\phi_1, …, \phi_p)$ and superscripts to denote the iteration number of the simulation. Superscripts are in parentheses so we don't think it means "raised to that power".
+
+The way the Gibbs sampler works is; each iteration of the Gibbs sampler itself requires $p$ steps ($p=2$ in yesterday's example).
+
+Exercise: Write down the form of the $j$th update of the gibbs sampler 
+
+$\phi_j^{(s)} \sim p(\phi_j | \phi_1^{(s)}, …, \phi_{j-1}^{(s)}, \phi_{j+1}^{(s-1)}, …., \phi_p^{(s-1)} )$
+
+The set of conditional distributions  $p(\phi_j | \phi_1, …, \phi_{j-1}, \phi_{j+1}, …., \phi_p )$ for all of $j = 1, 2, … p$ are collectively called the **full conditional distributions** for the target distribution $p(\phi_1, …., \phi_p)$. You see why it's a dependent sample? Take the semiconjugate normal model to illustrate. $\theta^{(s)}$ depends on $\sigma^{2(s-1)}$ but $\sigma^{2(s-1)}$ depends on $\theta^{(s-1)}$ therefore $\theta^{(s)}$ depends on $\theta^{(s-1)}$. The Gibbs sampler output is generally less good than would be ordinary Monte Carlo simulations (that is independent draws). However, this method(the Gibbs sampler) works in more complicated models where direct simulation may not be feasible.
+
+How does (in very broad terms) Markov chain Monte Carlo relate to ordinary Monte Carlo? It's not as good because (1) the draws are dependent and (2) they don't have the right sampling distribution exactly. Note this property; $\boldsymbol \phi^{(s)}$ depends on $\boldsymbol \phi^{(s-1)}$ and $\boldsymbol \phi^{(s-1)}$ is dependent on $\boldsymbol \phi^{(s-2)}$ therefore $\boldsymbol \phi^{(s)}$ is dependent on $\boldsymbol \phi^{(s-2)}$. By the principle of induction $\boldsymbol \phi^{(s)}$ is dependent on $\boldsymbol \phi^{(0)}$. However, $\boldsymbol \phi^{(s)}$ is conditionally independent of $\boldsymbol \phi^{(s-2)}$ and $\boldsymbol \phi^{(s-3)}$ etc given $\boldsymbol \phi^{(s-1)}$. If you've taken stochastic processes (stat 4207 / 5207) you've seen this idea before you know this is called the **Markov property**. So the Gibbs sampler produces a realization of a Markov chain and such is an example of a more general method called Markov chain Monte Carlo. If $\boldsymbol{\phi}^{(0)} \sim p(\boldsymbol{\phi})$(the right target distribution) then $\boldsymbol{\phi}^{(1)} \sim p(\boldsymbol{\phi})$ and $\boldsymbol{\phi}^{(2)} \sim p(\boldsymbol{\phi})$ etc. In general this will not be the case. The starting point $\boldsymbol{\phi}^{(0)}$ is determined somehow, but it's not a draw from the target distribution.  Therefore, the marginal distribution of $\boldsymbol{\phi}^{(s)}$ is NOT $p(\boldsymbol{\phi})$, i.e., is not the target distribution.  However, as $s$ increases the marginal distribution of $\boldsymbol{\phi}^{(s)}$ approaches the target distribution. Below is a technical statement of this property;
+$$
+Pr(\phi^{(s)} \in A) \rightarrow \int_A p(\phi)d \phi \quad \text{ as } s \rightarrow \infty
+$$
+
+You know about the Law of Large Numbers (LLN) for independent draws. This is the LLN for Markov chains;
+$$\frac{1}{S} \sum_{s=1}^{S} g\left(\phi^{(s)}\right) \rightarrow \mathrm{E}[g(\phi)]=\int g(\boldsymbol{\phi}) p(\boldsymbol{\phi}) d \boldsymbol{\phi} \quad \text { as } S \rightarrow \infty$$
+
+In the midge data example we did 1000 iterations of the Gibbs sampler for the semiconjugate normal model and from that we *approximate* posterior mean by 1.808 and posterior 95% interval by [1.72, 1.90].
+
+## Distinguishing estimation from approximation
+
+What role does MCMC (or Monte Carlo in general) play in a Bayesian analysis? It is not an inferential method. The inferential method is Bayesian inference. We have a sampling model for our observable data $p(\boldsymbol{y}|\phi)$, we have a probability distribution that describes our prior belief about $\phi, ~p(\phi)$. Once these items are specified according  to Bayes rule our belief about $\phi$ is "updated" to reflect the observed data; $p(\phi | \boldsymbol{y}) = p(\phi) p(\boldsymbol{y} | \phi) / p(\boldsymbol{y})$. 
+
+So what is the Gibbs sampler used for? The problem is $p(\phi | \boldsymbol{y})$ may be a very complicated object particularly if $\boldsymbol{\phi} = (\phi_1, \phi_2, …., \phi_p)$ and $p$ is a big number. That's where Monte Carlo comes in. **Monte Carlo** is a computational tool for describing features of the posterior distribution. Confusion comes about because Monte Carlo is an approximation method and is based on the principles of statistical inference. If $\phi$ is a scalar the average value of the simulated $\phi^{(s)}$ is an approximation to the posterior mean $E(\phi|\boldsymbol{y}).$ Sample quantiles of $\phi^{(1)} ,..., \phi^{(S)}$ approximate $L$ and $U$ such that $Pr(L < \phi < U | y) = 0.95$ (if it's the 0.025 and 0.975). We will refer to Monte Carlo approximations better we not use the term estimation for this purpose.
+
+The inferential problem is; what do we know about $\phi$ after observing the data $\boldsymbol{y}?$ and that problem is completely answered by the posterior probability distribution $p(\phi | \boldsymbol{y}).$ Where Monte Carlo methods come in is as a tool for helping us understand this complex object that is $p(\phi | \boldsymbol{y}).$
+
+Again, distinction between estimation; The estimation problem(the inference problem) is in principle solved the minute we write down $p(\theta|\boldsymbol{y}) = c \times p(\theta) p(\boldsymbol{y}|\theta$). But in practice in order to make useful statements about this posterior distribution we use various computational tools including Monte Carlo simulation and Markov chain Monte Carlo (like the Gibbs sampler). So the distinction is between estimation (inference -- solved by Bayes rule) and approximation (where Monte Carlo comes in).
+
+*Student question -* Suppose we take the .025 and .975 quantiles of a 1000 iterations of a Gibbs sampler and call that our 95% confidence interval for $\theta$. Is that estimation or approximation?
+
+The answer is: Both are going on here. The true value of $\theta$ is unknown. The true quantiles $[\theta_{.025},  \theta_{.975}]$ that satisfy $Pr( L < \theta < U | y ) = 0.95$ is a solution to the estimation problem. When $\theta_{.025}$ and $\theta_{.975}$ are not solvable exactly because the posterior distribution is too complicated and we use the sample quantile from a simulation based on Gibbs sampler that's an approximation.
+
+## Introduction to MCMC diagnostics
+
+We never talked about ordinary Monte Carlo diagnostics because there's no such thing. What MCMC diagnostics is concerned with is those two features of MCMC that make it less good than ordinary Monte Carlo:
+
+(1) $\theta^{(s)}$ is not exactly marginally $\sim p(\theta | y)$ only approximately (with this approximation improving as $s$ increases)
+
+(2) The draws are not independent, they are positively correlated.
+
+Recall that if $X_1$ and $X_2$ have the same mean and variance then $\text{Var}( [ X_1+X_2]/2 ) = \text{Var}(X) / 2$ if they are independent. But is greater than that if they are positively correlated $\text{Var}( [X_1+X_2]/2 ) = \text{Var}(X_1) /4  + \text{Var}(X_2) /4 + 2\text{Cov}(X_1, X_2) / 4.$ So if that covariance is positive, the average of two draws is still probably better(lower variance) than a single draw but not by as much as if $X_1$ and $X_2$ were independent.
+
+$\phi$ is a "parameter" $p(\phi)$ is the target distribution which is probably a posterior but we're simplifying notation here. The gold standard is ordinary Monte Carlo in which $\phi^{(s)} \sim \text{ iid } ~ p(\phi)$. That mean each has sampling distribution that is exactly $p(\phi)$ and the draws are independent. The two ways Gibbs sampling (and MCMC more generally) is less good than ordinary (iid) Monte Carlo are;
+
+(1) The sampling distribution of $\phi^{(s)}$ is exactly $p(\phi)$ in ordinary Monte Carlo but only approximately so under MCMC.
+
+(2) Draws are independent under ordinary Monte Carlo but positively correlated in a Gibbs sampler. This will be illustrated by the example below.
+
+### Example 
+
+Consider the following target distribution $\boldsymbol{\phi} = (\delta, \theta), ~ \delta \in \{1,2,3\}$ with probability { .45, .10, .45 }
+
+$\{\theta | \delta = 1 \}\sim \text{Normal}(-3 , 1/3 )$
+
+$\{\theta | \delta=2\} \sim \text{Normal}( 0,  1/3 )$
+
+$\{\theta | \delta=3\} \sim \text{Normal}( 3 , 1/3  )$.
+
+This is a mixture distribution (mixture of three normals) and simulating draws from a mixture distribution is straightforward:
+
+If $\delta \sim$ 1 or 2 or 3 with probability .45 or .10 or .45, then $\theta | \delta \sim \text{Normal}( \mu_\delta,  \sigma^2)$. In this case the "mixture of 3 normals" distribution has three modes. Though this is not always the case. In your homework problem the prior mixture of two betas had two modes but the posterior mixture of two betas does not.
+
+*Student question:* Is there a way to know in general whether a mixture distribution will have multiple modes or not? In the case of a mixture of normals it depends on how far apart the means are relative to the variances.
+
+Here's a rule for sampling from a mixture dist:
+
+Simulate $\delta^{(s)} \sim p(\delta)$ and $\theta^{(s)} \sim p(\theta | \delta^{(s)} )$ 
+
+result; $(\delta^{(s)}, \theta^{(s)}) \sim p(\delta,\theta)$. Also marginally $\theta^{(s)} \sim p(\theta)$.
+
+Below is what a mixture distribution looks like. Its density is $\{ [p_1\times$ `dnorm`$(\theta, \mu_1, \sigma)] + [p_2 \times$ `dnorm`$(\theta | \mu_2, \sigma)] + [p_3 \times$ `dnorm`$(\theta | \mu_3 , \sigma)] \}$
+
+```{r}
+S  <- 1000
+mu <- c(-3, 0, 3);  sigma <- rep(1/sqrt(3),3);  
+p  <- c(.45, .10, .45)
+delta.MC <- sample(3, S, replace=T, prob=p)
+theta.MC <- rnorm(S, mu[delta.MC], sigma[delta.MC])
+```
+
+
+```{r fig.cap = "A mixture of normal densities and a Monte Carlo approximation"}
+hist(theta.MC, freq=F, right=F, col="pink", 
+  xlim=c(-6,6), ylim=c(0, .32), breaks=30, 
+  xlab="theta", ylab="p(theta)", main="")
+
+theta.vals <- seq(-6, 6, .01)
+
+p.theta <- p[1] * dnorm(theta.vals, mu[1], sigma[1]) + 
+           p[2] * dnorm(theta.vals, mu[2], sigma[2]) + 
+           p[3] * dnorm(theta.vals, mu[3], sigma[3])
+
+lines(theta.vals, p.theta, lwd=2)
+```
+
+In this picture, the curve represents the target distribution. The histogram is 1000 independent samples from the target distribution.  Agreement is pretty good. 
+
+<p>&nbsp;</p>
+
+Let's do a Gibbs sampler for this problem.
+
+In ordinary Monte Carlo we can get independent samples by going;
+
+$\delta^{(s)} \sim p(\delta), ~ \theta^{(s)} \sim p(\theta | \delta^{(s)}).$ 
+
+A Gibbs sampler would go; $\delta^{(s)} \sim p(\delta | \theta^{(s-1)}),$ then $\theta^{(s)} \sim p(\theta | \delta^{(s)}).$ However, $\delta^{(s)}$ depends on $\theta^{(s-1)}$ and therefore $\theta^{(s)}$ is dependent on $\theta^{(s-1)}$.
+
+This is a practically silly thing to do in this problem because in fact ordinary Monte Carlo is more straightforward than the Gibbs sampler.
+
+Solve the conditional of $p(\delta | \theta )$ using Bayes rule $p(\delta | \theta) = p(\delta)p(\theta|\delta) / p(\theta)$, where $p(\theta) = \sum_\delta{p(\delta ) p(\theta | \delta) }$. Gibbs sampler requires starting values. Since $\delta \in \{1,2,3\},$ I'll start it at 3.
+
+```{r}
+# Gibbs sampler 
+delta.Gibbs <- rep(NA, S)
+theta.Gibbs <- rep(NA, S)
+delta       <- 3 # starting value
+
+for(s in 1:S)
+{
+ theta <- rnorm(1, mu[delta], sigma[delta])
+ pdgt  <- p * dnorm(theta, mu, sigma)
+ delta <- sample(3, 1, prob=pdgt)
+ delta.Gibbs[s] <- delta
+ theta.Gibbs[s] <- theta
+}
+```
+
+
+```{r fig.cap = "A mixture of normal densities and 1000 Gibbs samples" }
+hist(theta.Gibbs, freq=F, right=F, col="pink", 
+  xlim=c(-6,6), breaks=30, # ylim=c(0, .32), breaks=30, 
+  xlab="theta", ylab="p(theta)", main="")
+
+theta.vals <- seq(-6, 6, .01)
+p.theta    <- p[1] * dnorm(theta.vals, mu[1], sigma) + 
+              p[2] * dnorm(theta.vals, mu[2], sigma) + 
+              p[3] * dnorm(theta.vals, mu[3], sigma)
+
+lines(theta.vals, p.theta, lwd=2)
+```
+
+Here, 1000 draws from the Gibbs sampler do not agree very closely with the target distribution. Namely, values close to -3 are way overrepresented, values close to zero are overrepresented, values close to +3 are underrepresented. It's a mixture of the right 3 things but it's not the right mixture.
+
+What went wrong?
+
+```{r fig.cap = "Trace plots of theta-sequence"}
+par(mfrow=c(1,2))
+# The figure on the Left is what we want to see a trace plot look like. 
+# It means the draws are uncorrelated.
+plot(1:S, theta.MC, type="l", xlab="Iteration s", ylab="theta[s]"
+     ,main = "Monte Carlo trace plot")
+plot(1:S, theta.Gibbs,type="l",xlab="Iteration s",ylab="theta[s]"
+     ,main = "Gibbs sampler trace plot")
+```
+
+ 
+What went wrong is that Gibbs sampler draws are highly correlated on RHS so there is a very strong tendency for $\theta^{(s)}$ to be close to $\theta^{(s-1)}$. So when I get $\theta^{(s)}$ close to 3 there is very high probability that $\theta^{(s+1)}$ is also going to be close to 3. Compare this to the independent Markov chain Monte Carlo draws on LHS which are jumping all over the place. Result is even a very small value of $S$ is likely to be representative of the target distribution under ordinary MC. With the Gibbs sampler it takes a LOT more simulation to get a representative sample.
+
+The target distribution; 45% of it is concentrated around 3, 10% concentrated around 0, 45% concentrated around -3. With independent samples that just happens. With the Gibbs sampler that happens in the long run but not so well in the short run.
+
+**BIG IDEA:** The information about $p(\theta)$ contained in $S$ draws of a Gibbs sampler is less than the information about $p(\theta)$ contained in $S$ independent draws.
+
+Recall that we have: 
+$\{\theta | \delta = 1 \}\sim \text{Normal}(-3 , 1/3 )$
+
+$\{\theta | \delta=2\} \sim \text{Normal}( 0,  1/3 )$
+
+$\{\theta | \delta=3\} \sim \text{Normal}( 3 , 1/3  )$.
+
+If $\theta^{(s)}$ is close to zero it is highly probable that we will get $\delta^{(s)} = 2,$ if we get $\delta^{(s)} = 2$ we expect $\theta^{(s+1)}$ should be close to zero and so on. We can basically tell from the trace plot for $\theta$ what the trace plot for $\delta$ would look like.
+
+Isn't the Gibbs sampler guaranteed to eventually provide a good approximation? Yes it is. If we ran a lot more than 1000 draws, "eventually" we'd get about 45% of the time hovering around +3 about 10% hovering around 0 and about 45% hovering around -3. In the long run yes we would see exactly this, but $S  = 1000$ is apparently "short" for our example.
+
+## Discussion
+
+Concrete example: A particle moving around the parameter space.
+
+In this example the parameter is $\phi$ the parameter space is the real line but generally the probability in the target distribution is contained between -5 and 5. Think of $\phi$ as a particle moving around the line where it is at iteration $s$ is recorded in this plot (like the trace plot above). In the long run let $A_1, A_2$ and $A_3$ be three subsets of the parameter space so that $\int_{A2}p(\phi) d\phi$ is pretty small and $A_1$ and $A_3$ are separated by $A_2$ (just like the example above!). In the long run our particle should spend little time in $A_2$ but a lot more time in $A_1$ and $A_3$. Suppose we start in $A_2$, two things we would want to see happen (1) the chain should move out of $A_2$ pretty quickly (stationarity) (2) the chain to move between $A_1$ and $A_3$ fairly readily, that is, not get stuck for long stretches in either one.
+
+Definition: If $\phi^{(0)} \sim p(\phi)$ then the chain is **stationary**. 
+
+And if the chain is stationary then the sampling distribution of $\phi^{(s)}$ is $p(\phi)$ (the target distribution) for every $s$. And in that case: Issue number 1 would be a non-issue (Issue 1 is the "non-stationarity"). The stationarity issue, the practical issue, presented is where to start? In the problems we've done so far this really hasn't been an issue. *A mode of the target distribution is a good starting point.*
+
+The second issue, the autocorrelation issue, is also called mixing. Low autocorrelation and fast mixing go together, high autocorrelation and slow mixing go together.
+
+### How does autocorrelation(slow mixing) affect our MCMC approximation?
+
+For this discussion assume stationarity. With good starting values this is a reasonable assmption.
+
+We have $\phi^{(0)} \sim p(\phi)$ or close enough therefore $\phi^{(s)} \sim p(\phi)$ for each $s,$ the only issue is the draws are not independent. How does that much up our estimation?
+
+Suppose autocorrelation was zero i.e., independent samples. $\bar \phi = (1/S)[ \phi^{(1)} + … + \phi^{(S)} ]$ is our Monte Carlo approximation to $E(\phi)$. In this notation $\phi_0 = E(\phi)$. $\phi$ is the parameter (an uncertain quantity), $p(\phi)$ is the probability distribution, $\phi_0$ is the mean of that distribution. $\phi^{(s)}$ for $s = 1, …, S$ are a set of $S$ generated values being used to approximate $\phi_0$. If the $\phi^{(s)}$ are uncorrelated, then we can define Monte Carlo standard error as $\sqrt{\text{Var}_{MC}}$, where Var$_{MC} = E[(\bar \phi - \phi_0)^2] = \text{Var}(\phi)/S=$ Expected squared approximation error associated with using $\bar \phi$ to estimate $\phi_0$. This Monte Carlo variance is equal to $\text{Var}(\phi) / S.$ Var with no subscript means the variance of the target distribution.
+
+Want to have high confidence (say 95%) that your approximation error will be less than $\epsilon?$ solve for $S$ so that $2\text{mcse} = 2\sqrt{Var_{MC}} < \epsilon$.
+
+If we are using a Gibbs sampler so the $\phi^{(s)}$ are not independent (they're correlated) the expected squared approximation error Var$_{MCMC}$ is not Var$(\phi)  / S$. It's bigger. It's bigger by a term that depends on how strongly correlated are $\phi^{(s)}$ and $\phi^{(t)}$ for $t \neq s$ 
+
+"MCMC standard error" equals square root of ( expected squared approximation error under MCMC sampling ) i.e., $\text{mcmcse} = \sqrt{Var_{MCMC}}$, where $\text{Var}_{MCMC} > \text{Var}_{MC}$ by an amount that depends on how highly correlated are successive draws in the Gibbs sampler. The bigger is our expected squared approximation error $(\text{Var}_{MCMC})$ the more we expect our approximation to not be good.
+
+
+### Autocorrelation
+
+```{r fig.cap = "acf for independent MC draws and Gibbs samples"}
+par(mfrow=c(1,2))
+acf(theta.MC)
+acf(theta.Gibbs)
+```
+
+
+Corr$(\phi^{(s)} ,  \phi^{(s+1)})$ is called the lag-1 autocorrelation
+
+Corr$( \phi^{(s)} , \phi^{(s+2)})$ is called the lag 2 autocorrelation
+
+In general the lag-$t$ autocorrelation is defined as Corr$(\phi^{(s)}, \phi^{(s+t)})$ and if we consider this as a function of $t,~ t = 1, 2, 3, …,$ for a typical Gibbs sampler it is always positive and (generally) decreasing toward 0 as $t$ increases. The faster it zeros out the better. The "art" of MCMC is finding samplers for which the autocorrelation zeros out quickly.
+
+
+*Student Question:* If positive autocorrelation is bad in the sense that it makes the Monte Carlo less efficient might there be a way to simulate negatively correlated samples to get more efficient Monte Carlo!?
+
+Methods like that exist but to be able to implement them requires that you know quite a lot about the target distribution and the whole point of MCMC is that you can do it in situations where you know very little about the target distribution.
+
+There is sampling technique called antithetic variables or something like this with this goal but it's pretty limited. In high-dimensional complicated Bayesian models you're stuck with this situation where the draws will be positively correlated but MCMC is very much an art and the art is to make that correlation as little as possible. The software package Stan uses something called Hamiltonian Monte Carlo which is an MCMC method but has the goal of producing chains that are not so highly autocorrelated.
+
+
+### Sample autocorrelation function
+
+$$
+\operatorname{acf}_{t}(\phi)=\frac{\frac{1}{S-t} \sum_{s=1}^{S-t}\left(\phi_{s}-\bar{\phi}\right)\left(\phi_{s+t}-\bar{\phi}\right)}{\frac{1}{S-1} \sum_{s=1}^{S}\left(\phi_{s}-\bar{\phi}\right)^{2}}
+$$
+
+an expression for lag-t sample autocorrelation. Denominator is variance (recall that
+correlation = cov / sd$\times$sd ) numerator is a sample correlation between.. say for lag $t=5$, it will be between $\phi^{(1)}$ with $\phi^{(6)}$, $\phi^{(2)}$ with $\phi^{(7)}$, $\phi^{(3)}$ with $\phi^{(8)}$, etc.
+
+### Effective sample size
+
+$\text{Var}_{MC}(\bar \phi) = \text{Var}(\phi) / S$ 
+
+The effective sample size for MCMC is defined by $\text{Var}_{MC}(\bar \phi) = \text{Var}(\phi) / S_{\text{eff}}.$ 
+
+So what this means is that when we run the Markov chain for $S$ iterations we get the same precision for our MCMC approximation as we would get from $S_{\text{eff}}$ independent samples from $p(\phi)$
+
+
+```{r}
+S <- 10000
+
+delta.Gibbs <- rep(NA, S)
+theta.Gibbs <- rep(NA, S)
+delta <- 3;  theta <- 3;  # starting values
+
+for(s in 1:S)
+{
+ theta <- rnorm(1, mu[delta], sigma[delta])
+ pdgt  <- p * dnorm(theta, mu, sigma)
+ delta <- sample(3, 1, prob=pdgt)
+ delta.Gibbs[s] <- delta;  theta.Gibbs[s] <- theta;
+}
+```
+
+
+```{r fig.cap = "10,000 iterations of the Gibbs sampler instead of 1,000"}
+hist(theta.Gibbs, freq=F, right=F, col="pink", 
+  xlim=c(-6,6), breaks=30, ylim=c(0, .32), 
+  xlab="theta", ylab="p(theta)", main="")
+
+theta.vals <- seq(-6, 6, .01)
+
+p.theta <- p[1] * dnorm(theta.vals, mu[1], sigma[1]) + 
+           p[2] * dnorm(theta.vals, mu[2], sigma[2]) + 
+           p[3] * dnorm(theta.vals, mu[3], sigma[3])
+
+lines(theta.vals, p.theta, lwd=2)
+```
+
+Even with 10,000 iterations the realized chain is not perfectly representative of the target distribution it's too frequently around zero and not frequently enough around -3 and +3.
+
+
+There are numerous formulas for computing effective sample size they give different answers and in general the estimation of $S_{\text{eff}}$ is highly unstable. But it's still a useful quantity. So let's find it for this example. I like the effective sample size calculator that's in the R package <tt>mcmcse</tt>
+
+```{r}
+# Effective sample size calculation
+library(mcmcse)
+ess(theta.Gibbs)
+```
+
+The autocorrelation in this Markov chain is so severe that 10,000 iterations of the Gibbs sampler yields the same precision for estimating $E(\theta)$ as would only 13 or 14 independent draws from $p(\theta)$. CRAZY!
+
+
+```{r fig.cap = "autocorrelation function for theta-chain"}
+par(mfrow=c(1,2))
+acf(theta.Gibbs)
+acf(theta.Gibbs, lag.max =2000)
+```
+
+At some point we run out of data points. We have $S-1$ pairs as a basis for estimating lag 1 autocorrelation. It's the correlation between $(\phi^{(1)} , …,  \phi^{(S-1)})$ and $(\phi^{(2)}  , ….,  \phi^{(S)})$. In general we have $S-t$ data points to estimate the lag-$t$ autocorrelation.
+
+When you get something like this in a problem you care about you have two choices (1) Bigger $S$. Sometimes that's not feasible (2) figure out a better way to do Monte Carlo sampling. That's the "art" of MCMC in practice.
+
+This was a toy example chosen precisely to make this point. One of the most MCMC-confounding situations we might encounter is multimodality.
