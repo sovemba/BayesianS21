@@ -1,0 +1,351 @@
+
+# Multivariate Normal
+
+
+```{r setup, echo = FALSE, message = FALSE}
+rm(list=ls());  library(mvtnorm);  set.seed(20210518);
+knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
+```
+
+
+<tt>The following notes, mostly transcribed from Neath(0519,2021) lecture, summarize sections(7.1-7.4) of Hoff(2009).</tt>
+
+<p>&nbsp;</p>
+
+
+## Example: Reading comprehension
+
+Our notation : 
+
+* $n =$ sample size number of subjects on which have collected data
+* $p =$ dimension of observed response vector (number of measurements taken on each subject)
+
+In this example, $n = 22, ~p = 2$, $y_1 =$ score on pretest, $y_2 =$ score on posttest. 
+
+For $p = 2$ there are 5 parameters of interest; $\theta_1 =$ mean pretest score, $\theta_2 =$ mean posttest score, $\sigma_1^2 =$ variance of pretest scores, $\sigma_2^2 =$ variance of posttest scores, $\rho = \sigma_{1,2} / (\sigma_1 \times \sigma_2)$ the correlation between pretest score and posttest score. And we will assume that the pairs of test scores for a given student follow a bivariate normal distribution(even if they don't follow perfectly). 
+
+## The multivariate normal density
+
+With univariate data, there's just one measurement taken on each subject. What are the concrete examples we have done so far?
+
+$$
+\begin{aligned}
+y &= \text{number of tumors a mouse got}\\
+y &=
+\begin{cases}{1 \text{ if released is reincarcerated}\\
+0 \text{ otherwise}}
+\end{cases}
+\end{aligned}
+$$
+
+
+With multivariate data there are $p$ measurements taken on each subject. So associated with each subject is a vector value $\{ y_1, …, y_p \}$. If there are $p$ components to the random variable there are $p$ mean values, there are $p$ variances, there $p(p-1)/2$ covariances (the number of off-diagonal entries). 
+
+> <small> $\text{Cov}(Y_1, Y_2) ~~ \text{Cov}(Y_1, Y_3)$ etc $\text{Cov}(Y_1, Y_p)$ that's $p-1$ then we have $\text{Cov}(Y_2, Y_3)~~ \text{Cov}(Y_2, Y_4)$ etc $\text{Cov}(Y_2, Y_p)$ that's $p-2$ eventually we get to $\text{Cov}(Y_{p-1} , Y_p ).$ So the total number of covariances is $1 + 2 + … + p-1 = p(p-1) / 2$. </small>
+
+We can use the multivariate normal model if we want to make inference about mean values, variances(standard devations) and correlations. This is what the density function for the multivariate normal distribution looks like; 
+
+$$
+p(\boldsymbol y | \boldsymbol{\theta,\Sigma} ) = (2\pi)^{-p/2}|\boldsymbol \Sigma|^{1/2}\text{exp}\{-(\boldsymbol y - \boldsymbol \theta)^T \boldsymbol{\Sigma}^{-1} (\boldsymbol y - \boldsymbol \theta)/2 \}
+$$
+
+
+When we have a multivariate distribution the mean becomes a mean vector(there is a mean for each variable). We'll write $\boldsymbol{\theta}$ in a bold font. $\boldsymbol{\theta}$ is a $p \times 1$ vector, $\theta_j = E( Y_j )$. In univariate data in addition to the mean we have the variance. For multivariate data we have a variance-covariance matrix or just covariance matrix $= \boldsymbol \Sigma = \text{Cov}[\boldsymbol Y].$ For a covariance matrix the $j$th diagonal entry is $\sigma^2_j,$ the variance for the $j$th variable. The $(j, k)$ entry of the covariance matrix is the covariance between $Y_j$ and $Y_k$.
+
+
+$\sigma_{j,k} = \text{Cov}( Y_j,  Y_k )$, $\sigma_{j, j} = \text{Var}( Y_j )$. A subscript $i$ means the $i$th of the $n$ observations, so $\boldsymbol y_i$ is a $p \times 1$ vector. When I write $Y_j$, I'm thinking of the distribution for the $j$th of the $p$ variables. The exponential term of the univariate normal density $-(1/2)(y - \theta)^2 / \sigma^2$ write this as $(y - \theta)  \sigma^{-2}  (y - \theta).$ This way generalizes to $p$-variate normal density $(\boldsymbol y-\boldsymbol\theta)^T\boldsymbol \Sigma^{-1}(\boldsymbol y -\boldsymbol\theta)$. 
+
+The bigger are the entries of a matrix the bigger is the determinant. A matrix whose determinant is zero does not have an inverse matrix. Just as with univariate normal distribution where we require $\sigma > 0,$ with MVN distribution determinant of the covariance matrix will always be positive, $|\boldsymbol \Sigma| > 0$.
+
+Just as $x \times 1/x = 1, ~ \boldsymbol{A A^{-1}} = \boldsymbol{I},$ which is the identity matrix. It has 1's along the main diagonal and 0's in the off-diagonal positions.
+
+$\boldsymbol{A I} = \boldsymbol{A} = \boldsymbol{IA}$
+
+Bold-face capital letters (greek and latin both) will indicate matrices, bold-face lower-case letters will indicate vectors. A vector will always be a column vector. $\boldsymbol{b}$ is p x 1, $\boldsymbol{b}^T$ is 1 x p. If $\boldsymbol{b}$ is a $p \times 1$ vector and $\boldsymbol{A}$ is a p x p matrix, then $\boldsymbol{b}^T \boldsymbol{A} \boldsymbol{b}$ is a scalar! $(1 \times p)  (p \times p )  (p \times 1)$. Similarly, $\boldsymbol y$ and $\boldsymbol \theta$ are both $p$-vectors, $\boldsymbol{\Sigma}$ is $p \times p$ matrix $(\boldsymbol y  - \boldsymbol \theta)$ that's a $p$-vector $(\boldsymbol y - \boldsymbol \theta)^T \boldsymbol{\Sigma}^{-1} (\boldsymbol y - \boldsymbol \theta)$ that's a scalar!
+
+With $p=2$ (bivariate normal distribution) we can "draw" the bivariate normal density using contour plots.
+
+A contour is a collection of points $(y_1, y_2)$ such that $p(y_1, y_2) =$ same for all such $(y_1, y_2)$ on the same contour. The concentric circles corresponds to a set of values that are 95% of the peak, 85% of the peak, down to 0.001% of the peak.
+
+```{r}
+y1 <- seq(0, 100, 1)
+y2 <- seq(0, 100, 1)
+G  <- length(y1);  H <- length(y2);
+theta <- c(50,50)
+Sigma2 <- matrix(c(64, 0, 0, 144), 2, 2)
+Sigma1 <- Sigma2;  Sigma1[1,2] <- -48;  Sigma1[2,1] <- -48;
+Sigma3 <- Sigma2;  Sigma3[1,2] <- +48;  Sigma3[2,1] <- +48;
+
+p1 <- matrix(NA, G, H)
+p2 <- matrix(NA, G, H)
+p3 <- matrix(NA, G, H)
+
+for(g in 1:G){ for(h in 1:H){
+  p1[g,h] <- dmvnorm(c(y1[g],y2[h]), mean=theta, sigma=Sigma1, log=T)
+  p2[g,h] <- dmvnorm(c(y1[g],y2[h]), mean=theta, sigma=Sigma2, log=T)
+  p3[g,h] <- dmvnorm(c(y1[g],y2[h]), mean=theta, sigma=Sigma3, log=T)
+}}
+
+maxie <- max(p1);  p1 <- p1 - maxie;  rm(maxie);  p1 <- exp(p1);
+maxie <- max(p2);  p2 <- p2 - maxie;  rm(maxie);  p2 <- exp(p2);
+maxie <- max(p3);  p3 <- p3 - maxie;  rm(maxie);  p3 <- exp(p3);
+contours <- c(.001, .01, seq(.05, .95, .10))
+```
+
+```{r fig.cap = "Contour plots for bivariate normal densities"}
+op <- par(mfrow=c(1,3))
+
+contour(y1, y2, p1, levels=contours, drawlabels=F, 
+  xlab="y1", ylab="y2", main="rho=-0.5")
+
+points(rmvnorm(n=1000, mean=theta, sigma=Sigma1), pch=19, cex=.5)
+
+contour(y1, y2, p2, levels=contours, drawlabels=F, 
+  xlab="y1", ylab="y2", main="rho=0")
+
+points(rmvnorm(n=1000, mean=theta, sigma=Sigma2), pch=19, cex=.5)
+
+contour(y1, y2, p3, levels=contours, drawlabels=F, 
+  xlab="y1", ylab="y2", main="rho=+0.5")
+
+points(rmvnorm(n=1000, mean=theta, sigma=Sigma3), pch=19, cex=.5)
+```
+
+
+Take the middle density for example. The peak is in the middle. The innermost counter is the collection of all points $(y_1, y_2)$ such that $p(y_1, y_2) = 0.95 \times$max-density. The outermost contour is the set of all points $(y_1, y_2)$ such that $p(y_1, y_2) = 0.001\times$ max-density. 
+
+These three distributions have the same $\theta_1 ~($mean of $Y_1)$ $\theta_2 ~($mean of $Y_2)$ $\sigma_1 ~($sd of $Y_1) ~\sigma_2 ($sd of $Y_2)$ they only differ with respect to their correlation.
+
+If you want to describe a picture like this: Tell the person where it's centered how spread out the values (refer to $\theta$ and $\sigma$ values for help with this) and how the variables are correlated.
+
+The middle plot here shows an instance where the variables are uncorrelated (independent). LHS plot shows a negative correlation. RHS plot shows a positive correlation. To describe the spread you'll have to read the labels on the axes otherwise every picture of a normal dist looks exactly the same. If I drew two BVN densities both have $\boldsymbol \theta = (0, 0)$ one has $\boldsymbol \Sigma = \begin{pmatrix} 1, 0 \\ 0, 1 \end{pmatrix}$ and one has $\boldsymbol \Sigma = \begin{pmatrix} 100, 0\\ 0, 100\end{pmatrix},$ the two pictures will appear identical. You have to read the labels on the axes to describe the spread in a normal distribution).
+
+
+If $(Y_1, Y_2)$ are bivariate normal then marginally, $Y_1 \sim \text{Normal}(\theta_1, \sigma_1^2),$ $Y_2 \sim \text{Normal}(\theta_2, \sigma_2^2)$, $\{Y_2 | Y_1=y_1\} \sim$ Normal. We'll save that discussion for another day. 
+
+
+## A semiconjugate prior distribution for the mean
+
+Let's talk about Bayesian inference about the $p$-vector $\boldsymbol \theta$ and the $p\times p$ covariance matrix $\boldsymbol \Sigma$ in that order.
+
+Just like we did for univariate normal let's condition on $\Sigma$ and find the conjugate prior for $\boldsymbol \theta.$ Just as the conjugate prior for the univariate normal sampling model was the univariate normal distribution we will see that the conjugate prior for the mean of a multivariate normal sampling model is multivariate normal.
+
+Let $\boldsymbol \theta$ have a $p$-variate normal distribution with mean vector $\boldsymbol\mu_0$ and covariance matrix $\boldsymbol \Lambda_0$ and let $\{Y_1, …, Y_n | \theta\}$ be iid $p$-variate Normal $(\boldsymbol\theta, \boldsymbol\Sigma)$
+
+Let's look at the prior first. I'm only interested in terms that include a $\theta$
+
+$$
+\begin{aligned}
+p(\boldsymbol\theta) &\propto \text{exp}\left\{-\frac{1}{2} \boldsymbol\theta^{T} \mathbf{A}_{0} \boldsymbol\theta+\boldsymbol\theta^{T} b_{0}\right\}
+\end{aligned}
+$$
+
+where, $\mathbf{A}_0 = \boldsymbol\Lambda_0^{-1}$,  $\boldsymbol b_0 = \boldsymbol\Lambda_0^{-1} \boldsymbol\mu_0$ then $\boldsymbol\mu_0 = \Lambda_0 \boldsymbol b_0 = \mathbf{A}_0^{-1} %*% b$
+
+Consequence: The general form of a MVN density is $p(\boldsymbol\theta) = c \times \text{exp}\{ -0.5 \boldsymbol\theta^T \mathbf{A} \theta + \boldsymbol\theta^T \boldsymbol b \}$ for some matrix $\mathbf{A}$ and vector $\boldsymbol b$. 
+
+Next, the sampling distribution.
+
+$$
+p(y_1, …, y_n | \theta) \propto \exp \left\{-\frac{1}{2} \boldsymbol{\theta}^{T} \mathbf{A}_{1} \boldsymbol{\theta}+\boldsymbol{\theta}^{T} \boldsymbol{b}_{1}\right\}
+$$
+where $\mathbf{A}_{1}=n \Sigma^{-1},$ $\boldsymbol{b}_{1}=n \Sigma^{-1} {\boldsymbol{\bar y}},$ and ${\boldsymbol{\bar y}}=\left(\frac{1}{n} \sum_{i=1}^{n} y_{i, 1}, \ldots, \frac{1}{n} \sum_{i=1}^{n} y_{i, p}\right)^T$.
+
+Combining the above we get that
+
+$$\{\boldsymbol \theta \mid \boldsymbol  y_{1}, \ldots, \boldsymbol  y_{n}, \boldsymbol \Sigma\} \sim \operatorname{Normal}_{p}\left(\boldsymbol \mu_{n}, \boldsymbol \Lambda_{n}\right)$$
+where
+$\boldsymbol  \Lambda_{n}=\left(\boldsymbol \Lambda_{0}^{-1}+n \boldsymbol \Sigma^{-1}\right)^{-1}$ and $\boldsymbol \mu_{n}=\left(\boldsymbol \Lambda_{0}^{-1}+n \boldsymbol \Sigma^{-1}\right)^{-1}\left(\boldsymbol \Lambda_{0}^{-1} \boldsymbol \mu_{0}+n \boldsymbol \Sigma^{-1} \bar{\boldsymbol y}\right)$
+
+Just as in the univariate case the posterior precision, or inverse variance, is the sum of the prior precision and the data precision, and the posterior expectation is a weighted average of the prior expectation and the sample mean, weighted by their respective precisions.
+
+
+## The inverse-Wishart distribution
+
+The conjugate prior for a variance was the inverse-gamma distribution. For multivariate data we have a covariance matrix. A covariance matrix has $p^2$ entries however it must be symmetric, which means $\sigma_{j,k} = \sigma_{k,j}$. So it's not really $p^2$ entries it's something less than that because the top half = bottom half. Also it must be positive definite, which means $\boldsymbol x^T \boldsymbol x > 0$. We need a probability distribution for covariance matrices, defined on the set of all $p \times p$ symmetric positive definite matrices. This is a very complicated space, you can't picture it in your head. We can construct such distributions from more basic things.
+
+Let's say $\boldsymbol z_1, \boldsymbol z_2, …, \boldsymbol z_n$ are all $p$-vectors, then $\boldsymbol {z_i z_i}^T$ ( $(p \times 1)(1 \times p)$ that's a $p \times p$ matrix ). 
+$$
+\sum_{i=1}^n \boldsymbol z_i\boldsymbol z_i^T = \mathbf{Z}^T\mathbf{Z}
+$$ 
+
+is the sum of $n~~ p \times p$ matrices where the $i$th row of $\mathbf{Z}_{n\times p}$ is $\boldsymbol z_i^T$. 
+
+A way to construct a "random" covariance matrix is;
+
+1. sample $\boldsymbol z_1,...,\boldsymbol z_{\nu_0} \sim$ iid Normal$_p(\boldsymbol 0, \boldsymbol\Phi_0)$
+
+2. calculate $\sum_{i=1}^{\nu_0} \boldsymbol z_i\boldsymbol z_i^T$. 
+
+The result will be a $p\times p$ covariance matrix. as long as $\nu_0 > p$. This is called the Wishart$(\nu_0, \Phi_0)$ distribution $\nu_0$ is called the degrees of freedom and $\Phi_0$ is the scale matrix. 
+
+* The expected value, $E(\mathbf{Z}^T\mathbf{Z}),$ is $\nu_0  \boldsymbol\Phi_0$
+* It will be symmetric and positive definite
+
+The Wishart distribution generalizes the gamma distribution (equivalently the chi-square distribution) to higher dimensions. $\nu_0 > p$ guarantees that the $\boldsymbol z_i$ will be linearly independent. In this construction $\nu_0$ must be a positive integer. 
+
+The bigger $\nu_0,$ is the more $\boldsymbol z_i$'s are being added together the more there will be an "averaging out" of variation between the $\boldsymbol z_i$'s. So if I have (sum of $n$ things) the bigger $n$ is the more variable this sum is. However the bigger $n$ is the less variable (sum of $n$ things)/$n$ will be.
+
+It turns out the Wishart distribution is conjugate for the precision matrix in a multivariate normal model which means the inverse-Wishart distribution is conjugate for a covariance matrix in a multivariate normal model. We can define the inverse-Wishart distribution as follows; 
+
+Let $\boldsymbol z_i \sim$ iid Normal$p(\boldsymbol 0, \boldsymbol S_0^{-1})$ then take the "sum of squares" of the $\boldsymbol z_i$. Now invert that i.e., $\boldsymbol \Sigma = (\mathbf{Z}^T\mathbf{Z})^{-1}.$
+
+Under this simulation scheme, the precision matrix $\boldsymbol \Sigma^{-1}$ has a Wishart$(\nu_0, \boldsymbol S_0^{-1})$ distribution, and the covariance matrix $\boldsymbol \Sigma$has and inverse-Wishart$(\nu_0, \boldsymbol S_0^{-1});$ $\nu_0 =$ degrees of freedom (df), $\boldsymbol S_0^{-1} =$ scale matrix.
+
+The expectation for a Wishart-distributed random matrix is df $\times$ scale matrix. The expectation for an inverse-Wishart random matrix is inverse of scale matrix divided by (df - $p$ - 1) .
+
+This should help us figure out how to set a prior distribution for the covariance matrix. A sensible conjugate prior requires two things: (1) a prior best guess for the parameter value and (2) a fair assessment of your degree of confidence in that prior best guess.
+
+The second thing determines $\nu_0.$ You can't have have $\nu_0 < p$, only $\nu_0 > p$. And to have a prior expectation, you need $\nu_0 > p+1.$ So with very low confidence in your prior belief set $\nu_0 = p+2.$ Whatever you decide for $\nu_0$ set your best guess $\boldsymbol \Sigma_0.$ Set the scale matrix $\boldsymbol S_0^{-1}$ to be the inverse of $\boldsymbol S_0$ where $\boldsymbol S_0 = (\nu_0 -p -1) \boldsymbol\Sigma_0$. 
+
+## Full conditional distribution of the covariance matrix
+
+If $p(\boldsymbol\Sigma)$ is an inverse-Wishart density and $p(\boldsymbol y | \boldsymbol \theta, \boldsymbol \Sigma)$ is a Normal$_p(\boldsymbol \theta , \boldsymbol \Sigma)$ likelihood then 
+$$
+p(\boldsymbol \Sigma | \boldsymbol y, \boldsymbol \theta) \sim \text{inverse-Wishart}(\nu_0+n, [\boldsymbol S_0+\boldsymbol S_{\theta}]^{-1})
+$$
+
+$\boldsymbol S_{\theta} = \sum_{i=1}^n (\boldsymbol y_i - \boldsymbol\theta)(\boldsymbol y_i-\boldsymbol\theta)^T\\$
+
+
+
+The posterior expectation of $\boldsymbol\Sigma$ is a weighted average of the prior expectation and the sample covariance matrix ($1/n \times \boldsymbol S_{\theta}$) conditional on mean $\boldsymbol \theta$ being known. 
+
+$$
+\begin{array}{l}
+\mathrm{E}\left(\boldsymbol{\Sigma} \mid \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{n}, \boldsymbol{\theta}\right)=\frac{1}{\nu_{0}+n-p-1}\left(\mathbf{S}_{0}+\mathbf{S}_{\theta}\right) \\
+\quad=\frac{\nu_{0}-p-1}{\nu_{0}+n-p-1} \cdot \frac{1}{\nu_{0}-p-1} \mathbf{S}_{0}+\frac{n}{\nu_{0}+n-p-1} \cdot \frac{1}{n} \mathbf{S}_{\theta}
+\end{array}
+$$
+
+So we have full conditional distributions for $\boldsymbol \theta$ and $\boldsymbol \Sigma$. So we can do a Gibbs sampler! We just come up with a reasonable starting value and alternate between the two full conditionals.
+
+Starting values? easy enough. Start $\boldsymbol \theta$ at $\bar{\boldsymbol y}$ (sample mean vector) and start $\boldsymbol \Sigma$ at sample covariance matrix.
+
+
+I'm going to skip the discussion of the prior ( see slides 25- 26 ). For $\nu_0$, we want $\nu_0$ to be small relative to $n$ but we need it to be at least $> p+1$ so set it to $p+2 = 4$ and it will not get a lot of weight relative to $n=22$. The relative weights in this posterior expectation are $n=22$ for the sample data and $\nu_0 - p - 1 = 4 - 2 - 1 = 1$ for the prior. So the posterior expectation ( conditional on $\boldsymbol \theta$ ) will be a $22/23$ versus $1/23$ weighted toward the data.
+
+```{r}
+# Reading comprehension example from Chapter 7 of Hoff (2009)
+# Key in the data
+y1 <- c(59, 43, 34, 32, 42, 38, 55, 67, 64, 45, 49, 
+        72, 34, 70, 34, 50, 41, 52, 60, 34, 28, 35)
+y2 <- c(77, 39, 46, 26, 38, 43, 68, 86, 77, 60, 50, 
+        59, 38, 48, 55, 58, 54, 60, 75, 47, 48, 33)
+y <- data.frame(cbind(y1, y2));  rm(y1, y2);
+
+# y1 is pretest score, y2 is posttest score
+# Hyperparamaters 
+mu.0    <- c(50, 50)
+Lambda0 <- matrix(c(625, 312.5, 312.5, 625), 2, 2)
+S.0     <- Lambda0;  nu.0 <- 4;
+
+# Data summaries
+n <- dim(y)[1]
+p <- dim(y)[2]
+ybar <- apply(y, 2, mean)
+Cov.y <- cov(y)
+ybar;Cov.y
+```
+
+
+
+
+```{r}
+# Gibbs sampler approximation to posterior distribution
+S     <- 5000
+theta <- ybar  # initial values
+Sigma <- Cov.y # initial values
+
+# Calculations that will be used repeatedly
+Lambda0.inv  <- solve(Lambda0)
+Lam.inv.mu.0 <- Lambda0.inv %*% mu.0
+nu.n         <- nu.0 + n
+
+# Now generate the Markov chains: theta and Sigma
+theta.chain <- matrix(NA, S, p)
+Sigma.chain <- matrix(NA, S, p^2)
+
+for(s in 1:S)
+{
+ n.Sigma.inv <- n * solve(Sigma)
+ Lambda.n <- solve( Lambda0.inv + n.Sigma.inv) 
+ mu.n <- Lambda.n %*% (Lam.inv.mu.0 + n.Sigma.inv %*% ybar)
+ theta <- rmvnorm(1, mu.n, Lambda.n)[1,]
+ S.n <- S.0 + (n-1)*Cov.y + n * (ybar-theta) %*% t(ybar-theta)
+ Sigma <- solve( rWishart(1, nu.n, solve(S.n))[,,1] )
+ theta.chain[s,] <- theta
+ Sigma.chain[s,] <- Sigma
+}
+```
+
+```{r}
+# posterior covariance matrix
+matrix(apply(Sigma.chain, 2, mean),2)
+```
+
+
+**Posterior summaries**
+
+```{r}
+# 95% interval for theta2 - theta1
+quantile(theta.chain[,2] - theta.chain[,1], c(.025, .5, .975))
+```
+
+We estimate that $\theta_2 - \theta_1$ is between 1.5 and 11.8
+
+```{r}
+# Pr(theta2 > theta1 | y)
+mean(theta.chain[,2] > theta.chain[,1])
+```
+
+$Pr(\theta_2 > \theta_1 | \boldsymbol y) > 0.99$. So very strong evidence that the instruction program is effective. 
+
+<p>&nbsp;</p>
+
+We can also draw a scatterplot of the simulated pairs, $(\theta_1^{(s)},  \theta_2^{(s)}),$ to approximate the marginal posterior $p(\theta_1, \theta_2 | \boldsymbol y)$
+
+```{r fig.cap = "Marginal posterior distribution of (theta1, theta2)"}
+plot(theta.chain, cex=.5, xlab="theta1", ylab="theta2")
+abline(0,1, lwd=2, col="gray")
+```
+
+99.4% of the line is above the 45 degree line which is why we have the high believe that the treatment program is effective on average.
+
+<p>&nbsp;</p>
+
+Now let's ask a slightly different question. What is the probability that a randomly selected child will score higher on the second exam than on the first?
+
+I want to sample from the posterior predictive distribution $p(\tilde y|\boldsymbol y)$.
+
+```{r}
+# Posterior predictive simulations 
+Y.tilde <- matrix(NA, S, p)
+
+for (s in 1:S){ 
+ Y.tilde[s,] <- rmvnorm(1, mean=theta.chain[s,], 
+               sigma=matrix(Sigma.chain[s,],2,2))[1,]
+}
+```
+
+
+```{r}
+mean(Y.tilde[,2] > Y.tilde[,1])
+```
+
+```{r fig.cap = "Posterior predictive distribution"}
+plot(Y.tilde, cex=.5, xlab="y1.tilde", ylab="y2.tilde") 
+abline(0, 1, lwd=2, col="gray")
+```
+
+
+There is A LOT more variability in the posterior predictive distribution than in the posterior distribution of $\boldsymbol \theta$. The posterior distribution of $(\theta_1, \theta_2)$ sits 99% above the 45-degree line, the posterior predictive distribution $(\tilde y_1, \tilde y_2)$ sits 70% above the 45-degree line.
+
+
+
+
+
+
+
+
+
