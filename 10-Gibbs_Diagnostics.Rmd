@@ -6,7 +6,9 @@ rm(list=ls());  set.seed(20210517);
 knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
 
+
 <tt>The following notes, mostly transcribed from Neath(0518,2021) lecture, summarize sections(6.5 and 6.6) of Hoff(2009).</tt>
+
 
 ## The Gibbs sampler
 
