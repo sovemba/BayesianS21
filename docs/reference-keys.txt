@@ -24,6 +24,9 @@ fig:unnamed-chunk-68
 fig:unnamed-chunk-69
 fig:unnamed-chunk-71
 fig:unnamed-chunk-73
+fig:unnamed-chunk-76
+fig:unnamed-chunk-82
+fig:unnamed-chunk-85
 intro
 example
 random-variables
@@ -90,9 +93,15 @@ mcmc-diagnostics
 the-gibbs-sampler
 distinguishing-estimation-from-approximation
 introduction-to-mcmc-diagnostics
-example-4
+example-mixture-of-normal-densities
 discussion
 how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation
 autocorrelation
 sample-autocorrelation-function
 effective-sample-size
+multivariate-normal
+example-reading-comprehension
+the-multivariate-normal-density
+a-semiconjugate-prior-distribution-for-the-mean
+the-inverse-wishart-distribution
+full-conditional-distribution-of-the-covariance-matrix
