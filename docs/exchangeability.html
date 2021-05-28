@@ -24,7 +24,7 @@
 <meta name="author" content="Chisom Onyishi" />
 
 
-<meta name="date" content="2021-05-27" />
+<meta name="date" content="2021-05-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="binomial-1.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,48 +137,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
 <li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
 <li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
 <li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
-<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
 <li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a><ul>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
 <li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
 <li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
 <li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
 <li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
 <li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
@@ -187,27 +198,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
 <li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a><ul>
-<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a><ul>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
 <li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
 <li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a><ul>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
 <li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
 <li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
 <li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a><ul>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
 <li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
 <li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
 <li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a><ul>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
 <li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
 <li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
@@ -215,25 +231,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
 <li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
 <li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
-<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a><ul>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
 <li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
 <li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
 <li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a><ul>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
 <li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
 <li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
 <li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
 <li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.2</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -255,10 +283,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exchangeability" class="section level1">
+<div id="exchangeability" class="section level1" number="2">
 <h1><span class="header-section-number">Lecture 2</span> Exchangeability</h1>
 <p><tt>The following notes, mostly transcribed from Neath(0504, 2021) lecture, summarize sections(2.5-2.8) of Hoff(2009).</tt></p>
-<div id="discrete-joint-distributions" class="section level2">
+<div id="discrete-joint-distributions" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Discrete joint distributions</h2>
 <p>We will talk about joint probability distributions. <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are two discrete random variables. We can define a joint probability density function (joint pdf) <span class="math inline">\(p_{Y_1Y_2}(y_1, y_2) = Pr(Y_1 = y_1 \text{ and } Y_2 = y_2)\)</span>. We will also be interested in the marginal distributions e.g., the pdf of <span class="math inline">\(Y_1\)</span> only. We will use subscripts on the <span class="math inline">\(p\)</span> to be clear what density we’re talking about. I get the marginal of <span class="math inline">\(Y_1\)</span> from the joint of <span class="math inline">\((Y_1, Y_2)\)</span> by summing over the values that <span class="math inline">\(Y_2\)</span> can take.</p>
 <p>We can also speak of the conditional density of <span class="math inline">\(Y_2\)</span> given <span class="math inline">\(Y_1\)</span> which follows immediately from the definition of conditional probability! Recall that <span class="math inline">\(Pr( B | A ) = Pr(A \text{ and } B) / Pr(A)\)</span>. Conditional density of <span class="math inline">\(Y_2 | Y_1=y_1\)</span> equal the joint density of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> divided by the marginal of <span class="math inline">\(Y_1\)</span>.</p>
@@ -269,26 +297,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Given a joint distribution of (<span class="math inline">\(Y_1, Y_2\)</span>), the marginal distribution of <span class="math inline">\(Y_1\)</span> is found by (summing over <span class="math inline">\(Y_2\)</span> values in the discrete case) (in the continuous case it’s integrating over all the <span class="math inline">\(Y_2\)</span> values). Although probability densities are not strictly probabilities, conditional densities can be defined analogously. The conditional density of <span class="math inline">\(Y_2 | Y_1 = y_1\)</span> is found by joint density of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> divided by marginal density of <span class="math inline">\(Y_1\)</span>.</p>
 <p>We can define a pair of rvs so that <span class="math inline">\(Y_1\)</span> is discrete and <span class="math inline">\(Y_2\)</span> is continuous. We still have <span class="math inline">\(p(y_1, y_2) = p(y_1) p(y_2 | y_1)\)</span> and <span class="math inline">\(p(y_1, y_2) = p(y_2) p(y_1 | y_2)\)</span>. Probabilities are found by summing over values of the discrete one and integrating over values of the continuous one.</p>
 </div>
-<div id="bayesrule" class="section level2">
+<div id="bayesrule" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Bayes’ rule and parameter estimation</h2>
 <p>Let <span class="math inline">\(\theta =\)</span> proportion of people who have a certain characteristic.</p>
 <p>E.g., public opinion poll: Approve of performance of President Biden? Yes or No? <span class="math inline">\(\theta\)</span> would be the proportion of people who would answer yes, <span class="math inline">\(0 &lt; \theta &lt; 1\)</span></p>
 <p>Is <span class="math inline">\(\theta\)</span> discrete or continuous? If there are 300 million people in the population of interest then the possible values are 0, 1/300,000,000, 2/300,000,000, …, 299,999,999/300,000,000, 1. But that’s kind of stupid. It’s continuous. It makes most sense to treat <span class="math inline">\(\theta\)</span> as continuous, <span class="math inline">\(0 &lt; \theta &lt; 1\)</span>.</p>
-<p>What if <span class="math inline">\(Y =\)</span> number of people sampled who answer YES to “Approve of President Biden?”. The population size is millions the sample size is hundreds? Here it does make sense to use a discrete probability model for <span class="math inline">\(Y\)</span>.</p>
+<p>What if <span class="math inline">\(Y =\)</span> number of people sampled who answer YES to “Approve of President Biden?” The population size is millions the sample size is hundreds? Here it does make sense to use a discrete probability model for <span class="math inline">\(Y\)</span>.</p>
 <p><span class="math inline">\(\theta\)</span> is the value we want to know, <span class="math inline">\(Y = y\)</span> is the quantity we’re able to observe. <em>Statistical inference</em> is making induction about <span class="math inline">\(\theta\)</span> based on observation of <span class="math inline">\(Y = y\)</span>. For a classical (non-Bayesian) analysis this requires a probability model for <span class="math inline">\(Y\)</span> that depends on <span class="math inline">\(\theta\)</span>. In Bayesian statistics it requires a joint probability model for <span class="math inline">\((Y , \theta)\)</span>!</p>
 <p>Where frequentist statistics treats <span class="math inline">\(\theta\)</span> as fixed (unknown but fixed) Bayesian statistics treats it as a random variable. The justification for this? Our belief about the value of <span class="math inline">\(\theta\)</span> is measured by a probability dist! Start with what we believe about <span class="math inline">\(\theta\)</span> before we’ve observed any data. Those beliefs determine the marginal distribution <span class="math inline">\(p(\theta)\)</span>. We call this the <em>prior distribution</em>. Then we have (just as in non-Bayesian statistics) probability distribution for <span class="math inline">\(Y\)</span> that depends on <span class="math inline">\(\theta\)</span>. In Bayesian statistics we make it explicit that this is a CONDITIONAL probability, conditional on the value of <span class="math inline">\(\theta\)</span>. After data are observed we want to update our beliefs about <span class="math inline">\(\theta\)</span>. Use Bayes’ rule! <span class="math inline">\(p(\theta | y) = p(\theta, y) / p(y) = p(\theta) p(y | \theta) / p(y)\)</span>. This is called the posterior distribution (because it comes after observing the data).</p>
-<p>If <span class="math inline">\(\theta_a\)</span> and <span class="math inline">\(\theta_b\)</span> are two possible values of <span class="math inline">\(\theta\)</span> our belief in <span class="math inline">\(\theta_a\)</span> versus <span class="math inline">\(\theta_b\)</span> is defined by the ratio of their posterior probabilities (or posterior densities). That ratio depends on <span class="math inline">\(p(\theta_a) / p(\theta_b)\)</span> ratio of ‘prior probabilities’ and <span class="math inline">\(p(y | \theta_a) / p(y | \theta_b)\)</span> which is the ratio of the ‘likelihoods’.</p>
+<p>If <span class="math inline">\(\theta_a\)</span> and <span class="math inline">\(\theta_b\)</span> are two possible values of <span class="math inline">\(\theta\)</span> our belief in <span class="math inline">\(\theta_a\)</span> versus <span class="math inline">\(\theta_b\)</span> is defined by the ratio of their posterior probabilities (or posterior densities). That ratio depends on <span class="math inline">\(p(\theta_a) / p(\theta_b)\)</span> ratio of ‘prior probabilities’ and <span class="math inline">\(p(y | \theta_a) / p(y | \theta_b)\)</span> which is the ratio of the ‘likelihoods.’</p>
 <p>Note! One need not calculate the marginal probability <span class="math inline">\(p(y)\)</span> to calculate this ratio! That’s an important observation! Bayes’ rule tells us <span class="math inline">\(p(\theta | y) = p(\theta) p(y | \theta) / p(y)\)</span>. Thinking of this thing as a function of <span class="math inline">\(\theta\)</span> we can write <span class="math inline">\(p(\theta | y) = c \times p(\theta) \times p(y | \theta)\)</span>.</p>
 <p>Are you familiar with this “proportional to” symbol? You will be! We say <span class="math inline">\(f(x) \propto g(x)\)</span> if there exists a constant <span class="math inline">\(c &gt; 0\)</span> such that
 <span class="math inline">\(f(x) = c \times g(x) ~\forall ~x\)</span>. <span class="math inline">\(p(\theta | y)\)</span> is a probability density. It integrates to 1. The function <span class="math inline">\(p(\theta) p(y | \theta)\)</span>
 (a function of <span class="math inline">\(\theta\)</span>) integrates to something positive. Dividing by that positive thing would give us the normalized posterior density. Not dividing by that thing gives us an unnormalized posterior density which is just as good. Often solving for <span class="math inline">\(p(y)\)</span> explicitly is impossible (or nearly impossible) :( But we’ll see in this course, turns out that doesn’t really matter the important information about the posterior is contained in the numerator of the posterior expression that is <span class="math inline">\(p(\theta ) p(y | \theta)\)</span> which are not hard to solve :)</p>
 </div>
-<div id="independent-random-variables" class="section level2">
+<div id="independent-random-variables" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Independent random variables</h2>
 <p>Continuing with probability review.</p>
 <p><span class="math inline">\(Y_1, Y_2, \ldots , Y_n\)</span> are independent if their joint probability density factors into the product of their marginal probability densities. If these densities are specified conditionally on the value of <span class="math inline">\(\theta\)</span> (where <span class="math inline">\(\theta\)</span> is a random variable) we say <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> are conditionally independent given <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> are generated from a common process, then the marginal densities of the <span class="math inline">\(Y_i\)</span> (conditional on <span class="math inline">\(\theta\)</span>) are all the same. If <span class="math inline">\(\theta =\)</span> Biden’s true approval rate <span class="math inline">\(Pr(Y_1 = 1 | \theta) = Pr(Y_2 = 1 | \theta) = … = \theta\)</span>. In such a case we’ll say <span class="math inline">\(Y_1, Y_2, …,\)</span> are conditionally iid.</p>
 </div>
-<div id="exchangeability-1" class="section level2">
+<div id="exchangeability-1" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Exchangeability</h2>
 <p>In Bayesian statistical models we generally assume conditional independence which does not imply independence it implies a different condition called exchangeability.</p>
 <p><span class="math display">\[

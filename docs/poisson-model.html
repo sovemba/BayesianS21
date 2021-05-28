@@ -24,7 +24,7 @@
 <meta name="author" content="Chisom Onyishi" />
 
 
-<meta name="date" content="2021-05-27" />
+<meta name="date" content="2021-05-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="CI.html"/>
 <link rel="next" href="monte-carlo.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,48 +137,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
 <li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
 <li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
 <li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
-<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
 <li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a><ul>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
 <li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
 <li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
 <li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
 <li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
 <li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
@@ -187,27 +198,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
 <li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a><ul>
-<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a><ul>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
 <li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
 <li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a><ul>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
 <li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
 <li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
 <li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a><ul>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
 <li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
 <li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
 <li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a><ul>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
 <li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
 <li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
@@ -215,25 +231,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
 <li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
 <li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
-<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a><ul>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
 <li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
 <li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
 <li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a><ul>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
 <li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
 <li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
 <li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
 <li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.2</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -255,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="poisson-model" class="section level1">
+<div id="poisson-model" class="section level1" number="5">
 <h1><span class="header-section-number">Lecture 5</span> Poisson model</h1>
 <p><tt>The following notes are transcribed from Neath(2021) lecture which summarizes Sections(3.1.2 and 3.2) of Hoff(2009).</tt></p>
 <p>
@@ -277,16 +305,16 @@ Y_i = \begin{cases}  1 \text{ if the }i\text{th person in the world is a faceboo
 p(\theta | y_1, ..., y_n) = c_0 \times p(\theta) \times p(y|\theta)=c \times p(\theta) \times \theta^{\sum{y_i}}e^{-n \theta }
 \]</span></p>
 <p>We’ll work with a conjugate prior because it makes things simple. Looking at <span class="math inline">\(p(\theta)\times\theta^{\sum{y_i}} e^{-n\theta }\)</span>, what could we plug in for <span class="math inline">\(p(\theta)\)</span> such that <span class="math inline">\(p(\theta | y)\)</span> will have the same parametric form? well <span class="math inline">\(p(\theta | y)\)</span> is gonna have a <span class="math inline">\(\theta^{\text{something}}\)</span> and a something<span class="math inline">\(^{\theta}\)</span> so the prior can have those things too! What probability distribution for <span class="math inline">\(\theta &gt; 0\)</span> allows <span class="math inline">\(\theta^{\text{something}}\)</span> and something<span class="math inline">\(^{\theta}\)</span>? That would be the gamma distribution <span class="math inline">\(= \tilde c\times\theta^{a-1} e^{-b \theta}\)</span>. In this parameterization <span class="math inline">\(b\)</span> is the rate parameter, <span class="math inline">\(1/b\)</span> is the scale parameter.</p>
-<div id="posterior-inference-for-the-poisson-model" class="section level2">
+<div id="posterior-inference-for-the-poisson-model" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Posterior inference for the Poisson model</h2>
 <p>For our prior on <span class="math inline">\(\theta\)</span> we’ll say <span class="math inline">\(\theta \sim\)</span> gamma<span class="math inline">\((a, b)\)</span>.</p>
 <p><em>How do you choose a and b?</em> In general, when considering the question of how to choose a prior look at what the prior leads to in terms of the posterior. Not by peeking at the data though, just by studying the model. i.e., Let’s look at what posterior the gamma<span class="math inline">\((a, b)\)</span> prior will lead to and then come to the question of what <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> should be.</p>
 <p><strong>Key Result:</strong> If <span class="math inline">\(\theta \sim \text{gamma}(a,b)\)</span> and <span class="math inline">\(Y_1,\ldots,Y_n | \theta \sim\)</span> iid Poisson<span class="math inline">\((\theta)\)</span>, then <span class="math inline">\((\theta | Y_1 = y_1, \ldots, Y_n = y_n) \sim \text{gamma}(a+\sum y_i, b+n)\)</span>.</p>
-<p>What do <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> contribute to the posterior? <span class="math inline">\(a\)</span> contributes analogously to <span class="math inline">\(\sum{y_i}\)</span> which is the observed total count <span class="math inline">\(b\)</span> contributes analogously to <span class="math inline">\(n\)</span> which is the number of observed counts. Another way to say this: The data consist of <span class="math inline">\(n\)</span> observations with average value <span class="math inline">\(\sum{y_i} / n,\)</span> the prior contributes (effectively) <span class="math inline">\(b\)</span> observations with average value <span class="math inline">\(a/b\)</span>. So in the absence of genuine prior information about <span class="math inline">\(\theta\)</span> just make sure <span class="math inline">\(b\)</span> is small relative to <span class="math inline">\(n\)</span> and it won’t matter very much. Make <span class="math inline">\(b\)</span> small relative to <span class="math inline">\(n\)</span> and make <span class="math inline">\(a/b\)</span> or <span class="math inline">\((a-1)/b\)</span> your prior “best guess”.</p>
+<p>What do <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> contribute to the posterior? <span class="math inline">\(a\)</span> contributes analogously to <span class="math inline">\(\sum{y_i}\)</span> which is the observed total count <span class="math inline">\(b\)</span> contributes analogously to <span class="math inline">\(n\)</span> which is the number of observed counts. Another way to say this: The data consist of <span class="math inline">\(n\)</span> observations with average value <span class="math inline">\(\sum{y_i} / n,\)</span> the prior contributes (effectively) <span class="math inline">\(b\)</span> observations with average value <span class="math inline">\(a/b\)</span>. So in the absence of genuine prior information about <span class="math inline">\(\theta\)</span> just make sure <span class="math inline">\(b\)</span> is small relative to <span class="math inline">\(n\)</span> and it won’t matter very much. Make <span class="math inline">\(b\)</span> small relative to <span class="math inline">\(n\)</span> and make <span class="math inline">\(a/b\)</span> or <span class="math inline">\((a-1)/b\)</span> your prior “best guess.”</p>
 <p>Student question: What’s the difference, definition wise, between <span class="math inline">\(n\)</span> observations and <span class="math inline">\(b\)</span> observations?</p>
 <p>Ans: The <span class="math inline">\(n\)</span> observations are real data. The <span class="math inline">\(b\)</span> observations are not data they’re “pseudo-data” or “prior observations” The value of <span class="math inline">\(\sum{y_i}\)</span> is determined by the data. The values of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are chosen by us.</p>
 </div>
-<div id="posterior-predictive-distribution" class="section level2">
+<div id="posterior-predictive-distribution" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Posterior predictive distribution</h2>
 <p>Now suppose we have <span class="math inline">\(n+1\)</span> observations and our job is to predict the <span class="math inline">\((n+1)\)</span>st. Let <span class="math inline">\(\tilde Y\)</span> represent this <span class="math inline">\((n+1)\)</span>st observation. The conditional distribution of <span class="math inline">\(\tilde Y|Y_1 = y_1, …, Y_n = y_n\)</span> is called the <em>posterior predictive distribution</em>. Posterior because it depends on the observed data. The distinction between
 “estimation” and “prediction”; If it’s an observable (but as yet unobserved) quantity it’s a prediction. Like <span class="math inline">\(\tilde Y;\)</span> the <span class="math inline">\((n+1)\)</span>st data point that just hasn’t been observed yet. Versus an unknown parameter like <span class="math inline">\(\theta\)</span> is an unobservable quantity. Inference about <span class="math inline">\(\theta\)</span> would be called estimation.
@@ -296,38 +324,38 @@ p(\tilde y | y_1,...,y_n) &amp;= \int p(\tilde y,\theta | y_1,...,y_n)d\theta\\
 &amp;=\int \texttt{dpois}(\tilde y, \theta) \texttt{dgamma}(\theta, a+\sum y_i, b+n)d\theta
 \end{aligned}
 \]</span></p>
-<p><strong>A general result:</strong> “A gamma mixture of Poissons is negative binomial”.</p>
+<p><strong>A general result:</strong> “A gamma mixture of Poissons is negative binomial.”</p>
 <p>One way the negative binomial distribution arises is; <span class="math inline">\(y =\)</span> number of failures before the <span class="math inline">\(n\)</span>th success(in Bernoulli trials). This is the same negative binomial distribution as that but not the same motivation and note the “<span class="math inline">\(n\)</span>” parameter need not be an integer.</p>
 <p><span class="math inline">\(E (\tilde Y) = E [ E(\tilde Y | \theta) ] = E(\theta).\)</span> Simalarly,</p>
 <p><span class="math inline">\(\text{Var}[ \tilde Y ] = \text{Var}[ E(\tilde Y | \theta) ] + E[\text{Var}(\tilde Y | \theta) ] = \text{Var}( \theta ) + E (\theta )\)</span> but the posteriors!</p>
 </div>
-<div id="example-birth-rates" class="section level2">
+<div id="example-birth-rates" class="section level2" number="5.3">
 <h2><span class="header-section-number">5.3</span> Example: Birth rates</h2>
 <p>We are comparing two populations. There’s strong evidence that there is a difference between the two populations (see slide 22).</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="poisson-model.html#cb11-1"></a>a  &lt;-<span class="st"> </span><span class="dv">2</span>  ; b  &lt;-<span class="st"> </span><span class="dv">1</span>  <span class="co"># prior parameters</span></span>
-<span id="cb11-2"><a href="poisson-model.html#cb11-2"></a>n1 &lt;-<span class="st"> </span><span class="dv">111</span>; sy1&lt;-<span class="dv">217</span> <span class="co"># data in group 1</span></span>
-<span id="cb11-3"><a href="poisson-model.html#cb11-3"></a></span>
-<span id="cb11-4"><a href="poisson-model.html#cb11-4"></a><span class="co"># posterior mean </span></span>
-<span id="cb11-5"><a href="poisson-model.html#cb11-5"></a>( a<span class="op">+</span>sy1 )<span class="op">/</span>( b<span class="op">+</span>n1 )</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="poisson-model.html#cb11-1" aria-hidden="true" tabindex="-1"></a>a  <span class="ot">&lt;-</span> <span class="dv">2</span>  ; b  <span class="ot">&lt;-</span> <span class="dv">1</span>  <span class="co"># prior parameters</span></span>
+<span id="cb11-2"><a href="poisson-model.html#cb11-2" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="dv">111</span>; sy1<span class="ot">&lt;-</span><span class="dv">217</span> <span class="co"># data in group 1</span></span>
+<span id="cb11-3"><a href="poisson-model.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="poisson-model.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior mean </span></span>
+<span id="cb11-5"><a href="poisson-model.html#cb11-5" aria-hidden="true" tabindex="-1"></a>( a<span class="sc">+</span>sy1 )<span class="sc">/</span>( b<span class="sc">+</span>n1 )</span></code></pre></div>
 <pre><code>## [1] 1.955357</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="poisson-model.html#cb13-1"></a><span class="co"># posterior mode</span></span>
-<span id="cb13-2"><a href="poisson-model.html#cb13-2"></a>( a<span class="op">+</span>sy1<span class="dv">-1</span>)<span class="op">/</span>(b<span class="op">+</span>n1 ) </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="poisson-model.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior mode</span></span>
+<span id="cb13-2"><a href="poisson-model.html#cb13-2" aria-hidden="true" tabindex="-1"></a>( a<span class="sc">+</span>sy1<span class="dv">-1</span>)<span class="sc">/</span>(b<span class="sc">+</span>n1 ) </span></code></pre></div>
 <pre><code>## [1] 1.946429</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="poisson-model.html#cb15-1"></a><span class="co"># posterior 95% CI</span></span>
-<span id="cb15-2"><a href="poisson-model.html#cb15-2"></a><span class="kw">qgamma</span>( <span class="kw">c</span> (<span class="fl">0.025</span> , <span class="fl">0.975</span>) , a<span class="op">+</span>sy1 , b<span class="op">+</span>n1 ) </span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="poisson-model.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior 95% CI</span></span>
+<span id="cb15-2"><a href="poisson-model.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qgamma</span>( <span class="fu">c</span> (<span class="fl">0.025</span> , <span class="fl">0.975</span>) , a<span class="sc">+</span>sy1 , b<span class="sc">+</span>n1 ) </span></code></pre></div>
 <pre><code>## [1] 1.704943 2.222679</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="poisson-model.html#cb17-1"></a>n2 &lt;-<span class="st"> </span><span class="dv">44</span> ; sy2&lt;-<span class="dv">66</span> <span class="co"># data in group 2</span></span>
-<span id="cb17-2"><a href="poisson-model.html#cb17-2"></a><span class="co"># posterior mean </span></span>
-<span id="cb17-3"><a href="poisson-model.html#cb17-3"></a>( a<span class="op">+</span>sy2 )<span class="op">/</span>( b<span class="op">+</span>n2 )</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="poisson-model.html#cb17-1" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="dv">44</span> ; sy2<span class="ot">&lt;-</span><span class="dv">66</span> <span class="co"># data in group 2</span></span>
+<span id="cb17-2"><a href="poisson-model.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior mean </span></span>
+<span id="cb17-3"><a href="poisson-model.html#cb17-3" aria-hidden="true" tabindex="-1"></a>( a<span class="sc">+</span>sy2 )<span class="sc">/</span>( b<span class="sc">+</span>n2 )</span></code></pre></div>
 <pre><code>## [1] 1.511111</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="poisson-model.html#cb19-1"></a><span class="co"># posterior mode</span></span>
-<span id="cb19-2"><a href="poisson-model.html#cb19-2"></a>( a<span class="op">+</span>sy2<span class="dv">-1</span>)<span class="op">/</span>(b<span class="op">+</span>n2 )</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="poisson-model.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior mode</span></span>
+<span id="cb19-2"><a href="poisson-model.html#cb19-2" aria-hidden="true" tabindex="-1"></a>( a<span class="sc">+</span>sy2<span class="dv">-1</span>)<span class="sc">/</span>(b<span class="sc">+</span>n2 )</span></code></pre></div>
 <pre><code>## [1] 1.488889</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="poisson-model.html#cb21-1"></a><span class="co"># posterior 95% CI</span></span>
-<span id="cb21-2"><a href="poisson-model.html#cb21-2"></a><span class="kw">qgamma</span>( <span class="kw">c</span> (<span class="fl">0.025</span> , <span class="fl">0.975</span>) , a<span class="op">+</span>sy2 , b<span class="op">+</span>n2 )</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="poisson-model.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior 95% CI</span></span>
+<span id="cb21-2"><a href="poisson-model.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qgamma</span>( <span class="fu">c</span> (<span class="fl">0.025</span> , <span class="fl">0.975</span>) , a<span class="sc">+</span>sy2 , b<span class="sc">+</span>n2 )</span></code></pre></div>
 <pre><code>## [1] 1.173437 1.890836</code></pre>
 </div>
-<div id="explaining-the-parameters-of-the-gamma-distribution" class="section level2">
+<div id="explaining-the-parameters-of-the-gamma-distribution" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Explaining the parameters of the gamma distribution</h2>
 <p>Poisson
 <span class="math display">\[
@@ -339,7 +367,7 @@ f(x|\theta)=e^{-\theta}\,\frac{\theta^x}{x!} \quad \text{ for } x\in\{0,1,...,\}
 <p>Why is <span class="math inline">\(a\)</span> called the shape parameter? If we change the variable from waiting time till next event to waiting time till <span class="math inline">\(a\)</span>th event we get a gamma<span class="math inline">\((a, b)\)</span> distribution.</p>
 <p>In what sense does <span class="math inline">\(a\)</span> govern the shape of a gamma dist? The answer is: When <span class="math inline">\(a = 1\)</span> we have an exponential dist and in the exponential dist <span class="math inline">\(a &lt; 1\)</span> means asymptote at 0, <span class="math inline">\(a=1\)</span> means mode at 0 that’s a severely right-skewed dist. When <span class="math inline">\(a &gt; 1\)</span>, the mode is at <span class="math inline">\((a-1) / b\)</span>. And the bigger <span class="math inline">\(a\)</span> is the farther away from zero this mode is AND the more bell-shaped is the density curve. Property of the gamma<span class="math inline">\((a, b)\)</span> dist is; If <span class="math inline">\(a\)</span> is big, it’s well-approximated by a normal distribution.</p>
 <p><img src="bayesianS21_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>To the original question in what sense is <span class="math inline">\(b\)</span> a “rate” and in what sense does <span class="math inline">\(a\)</span> determine “shape”? <span class="math inline">\(b\)</span> is a rate in the “Poisson-process-connection to exponential distribution” sense. The closer <span class="math inline">\(a\)</span> is to zero the more right-skewed is the gamma distribution, the bigger <span class="math inline">\(a\)</span> is the more bell-shaped (normal) is the gamma distribution.</p>
+<p>To the original question in what sense is <span class="math inline">\(b\)</span> a “rate” and in what sense does <span class="math inline">\(a\)</span> determine “shape?” <span class="math inline">\(b\)</span> is a rate in the “Poisson-process-connection to exponential distribution” sense. The closer <span class="math inline">\(a\)</span> is to zero the more right-skewed is the gamma distribution, the bigger <span class="math inline">\(a\)</span> is the more bell-shaped (normal) is the gamma distribution.</p>
 <p>In the Poisson-gamma Bayesian problem the bigger is <span class="math inline">\(\sum{y_i}\)</span> the more data we’ve observed the more events we’ve observed. <em>A general result in Bayesian inference is: The more data you have the more normal will be the posterior dist.</em> In the case of the Poisson-gamma model having “more data” doesn’t just mean <span class="math inline">\(n\)</span> increasing. It actually depends on observing lots of events so “lots of data” in the Poisson gamma model is not just big “exposure” it’s lots of events also which is determined by <span class="math inline">\(\sum{y_i}\)</span>. The more events we’ve observed the more data we have the more normal is our posterior dist hence <span class="math inline">\(\sum{y_i}\)</span> (along with <span class="math inline">\(a\)</span> in the prior dist) make the posterior more and more bell-shaped or normal so they drive the shape of the posterior toward the normal dist.</p>
 <p>The rate is there to normalize things. Observing 50 events in 10 days does not mean the same thing ( about <span class="math inline">\(\theta\)</span> ) as observing 50 events in 2 days. So the <span class="math inline">\(n\)</span>(the rate) is defined with respect to a unit of time which determines how many units of data we’ve observed so in that sense <span class="math inline">\(n\)</span> (along with <span class="math inline">\(b\)</span>) define the rate parameter in our gamma posterior.</p>
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Chisom Onyishi" />
 
 
-<meta name="date" content="2021-05-27" />
+<meta name="date" content="2021-05-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="gibbs-sampler.html"/>
 <link rel="next" href="multivariate-normal.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,48 +137,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
 <li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
 <li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
 <li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
-<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
 <li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a><ul>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
 <li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
 <li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
 <li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
 <li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
 <li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
@@ -187,27 +198,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
 <li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a><ul>
-<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a><ul>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
 <li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
 <li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a><ul>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
 <li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
 <li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
 <li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a><ul>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
 <li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
 <li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
 <li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a><ul>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
 <li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
 <li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
@@ -215,25 +231,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
 <li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
 <li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
-<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a><ul>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
 <li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
 <li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
 <li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a><ul>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
 <li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
 <li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
 <li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
 <li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.2</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -255,14 +283,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mcmc-diagnostics" class="section level1">
+<div id="mcmc-diagnostics" class="section level1" number="11">
 <h1><span class="header-section-number">Lecture 11</span> MCMC diagnostics</h1>
 <p><tt>The following notes, mostly transcribed from Neath(0518,2021) lecture, summarize sections(6.5 and 6.6) of Hoff(2009).</tt></p>
-<div id="the-gibbs-sampler" class="section level2">
+<div id="the-gibbs-sampler" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> The Gibbs sampler</h2>
 <p>We had a posterior distribution <span class="math inline">\(p(\theta, \sigma^2 | y)\)</span> where the full conditional distributions <span class="math inline">\(p(\theta | \sigma^2, y)\)</span> and <span class="math inline">\(p(\sigma^2 | \theta, y)\)</span> took a convenient form, but neither marginal distribution did. In a Gibbs sampler you alternately draw from both “full conditional” distributions and the result is; as <span class="math inline">\(s\)</span> increases the sampling distribution of <span class="math inline">\((\theta, \sigma^2)^{(s)}\)</span> approaches the target distribution (which is the posterior). The Gibbs sampler we saw last time was very simple, just two parameters, but the idea extends to <span class="math inline">\(p\)</span> parameters.</p>
 <p>Let <span class="math inline">\(\boldsymbol{\phi} = (\phi_1,\phi_2,...,\phi_p)\)</span> be a vector of parameters. Let <span class="math inline">\(p(\boldsymbol{\phi}) = p(\phi_1,\phi_2,...,\phi_p)\)</span> be the target distribution and the goal is to approximate probabilities and moments and quantiles etc with respect to this target distribution. In Bayesian statistics the target distribution is generally the posterior distribution <span class="math inline">\(p(\boldsymbol{\phi} | y)\)</span>. Often in today’s class you’ll notice we’re just writing <span class="math inline">\(p(\boldsymbol{\phi})\)</span> to denote a generic target distribution. But it’s probably (in practical application) the posterior not the prior.</p>
-<p>We are using subscripts to denote the position in a vector <span class="math inline">\(\boldsymbol{\phi} = (\phi_1, …, \phi_p)\)</span> and superscripts to denote the iteration number of the simulation. Superscripts are in parentheses so we don’t think it means “raised to that power”.</p>
+<p>We are using subscripts to denote the position in a vector <span class="math inline">\(\boldsymbol{\phi} = (\phi_1, …, \phi_p)\)</span> and superscripts to denote the iteration number of the simulation. Superscripts are in parentheses so we don’t think it means “raised to that power.”</p>
 <p>The way the Gibbs sampler works is; each iteration of the Gibbs sampler itself requires <span class="math inline">\(p\)</span> steps (<span class="math inline">\(p=2\)</span> in yesterday’s example).</p>
 <p>Exercise: Write down the form of the <span class="math inline">\(j\)</span>th update of the gibbs sampler</p>
 <p><span class="math inline">\(\phi_j^{(s)} \sim p(\phi_j | \phi_1^{(s)}, …, \phi_{j-1}^{(s)}, \phi_{j+1}^{(s-1)}, …., \phi_p^{(s-1)} )\)</span></p>
@@ -276,7 +304,7 @@ Pr(\boldsymbol\phi^{(s)} \in A) \rightarrow \int_A p(\boldsymbol\phi)d \boldsymb
 <span class="math display">\[\frac{1}{S} \sum_{s=1}^{S} g\left(\boldsymbol\phi^{(s)}\right) \rightarrow \mathrm{E}[g(\boldsymbol\phi)]=\int g(\boldsymbol{\phi}) p(\boldsymbol{\phi}) d \boldsymbol{\phi} \quad \text { as } S \rightarrow \infty\]</span></p>
 <p>In the midge data example we did 1000 iterations of the Gibbs sampler for the semiconjugate normal model and from that we <em>approximate</em> posterior mean by <span class="math inline">\(1.808\)</span> and posterior 95% interval by <span class="math inline">\([1.72, 1.90]\)</span>.</p>
 </div>
-<div id="distinguishing-estimation-from-approximation" class="section level2">
+<div id="distinguishing-estimation-from-approximation" class="section level2" number="11.2">
 <h2><span class="header-section-number">11.2</span> Distinguishing estimation from approximation</h2>
 <p>What role does MCMC (or Monte Carlo in general) play in a Bayesian analysis? It is not an inferential method. The inferential method is Bayesian inference. We have a sampling model for our observable data <span class="math inline">\(p(\boldsymbol{y}|\phi)\)</span>, we have a probability distribution that describes our prior belief about <span class="math inline">\(\phi, ~p(\phi)\)</span>. Once these items are specified according to Bayes rule our belief about <span class="math inline">\(\phi\)</span> is “updated” to reflect the observed data; <span class="math inline">\(p(\phi | \boldsymbol{y}) = p(\phi) p(\boldsymbol{y} | \phi) / p(\boldsymbol{y})\)</span>.</p>
 <p>So what is the Gibbs sampler used for? The problem is <span class="math inline">\(p(\phi | \boldsymbol{y})\)</span> may be a very complicated object particularly if <span class="math inline">\(\boldsymbol{\phi} = (\phi_1, \phi_2, …., \phi_p)\)</span> and <span class="math inline">\(p\)</span> is a big number. That’s where Monte Carlo comes in. <strong>Monte Carlo</strong> is a computational tool for describing features of the posterior distribution. Confusion comes about because Monte Carlo is an approximation method and is based on the principles of statistical inference. If <span class="math inline">\(\phi\)</span> is a scalar the average value of the simulated <span class="math inline">\(\phi^{(s)}\)</span> is an approximation to the posterior mean <span class="math inline">\(E(\phi|\boldsymbol{y}).\)</span> Sample quantiles of <span class="math inline">\(\phi^{(1)} ,..., \phi^{(S)}\)</span> approximate <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span> such that <span class="math inline">\(Pr(L &lt; \phi &lt; U | y) = 1-\alpha\)</span>. It is better we not use the term <em>estimation</em> for this purpose and refer to such approximations as Monte Carlo approximations.</p>
@@ -285,7 +313,7 @@ Pr(\boldsymbol\phi^{(s)} \in A) \rightarrow \int_A p(\boldsymbol\phi)d \boldsymb
 <p><em>Student question -</em> Suppose we take the .025 and .975 quantiles of a 1000 iterations of a Gibbs sampler and call that our 95% confidence interval for <span class="math inline">\(\theta\)</span>. Is that estimation or approximation?</p>
 <p>The answer is: Both are going on here. The true value of <span class="math inline">\(\theta\)</span> is unknown. The true quantiles <span class="math inline">\([\theta_{.025}, \theta_{.975}]\)</span> that satisfy <span class="math inline">\(Pr( L &lt; \theta &lt; U | y ) = 0.95\)</span> is a solution to the estimation problem. When <span class="math inline">\(\theta_{.025}\)</span> and <span class="math inline">\(\theta_{.975}\)</span> are not solvable exactly because the posterior distribution is too complicated and we use the sample quantile from a simulation based on Gibbs sampler that’s an approximation.</p>
 </div>
-<div id="introduction-to-mcmc-diagnostics" class="section level2">
+<div id="introduction-to-mcmc-diagnostics" class="section level2" number="11.3">
 <h2><span class="header-section-number">11.3</span> Introduction to MCMC diagnostics</h2>
 <p>We never talked about ordinary Monte Carlo diagnostics because there’s no such thing. What MCMC diagnostics is concerned with is those two features of MCMC that make it less good than ordinary Monte Carlo:</p>
 <ol style="list-style-type: decimal">
@@ -293,12 +321,12 @@ Pr(\boldsymbol\phi^{(s)} \in A) \rightarrow \int_A p(\boldsymbol\phi)d \boldsymb
 <li><p>The draws are not independent, they are positively correlated.</p></li>
 </ol>
 <p>Recall that if <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> have the same mean and variance then <span class="math inline">\(\text{Var}( [ X_1+X_2]/2 ) = \text{Var}(X) / 4\)</span> if they are independent. But is greater than that if they are positively correlated <span class="math inline">\(\text{Var}( [X_1+X_2]/2 ) = \text{Var}(X_1) /4 + \text{Var}(X_2) /4 + 2\text{Cov}(X_1, X_2) / 4.\)</span> So if that covariance is positive, the average of two draws is still probably better(lower variance) than a single draw but not by as much as if <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> were independent.</p>
-<p>Let <span class="math inline">\(\phi\)</span> be a “parameter”, <span class="math inline">\(p(\phi)\)</span> is the target distribution which is probably a posterior. The gold standard is ordinary Monte Carlo in which <span class="math inline">\(\phi^{(s)} \stackrel{\text{ iid }} \sim ~ p(\phi)\)</span>. That means each has sampling distribution that is exactly <span class="math inline">\(p(\phi)\)</span> and the draws are independent. The two ways Gibbs sampling (and MCMC more generally) is less good than ordinary (iid) Monte Carlo are;</p>
+<p>Let <span class="math inline">\(\phi\)</span> be a “parameter,” <span class="math inline">\(p(\phi)\)</span> is the target distribution which is probably a posterior. The gold standard is ordinary Monte Carlo in which <span class="math inline">\(\phi^{(s)} \stackrel{\text{ iid }} \sim ~ p(\phi)\)</span>. That means each has sampling distribution that is exactly <span class="math inline">\(p(\phi)\)</span> and the draws are independent. The two ways Gibbs sampling (and MCMC more generally) is less good than ordinary (iid) Monte Carlo are;</p>
 <ol style="list-style-type: decimal">
 <li><p>The sampling distribution of <span class="math inline">\(\phi^{(s)}\)</span> is exactly <span class="math inline">\(p(\phi)\)</span> in ordinary Monte Carlo but only approximately so under MCMC.</p></li>
 <li><p>Draws are independent under ordinary Monte Carlo but positively correlated in a Gibbs sampler. This will be illustrated by the example below.</p></li>
 </ol>
-<div id="example-mixture-of-normal-densities" class="section level3">
+<div id="example-mixture-of-normal-densities" class="section level3" number="11.3.1">
 <h3><span class="header-section-number">11.3.1</span> Example: mixture of normal densities</h3>
 <p>Consider the following target distribution <span class="math inline">\(\boldsymbol{\phi} = (\delta, \theta), ~ \delta \in \{1,2,3\}\)</span> with probability { 0.45, 0.10, 0.45 }</p>
 <p><span class="math inline">\(\{\theta | \delta = 1 \}\sim \text{Normal}(-3 , 1/3 )\)</span></p>
@@ -311,23 +339,23 @@ Pr(\boldsymbol\phi^{(s)} \in A) \rightarrow \int_A p(\boldsymbol\phi)d \boldsymb
 <p>Simulate <span class="math inline">\(\delta^{(s)} \sim p(\delta)\)</span> and <span class="math inline">\(\theta^{(s)} \sim p(\theta | \delta^{(s)} )\)</span></p>
 <p>result; <span class="math inline">\((\delta^{(s)}, \theta^{(s)}) \sim p(\delta,\theta)\)</span>. Also marginally <span class="math inline">\(\theta^{(s)} \sim p(\theta)\)</span>.</p>
 <p>Below is what a mixture distribution looks like. Its density is <span class="math inline">\(\{ [p_1\times \texttt{dnorm}(\theta, \mu_1, \sigma)] + [p_2 \times\texttt{dnorm}(\theta | \mu_2, \sigma)] + [p_3 \times \texttt{dnorm} (\theta | \mu_3 , \sigma)] \}\)</span></p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="mcmc-diagnostics.html#cb98-1"></a>S  &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb98-2"><a href="mcmc-diagnostics.html#cb98-2"></a>mu &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>);  sigma &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="dv">3</span>),<span class="dv">3</span>);  </span>
-<span id="cb98-3"><a href="mcmc-diagnostics.html#cb98-3"></a>p  &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">45</span>, <span class="fl">.10</span>, <span class="fl">.45</span>)</span>
-<span id="cb98-4"><a href="mcmc-diagnostics.html#cb98-4"></a>delta.MC &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">3</span>, S, <span class="dt">replace=</span>T, <span class="dt">prob=</span>p)</span>
-<span id="cb98-5"><a href="mcmc-diagnostics.html#cb98-5"></a>theta.MC &lt;-<span class="st"> </span><span class="kw">rnorm</span>(S, mu[delta.MC], sigma[delta.MC])</span></code></pre></div>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="mcmc-diagnostics.html#cb99-1"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">mgp=</span><span class="kw">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>))</span>
-<span id="cb99-2"><a href="mcmc-diagnostics.html#cb99-2"></a><span class="kw">hist</span>(theta.MC, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">col=</span><span class="st">&quot;pink&quot;</span>, </span>
-<span id="cb99-3"><a href="mcmc-diagnostics.html#cb99-3"></a>  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>,<span class="dv">6</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.32</span>), <span class="dt">breaks=</span><span class="dv">30</span>, </span>
-<span id="cb99-4"><a href="mcmc-diagnostics.html#cb99-4"></a>  <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">p</span>(theta)), <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb99-5"><a href="mcmc-diagnostics.html#cb99-5"></a></span>
-<span id="cb99-6"><a href="mcmc-diagnostics.html#cb99-6"></a>theta.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">.01</span>)</span>
-<span id="cb99-7"><a href="mcmc-diagnostics.html#cb99-7"></a></span>
-<span id="cb99-8"><a href="mcmc-diagnostics.html#cb99-8"></a>p.theta &lt;-<span class="st"> </span>p[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">1</span>], sigma[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb99-9"><a href="mcmc-diagnostics.html#cb99-9"></a><span class="st">           </span>p[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">2</span>], sigma[<span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb99-10"><a href="mcmc-diagnostics.html#cb99-10"></a><span class="st">           </span>p[<span class="dv">3</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">3</span>], sigma[<span class="dv">3</span>])</span>
-<span id="cb99-11"><a href="mcmc-diagnostics.html#cb99-11"></a></span>
-<span id="cb99-12"><a href="mcmc-diagnostics.html#cb99-12"></a><span class="kw">lines</span>(theta.vals, p.theta, <span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="mcmc-diagnostics.html#cb98-1" aria-hidden="true" tabindex="-1"></a>S  <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb98-2"><a href="mcmc-diagnostics.html#cb98-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">3</span>);  sigma <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">3</span>),<span class="dv">3</span>);  </span>
+<span id="cb98-3"><a href="mcmc-diagnostics.html#cb98-3" aria-hidden="true" tabindex="-1"></a>p  <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">45</span>, .<span class="dv">10</span>, .<span class="dv">45</span>)</span>
+<span id="cb98-4"><a href="mcmc-diagnostics.html#cb98-4" aria-hidden="true" tabindex="-1"></a>delta.MC <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">3</span>, S, <span class="at">replace=</span>T, <span class="at">prob=</span>p)</span>
+<span id="cb98-5"><a href="mcmc-diagnostics.html#cb98-5" aria-hidden="true" tabindex="-1"></a>theta.MC <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(S, mu[delta.MC], sigma[delta.MC])</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="mcmc-diagnostics.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>))</span>
+<span id="cb99-2"><a href="mcmc-diagnostics.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(theta.MC, <span class="at">freq=</span>F, <span class="at">right=</span>F, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, </span>
+<span id="cb99-3"><a href="mcmc-diagnostics.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>,<span class="dv">6</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">32</span>), <span class="at">breaks=</span><span class="dv">30</span>, </span>
+<span id="cb99-4"><a href="mcmc-diagnostics.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="fu">expression</span>(theta), <span class="at">ylab=</span><span class="fu">expression</span>(<span class="fu">p</span>(theta)), <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb99-5"><a href="mcmc-diagnostics.html#cb99-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-6"><a href="mcmc-diagnostics.html#cb99-6" aria-hidden="true" tabindex="-1"></a>theta.vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb99-7"><a href="mcmc-diagnostics.html#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-8"><a href="mcmc-diagnostics.html#cb99-8" aria-hidden="true" tabindex="-1"></a>p.theta <span class="ot">&lt;-</span> p[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">1</span>], sigma[<span class="dv">1</span>]) <span class="sc">+</span> </span>
+<span id="cb99-9"><a href="mcmc-diagnostics.html#cb99-9" aria-hidden="true" tabindex="-1"></a>           p[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">2</span>], sigma[<span class="dv">2</span>]) <span class="sc">+</span> </span>
+<span id="cb99-10"><a href="mcmc-diagnostics.html#cb99-10" aria-hidden="true" tabindex="-1"></a>           p[<span class="dv">3</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">3</span>], sigma[<span class="dv">3</span>])</span>
+<span id="cb99-11"><a href="mcmc-diagnostics.html#cb99-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-12"><a href="mcmc-diagnostics.html#cb99-12" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(theta.vals, p.theta, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-65"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-65-1.png" alt="A mixture of normal densities and a Monte Carlo approximation" width="672" />
 <p class="caption">
@@ -359,29 +387,29 @@ p(\delta=k | \theta) &amp;= p(\delta)p(\theta|\delta) / p(\theta)=
 \end{aligned}
 \]</span></p>
 <p>Since <span class="math inline">\(\delta \in \{1,2,3\},\)</span> let’s start it at <span class="math inline">\(3.\)</span></p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="mcmc-diagnostics.html#cb100-1"></a><span class="co"># Gibbs sampler </span></span>
-<span id="cb100-2"><a href="mcmc-diagnostics.html#cb100-2"></a>delta.Gibbs &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, S)</span>
-<span id="cb100-3"><a href="mcmc-diagnostics.html#cb100-3"></a>theta.Gibbs &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, S)</span>
-<span id="cb100-4"><a href="mcmc-diagnostics.html#cb100-4"></a>delta       &lt;-<span class="st"> </span><span class="dv">3</span> <span class="co"># starting value</span></span>
-<span id="cb100-5"><a href="mcmc-diagnostics.html#cb100-5"></a></span>
-<span id="cb100-6"><a href="mcmc-diagnostics.html#cb100-6"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>S)</span>
-<span id="cb100-7"><a href="mcmc-diagnostics.html#cb100-7"></a>{</span>
-<span id="cb100-8"><a href="mcmc-diagnostics.html#cb100-8"></a> theta &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, mu[delta], sigma[delta])</span>
-<span id="cb100-9"><a href="mcmc-diagnostics.html#cb100-9"></a> pdgt  &lt;-<span class="st"> </span>p <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta, mu, sigma)</span>
-<span id="cb100-10"><a href="mcmc-diagnostics.html#cb100-10"></a> delta &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dt">prob=</span>pdgt)</span>
-<span id="cb100-11"><a href="mcmc-diagnostics.html#cb100-11"></a> delta.Gibbs[s] &lt;-<span class="st"> </span>delta</span>
-<span id="cb100-12"><a href="mcmc-diagnostics.html#cb100-12"></a> theta.Gibbs[s] &lt;-<span class="st"> </span>theta</span>
-<span id="cb100-13"><a href="mcmc-diagnostics.html#cb100-13"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="mcmc-diagnostics.html#cb101-1"></a><span class="kw">hist</span>(theta.Gibbs, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">col=</span><span class="st">&quot;pink&quot;</span>, </span>
-<span id="cb101-2"><a href="mcmc-diagnostics.html#cb101-2"></a>  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>,<span class="dv">6</span>), <span class="dt">breaks=</span><span class="dv">30</span>, <span class="co"># ylim=c(0, .32), breaks=30, </span></span>
-<span id="cb101-3"><a href="mcmc-diagnostics.html#cb101-3"></a>  <span class="dt">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;p(theta)&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb101-4"><a href="mcmc-diagnostics.html#cb101-4"></a></span>
-<span id="cb101-5"><a href="mcmc-diagnostics.html#cb101-5"></a>theta.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">.01</span>)</span>
-<span id="cb101-6"><a href="mcmc-diagnostics.html#cb101-6"></a>p.theta    &lt;-<span class="st"> </span>p[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">1</span>], sigma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb101-7"><a href="mcmc-diagnostics.html#cb101-7"></a><span class="st">              </span>p[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">2</span>], sigma) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb101-8"><a href="mcmc-diagnostics.html#cb101-8"></a><span class="st">              </span>p[<span class="dv">3</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">3</span>], sigma)</span>
-<span id="cb101-9"><a href="mcmc-diagnostics.html#cb101-9"></a></span>
-<span id="cb101-10"><a href="mcmc-diagnostics.html#cb101-10"></a><span class="kw">lines</span>(theta.vals, p.theta, <span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="mcmc-diagnostics.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gibbs sampler </span></span>
+<span id="cb100-2"><a href="mcmc-diagnostics.html#cb100-2" aria-hidden="true" tabindex="-1"></a>delta.Gibbs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S)</span>
+<span id="cb100-3"><a href="mcmc-diagnostics.html#cb100-3" aria-hidden="true" tabindex="-1"></a>theta.Gibbs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S)</span>
+<span id="cb100-4"><a href="mcmc-diagnostics.html#cb100-4" aria-hidden="true" tabindex="-1"></a>delta       <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># starting value</span></span>
+<span id="cb100-5"><a href="mcmc-diagnostics.html#cb100-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-6"><a href="mcmc-diagnostics.html#cb100-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb100-7"><a href="mcmc-diagnostics.html#cb100-7" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb100-8"><a href="mcmc-diagnostics.html#cb100-8" aria-hidden="true" tabindex="-1"></a> theta <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mu[delta], sigma[delta])</span>
+<span id="cb100-9"><a href="mcmc-diagnostics.html#cb100-9" aria-hidden="true" tabindex="-1"></a> pdgt  <span class="ot">&lt;-</span> p <span class="sc">*</span> <span class="fu">dnorm</span>(theta, mu, sigma)</span>
+<span id="cb100-10"><a href="mcmc-diagnostics.html#cb100-10" aria-hidden="true" tabindex="-1"></a> delta <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="at">prob=</span>pdgt)</span>
+<span id="cb100-11"><a href="mcmc-diagnostics.html#cb100-11" aria-hidden="true" tabindex="-1"></a> delta.Gibbs[s] <span class="ot">&lt;-</span> delta</span>
+<span id="cb100-12"><a href="mcmc-diagnostics.html#cb100-12" aria-hidden="true" tabindex="-1"></a> theta.Gibbs[s] <span class="ot">&lt;-</span> theta</span>
+<span id="cb100-13"><a href="mcmc-diagnostics.html#cb100-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="mcmc-diagnostics.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(theta.Gibbs, <span class="at">freq=</span>F, <span class="at">right=</span>F, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, </span>
+<span id="cb101-2"><a href="mcmc-diagnostics.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>,<span class="dv">6</span>), <span class="at">breaks=</span><span class="dv">30</span>, <span class="co"># ylim=c(0, .32), breaks=30, </span></span>
+<span id="cb101-3"><a href="mcmc-diagnostics.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;p(theta)&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb101-4"><a href="mcmc-diagnostics.html#cb101-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-5"><a href="mcmc-diagnostics.html#cb101-5" aria-hidden="true" tabindex="-1"></a>theta.vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb101-6"><a href="mcmc-diagnostics.html#cb101-6" aria-hidden="true" tabindex="-1"></a>p.theta    <span class="ot">&lt;-</span> p[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">1</span>], sigma) <span class="sc">+</span> </span>
+<span id="cb101-7"><a href="mcmc-diagnostics.html#cb101-7" aria-hidden="true" tabindex="-1"></a>              p[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">2</span>], sigma) <span class="sc">+</span> </span>
+<span id="cb101-8"><a href="mcmc-diagnostics.html#cb101-8" aria-hidden="true" tabindex="-1"></a>              p[<span class="dv">3</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">3</span>], sigma)</span>
+<span id="cb101-9"><a href="mcmc-diagnostics.html#cb101-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-10"><a href="mcmc-diagnostics.html#cb101-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(theta.vals, p.theta, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-67"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-67-1.png" alt="A mixture of normal densities and 1000 Gibbs samples" width="672" />
 <p class="caption">
@@ -393,12 +421,12 @@ Figure 11.2: A mixture of normal densities and 1000 Gibbs samples
 </p>
 <p>Here, 1000 draws from the Gibbs sampler do not agree very closely with the target distribution. Namely, values close to -3 are way overrepresented, values close to zero are overrepresented, values close to +3 are underrepresented. It’s a mixture of the right 3 things but it’s not the right mixture.</p>
 <p>What went wrong?</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="mcmc-diagnostics.html#cb102-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb102-2"><a href="mcmc-diagnostics.html#cb102-2"></a></span>
-<span id="cb102-3"><a href="mcmc-diagnostics.html#cb102-3"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span>S, theta.MC, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Iteration s&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;theta[s]&quot;</span></span>
-<span id="cb102-4"><a href="mcmc-diagnostics.html#cb102-4"></a>     ,<span class="dt">main =</span> <span class="st">&quot;Monte Carlo trace plot&quot;</span>)</span>
-<span id="cb102-5"><a href="mcmc-diagnostics.html#cb102-5"></a><span class="kw">plot</span>(<span class="dv">1</span><span class="op">:</span>S, theta.Gibbs,<span class="dt">type=</span><span class="st">&quot;l&quot;</span>,<span class="dt">xlab=</span><span class="st">&quot;Iteration s&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;theta[s]&quot;</span></span>
-<span id="cb102-6"><a href="mcmc-diagnostics.html#cb102-6"></a>     ,<span class="dt">main =</span> <span class="st">&quot;Gibbs sampler trace plot&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="mcmc-diagnostics.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb102-2"><a href="mcmc-diagnostics.html#cb102-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-3"><a href="mcmc-diagnostics.html#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>S, theta.MC, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Iteration s&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;theta[s]&quot;</span></span>
+<span id="cb102-4"><a href="mcmc-diagnostics.html#cb102-4" aria-hidden="true" tabindex="-1"></a>     ,<span class="at">main =</span> <span class="st">&quot;Monte Carlo trace plot&quot;</span>)</span>
+<span id="cb102-5"><a href="mcmc-diagnostics.html#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>S, theta.Gibbs,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;Iteration s&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;theta[s]&quot;</span></span>
+<span id="cb102-6"><a href="mcmc-diagnostics.html#cb102-6" aria-hidden="true" tabindex="-1"></a>     ,<span class="at">main =</span> <span class="st">&quot;Gibbs sampler trace plot&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-68"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-68-1.png" alt="Trace plots of theta-sequence" width="672" />
 <p class="caption">
@@ -419,14 +447,14 @@ Figure 11.3: Trace plots of theta-sequence
 <p>Isn’t the Gibbs sampler guaranteed to eventually provide a good approximation? Yes it is. If we ran a lot more than 1000 draws, “eventually” we’d get about 45% of the time hovering around +3 about 10% hovering around 0 and about 45% hovering around -3. In the long run yes we would see exactly this, but <span class="math inline">\(S = 1000\)</span> is apparently “short” for our example.</p>
 </div>
 </div>
-<div id="discussion" class="section level2">
+<div id="discussion" class="section level2" number="11.4">
 <h2><span class="header-section-number">11.4</span> Discussion</h2>
 <p>Concrete example: A particle moving around the parameter space.</p>
 <p>In this example the parameter is <span class="math inline">\(\phi\)</span> the parameter space is the real line but generally the probability in the target distribution is contained between -5 and 5. Think of <span class="math inline">\(\phi\)</span> as a particle moving around the line and where it is at iteration <span class="math inline">\(s\)</span> is recorded in this plot (like the trace plot above). In the long run let <span class="math inline">\(A_1, A_2\)</span> and <span class="math inline">\(A_3\)</span> be three subsets of the parameter space so that <span class="math inline">\(\int_{A2}p(\phi) d\phi\)</span> is pretty small and <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_3\)</span> are separated by <span class="math inline">\(A_2\)</span> (just like the example above!). In the long run our particle should spend little time in <span class="math inline">\(A_2\)</span> but a lot more time in <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_3\)</span>. Suppose we start in <span class="math inline">\(A_2\)</span>, two things we would want to see happen (1) the chain should move out of <span class="math inline">\(A_2\)</span> pretty quickly (stationarity) (2) the chain to move between <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_3\)</span> fairly readily, that is, not get stuck for long stretches in either one (low autocorrelation).</p>
 <p>Definition: If <span class="math inline">\(\phi^{(0)} \sim p(\phi)\)</span> then the chain is <strong>stationary</strong>.</p>
 <p>And if the chain is stationary then the sampling distribution of <span class="math inline">\(\phi^{(s)}\)</span> is <span class="math inline">\(p(\phi)\)</span> (the target distribution) for every <span class="math inline">\(s\)</span>. And in that case: Issue number 1 (the “non-stationarity” issue) would be a non-issue. Regarding the stationarity issue, the practical issue presented is where to start? In the problems we’ve done so far this really hasn’t been an issue. <em>A mode of the target distribution is a good starting point.</em></p>
 <p>The second issue, the autocorrelation issue, is also called mixing. Low autocorrelation and fast mixing go together, high autocorrelation and slow mixing go together.</p>
-<div id="how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation" class="section level3">
+<div id="how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation" class="section level3" number="11.4.1">
 <h3><span class="header-section-number">11.4.1</span> How does autocorrelation(slow mixing) affect our MCMC approximation?</h3>
 <p>For this discussion assume stationarity. With good starting values this is a reasonable assmption.</p>
 <p>We have <span class="math inline">\(\phi^{(0)} \sim p(\phi)\)</span> or close enough therefore <span class="math inline">\(\phi^{(s)} \sim p(\phi)\)</span> for each <span class="math inline">\(s,\)</span> the only issue is the draws are not independent. How does that muck up our estimation?</p>
@@ -435,11 +463,11 @@ Figure 11.3: Trace plots of theta-sequence
 <p>If we are using a Gibbs sampler so the <span class="math inline">\(\phi^{(s)}\)</span> are not independent (they’re correlated) the expected squared approximation error <span class="math inline">\(\text{Var}_{MCMC}\)</span> is not Var<span class="math inline">\((\phi) / S\)</span>. It’s bigger. It’s bigger by a term that depends on how strongly correlated are <span class="math inline">\(\phi^{(s)}\)</span> and <span class="math inline">\(\phi^{(t)}\)</span> for <span class="math inline">\(t \neq s\)</span></p>
 <p>“MCMC standard error” equals square root of ( expected squared approximation error under MCMC sampling ) i.e., <span class="math inline">\(\text{mcmcse} = \sqrt{\text{Var}_{MCMC}}\)</span>, where <span class="math inline">\(\text{Var}_{MCMC} &gt; \text{Var}_{MC}\)</span> by an amount that depends on how highly correlated are successive draws in the Gibbs sampler. The bigger is our expected squared approximation error <span class="math inline">\((\text{Var}_{MCMC})\)</span> the more we expect our approximation to not be good.</p>
 </div>
-<div id="autocorrelation" class="section level3">
+<div id="autocorrelation" class="section level3" number="11.4.2">
 <h3><span class="header-section-number">11.4.2</span> Autocorrelation</h3>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="mcmc-diagnostics.html#cb103-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb103-2"><a href="mcmc-diagnostics.html#cb103-2"></a><span class="kw">acf</span>(theta.MC)</span>
-<span id="cb103-3"><a href="mcmc-diagnostics.html#cb103-3"></a><span class="kw">acf</span>(theta.Gibbs)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="mcmc-diagnostics.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb103-2"><a href="mcmc-diagnostics.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(theta.MC)</span>
+<span id="cb103-3"><a href="mcmc-diagnostics.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(theta.Gibbs)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-69"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-69-1.png" alt="acf for independent MC draws and Gibbs samples" width="672" />
 <p class="caption">
@@ -456,7 +484,7 @@ Figure 11.4: acf for independent MC draws and Gibbs samples
 <p>Methods like that exist but to be able to implement them requires that you know quite a lot about the target distribution and the whole point of MCMC is that you can do it in situations where you know very little about the target distribution.</p>
 <p>There is sampling technique called antithetic variables or something like this with this goal but it’s pretty limited. In high-dimensional complicated Bayesian models you’re stuck with this situation where the draws will be positively correlated but MCMC is very much an art and the art is to make that correlation as little as possible. The software package Stan uses something called Hamiltonian Monte Carlo which is an MCMC method but has the goal of producing chains that are not so highly autocorrelated.</p>
 </div>
-<div id="sample-autocorrelation-function" class="section level3">
+<div id="sample-autocorrelation-function" class="section level3" number="11.4.3">
 <h3><span class="header-section-number">11.4.3</span> Sample autocorrelation function</h3>
 <p><span class="math display">\[
 \operatorname{acf}_{t}(\phi)=\frac{\frac{1}{S-t} \sum_{s=1}^{S-t}\left(\phi_{s}-\bar{\phi}\right)\left(\phi_{s+t}-\bar{\phi}\right)}{\frac{1}{S-1} \sum_{s=1}^{S}\left(\phi_{s}-\bar{\phi}\right)^{2}}
@@ -464,35 +492,35 @@ Figure 11.4: acf for independent MC draws and Gibbs samples
 <p>an expression for lag-t sample autocorrelation. Denominator is variance (recall that
 correlation = cov / sd<span class="math inline">\(\times\)</span>sd ) numerator is a sample correlation between.. say for lag <span class="math inline">\(t=5\)</span>, it will be between <span class="math inline">\(\phi^{(1)}\)</span> with <span class="math inline">\(\phi^{(6)}\)</span>, <span class="math inline">\(\phi^{(2)}\)</span> with <span class="math inline">\(\phi^{(7)}\)</span>, <span class="math inline">\(\phi^{(3)}\)</span> with <span class="math inline">\(\phi^{(8)}\)</span>, etc.</p>
 </div>
-<div id="effective-sample-size" class="section level3">
+<div id="effective-sample-size" class="section level3" number="11.4.4">
 <h3><span class="header-section-number">11.4.4</span> Effective sample size</h3>
 <p><span class="math inline">\(\text{Var}_{MC}(\bar \phi) = \text{Var}(\phi) / S\)</span></p>
 <p>The effective sample size for MCMC is defined by <span class="math inline">\(\text{Var}_{MC}(\bar \phi) = \text{Var}(\phi) / S_{\text{eff}}.\)</span></p>
 <p>So what this means is that when we run the Markov chain for <span class="math inline">\(S\)</span> iterations we get the same precision for our MCMC approximation as we would get from <span class="math inline">\(S_{\text{eff}}\)</span> independent samples from <span class="math inline">\(p(\phi)\)</span></p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="mcmc-diagnostics.html#cb104-1"></a>S &lt;-<span class="st"> </span><span class="dv">10000</span></span>
-<span id="cb104-2"><a href="mcmc-diagnostics.html#cb104-2"></a></span>
-<span id="cb104-3"><a href="mcmc-diagnostics.html#cb104-3"></a>delta.Gibbs &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, S)</span>
-<span id="cb104-4"><a href="mcmc-diagnostics.html#cb104-4"></a>theta.Gibbs &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, S)</span>
-<span id="cb104-5"><a href="mcmc-diagnostics.html#cb104-5"></a>delta &lt;-<span class="st"> </span><span class="dv">3</span>;  theta &lt;-<span class="st"> </span><span class="dv">3</span>;  <span class="co"># starting values</span></span>
-<span id="cb104-6"><a href="mcmc-diagnostics.html#cb104-6"></a></span>
-<span id="cb104-7"><a href="mcmc-diagnostics.html#cb104-7"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>S)</span>
-<span id="cb104-8"><a href="mcmc-diagnostics.html#cb104-8"></a>{</span>
-<span id="cb104-9"><a href="mcmc-diagnostics.html#cb104-9"></a> theta &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, mu[delta], sigma[delta])</span>
-<span id="cb104-10"><a href="mcmc-diagnostics.html#cb104-10"></a> pdgt  &lt;-<span class="st"> </span>p <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta, mu, sigma)</span>
-<span id="cb104-11"><a href="mcmc-diagnostics.html#cb104-11"></a> delta &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dt">prob=</span>pdgt)</span>
-<span id="cb104-12"><a href="mcmc-diagnostics.html#cb104-12"></a> delta.Gibbs[s] &lt;-<span class="st"> </span>delta;  theta.Gibbs[s] &lt;-<span class="st"> </span>theta;</span>
-<span id="cb104-13"><a href="mcmc-diagnostics.html#cb104-13"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="mcmc-diagnostics.html#cb105-1"></a><span class="kw">hist</span>(theta.Gibbs, <span class="dt">freq=</span>F, <span class="dt">right=</span>F, <span class="dt">col=</span><span class="st">&quot;pink&quot;</span>, </span>
-<span id="cb105-2"><a href="mcmc-diagnostics.html#cb105-2"></a>  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="op">-</span><span class="dv">6</span>,<span class="dv">6</span>), <span class="dt">breaks=</span><span class="dv">30</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.32</span>), </span>
-<span id="cb105-3"><a href="mcmc-diagnostics.html#cb105-3"></a>  <span class="dt">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;p(theta)&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb105-4"><a href="mcmc-diagnostics.html#cb105-4"></a></span>
-<span id="cb105-5"><a href="mcmc-diagnostics.html#cb105-5"></a>theta.vals &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="fl">.01</span>)</span>
-<span id="cb105-6"><a href="mcmc-diagnostics.html#cb105-6"></a></span>
-<span id="cb105-7"><a href="mcmc-diagnostics.html#cb105-7"></a>p.theta &lt;-<span class="st"> </span>p[<span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">1</span>], sigma[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb105-8"><a href="mcmc-diagnostics.html#cb105-8"></a><span class="st">           </span>p[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">2</span>], sigma[<span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb105-9"><a href="mcmc-diagnostics.html#cb105-9"></a><span class="st">           </span>p[<span class="dv">3</span>] <span class="op">*</span><span class="st"> </span><span class="kw">dnorm</span>(theta.vals, mu[<span class="dv">3</span>], sigma[<span class="dv">3</span>])</span>
-<span id="cb105-10"><a href="mcmc-diagnostics.html#cb105-10"></a></span>
-<span id="cb105-11"><a href="mcmc-diagnostics.html#cb105-11"></a><span class="kw">lines</span>(theta.vals, p.theta, <span class="dt">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="mcmc-diagnostics.html#cb104-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb104-2"><a href="mcmc-diagnostics.html#cb104-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-3"><a href="mcmc-diagnostics.html#cb104-3" aria-hidden="true" tabindex="-1"></a>delta.Gibbs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S)</span>
+<span id="cb104-4"><a href="mcmc-diagnostics.html#cb104-4" aria-hidden="true" tabindex="-1"></a>theta.Gibbs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S)</span>
+<span id="cb104-5"><a href="mcmc-diagnostics.html#cb104-5" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="dv">3</span>;  theta <span class="ot">&lt;-</span> <span class="dv">3</span>;  <span class="co"># starting values</span></span>
+<span id="cb104-6"><a href="mcmc-diagnostics.html#cb104-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-7"><a href="mcmc-diagnostics.html#cb104-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb104-8"><a href="mcmc-diagnostics.html#cb104-8" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb104-9"><a href="mcmc-diagnostics.html#cb104-9" aria-hidden="true" tabindex="-1"></a> theta <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, mu[delta], sigma[delta])</span>
+<span id="cb104-10"><a href="mcmc-diagnostics.html#cb104-10" aria-hidden="true" tabindex="-1"></a> pdgt  <span class="ot">&lt;-</span> p <span class="sc">*</span> <span class="fu">dnorm</span>(theta, mu, sigma)</span>
+<span id="cb104-11"><a href="mcmc-diagnostics.html#cb104-11" aria-hidden="true" tabindex="-1"></a> delta <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="at">prob=</span>pdgt)</span>
+<span id="cb104-12"><a href="mcmc-diagnostics.html#cb104-12" aria-hidden="true" tabindex="-1"></a> delta.Gibbs[s] <span class="ot">&lt;-</span> delta;  theta.Gibbs[s] <span class="ot">&lt;-</span> theta;</span>
+<span id="cb104-13"><a href="mcmc-diagnostics.html#cb104-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="mcmc-diagnostics.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(theta.Gibbs, <span class="at">freq=</span>F, <span class="at">right=</span>F, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, </span>
+<span id="cb105-2"><a href="mcmc-diagnostics.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>,<span class="dv">6</span>), <span class="at">breaks=</span><span class="dv">30</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">32</span>), </span>
+<span id="cb105-3"><a href="mcmc-diagnostics.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;p(theta)&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb105-4"><a href="mcmc-diagnostics.html#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="mcmc-diagnostics.html#cb105-5" aria-hidden="true" tabindex="-1"></a>theta.vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, .<span class="dv">01</span>)</span>
+<span id="cb105-6"><a href="mcmc-diagnostics.html#cb105-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-7"><a href="mcmc-diagnostics.html#cb105-7" aria-hidden="true" tabindex="-1"></a>p.theta <span class="ot">&lt;-</span> p[<span class="dv">1</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">1</span>], sigma[<span class="dv">1</span>]) <span class="sc">+</span> </span>
+<span id="cb105-8"><a href="mcmc-diagnostics.html#cb105-8" aria-hidden="true" tabindex="-1"></a>           p[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">2</span>], sigma[<span class="dv">2</span>]) <span class="sc">+</span> </span>
+<span id="cb105-9"><a href="mcmc-diagnostics.html#cb105-9" aria-hidden="true" tabindex="-1"></a>           p[<span class="dv">3</span>] <span class="sc">*</span> <span class="fu">dnorm</span>(theta.vals, mu[<span class="dv">3</span>], sigma[<span class="dv">3</span>])</span>
+<span id="cb105-10"><a href="mcmc-diagnostics.html#cb105-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb105-11"><a href="mcmc-diagnostics.html#cb105-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(theta.vals, p.theta, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-71"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-71-1.png" alt="10,000 iterations of the Gibbs sampler instead of 1,000" width="672" />
 <p class="caption">
@@ -504,13 +532,13 @@ Figure 11.5: 10,000 iterations of the Gibbs sampler instead of 1,000
 </p>
 <p>Even with 10,000 iterations the realized chain is not perfectly representative of the target distribution. It’s too frequently around zero and not frequently enough around -3 and +3.</p>
 <p>There are numerous formulas for computing effective sample size they give different answers and in general the estimation of <span class="math inline">\(S_{\text{eff}}\)</span> is highly unstable. But it’s still a useful quantity. So let’s find it for this example. I like the effective sample size calculator that’s in the R package <tt>mcmcse</tt></p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="mcmc-diagnostics.html#cb106-1"></a><span class="kw">library</span>(mcmcse)</span>
-<span id="cb106-2"><a href="mcmc-diagnostics.html#cb106-2"></a><span class="kw">ess</span>(theta.Gibbs)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="mcmc-diagnostics.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mcmcse)</span>
+<span id="cb106-2"><a href="mcmc-diagnostics.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ess</span>(theta.Gibbs)</span></code></pre></div>
 <pre><code>## [1] 13.54</code></pre>
 <p>The autocorrelation in this Markov chain is so severe that 10,000 iterations of the Gibbs sampler yields the same precision for estimating <span class="math inline">\(E(\theta)\)</span> as would only 13 or 14 independent draws from <span class="math inline">\(p(\theta)\)</span> (using iid Monte Carlo). CRAZY!</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="mcmc-diagnostics.html#cb108-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb108-2"><a href="mcmc-diagnostics.html#cb108-2"></a><span class="kw">acf</span>(theta.Gibbs)</span>
-<span id="cb108-3"><a href="mcmc-diagnostics.html#cb108-3"></a><span class="kw">acf</span>(theta.Gibbs, <span class="dt">lag.max =</span><span class="dv">2000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="mcmc-diagnostics.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb108-2"><a href="mcmc-diagnostics.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(theta.Gibbs)</span>
+<span id="cb108-3"><a href="mcmc-diagnostics.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(theta.Gibbs, <span class="at">lag.max =</span><span class="dv">2000</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-73"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-73-1.png" alt="autocorrelation function for theta-chain from the Gibbs sampler." width="672" />
 <p class="caption">

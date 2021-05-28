@@ -24,7 +24,7 @@
 <meta name="author" content="Chisom Onyishi" />
 
 
-<meta name="date" content="2021-05-27" />
+<meta name="date" content="2021-05-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,8 @@
   
   
 <link rel="prev" href="mcmc-diagnostics.html"/>
-
+<link rel="next" href="group-comparisons.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,48 +137,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
 <li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
 <li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
 <li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
-<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
 <li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a><ul>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
 <li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
 <li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
 <li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
 <li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
 <li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
@@ -187,27 +198,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
 <li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a><ul>
-<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a><ul>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
 <li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
 <li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a><ul>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
 <li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
 <li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
 <li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a><ul>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
 <li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
 <li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
 <li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a><ul>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
 <li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
 <li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
@@ -215,25 +231,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
 <li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
 <li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
-<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a><ul>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
 <li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
 <li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
 <li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a><ul>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
 <li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
 <li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
 <li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
 <li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.2</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -255,23 +283,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multivariate-normal" class="section level1">
+<div id="multivariate-normal" class="section level1" number="12">
 <h1><span class="header-section-number">Lecture 12</span> Multivariate Normal</h1>
-<p><tt>The following notes, mostly transcribed from Neath(0519,2021) lecture, summarize sections(7.1-7.4) of Hoff(2009).</tt></p>
+<p><tt>The following notes, mostly transcribed from Neath(0520,2021) lecture, summarize sections(7.1-7.4) of Hoff(2009).</tt></p>
 <p>
  
 </p>
-<div id="example-reading-comprehension" class="section level2">
+<div id="example-reading-comprehension" class="section level2" number="12.1">
 <h2><span class="header-section-number">12.1</span> Example: Reading comprehension</h2>
 <p>Our notation :</p>
 <ul>
-<li><span class="math inline">\(n =\)</span> sample size number of subjects on which have collected data</li>
+<li><span class="math inline">\(n =\)</span> sample size (number of subjects on which we have collected data)</li>
 <li><span class="math inline">\(p =\)</span> dimension of observed response vector (number of measurements taken on each subject)</li>
 </ul>
 <p>In this example, <span class="math inline">\(n = 22, ~p = 2\)</span>, <span class="math inline">\(y_1 =\)</span> score on pretest, <span class="math inline">\(y_2 =\)</span> score on posttest.</p>
-<p>For <span class="math inline">\(p = 2\)</span> there are 5 parameters of interest; <span class="math inline">\(\theta_1 =\)</span> mean pretest score, <span class="math inline">\(\theta_2 =\)</span> mean posttest score, <span class="math inline">\(\sigma_1^2 =\)</span> variance of pretest scores, <span class="math inline">\(\sigma_2^2 =\)</span> variance of posttest scores, <span class="math inline">\(\rho = \sigma_{1,2} / (\sigma_1 \times \sigma_2)\)</span> the correlation between pretest score and posttest score. And we will assume that the pairs of test scores for a given student follow a bivariate normal distribution(even if they don’t follow perfectly).</p>
+<p>For <span class="math inline">\(p = 2\)</span> there are 5 parameters of interest; <span class="math inline">\(\theta_1 =\)</span> mean pretest scores, <span class="math inline">\(\theta_2 =\)</span> mean posttest scores, <span class="math inline">\(\sigma_1^2 =\)</span> variance of pretest scores, <span class="math inline">\(\sigma_2^2 =\)</span> variance of posttest scores, <span class="math inline">\(\rho = \sigma_{1,2} / (\sigma_1 \times \sigma_2)\)</span> the correlation between pretest scores and posttest scores. And we will assume that the pairs of test scores for a given student follow a bivariate normal distribution, even if they don’t follow perfectly.</p>
 </div>
-<div id="the-multivariate-normal-density" class="section level2">
+<div id="the-multivariate-normal-density" class="section level2" number="12.2">
 <h2><span class="header-section-number">12.2</span> The multivariate normal density</h2>
 <p>With univariate data, there’s just one measurement taken on each subject. What are the concrete examples we have done so far?</p>
 <p><span class="math display">\[
@@ -284,59 +312,58 @@ y &amp;=
 \end{aligned}
 \]</span></p>
 <p>With multivariate data there are <span class="math inline">\(p\)</span> measurements taken on each subject. So associated with each subject is a vector value <span class="math inline">\(\{ y_1, …, y_p \}\)</span>. If there are <span class="math inline">\(p\)</span> components to the random variable there are <span class="math inline">\(p\)</span> mean values, there are <span class="math inline">\(p\)</span> variances, there <span class="math inline">\(p(p-1)/2\)</span> covariances (the number of off-diagonal entries).</p>
-<blockquote>
-<p><small> <span class="math inline">\(\text{Cov}(Y_1, Y_2) ~~ \text{Cov}(Y_1, Y_3)\)</span> etc <span class="math inline">\(\text{Cov}(Y_1, Y_p)\)</span> that’s <span class="math inline">\(p-1\)</span> then we have <span class="math inline">\(\text{Cov}(Y_2, Y_3)~~ \text{Cov}(Y_2, Y_4)\)</span> etc <span class="math inline">\(\text{Cov}(Y_2, Y_p)\)</span> that’s <span class="math inline">\(p-2\)</span> eventually we get to <span class="math inline">\(\text{Cov}(Y_{p-1} , Y_p ).\)</span> So the total number of covariances is <span class="math inline">\(1 + 2 + … + p-1 = p(p-1) / 2\)</span>. </small></p>
-</blockquote>
-<p>We can use the multivariate normal model if we want to make inference about mean values, variances(standard devations) and correlations. This is what the density function for the multivariate normal distribution looks like;</p>
+<p><span class="math inline">\(\text{Cov}(Y_1, Y_2),\text{Cov}(Y_1, Y_3),...,\text{Cov}(Y_1, Y_p)\)</span> that’s <span class="math inline">\(p-1\)</span> then we have <span class="math inline">\(\text{Cov}(Y_2, Y_3), \text{Cov}(Y_2, Y_4),...,\text{Cov}(Y_2, Y_p)\)</span> that’s <span class="math inline">\(p-2\)</span> eventually we get to <span class="math inline">\(\text{Cov}(Y_{p-1} , Y_p ).\)</span> So the total number of covariances is <span class="math inline">\(1 + 2 + … + p-1 = p(p-1) / 2\)</span>.</p>
+<p>We can use the multivariate normal model if we want to make inference about mean values, variances(standard deviations) and correlations. This is what the density function for the multivariate normal distribution looks like;</p>
 <p><span class="math display">\[
 p(\boldsymbol y | \boldsymbol{\theta,\Sigma} ) = (2\pi)^{-p/2}|\boldsymbol \Sigma|^{1/2}\text{exp}\{-(\boldsymbol y - \boldsymbol \theta)^T \boldsymbol{\Sigma}^{-1} (\boldsymbol y - \boldsymbol \theta)/2 \}
 \]</span></p>
-<p>When we have a multivariate distribution the mean becomes a mean vector(there is a mean for each variable). We’ll write <span class="math inline">\(\boldsymbol{\theta}\)</span> in a bold font. <span class="math inline">\(\boldsymbol{\theta}\)</span> is a <span class="math inline">\(p \times 1\)</span> vector, <span class="math inline">\(\theta_j = E( Y_j )\)</span>. In univariate data in addition to the mean we have the variance. For multivariate data we have a variance-covariance matrix or just covariance matrix <span class="math inline">\(= \boldsymbol \Sigma = \text{Cov}[\boldsymbol Y].\)</span> For a covariance matrix the <span class="math inline">\(j\)</span>th diagonal entry is <span class="math inline">\(\sigma^2_j,\)</span> the variance for the <span class="math inline">\(j\)</span>th variable. The <span class="math inline">\((j, k)\)</span> entry of the covariance matrix is the covariance between <span class="math inline">\(Y_j\)</span> and <span class="math inline">\(Y_k\)</span>.</p>
-<p><span class="math inline">\(\sigma_{j,k} = \text{Cov}( Y_j, Y_k )\)</span>, <span class="math inline">\(\sigma_{j, j} = \text{Var}( Y_j )\)</span>. A subscript <span class="math inline">\(i\)</span> means the <span class="math inline">\(i\)</span>th of the <span class="math inline">\(n\)</span> observations, so <span class="math inline">\(\boldsymbol y_i\)</span> is a <span class="math inline">\(p \times 1\)</span> vector. When I write <span class="math inline">\(Y_j\)</span>, I’m thinking of the distribution for the <span class="math inline">\(j\)</span>th of the <span class="math inline">\(p\)</span> variables. The exponential term of the univariate normal density <span class="math inline">\(-(1/2)(y - \theta)^2 / \sigma^2\)</span> write this as <span class="math inline">\((y - \theta) \sigma^{-2} (y - \theta).\)</span> This way generalizes to <span class="math inline">\(p\)</span>-variate normal density <span class="math inline">\((\boldsymbol y-\boldsymbol\theta)^T\boldsymbol \Sigma^{-1}(\boldsymbol y -\boldsymbol\theta)\)</span>.</p>
+<p>When we have a multivariate distribution the mean becomes a mean vector(there is a mean for each variable). We’ll write <span class="math inline">\(\boldsymbol{\theta}\)</span> in a bold font. <span class="math inline">\(\boldsymbol{\theta}\)</span> is a <span class="math inline">\(p \times 1\)</span> vector, <span class="math inline">\(\theta_j = E( Y_j )\)</span>. In univariate data in addition to the mean we have the variance. For multivariate data we have a variance-covariance matrix or just covariance matrix <span class="math inline">\(= \boldsymbol \Sigma = \text{Cov}[\mathbf Y].\)</span> For a covariance matrix the <span class="math inline">\(j\)</span>th diagonal entry is <span class="math inline">\(\sigma^2_j,\)</span> the variance for the <span class="math inline">\(j\)</span>th variable. The <span class="math inline">\((j, k)\)</span> entry of the covariance matrix is the covariance between <span class="math inline">\(Y_j\)</span> and <span class="math inline">\(Y_k\)</span>. <span class="math inline">\(\sigma_{j,k} = \text{Cov}( Y_j, Y_k )\)</span>, <span class="math inline">\(\sigma_{j, j} = \text{Var}( Y_j )\)</span>.</p>
+<p>A subscript <span class="math inline">\(i\)</span> means the <span class="math inline">\(i\)</span>th of the <span class="math inline">\(n\)</span> observations, so <span class="math inline">\(\boldsymbol y_i\)</span> is a <span class="math inline">\(p \times 1\)</span> vector. When I write <span class="math inline">\(Y_j\)</span>, I’m thinking of the distribution for the <span class="math inline">\(j\)</span>th of the <span class="math inline">\(p\)</span> variables. The exponential term of the univariate normal density is <span class="math inline">\(-(1/2)(y - \theta)^2 / \sigma^2.\)</span> Write this as <span class="math inline">\((y - \theta) \sigma^{-2} (y - \theta).\)</span> This way generalizes to <span class="math inline">\(p\)</span>-variate normal density <span class="math inline">\((\boldsymbol y-\boldsymbol\theta)^T\boldsymbol \Sigma^{-1}(\boldsymbol y -\boldsymbol\theta)\)</span>.</p>
 <p>The bigger are the entries of a matrix the bigger is the determinant. A matrix whose determinant is zero does not have an inverse matrix. Just as with univariate normal distribution where we require <span class="math inline">\(\sigma &gt; 0,\)</span> with MVN distribution determinant of the covariance matrix will always be positive, <span class="math inline">\(|\boldsymbol \Sigma| &gt; 0\)</span>.</p>
-<p>Just as <span class="math inline">\(x \times 1/x = 1, ~ \boldsymbol{A A^{-1}} = \boldsymbol{I},\)</span> which is the identity matrix. It has 1’s along the main diagonal and 0’s in the off-diagonal positions.</p>
-<p><span class="math inline">\(\boldsymbol{A I} = \boldsymbol{A} = \boldsymbol{IA}\)</span></p>
-<p>Bold-face capital letters (greek and latin both) will indicate matrices, bold-face lower-case letters will indicate vectors. A vector will always be a column vector. <span class="math inline">\(\boldsymbol{b}\)</span> is p x 1, <span class="math inline">\(\boldsymbol{b}^T\)</span> is 1 x p. If <span class="math inline">\(\boldsymbol{b}\)</span> is a <span class="math inline">\(p \times 1\)</span> vector and <span class="math inline">\(\boldsymbol{A}\)</span> is a p x p matrix, then <span class="math inline">\(\boldsymbol{b}^T \boldsymbol{A} \boldsymbol{b}\)</span> is a scalar! <span class="math inline">\((1 \times p) (p \times p ) (p \times 1)\)</span>. Similarly, <span class="math inline">\(\boldsymbol y\)</span> and <span class="math inline">\(\boldsymbol \theta\)</span> are both <span class="math inline">\(p\)</span>-vectors, <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is <span class="math inline">\(p \times p\)</span> matrix <span class="math inline">\((\boldsymbol y - \boldsymbol \theta)\)</span> that’s a <span class="math inline">\(p\)</span>-vector <span class="math inline">\((\boldsymbol y - \boldsymbol \theta)^T \boldsymbol{\Sigma}^{-1} (\boldsymbol y - \boldsymbol \theta)\)</span> that’s a scalar!</p>
+<p>Just as <span class="math inline">\(x \times 1/x = 1, ~ \mathbf{A A}^{-1} = \mathbf{I},\)</span> which is the identity matrix. It has 1’s along the main diagonal and 0’s in the off-diagonal positions.</p>
+<p><span class="math inline">\(\mathbf{A I} = \mathbf{A} = \mathbf{IA}\)</span></p>
+<p>Bold-face capital letters (greek and latin both) will indicate matrices, bold-face lower-case letters will indicate vectors. A vector will always be a column vector, hence <span class="math inline">\(\mathbf{b}\)</span> is <span class="math inline">\(p \times 1\)</span>, <span class="math inline">\(\mathbf{b}^T\)</span> is <span class="math inline">\(1 \times p\)</span>.</p>
+<p>If <span class="math inline">\(\mathbf{b}\)</span> is a <span class="math inline">\(p \times 1\)</span> vector and <span class="math inline">\(\mathbf{A}\)</span> is a <span class="math inline">\(p \times p\)</span> matrix, then <span class="math inline">\(\mathbf{b}^T \mathbf{A} \mathbf{b}\)</span> is a scalar! <span class="math inline">\((1 \times p) (p \times p ) (p \times 1)\)</span>. Similarly, <span class="math inline">\(\boldsymbol y\)</span> and <span class="math inline">\(\boldsymbol \theta\)</span> are both <span class="math inline">\(p\)</span>-vectors, <span class="math inline">\(\boldsymbol{\Sigma}\)</span> is <span class="math inline">\(p \times p\)</span> matrix, <span class="math inline">\((\boldsymbol y - \boldsymbol \theta)\)</span> that’s a <span class="math inline">\(p\)</span>-vector, <span class="math inline">\((\boldsymbol y - \boldsymbol \theta)^T \boldsymbol{\Sigma}^{-1} (\boldsymbol y - \boldsymbol \theta)\)</span> that’s a scalar!</p>
 <p>With <span class="math inline">\(p=2\)</span> (bivariate normal distribution) we can “draw” the bivariate normal density using contour plots.</p>
 <p>A contour is a collection of points <span class="math inline">\((y_1, y_2)\)</span> such that <span class="math inline">\(p(y_1, y_2) =\)</span> same for all such <span class="math inline">\((y_1, y_2)\)</span> on the same contour. The concentric circles corresponds to a set of values that are 95% of the peak, 85% of the peak, down to 0.001% of the peak.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="multivariate-normal.html#cb109-1"></a>y1 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb109-2"><a href="multivariate-normal.html#cb109-2"></a>y2 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb109-3"><a href="multivariate-normal.html#cb109-3"></a>G  &lt;-<span class="st"> </span><span class="kw">length</span>(y1);  H &lt;-<span class="st"> </span><span class="kw">length</span>(y2);</span>
-<span id="cb109-4"><a href="multivariate-normal.html#cb109-4"></a>theta &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>,<span class="dv">50</span>)</span>
-<span id="cb109-5"><a href="multivariate-normal.html#cb109-5"></a>Sigma2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">64</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">144</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb109-6"><a href="multivariate-normal.html#cb109-6"></a>Sigma1 &lt;-<span class="st"> </span>Sigma2;  Sigma1[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">-48</span>;  Sigma1[<span class="dv">2</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="dv">-48</span>;</span>
-<span id="cb109-7"><a href="multivariate-normal.html#cb109-7"></a>Sigma3 &lt;-<span class="st"> </span>Sigma2;  Sigma3[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="op">+</span><span class="dv">48</span>;  Sigma3[<span class="dv">2</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="op">+</span><span class="dv">48</span>;</span>
-<span id="cb109-8"><a href="multivariate-normal.html#cb109-8"></a></span>
-<span id="cb109-9"><a href="multivariate-normal.html#cb109-9"></a>p1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, G, H)</span>
-<span id="cb109-10"><a href="multivariate-normal.html#cb109-10"></a>p2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, G, H)</span>
-<span id="cb109-11"><a href="multivariate-normal.html#cb109-11"></a>p3 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, G, H)</span>
-<span id="cb109-12"><a href="multivariate-normal.html#cb109-12"></a></span>
-<span id="cb109-13"><a href="multivariate-normal.html#cb109-13"></a><span class="cf">for</span>(g <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>G){ <span class="cf">for</span>(h <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>H){</span>
-<span id="cb109-14"><a href="multivariate-normal.html#cb109-14"></a>  p1[g,h] &lt;-<span class="st"> </span><span class="kw">dmvnorm</span>(<span class="kw">c</span>(y1[g],y2[h]), <span class="dt">mean=</span>theta, <span class="dt">sigma=</span>Sigma1, <span class="dt">log=</span>T)</span>
-<span id="cb109-15"><a href="multivariate-normal.html#cb109-15"></a>  p2[g,h] &lt;-<span class="st"> </span><span class="kw">dmvnorm</span>(<span class="kw">c</span>(y1[g],y2[h]), <span class="dt">mean=</span>theta, <span class="dt">sigma=</span>Sigma2, <span class="dt">log=</span>T)</span>
-<span id="cb109-16"><a href="multivariate-normal.html#cb109-16"></a>  p3[g,h] &lt;-<span class="st"> </span><span class="kw">dmvnorm</span>(<span class="kw">c</span>(y1[g],y2[h]), <span class="dt">mean=</span>theta, <span class="dt">sigma=</span>Sigma3, <span class="dt">log=</span>T)</span>
-<span id="cb109-17"><a href="multivariate-normal.html#cb109-17"></a>}}</span>
-<span id="cb109-18"><a href="multivariate-normal.html#cb109-18"></a></span>
-<span id="cb109-19"><a href="multivariate-normal.html#cb109-19"></a>maxie &lt;-<span class="st"> </span><span class="kw">max</span>(p1);  p1 &lt;-<span class="st"> </span>p1 <span class="op">-</span><span class="st"> </span>maxie;  <span class="kw">rm</span>(maxie);  p1 &lt;-<span class="st"> </span><span class="kw">exp</span>(p1);</span>
-<span id="cb109-20"><a href="multivariate-normal.html#cb109-20"></a>maxie &lt;-<span class="st"> </span><span class="kw">max</span>(p2);  p2 &lt;-<span class="st"> </span>p2 <span class="op">-</span><span class="st"> </span>maxie;  <span class="kw">rm</span>(maxie);  p2 &lt;-<span class="st"> </span><span class="kw">exp</span>(p2);</span>
-<span id="cb109-21"><a href="multivariate-normal.html#cb109-21"></a>maxie &lt;-<span class="st"> </span><span class="kw">max</span>(p3);  p3 &lt;-<span class="st"> </span>p3 <span class="op">-</span><span class="st"> </span>maxie;  <span class="kw">rm</span>(maxie);  p3 &lt;-<span class="st"> </span><span class="kw">exp</span>(p3);</span>
-<span id="cb109-22"><a href="multivariate-normal.html#cb109-22"></a>contours &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">001</span>, <span class="fl">.01</span>, <span class="kw">seq</span>(.<span class="dv">05</span>, <span class="fl">.95</span>, <span class="fl">.10</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="multivariate-normal.html#cb110-1"></a>op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb110-2"><a href="multivariate-normal.html#cb110-2"></a></span>
-<span id="cb110-3"><a href="multivariate-normal.html#cb110-3"></a><span class="kw">contour</span>(y1, y2, p1, <span class="dt">levels=</span>contours, <span class="dt">drawlabels=</span>F, </span>
-<span id="cb110-4"><a href="multivariate-normal.html#cb110-4"></a>  <span class="dt">xlab=</span><span class="st">&quot;y1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;y2&quot;</span>, <span class="dt">main=</span><span class="st">&quot;rho=-0.5&quot;</span>)</span>
-<span id="cb110-5"><a href="multivariate-normal.html#cb110-5"></a></span>
-<span id="cb110-6"><a href="multivariate-normal.html#cb110-6"></a><span class="kw">points</span>(<span class="kw">rmvnorm</span>(<span class="dt">n=</span><span class="dv">1000</span>, <span class="dt">mean=</span>theta, <span class="dt">sigma=</span>Sigma1), <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span>.<span class="dv">5</span>)</span>
-<span id="cb110-7"><a href="multivariate-normal.html#cb110-7"></a></span>
-<span id="cb110-8"><a href="multivariate-normal.html#cb110-8"></a><span class="kw">contour</span>(y1, y2, p2, <span class="dt">levels=</span>contours, <span class="dt">drawlabels=</span>F, </span>
-<span id="cb110-9"><a href="multivariate-normal.html#cb110-9"></a>  <span class="dt">xlab=</span><span class="st">&quot;y1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;y2&quot;</span>, <span class="dt">main=</span><span class="st">&quot;rho=0&quot;</span>)</span>
-<span id="cb110-10"><a href="multivariate-normal.html#cb110-10"></a></span>
-<span id="cb110-11"><a href="multivariate-normal.html#cb110-11"></a><span class="kw">points</span>(<span class="kw">rmvnorm</span>(<span class="dt">n=</span><span class="dv">1000</span>, <span class="dt">mean=</span>theta, <span class="dt">sigma=</span>Sigma2), <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span>.<span class="dv">5</span>)</span>
-<span id="cb110-12"><a href="multivariate-normal.html#cb110-12"></a></span>
-<span id="cb110-13"><a href="multivariate-normal.html#cb110-13"></a><span class="kw">contour</span>(y1, y2, p3, <span class="dt">levels=</span>contours, <span class="dt">drawlabels=</span>F, </span>
-<span id="cb110-14"><a href="multivariate-normal.html#cb110-14"></a>  <span class="dt">xlab=</span><span class="st">&quot;y1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;y2&quot;</span>, <span class="dt">main=</span><span class="st">&quot;rho=+0.5&quot;</span>)</span>
-<span id="cb110-15"><a href="multivariate-normal.html#cb110-15"></a></span>
-<span id="cb110-16"><a href="multivariate-normal.html#cb110-16"></a><span class="kw">points</span>(<span class="kw">rmvnorm</span>(<span class="dt">n=</span><span class="dv">1000</span>, <span class="dt">mean=</span>theta, <span class="dt">sigma=</span>Sigma3), <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span>.<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="multivariate-normal.html#cb109-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb109-2"><a href="multivariate-normal.html#cb109-2" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb109-3"><a href="multivariate-normal.html#cb109-3" aria-hidden="true" tabindex="-1"></a>G  <span class="ot">&lt;-</span> <span class="fu">length</span>(y1);  H <span class="ot">&lt;-</span> <span class="fu">length</span>(y2);</span>
+<span id="cb109-4"><a href="multivariate-normal.html#cb109-4" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">50</span>,<span class="dv">50</span>)</span>
+<span id="cb109-5"><a href="multivariate-normal.html#cb109-5" aria-hidden="true" tabindex="-1"></a>Sigma2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">64</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">144</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb109-6"><a href="multivariate-normal.html#cb109-6" aria-hidden="true" tabindex="-1"></a>Sigma1 <span class="ot">&lt;-</span> Sigma2;  Sigma1[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">48</span>;  Sigma1[<span class="dv">2</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">48</span>;</span>
+<span id="cb109-7"><a href="multivariate-normal.html#cb109-7" aria-hidden="true" tabindex="-1"></a>Sigma3 <span class="ot">&lt;-</span> Sigma2;  Sigma3[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="sc">+</span><span class="dv">48</span>;  Sigma3[<span class="dv">2</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="sc">+</span><span class="dv">48</span>;</span>
+<span id="cb109-8"><a href="multivariate-normal.html#cb109-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-9"><a href="multivariate-normal.html#cb109-9" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, G, H)</span>
+<span id="cb109-10"><a href="multivariate-normal.html#cb109-10" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, G, H)</span>
+<span id="cb109-11"><a href="multivariate-normal.html#cb109-11" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, G, H)</span>
+<span id="cb109-12"><a href="multivariate-normal.html#cb109-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-13"><a href="multivariate-normal.html#cb109-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(g <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>G){ <span class="cf">for</span>(h <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>H){</span>
+<span id="cb109-14"><a href="multivariate-normal.html#cb109-14" aria-hidden="true" tabindex="-1"></a>  p1[g,h] <span class="ot">&lt;-</span> <span class="fu">dmvnorm</span>(<span class="fu">c</span>(y1[g],y2[h]), <span class="at">mean=</span>theta, <span class="at">sigma=</span>Sigma1, <span class="at">log=</span>T)</span>
+<span id="cb109-15"><a href="multivariate-normal.html#cb109-15" aria-hidden="true" tabindex="-1"></a>  p2[g,h] <span class="ot">&lt;-</span> <span class="fu">dmvnorm</span>(<span class="fu">c</span>(y1[g],y2[h]), <span class="at">mean=</span>theta, <span class="at">sigma=</span>Sigma2, <span class="at">log=</span>T)</span>
+<span id="cb109-16"><a href="multivariate-normal.html#cb109-16" aria-hidden="true" tabindex="-1"></a>  p3[g,h] <span class="ot">&lt;-</span> <span class="fu">dmvnorm</span>(<span class="fu">c</span>(y1[g],y2[h]), <span class="at">mean=</span>theta, <span class="at">sigma=</span>Sigma3, <span class="at">log=</span>T)</span>
+<span id="cb109-17"><a href="multivariate-normal.html#cb109-17" aria-hidden="true" tabindex="-1"></a>}}</span>
+<span id="cb109-18"><a href="multivariate-normal.html#cb109-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb109-19"><a href="multivariate-normal.html#cb109-19" aria-hidden="true" tabindex="-1"></a>maxie <span class="ot">&lt;-</span> <span class="fu">max</span>(p1);  p1 <span class="ot">&lt;-</span> p1 <span class="sc">-</span> maxie;  <span class="fu">rm</span>(maxie);  p1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(p1);</span>
+<span id="cb109-20"><a href="multivariate-normal.html#cb109-20" aria-hidden="true" tabindex="-1"></a>maxie <span class="ot">&lt;-</span> <span class="fu">max</span>(p2);  p2 <span class="ot">&lt;-</span> p2 <span class="sc">-</span> maxie;  <span class="fu">rm</span>(maxie);  p2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(p2);</span>
+<span id="cb109-21"><a href="multivariate-normal.html#cb109-21" aria-hidden="true" tabindex="-1"></a>maxie <span class="ot">&lt;-</span> <span class="fu">max</span>(p3);  p3 <span class="ot">&lt;-</span> p3 <span class="sc">-</span> maxie;  <span class="fu">rm</span>(maxie);  p3 <span class="ot">&lt;-</span> <span class="fu">exp</span>(p3);</span>
+<span id="cb109-22"><a href="multivariate-normal.html#cb109-22" aria-hidden="true" tabindex="-1"></a>contours <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">001</span>, .<span class="dv">01</span>, <span class="fu">seq</span>(.<span class="dv">05</span>, .<span class="dv">95</span>, .<span class="dv">10</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="multivariate-normal.html#cb110-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb110-2"><a href="multivariate-normal.html#cb110-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="multivariate-normal.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(y1, y2, p1, <span class="at">levels=</span>contours, <span class="at">drawlabels=</span>F, </span>
+<span id="cb110-4"><a href="multivariate-normal.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;y1&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;y2&quot;</span>, <span class="at">main=</span><span class="st">&quot;rho=-0.5&quot;</span>)</span>
+<span id="cb110-5"><a href="multivariate-normal.html#cb110-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-6"><a href="multivariate-normal.html#cb110-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">rmvnorm</span>(<span class="at">n=</span><span class="dv">1000</span>, <span class="at">mean=</span>theta, <span class="at">sigma=</span>Sigma1), <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span>.<span class="dv">5</span>)</span>
+<span id="cb110-7"><a href="multivariate-normal.html#cb110-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-8"><a href="multivariate-normal.html#cb110-8" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(y1, y2, p2, <span class="at">levels=</span>contours, <span class="at">drawlabels=</span>F, </span>
+<span id="cb110-9"><a href="multivariate-normal.html#cb110-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;y1&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;y2&quot;</span>, <span class="at">main=</span><span class="st">&quot;rho=0&quot;</span>)</span>
+<span id="cb110-10"><a href="multivariate-normal.html#cb110-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-11"><a href="multivariate-normal.html#cb110-11" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">rmvnorm</span>(<span class="at">n=</span><span class="dv">1000</span>, <span class="at">mean=</span>theta, <span class="at">sigma=</span>Sigma2), <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span>.<span class="dv">5</span>)</span>
+<span id="cb110-12"><a href="multivariate-normal.html#cb110-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-13"><a href="multivariate-normal.html#cb110-13" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(y1, y2, p3, <span class="at">levels=</span>contours, <span class="at">drawlabels=</span>F, </span>
+<span id="cb110-14"><a href="multivariate-normal.html#cb110-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;y1&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;y2&quot;</span>, <span class="at">main=</span><span class="st">&quot;rho=+0.5&quot;</span>)</span>
+<span id="cb110-15"><a href="multivariate-normal.html#cb110-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-16"><a href="multivariate-normal.html#cb110-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">rmvnorm</span>(<span class="at">n=</span><span class="dv">1000</span>, <span class="at">mean=</span>theta, <span class="at">sigma=</span>Sigma3), <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-76"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-76-1.png" alt="Contour plots for bivariate normal densities" width="672" />
 <p class="caption">
@@ -345,14 +372,17 @@ Figure 12.1: Contour plots for bivariate normal densities
 </div>
 <p>Take the middle density for example. The peak is in the middle. The innermost counter is the collection of all points <span class="math inline">\((y_1, y_2)\)</span> such that <span class="math inline">\(p(y_1, y_2) = 0.95 \times\)</span>max-density. The outermost contour is the set of all points <span class="math inline">\((y_1, y_2)\)</span> such that <span class="math inline">\(p(y_1, y_2) = 0.001\times\)</span> max-density.</p>
 <p>These three distributions have the same <span class="math inline">\(\theta_1 ~(\)</span>mean of <span class="math inline">\(Y_1)\)</span> <span class="math inline">\(\theta_2 ~(\)</span>mean of <span class="math inline">\(Y_2)\)</span> <span class="math inline">\(\sigma_1 ~(\)</span>sd of <span class="math inline">\(Y_1) ~\sigma_2 (\)</span>sd of <span class="math inline">\(Y_2)\)</span> they only differ with respect to their correlation.</p>
-<p>If you want to describe a picture like this: Tell the person where it’s centered how spread out the values (refer to <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma\)</span> values for help with this) and how the variables are correlated.</p>
-<p>The middle plot here shows an instance where the variables are uncorrelated (independent). LHS plot shows a negative correlation. RHS plot shows a positive correlation. To describe the spread you’ll have to read the labels on the axes otherwise every picture of a normal dist looks exactly the same. If I drew two BVN densities both have <span class="math inline">\(\boldsymbol \theta = (0, 0)\)</span> one has <span class="math inline">\(\boldsymbol \Sigma = \begin{pmatrix} 1, 0 \\ 0, 1 \end{pmatrix}\)</span> and one has <span class="math inline">\(\boldsymbol \Sigma = \begin{pmatrix} 100, 0\\ 0, 100\end{pmatrix},\)</span> the two pictures will appear identical. You have to read the labels on the axes to describe the spread in a normal distribution).</p>
+<p>If you want to describe a picture like this: Tell the person where it’s centered, how spread out the values are (refer to <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma\)</span> values for help with this) and how the variables are correlated.</p>
+<p>The middle plot shows an instance where the variables are uncorrelated (independent). LHS plot shows a negative correlation. RHS plot shows a positive correlation. To describe the spread you’ll have to read the labels on the axes otherwise every picture of a normal distribution looks exactly the same. Case in point, if I drew two BVN densities both have <span class="math inline">\(\boldsymbol \theta = (0, 0)\)</span> one has <span class="math inline">\(\boldsymbol \Sigma = \begin{pmatrix} 1, 0 \\ 0, 1 \end{pmatrix}\)</span> and one has <span class="math inline">\(\boldsymbol \Sigma = \begin{pmatrix} 100, 0\\ 0, 100\end{pmatrix},\)</span> the two pictures will appear identical. You have to read the labels on the axes to describe the spread in a normal distribution.</p>
+<p>
+ 
+</p>
 <p>If <span class="math inline">\((Y_1, Y_2)\)</span> are bivariate normal then marginally, <span class="math inline">\(Y_1 \sim \text{Normal}(\theta_1, \sigma_1^2),\)</span> <span class="math inline">\(Y_2 \sim \text{Normal}(\theta_2, \sigma_2^2)\)</span>, <span class="math inline">\(\{Y_2 | Y_1=y_1\} \sim\)</span> Normal. We’ll save that discussion for another day.</p>
 </div>
-<div id="a-semiconjugate-prior-distribution-for-the-mean" class="section level2">
+<div id="a-semiconjugate-prior-distribution-for-the-mean" class="section level2" number="12.3">
 <h2><span class="header-section-number">12.3</span> A semiconjugate prior distribution for the mean</h2>
 <p>Let’s talk about Bayesian inference about the <span class="math inline">\(p\)</span>-vector <span class="math inline">\(\boldsymbol \theta\)</span> and the <span class="math inline">\(p\times p\)</span> covariance matrix <span class="math inline">\(\boldsymbol \Sigma\)</span> in that order.</p>
-<p>Just like we did for univariate normal let’s condition on <span class="math inline">\(\Sigma\)</span> and find the conjugate prior for <span class="math inline">\(\boldsymbol \theta.\)</span> Just as the conjugate prior for the univariate normal sampling model was the univariate normal distribution we will see that the conjugate prior for the mean of a multivariate normal sampling model is multivariate normal.</p>
+<p>Just like we did for univariate normal let’s condition on <span class="math inline">\(\boldsymbol\Sigma\)</span> and find the conjugate prior for <span class="math inline">\(\boldsymbol \theta.\)</span> Just as the conjugate prior for the univariate normal sampling model was the univariate normal distribution we will see that the conjugate prior for the mean of a multivariate normal sampling model is multivariate normal.</p>
 <p>Let <span class="math inline">\(\boldsymbol \theta\)</span> have a <span class="math inline">\(p\)</span>-variate normal distribution with mean vector <span class="math inline">\(\boldsymbol\mu_0\)</span> and covariance matrix <span class="math inline">\(\boldsymbol \Lambda_0\)</span> and let <span class="math inline">\(\{Y_1, …, Y_n | \theta\}\)</span> be iid <span class="math inline">\(p\)</span>-variate Normal <span class="math inline">\((\boldsymbol\theta, \boldsymbol\Sigma)\)</span></p>
 <p>Let’s look at the prior first. I’m only interested in terms that include a <span class="math inline">\(\theta\)</span></p>
 <p><span class="math display">\[
@@ -360,22 +390,24 @@ Figure 12.1: Contour plots for bivariate normal densities
 p(\boldsymbol\theta) &amp;\propto \text{exp}\left\{-\frac{1}{2} \boldsymbol\theta^{T} \mathbf{A}_{0} \boldsymbol\theta+\boldsymbol\theta^{T} b_{0}\right\}
 \end{aligned}
 \]</span></p>
-<p>where, <span class="math inline">\(\mathbf{A}_0 = \boldsymbol\Lambda_0^{-1}\)</span>, <span class="math inline">\(\boldsymbol b_0 = \boldsymbol\Lambda_0^{-1} \boldsymbol\mu_0\)</span> then <span class="math inline">\(\boldsymbol\mu_0 = \Lambda_0 \boldsymbol b_0 = \mathbf{A}_0^{-1} %*% b\)</span></p>
-<p>Consequence: The general form of a MVN density is <span class="math inline">\(p(\boldsymbol\theta) = c \times \text{exp}\{ -0.5 \boldsymbol\theta^T \mathbf{A} \theta + \boldsymbol\theta^T \boldsymbol b \}\)</span> for some matrix <span class="math inline">\(\mathbf{A}\)</span> and vector <span class="math inline">\(\boldsymbol b\)</span>.</p>
+<p>where, <span class="math inline">\(\mathbf{A}_0 = \boldsymbol\Lambda_0^{-1}\)</span>, <span class="math inline">\(\mathbf b_0 = \boldsymbol\Lambda_0^{-1} \boldsymbol\mu_0\)</span> then <span class="math inline">\(\boldsymbol\mu_0 = \boldsymbol\Lambda_0 \mathbf b_0 = \mathbf{A}_0^{-1}\mathbf b\)</span></p>
+<p>Consequence: The general form of a MVN density is <span class="math inline">\(p(\boldsymbol\theta) = c \times \text{exp}\{ -0.5 \boldsymbol\theta^T \mathbf{A} \theta + \boldsymbol\theta^T \mathbf{b} \}\)</span> for some matrix <span class="math inline">\(\mathbf{A}\)</span> and vector <span class="math inline">\(\mathbf b\)</span>.</p>
 <p>Next, the sampling distribution.</p>
 <p><span class="math display">\[
 p(y_1, …, y_n | \theta) \propto \exp \left\{-\frac{1}{2} \boldsymbol{\theta}^{T} \mathbf{A}_{1} \boldsymbol{\theta}+\boldsymbol{\theta}^{T} \boldsymbol{b}_{1}\right\}
 \]</span>
-where <span class="math inline">\(\mathbf{A}_{1}=n \Sigma^{-1},\)</span> <span class="math inline">\(\boldsymbol{b}_{1}=n \Sigma^{-1} {\boldsymbol{\bar y}},\)</span> and <span class="math inline">\({\boldsymbol{\bar y}}=\left(\frac{1}{n} \sum_{i=1}^{n} y_{i, 1}, \ldots, \frac{1}{n} \sum_{i=1}^{n} y_{i, p}\right)^T\)</span>.</p>
+where <span class="math inline">\(\mathbf{A}_{1}=n \boldsymbol\Sigma^{-1},\)</span> <span class="math inline">\(\mathbf{b}_{1}=n \boldsymbol\Sigma^{-1} {\boldsymbol{\bar y}},\)</span> and <span class="math inline">\({\boldsymbol{\bar y}}=\left(\frac{1}{n} \sum_{i=1}^{n} y_{i, 1}, \ldots, \frac{1}{n} \sum_{i=1}^{n} y_{i, p}\right)^T\)</span>.</p>
 <p>Combining the above we get that</p>
 <p><span class="math display">\[\{\boldsymbol \theta \mid \boldsymbol  y_{1}, \ldots, \boldsymbol  y_{n}, \boldsymbol \Sigma\} \sim \operatorname{Normal}_{p}\left(\boldsymbol \mu_{n}, \boldsymbol \Lambda_{n}\right)\]</span>
-where
-<span class="math inline">\(\boldsymbol \Lambda_{n}=\left(\boldsymbol \Lambda_{0}^{-1}+n \boldsymbol \Sigma^{-1}\right)^{-1}\)</span> and <span class="math inline">\(\boldsymbol \mu_{n}=\left(\boldsymbol \Lambda_{0}^{-1}+n \boldsymbol \Sigma^{-1}\right)^{-1}\left(\boldsymbol \Lambda_{0}^{-1} \boldsymbol \mu_{0}+n \boldsymbol \Sigma^{-1} \bar{\boldsymbol y}\right)\)</span></p>
+where</p>
+<p><span class="math inline">\(\boldsymbol \Lambda_{n}=\left(\boldsymbol \Lambda_{0}^{-1}+n \boldsymbol \Sigma^{-1}\right)^{-1}\)</span></p>
+<p>and</p>
+<p><span class="math inline">\(\boldsymbol \mu_{n}=\left(\boldsymbol \Lambda_{0}^{-1}+n \boldsymbol \Sigma^{-1}\right)^{-1}\left(\boldsymbol \Lambda_{0}^{-1} \boldsymbol \mu_{0}+n \boldsymbol \Sigma^{-1} \bar{\boldsymbol y}\right)\)</span></p>
 <p>Just as in the univariate case the posterior precision, or inverse variance, is the sum of the prior precision and the data precision, and the posterior expectation is a weighted average of the prior expectation and the sample mean, weighted by their respective precisions.</p>
 </div>
-<div id="the-inverse-wishart-distribution" class="section level2">
+<div id="the-inverse-wishart-distribution" class="section level2" number="12.4">
 <h2><span class="header-section-number">12.4</span> The inverse-Wishart distribution</h2>
-<p>The conjugate prior for a variance was the inverse-gamma distribution. For multivariate data we have a covariance matrix. A covariance matrix has <span class="math inline">\(p^2\)</span> entries however it must be symmetric, which means <span class="math inline">\(\sigma_{j,k} = \sigma_{k,j}\)</span>. So it’s not really <span class="math inline">\(p^2\)</span> entries it’s something less than that because the top half = bottom half. Also it must be positive definite, which means <span class="math inline">\(\boldsymbol x^T \boldsymbol x &gt; 0\)</span>. We need a probability distribution for covariance matrices, defined on the set of all <span class="math inline">\(p \times p\)</span> symmetric positive definite matrices. This is a very complicated space, you can’t picture it in your head. We can construct such distributions from more basic things.</p>
+<p>For univariate data, the conjugate prior for variance was the inverse-gamma distribution. For multivariate data we have a covariance matrix. A covariance matrix has <span class="math inline">\(p^2\)</span> entries however it must be symmetric, which means <span class="math inline">\(\sigma_{j,k} = \sigma_{k,j}\)</span>. So it’s not really <span class="math inline">\(p^2\)</span> entries it’s something less than that because the top half = bottom half. Also it must be positive definite, which means <span class="math inline">\(\boldsymbol x^T \boldsymbol x &gt; 0\)</span>. We need a probability distribution for covariance matrices, defined on the set of all <span class="math inline">\(p \times p\)</span> symmetric positive definite matrices. This is a very complicated space, you can’t picture it in your head. We can construct such distributions from more basic things.</p>
 <p>Let’s say <span class="math inline">\(\boldsymbol z_1, \boldsymbol z_2, …, \boldsymbol z_n\)</span> are all <span class="math inline">\(p\)</span>-vectors, then <span class="math inline">\(\boldsymbol {z_i z_i}^T\)</span> ( <span class="math inline">\((p \times 1)(1 \times p)\)</span> that’s a <span class="math inline">\(p \times p\)</span> matrix ).
 <span class="math display">\[
 \sum_{i=1}^n \boldsymbol z_i\boldsymbol z_i^T = \mathbf{Z}^T\mathbf{Z}
@@ -383,10 +415,10 @@ where
 <p>is the sum of <span class="math inline">\(n~~ p \times p\)</span> matrices where the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(\mathbf{Z}_{n\times p}\)</span> is <span class="math inline">\(\boldsymbol z_i^T\)</span>.</p>
 <p>A way to construct a “random” covariance matrix is;</p>
 <ol style="list-style-type: decimal">
-<li><p>sample <span class="math inline">\(\boldsymbol z_1,...,\boldsymbol z_{\nu_0} \sim\)</span> iid Normal<span class="math inline">\(_p(\boldsymbol 0, \boldsymbol\Phi_0)\)</span></p></li>
-<li><p>calculate <span class="math inline">\(\sum_{i=1}^{\nu_0} \boldsymbol z_i\boldsymbol z_i^T\)</span>.</p></li>
+<li><p>sample <span class="math inline">\(\boldsymbol z_1,...,\boldsymbol z_{\nu_0} \stackrel{\text{iid}}\sim\)</span> Normal<span class="math inline">\(_p(\boldsymbol 0, \boldsymbol\Phi_0)\)</span></p></li>
+<li><p>calculate <span class="math inline">\(\mathbf{Z}^T\mathbf{Z} =\sum_{i=1}^{\nu_0} \boldsymbol z_i\boldsymbol z_i^T\)</span>.</p></li>
 </ol>
-<p>The result will be a <span class="math inline">\(p\times p\)</span> covariance matrix. as long as <span class="math inline">\(\nu_0 &gt; p\)</span>. This is called the Wishart<span class="math inline">\((\nu_0, \Phi_0)\)</span> distribution <span class="math inline">\(\nu_0\)</span> is called the degrees of freedom and <span class="math inline">\(\Phi_0\)</span> is the scale matrix.</p>
+<p>As long as <span class="math inline">\(\nu_0 &gt; p\)</span>, the result will be a <span class="math inline">\(p\times p\)</span> covariance matrix called the Wishart<span class="math inline">\((\nu_0, \Phi_0)\)</span> distribution <span class="math inline">\(\nu_0\)</span> is called the degrees of freedom and <span class="math inline">\(\Phi_0\)</span> is the scale matrix.</p>
 <ul>
 <li>The expected value, <span class="math inline">\(E(\mathbf{Z}^T\mathbf{Z}),\)</span> is <span class="math inline">\(\nu_0 \boldsymbol\Phi_0\)</span></li>
 <li>It will be symmetric and positive definite</li>
@@ -394,100 +426,111 @@ where
 <p>The Wishart distribution generalizes the gamma distribution (equivalently the chi-square distribution) to higher dimensions. <span class="math inline">\(\nu_0 &gt; p\)</span> guarantees that the <span class="math inline">\(\boldsymbol z_i\)</span> will be linearly independent. In this construction <span class="math inline">\(\nu_0\)</span> must be a positive integer.</p>
 <p>The bigger <span class="math inline">\(\nu_0,\)</span> is the more <span class="math inline">\(\boldsymbol z_i\)</span>’s are being added together the more there will be an “averaging out” of variation between the <span class="math inline">\(\boldsymbol z_i\)</span>’s. So if I have (sum of <span class="math inline">\(n\)</span> things) the bigger <span class="math inline">\(n\)</span> is the more variable this sum is. However the bigger <span class="math inline">\(n\)</span> is the less variable (sum of <span class="math inline">\(n\)</span> things)/<span class="math inline">\(n\)</span> will be.</p>
 <p>It turns out the Wishart distribution is conjugate for the precision matrix in a multivariate normal model which means the inverse-Wishart distribution is conjugate for a covariance matrix in a multivariate normal model. We can define the inverse-Wishart distribution as follows;</p>
-<p>Let <span class="math inline">\(\boldsymbol z_i \sim\)</span> iid Normal<span class="math inline">\(p(\boldsymbol 0, \boldsymbol S_0^{-1})\)</span> then take the “sum of squares” of the <span class="math inline">\(\boldsymbol z_i\)</span>. Now invert that i.e., <span class="math inline">\(\boldsymbol \Sigma = (\mathbf{Z}^T\mathbf{Z})^{-1}.\)</span></p>
-<p>Under this simulation scheme, the precision matrix <span class="math inline">\(\boldsymbol \Sigma^{-1}\)</span> has a Wishart<span class="math inline">\((\nu_0, \boldsymbol S_0^{-1})\)</span> distribution, and the covariance matrix <span class="math inline">\(\boldsymbol \Sigma\)</span>has and inverse-Wishart<span class="math inline">\((\nu_0, \boldsymbol S_0^{-1});\)</span> <span class="math inline">\(\nu_0 =\)</span> degrees of freedom (df), <span class="math inline">\(\boldsymbol S_0^{-1} =\)</span> scale matrix.</p>
+<p>Let <span class="math inline">\(\boldsymbol z_i \stackrel{\text{iid}}\sim\)</span> Normal<span class="math inline">\(_p(\boldsymbol 0, \mathbf S_0^{-1})\)</span> then take the “sum of squares” of the <span class="math inline">\(\boldsymbol z_i\)</span> and invert it, so we have <span class="math inline">\(\boldsymbol \Sigma = (\mathbf{Z}^T\mathbf{Z})^{-1}.\)</span></p>
+<p>Under this simulation scheme, the precision matrix <span class="math inline">\(\mathbf \Sigma^{-1}\)</span> has a Wishart<span class="math inline">\((\nu_0, \boldsymbol S_0^{-1})\)</span> distribution, and the covariance matrix <span class="math inline">\(\boldsymbol \Sigma\)</span> has an inverse-Wishart<span class="math inline">\((\nu_0, \mathbf S_0^{-1})\)</span> where <span class="math inline">\(\nu_0 =\)</span> degrees of freedom (df) and <span class="math inline">\(\mathbf S_0^{-1} =\)</span> scale matrix.</p>
+<p><span class="math display">\[
+\mathrm{E}(\boldsymbol{\Sigma}^{-1})=\nu_{0} \mathbf{S}_{0}^{-1} \quad \text { and } \quad \mathrm{E}(\boldsymbol{\Sigma})=\frac{1}{\nu_{0}-p-1} \mathbf{S}_{0}
+\]</span></p>
 <p>The expectation for a Wishart-distributed random matrix is df <span class="math inline">\(\times\)</span> scale matrix. The expectation for an inverse-Wishart random matrix is inverse of scale matrix divided by (df - <span class="math inline">\(p\)</span> - 1) .</p>
-<p>This should help us figure out how to set a prior distribution for the covariance matrix. A sensible conjugate prior requires two things: (1) a prior best guess for the parameter value and (2) a fair assessment of your degree of confidence in that prior best guess.</p>
-<p>The second thing determines <span class="math inline">\(\nu_0.\)</span> You can’t have have <span class="math inline">\(\nu_0 &lt; p\)</span>, only <span class="math inline">\(\nu_0 &gt; p\)</span>. And to have a prior expectation, you need <span class="math inline">\(\nu_0 &gt; p+1.\)</span> So with very low confidence in your prior belief set <span class="math inline">\(\nu_0 = p+2.\)</span> Whatever you decide for <span class="math inline">\(\nu_0\)</span> set your best guess <span class="math inline">\(\boldsymbol \Sigma_0.\)</span> Set the scale matrix <span class="math inline">\(\boldsymbol S_0^{-1}\)</span> to be the inverse of <span class="math inline">\(\boldsymbol S_0\)</span> where <span class="math inline">\(\boldsymbol S_0 = (\nu_0 -p -1) \boldsymbol\Sigma_0\)</span>.</p>
+<p>This should help us figure out how to set a prior distribution for the covariance matrix. A sensible conjugate prior requires two things: (1) a prior best guess for the parameter value and (2) a fair assessment of your degree of confidence in that prior best guess which determines <span class="math inline">\(\nu_0.\)</span></p>
+<p>You can’t have have <span class="math inline">\(\nu_0 &lt; p\)</span>, only <span class="math inline">\(\nu_0 &gt; p\)</span>. And to have a prior expectation, you need <span class="math inline">\(\nu_0 &gt; p+1.\)</span> So with very low confidence in your prior belief set <span class="math inline">\(\nu_0 = p+2,\)</span> and <span class="math inline">\(\mathbf S_0 = \boldsymbol\Sigma_0.\)</span> Howeber, if we are confident that the true covariance matrix is near some covariance matrix <span class="math inline">\(\boldsymbol\Sigma_0\)</span>, then set the scale matrix <span class="math inline">\(\mathbf S_0^{-1}\)</span> to be the inverse of <span class="math inline">\(\mathbf S_0\)</span> where <span class="math inline">\(\mathbf S_0 = (\nu_0 -p -1) \mathbf\Sigma_0\)</span>.</p>
 </div>
-<div id="full-conditional-distribution-of-the-covariance-matrix" class="section level2">
+<div id="full-conditional-distribution-of-the-covariance-matrix" class="section level2" number="12.5">
 <h2><span class="header-section-number">12.5</span> Full conditional distribution of the covariance matrix</h2>
 <p>If <span class="math inline">\(p(\boldsymbol\Sigma)\)</span> is an inverse-Wishart density and <span class="math inline">\(p(\boldsymbol y | \boldsymbol \theta, \boldsymbol \Sigma)\)</span> is a Normal<span class="math inline">\(_p(\boldsymbol \theta , \boldsymbol \Sigma)\)</span> likelihood then
 <span class="math display">\[
-p(\boldsymbol \Sigma | \boldsymbol y, \boldsymbol \theta) \sim \text{inverse-Wishart}(\nu_0+n, [\boldsymbol S_0+\boldsymbol S_{\theta}]^{-1})
+p(\boldsymbol \Sigma | \boldsymbol y, \boldsymbol \theta) \sim \text{inverse-Wishart}(\nu_0+n, [\mathbf S_0+\mathbf S_{\theta}]^{-1})
 \]</span></p>
-<p><span class="math inline">\(\boldsymbol S_{\theta} = \sum_{i=1}^n (\boldsymbol y_i - \boldsymbol\theta)(\boldsymbol y_i-\boldsymbol\theta)^T\\\)</span></p>
-<p>The posterior expectation of <span class="math inline">\(\boldsymbol\Sigma\)</span> is a weighted average of the prior expectation and the sample covariance matrix (<span class="math inline">\(1/n \times \boldsymbol S_{\theta}\)</span>) conditional on mean <span class="math inline">\(\boldsymbol \theta\)</span> being known.</p>
+<p><span class="math inline">\(\mathbf S_{\theta} = \sum_{i=1}^n (\boldsymbol y_i - \boldsymbol\theta)(\boldsymbol y_i-\boldsymbol\theta)^T\\\)</span></p>
+<p>The posterior expectation of <span class="math inline">\(\boldsymbol\Sigma\)</span> is a weighted average of the prior expectation and the sample covariance matrix (<span class="math inline">\(1/n \times \mathbf S_{\theta}\)</span>) conditional on mean <span class="math inline">\(\boldsymbol \theta\)</span> being known.</p>
 <p><span class="math display">\[
 \begin{array}{l}
 \mathrm{E}\left(\boldsymbol{\Sigma} \mid \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{n}, \boldsymbol{\theta}\right)=\frac{1}{\nu_{0}+n-p-1}\left(\mathbf{S}_{0}+\mathbf{S}_{\theta}\right) \\
 \quad=\frac{\nu_{0}-p-1}{\nu_{0}+n-p-1} \cdot \frac{1}{\nu_{0}-p-1} \mathbf{S}_{0}+\frac{n}{\nu_{0}+n-p-1} \cdot \frac{1}{n} \mathbf{S}_{\theta}
 \end{array}
 \]</span></p>
-<p>So we have full conditional distributions for <span class="math inline">\(\boldsymbol \theta\)</span> and <span class="math inline">\(\boldsymbol \Sigma\)</span>. So we can do a Gibbs sampler! We just come up with a reasonable starting value and alternate between the two full conditionals.</p>
+<p>
+ 
+</p>
+<p>Since we have full conditional distributions for <span class="math inline">\(\boldsymbol \theta\)</span> and <span class="math inline">\(\boldsymbol \Sigma\)</span>, we can do a Gibbs sampler! We just come up with a reasonable starting value and alternate between the two full conditionals.</p>
 <p>Starting values? easy enough. Start <span class="math inline">\(\boldsymbol \theta\)</span> at <span class="math inline">\(\bar{\boldsymbol y}\)</span> (sample mean vector) and start <span class="math inline">\(\boldsymbol \Sigma\)</span> at sample covariance matrix.</p>
-<p>I’m going to skip the discussion of the prior ( see slides 25- 26 ). For <span class="math inline">\(\nu_0\)</span>, we want <span class="math inline">\(\nu_0\)</span> to be small relative to <span class="math inline">\(n\)</span> but we need it to be at least <span class="math inline">\(&gt; p+1\)</span> so set it to <span class="math inline">\(p+2 = 4\)</span> and it will not get a lot of weight relative to <span class="math inline">\(n=22\)</span>. The relative weights in this posterior expectation are <span class="math inline">\(n=22\)</span> for the sample data and <span class="math inline">\(\nu_0 - p - 1 = 4 - 2 - 1 = 1\)</span> for the prior. So the posterior expectation ( conditional on <span class="math inline">\(\boldsymbol \theta\)</span> ) will be a <span class="math inline">\(22/23\)</span> versus <span class="math inline">\(1/23\)</span> weighted toward the data.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="multivariate-normal.html#cb111-1"></a><span class="co"># Reading comprehension example from Chapter 7 of Hoff (2009)</span></span>
-<span id="cb111-2"><a href="multivariate-normal.html#cb111-2"></a><span class="co"># Key in the data</span></span>
-<span id="cb111-3"><a href="multivariate-normal.html#cb111-3"></a>y1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">59</span>, <span class="dv">43</span>, <span class="dv">34</span>, <span class="dv">32</span>, <span class="dv">42</span>, <span class="dv">38</span>, <span class="dv">55</span>, <span class="dv">67</span>, <span class="dv">64</span>, <span class="dv">45</span>, <span class="dv">49</span>, </span>
-<span id="cb111-4"><a href="multivariate-normal.html#cb111-4"></a>        <span class="dv">72</span>, <span class="dv">34</span>, <span class="dv">70</span>, <span class="dv">34</span>, <span class="dv">50</span>, <span class="dv">41</span>, <span class="dv">52</span>, <span class="dv">60</span>, <span class="dv">34</span>, <span class="dv">28</span>, <span class="dv">35</span>)</span>
-<span id="cb111-5"><a href="multivariate-normal.html#cb111-5"></a>y2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">77</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">26</span>, <span class="dv">38</span>, <span class="dv">43</span>, <span class="dv">68</span>, <span class="dv">86</span>, <span class="dv">77</span>, <span class="dv">60</span>, <span class="dv">50</span>, </span>
-<span id="cb111-6"><a href="multivariate-normal.html#cb111-6"></a>        <span class="dv">59</span>, <span class="dv">38</span>, <span class="dv">48</span>, <span class="dv">55</span>, <span class="dv">58</span>, <span class="dv">54</span>, <span class="dv">60</span>, <span class="dv">75</span>, <span class="dv">47</span>, <span class="dv">48</span>, <span class="dv">33</span>)</span>
-<span id="cb111-7"><a href="multivariate-normal.html#cb111-7"></a>y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">cbind</span>(y1, y2));  <span class="kw">rm</span>(y1, y2);</span>
-<span id="cb111-8"><a href="multivariate-normal.html#cb111-8"></a></span>
-<span id="cb111-9"><a href="multivariate-normal.html#cb111-9"></a><span class="co"># y1 is pretest score, y2 is posttest score</span></span>
-<span id="cb111-10"><a href="multivariate-normal.html#cb111-10"></a><span class="co"># Hyperparamaters </span></span>
-<span id="cb111-11"><a href="multivariate-normal.html#cb111-11"></a>mu<span class="fl">.0</span>    &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">50</span>)</span>
-<span id="cb111-12"><a href="multivariate-normal.html#cb111-12"></a>Lambda0 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">625</span>, <span class="fl">312.5</span>, <span class="fl">312.5</span>, <span class="dv">625</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb111-13"><a href="multivariate-normal.html#cb111-13"></a>S<span class="fl">.0</span>     &lt;-<span class="st"> </span>Lambda0;  nu<span class="fl">.0</span> &lt;-<span class="st"> </span><span class="dv">4</span>;</span>
-<span id="cb111-14"><a href="multivariate-normal.html#cb111-14"></a></span>
-<span id="cb111-15"><a href="multivariate-normal.html#cb111-15"></a><span class="co"># Data summaries</span></span>
-<span id="cb111-16"><a href="multivariate-normal.html#cb111-16"></a>n &lt;-<span class="st"> </span><span class="kw">dim</span>(y)[<span class="dv">1</span>]</span>
-<span id="cb111-17"><a href="multivariate-normal.html#cb111-17"></a>p &lt;-<span class="st"> </span><span class="kw">dim</span>(y)[<span class="dv">2</span>]</span>
-<span id="cb111-18"><a href="multivariate-normal.html#cb111-18"></a>ybar &lt;-<span class="st"> </span><span class="kw">apply</span>(y, <span class="dv">2</span>, mean)</span>
-<span id="cb111-19"><a href="multivariate-normal.html#cb111-19"></a>Cov.y &lt;-<span class="st"> </span><span class="kw">cov</span>(y)</span>
-<span id="cb111-20"><a href="multivariate-normal.html#cb111-20"></a>ybar;Cov.y</span></code></pre></div>
+<p><strong>Choosing priors</strong></p>
+<p>We want <span class="math inline">\(\nu_0\)</span> to be small relative to <span class="math inline">\(n\)</span> but we need it to be at least <span class="math inline">\(&gt; p+1\)</span> so set it to <span class="math inline">\(p+2 = 4\)</span> and it will not get a lot of weight relative to <span class="math inline">\(n=22\)</span>.</p>
+<p>The relative weights in this posterior expectation are <span class="math inline">\(n=22\)</span> for the sample data and <span class="math inline">\(\nu_0 - p - 1 = 4 - 2 - 1 = 1\)</span> for the prior. So the posterior expectation ( conditional on <span class="math inline">\(\boldsymbol \theta\)</span> ) will be a <span class="math inline">\(22/23\)</span> versus <span class="math inline">\(1/23\)</span> weighted toward the data.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="multivariate-normal.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading comprehension example from Chapter 7 of Hoff (2009)</span></span>
+<span id="cb111-2"><a href="multivariate-normal.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co"># y1 is pretest score, y2 is posttest score</span></span>
+<span id="cb111-3"><a href="multivariate-normal.html#cb111-3" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">59</span>, <span class="dv">43</span>, <span class="dv">34</span>, <span class="dv">32</span>, <span class="dv">42</span>, <span class="dv">38</span>, <span class="dv">55</span>, <span class="dv">67</span>, <span class="dv">64</span>, <span class="dv">45</span>, <span class="dv">49</span>, </span>
+<span id="cb111-4"><a href="multivariate-normal.html#cb111-4" aria-hidden="true" tabindex="-1"></a>        <span class="dv">72</span>, <span class="dv">34</span>, <span class="dv">70</span>, <span class="dv">34</span>, <span class="dv">50</span>, <span class="dv">41</span>, <span class="dv">52</span>, <span class="dv">60</span>, <span class="dv">34</span>, <span class="dv">28</span>, <span class="dv">35</span>)</span>
+<span id="cb111-5"><a href="multivariate-normal.html#cb111-5" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">77</span>, <span class="dv">39</span>, <span class="dv">46</span>, <span class="dv">26</span>, <span class="dv">38</span>, <span class="dv">43</span>, <span class="dv">68</span>, <span class="dv">86</span>, <span class="dv">77</span>, <span class="dv">60</span>, <span class="dv">50</span>, </span>
+<span id="cb111-6"><a href="multivariate-normal.html#cb111-6" aria-hidden="true" tabindex="-1"></a>        <span class="dv">59</span>, <span class="dv">38</span>, <span class="dv">48</span>, <span class="dv">55</span>, <span class="dv">58</span>, <span class="dv">54</span>, <span class="dv">60</span>, <span class="dv">75</span>, <span class="dv">47</span>, <span class="dv">48</span>, <span class="dv">33</span>)</span>
+<span id="cb111-7"><a href="multivariate-normal.html#cb111-7" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(y1, y2));  <span class="fu">rm</span>(y1, y2);</span>
+<span id="cb111-8"><a href="multivariate-normal.html#cb111-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-9"><a href="multivariate-normal.html#cb111-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyperparamaters </span></span>
+<span id="cb111-10"><a href="multivariate-normal.html#cb111-10" aria-hidden="true" tabindex="-1"></a>mu<span class="fl">.0</span>    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">50</span>)</span>
+<span id="cb111-11"><a href="multivariate-normal.html#cb111-11" aria-hidden="true" tabindex="-1"></a>Lambda0 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">625</span>, <span class="fl">312.5</span>, <span class="fl">312.5</span>, <span class="dv">625</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb111-12"><a href="multivariate-normal.html#cb111-12" aria-hidden="true" tabindex="-1"></a>S<span class="fl">.0</span>     <span class="ot">&lt;-</span> Lambda0;  nu<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">4</span>;</span>
+<span id="cb111-13"><a href="multivariate-normal.html#cb111-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-14"><a href="multivariate-normal.html#cb111-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Data summaries</span></span>
+<span id="cb111-15"><a href="multivariate-normal.html#cb111-15" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(y)[<span class="dv">1</span>]</span>
+<span id="cb111-16"><a href="multivariate-normal.html#cb111-16" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">dim</span>(y)[<span class="dv">2</span>]</span>
+<span id="cb111-17"><a href="multivariate-normal.html#cb111-17" aria-hidden="true" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">apply</span>(y, <span class="dv">2</span>, mean)</span>
+<span id="cb111-18"><a href="multivariate-normal.html#cb111-18" aria-hidden="true" tabindex="-1"></a>Cov.y <span class="ot">&lt;-</span> <span class="fu">cov</span>(y)</span>
+<span id="cb111-19"><a href="multivariate-normal.html#cb111-19" aria-hidden="true" tabindex="-1"></a>ybar</span></code></pre></div>
 <pre><code>##    y1    y2 
 ## 47.18 53.86</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="multivariate-normal.html#cb113-1" aria-hidden="true" tabindex="-1"></a>Cov.y</span></code></pre></div>
 <pre><code>##       y1    y2
 ## y1 182.2 148.4
 ## y2 148.4 243.6</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="multivariate-normal.html#cb114-1"></a><span class="co"># Gibbs sampler approximation to posterior distribution</span></span>
-<span id="cb114-2"><a href="multivariate-normal.html#cb114-2"></a>S     &lt;-<span class="st"> </span><span class="dv">5000</span></span>
-<span id="cb114-3"><a href="multivariate-normal.html#cb114-3"></a>theta &lt;-<span class="st"> </span>ybar  <span class="co"># initial values</span></span>
-<span id="cb114-4"><a href="multivariate-normal.html#cb114-4"></a>Sigma &lt;-<span class="st"> </span>Cov.y <span class="co"># initial values</span></span>
-<span id="cb114-5"><a href="multivariate-normal.html#cb114-5"></a></span>
-<span id="cb114-6"><a href="multivariate-normal.html#cb114-6"></a><span class="co"># Calculations that will be used repeatedly</span></span>
-<span id="cb114-7"><a href="multivariate-normal.html#cb114-7"></a>Lambda0.inv  &lt;-<span class="st"> </span><span class="kw">solve</span>(Lambda0)</span>
-<span id="cb114-8"><a href="multivariate-normal.html#cb114-8"></a>Lam.inv.mu<span class="fl">.0</span> &lt;-<span class="st"> </span>Lambda0.inv <span class="op">%*%</span><span class="st"> </span>mu<span class="fl">.0</span></span>
-<span id="cb114-9"><a href="multivariate-normal.html#cb114-9"></a>nu.n         &lt;-<span class="st"> </span>nu<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n</span>
-<span id="cb114-10"><a href="multivariate-normal.html#cb114-10"></a></span>
-<span id="cb114-11"><a href="multivariate-normal.html#cb114-11"></a><span class="co"># Now generate the Markov chains: theta and Sigma</span></span>
-<span id="cb114-12"><a href="multivariate-normal.html#cb114-12"></a>theta.chain &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, S, p)</span>
-<span id="cb114-13"><a href="multivariate-normal.html#cb114-13"></a>Sigma.chain &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, S, p<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb114-14"><a href="multivariate-normal.html#cb114-14"></a></span>
-<span id="cb114-15"><a href="multivariate-normal.html#cb114-15"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>S)</span>
-<span id="cb114-16"><a href="multivariate-normal.html#cb114-16"></a>{</span>
-<span id="cb114-17"><a href="multivariate-normal.html#cb114-17"></a> n.Sigma.inv &lt;-<span class="st"> </span>n <span class="op">*</span><span class="st"> </span><span class="kw">solve</span>(Sigma)</span>
-<span id="cb114-18"><a href="multivariate-normal.html#cb114-18"></a> Lambda.n &lt;-<span class="st"> </span><span class="kw">solve</span>( Lambda0.inv <span class="op">+</span><span class="st"> </span>n.Sigma.inv) </span>
-<span id="cb114-19"><a href="multivariate-normal.html#cb114-19"></a> mu.n &lt;-<span class="st"> </span>Lambda.n <span class="op">%*%</span><span class="st"> </span>(Lam.inv.mu<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n.Sigma.inv <span class="op">%*%</span><span class="st"> </span>ybar)</span>
-<span id="cb114-20"><a href="multivariate-normal.html#cb114-20"></a> theta &lt;-<span class="st"> </span><span class="kw">rmvnorm</span>(<span class="dv">1</span>, mu.n, Lambda.n)[<span class="dv">1</span>,]</span>
-<span id="cb114-21"><a href="multivariate-normal.html#cb114-21"></a> S.n &lt;-<span class="st"> </span>S<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>(n<span class="dv">-1</span>)<span class="op">*</span>Cov.y <span class="op">+</span><span class="st"> </span>n <span class="op">*</span><span class="st"> </span>(ybar<span class="op">-</span>theta) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(ybar<span class="op">-</span>theta)</span>
-<span id="cb114-22"><a href="multivariate-normal.html#cb114-22"></a> Sigma &lt;-<span class="st"> </span><span class="kw">solve</span>( <span class="kw">rWishart</span>(<span class="dv">1</span>, nu.n, <span class="kw">solve</span>(S.n))[,,<span class="dv">1</span>] )</span>
-<span id="cb114-23"><a href="multivariate-normal.html#cb114-23"></a> theta.chain[s,] &lt;-<span class="st"> </span>theta</span>
-<span id="cb114-24"><a href="multivariate-normal.html#cb114-24"></a> Sigma.chain[s,] &lt;-<span class="st"> </span>Sigma</span>
-<span id="cb114-25"><a href="multivariate-normal.html#cb114-25"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="multivariate-normal.html#cb115-1"></a><span class="co"># posterior covariance matrix</span></span>
-<span id="cb115-2"><a href="multivariate-normal.html#cb115-2"></a><span class="kw">matrix</span>(<span class="kw">apply</span>(Sigma.chain, <span class="dv">2</span>, mean),<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="multivariate-normal.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gibbs sampler approximation to posterior distribution</span></span>
+<span id="cb115-2"><a href="multivariate-normal.html#cb115-2" aria-hidden="true" tabindex="-1"></a>S     <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb115-3"><a href="multivariate-normal.html#cb115-3" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> ybar  <span class="co"># initial values</span></span>
+<span id="cb115-4"><a href="multivariate-normal.html#cb115-4" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> Cov.y <span class="co"># initial values</span></span>
+<span id="cb115-5"><a href="multivariate-normal.html#cb115-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-6"><a href="multivariate-normal.html#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculations that will be used repeatedly</span></span>
+<span id="cb115-7"><a href="multivariate-normal.html#cb115-7" aria-hidden="true" tabindex="-1"></a>Lambda0.inv  <span class="ot">&lt;-</span> <span class="fu">solve</span>(Lambda0)</span>
+<span id="cb115-8"><a href="multivariate-normal.html#cb115-8" aria-hidden="true" tabindex="-1"></a>Lam.inv.mu<span class="fl">.0</span> <span class="ot">&lt;-</span> Lambda0.inv <span class="sc">%*%</span> mu<span class="fl">.0</span></span>
+<span id="cb115-9"><a href="multivariate-normal.html#cb115-9" aria-hidden="true" tabindex="-1"></a>nu.n         <span class="ot">&lt;-</span> nu<span class="fl">.0</span> <span class="sc">+</span> n</span>
+<span id="cb115-10"><a href="multivariate-normal.html#cb115-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-11"><a href="multivariate-normal.html#cb115-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Now generate the Markov chains: theta and Sigma</span></span>
+<span id="cb115-12"><a href="multivariate-normal.html#cb115-12" aria-hidden="true" tabindex="-1"></a>theta.chain <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, p)</span>
+<span id="cb115-13"><a href="multivariate-normal.html#cb115-13" aria-hidden="true" tabindex="-1"></a>Sigma.chain <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, p<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb115-14"><a href="multivariate-normal.html#cb115-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-15"><a href="multivariate-normal.html#cb115-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb115-16"><a href="multivariate-normal.html#cb115-16" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb115-17"><a href="multivariate-normal.html#cb115-17" aria-hidden="true" tabindex="-1"></a> n.Sigma.inv <span class="ot">&lt;-</span> n <span class="sc">*</span> <span class="fu">solve</span>(Sigma)</span>
+<span id="cb115-18"><a href="multivariate-normal.html#cb115-18" aria-hidden="true" tabindex="-1"></a> Lambda.n <span class="ot">&lt;-</span> <span class="fu">solve</span>( Lambda0.inv <span class="sc">+</span> n.Sigma.inv) </span>
+<span id="cb115-19"><a href="multivariate-normal.html#cb115-19" aria-hidden="true" tabindex="-1"></a> mu.n <span class="ot">&lt;-</span> Lambda.n <span class="sc">%*%</span> (Lam.inv.mu<span class="fl">.0</span> <span class="sc">+</span> n.Sigma.inv <span class="sc">%*%</span> ybar)</span>
+<span id="cb115-20"><a href="multivariate-normal.html#cb115-20" aria-hidden="true" tabindex="-1"></a> theta <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, mu.n, Lambda.n)[<span class="dv">1</span>,]</span>
+<span id="cb115-21"><a href="multivariate-normal.html#cb115-21" aria-hidden="true" tabindex="-1"></a> S.n <span class="ot">&lt;-</span> S<span class="fl">.0</span> <span class="sc">+</span> (n<span class="dv">-1</span>)<span class="sc">*</span>Cov.y <span class="sc">+</span> n <span class="sc">*</span> (ybar<span class="sc">-</span>theta) <span class="sc">%*%</span> <span class="fu">t</span>(ybar<span class="sc">-</span>theta)</span>
+<span id="cb115-22"><a href="multivariate-normal.html#cb115-22" aria-hidden="true" tabindex="-1"></a> Sigma <span class="ot">&lt;-</span> <span class="fu">solve</span>( <span class="fu">rWishart</span>(<span class="dv">1</span>, nu.n, <span class="fu">solve</span>(S.n))[,,<span class="dv">1</span>] )</span>
+<span id="cb115-23"><a href="multivariate-normal.html#cb115-23" aria-hidden="true" tabindex="-1"></a> theta.chain[s,] <span class="ot">&lt;-</span> theta</span>
+<span id="cb115-24"><a href="multivariate-normal.html#cb115-24" aria-hidden="true" tabindex="-1"></a> Sigma.chain[s,] <span class="ot">&lt;-</span> Sigma</span>
+<span id="cb115-25"><a href="multivariate-normal.html#cb115-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="multivariate-normal.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior covariance matrix</span></span>
+<span id="cb116-2"><a href="multivariate-normal.html#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">apply</span>(Sigma.chain, <span class="dv">2</span>, mean),<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##       [,1]  [,2]
 ## [1,] 202.6 156.4
 ## [2,] 156.4 260.9</code></pre>
 <p><strong>Posterior summaries</strong></p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="multivariate-normal.html#cb117-1"></a><span class="co"># 95% interval for theta2 - theta1</span></span>
-<span id="cb117-2"><a href="multivariate-normal.html#cb117-2"></a><span class="kw">quantile</span>(theta.chain[,<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>theta.chain[,<span class="dv">1</span>], <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="multivariate-normal.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% interval for theta2 - theta1</span></span>
+<span id="cb118-2"><a href="multivariate-normal.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(theta.chain[,<span class="dv">2</span>] <span class="sc">-</span> theta.chain[,<span class="dv">1</span>], <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span></code></pre></div>
 <pre><code>##   2.5%    50%  97.5% 
 ##  1.484  6.600 11.795</code></pre>
 <p>We estimate that <span class="math inline">\(\theta_2 - \theta_1\)</span> is between 1.5 and 11.8</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="multivariate-normal.html#cb119-1"></a><span class="co"># Pr(theta2 &gt; theta1 | y)</span></span>
-<span id="cb119-2"><a href="multivariate-normal.html#cb119-2"></a><span class="kw">mean</span>(theta.chain[,<span class="dv">2</span>] <span class="op">&gt;</span><span class="st"> </span>theta.chain[,<span class="dv">1</span>])</span></code></pre></div>
+<p>
+ 
+</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="multivariate-normal.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pr(theta2 &gt; theta1 | y)</span></span>
+<span id="cb120-2"><a href="multivariate-normal.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(theta.chain[,<span class="dv">2</span>] <span class="sc">&gt;</span> theta.chain[,<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] 0.9936</code></pre>
 <p><span class="math inline">\(Pr(\theta_2 &gt; \theta_1 | \boldsymbol y) &gt; 0.99\)</span>. So very strong evidence that the instruction program is effective.</p>
 <p>
  
 </p>
 <p>We can also draw a scatterplot of the simulated pairs, <span class="math inline">\((\theta_1^{(s)}, \theta_2^{(s)}),\)</span> to approximate the marginal posterior <span class="math inline">\(p(\theta_1, \theta_2 | \boldsymbol y)\)</span></p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="multivariate-normal.html#cb121-1"></a><span class="kw">plot</span>(theta.chain, <span class="dt">cex=</span>.<span class="dv">5</span>, <span class="dt">xlab=</span><span class="st">&quot;theta1&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;theta2&quot;</span>)</span>
-<span id="cb121-2"><a href="multivariate-normal.html#cb121-2"></a><span class="kw">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="multivariate-normal.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta.chain, <span class="at">cex=</span>.<span class="dv">5</span>, <span class="at">xlab=</span><span class="fu">expression</span>(theta[<span class="dv">1</span>]), <span class="at">ylab=</span><span class="fu">expression</span>(theta[<span class="dv">2</span>]))</span>
+<span id="cb122-2"><a href="multivariate-normal.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-82"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-82-1.png" alt="Marginal posterior distribution of (theta1, theta2)" width="672" />
 <p class="caption">
@@ -499,18 +542,18 @@ Figure 12.2: Marginal posterior distribution of (theta1, theta2)
  
 </p>
 <p>Now let’s ask a slightly different question. What is the probability that a randomly selected child will score higher on the second exam than on the first?</p>
-<p>I want to sample from the posterior predictive distribution <span class="math inline">\(p(\tilde y|\boldsymbol y)\)</span>.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="multivariate-normal.html#cb122-1"></a><span class="co"># Posterior predictive simulations </span></span>
-<span id="cb122-2"><a href="multivariate-normal.html#cb122-2"></a>Y.tilde &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, S, p)</span>
-<span id="cb122-3"><a href="multivariate-normal.html#cb122-3"></a></span>
-<span id="cb122-4"><a href="multivariate-normal.html#cb122-4"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>S){ </span>
-<span id="cb122-5"><a href="multivariate-normal.html#cb122-5"></a> Y.tilde[s,] &lt;-<span class="st"> </span><span class="kw">rmvnorm</span>(<span class="dv">1</span>, <span class="dt">mean=</span>theta.chain[s,], </span>
-<span id="cb122-6"><a href="multivariate-normal.html#cb122-6"></a>               <span class="dt">sigma=</span><span class="kw">matrix</span>(Sigma.chain[s,],<span class="dv">2</span>,<span class="dv">2</span>))[<span class="dv">1</span>,]</span>
-<span id="cb122-7"><a href="multivariate-normal.html#cb122-7"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="multivariate-normal.html#cb123-1"></a><span class="kw">mean</span>(Y.tilde[,<span class="dv">2</span>] <span class="op">&gt;</span><span class="st"> </span>Y.tilde[,<span class="dv">1</span>])</span></code></pre></div>
+<p>To answer this, we sample from the posterior predictive distribution <span class="math inline">\(p(\tilde y|\boldsymbol y)\)</span>.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="multivariate-normal.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior predictive simulations </span></span>
+<span id="cb123-2"><a href="multivariate-normal.html#cb123-2" aria-hidden="true" tabindex="-1"></a>Y.tilde <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, p)</span>
+<span id="cb123-3"><a href="multivariate-normal.html#cb123-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-4"><a href="multivariate-normal.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S){ </span>
+<span id="cb123-5"><a href="multivariate-normal.html#cb123-5" aria-hidden="true" tabindex="-1"></a> Y.tilde[s,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>theta.chain[s,], </span>
+<span id="cb123-6"><a href="multivariate-normal.html#cb123-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">sigma=</span><span class="fu">matrix</span>(Sigma.chain[s,],<span class="dv">2</span>,<span class="dv">2</span>))[<span class="dv">1</span>,]</span>
+<span id="cb123-7"><a href="multivariate-normal.html#cb123-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="multivariate-normal.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Y.tilde[,<span class="dv">2</span>] <span class="sc">&gt;</span> Y.tilde[,<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] 0.7178</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="multivariate-normal.html#cb125-1"></a><span class="kw">plot</span>(Y.tilde, <span class="dt">cex=</span>.<span class="dv">5</span>, <span class="dt">xlab=</span><span class="st">&quot;y1.tilde&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;y2.tilde&quot;</span>) </span>
-<span id="cb125-2"><a href="multivariate-normal.html#cb125-2"></a><span class="kw">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="multivariate-normal.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y.tilde, <span class="at">cex=</span>.<span class="dv">5</span>, <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">tilde</span>(y[<span class="dv">1</span>])), <span class="at">ylab=</span><span class="fu">expression</span>(<span class="fu">tilde</span>(y[<span class="dv">2</span>]))) </span>
+<span id="cb126-2"><a href="multivariate-normal.html#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-85"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-85-1.png" alt="Posterior predictive distribution" width="672" />
 <p class="caption">
@@ -526,8 +569,8 @@ Figure 12.3: Posterior predictive distribution
           </div>
         </div>
       </div>
-<a href="mcmc-diagnostics.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="mcmc-diagnostics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="group-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

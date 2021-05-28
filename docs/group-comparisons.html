@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lecture 13 Group comparisons | Bayesian Statistics notes from summer 2021</title>
+  <meta name="description" content="Lecture 13 Group comparisons | Bayesian Statistics notes from summer 2021" />
+  <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lecture 13 Group comparisons | Bayesian Statistics notes from summer 2021" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lecture 13 Group comparisons | Bayesian Statistics notes from summer 2021" />
+  
+  
+  
+
+<meta name="author" content="Chisom Onyishi" />
+
+
+<meta name="date" content="2021-05-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multivariate-normal.html"/>
+
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
+<li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
+<li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
+<li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
+<li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
+<li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
+<li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
+<li class="chapter" data-level="6.4" data-path="monte-carlo.html"><a href="monte-carlo.html#posterior-inference-for-arbitrary-functions"><i class="fa fa-check"></i><b>6.4</b> Posterior inference for arbitrary functions</a></li>
+<li class="chapter" data-level="6.5" data-path="monte-carlo.html"><a href="monte-carlo.html#example-log-odds"><i class="fa fa-check"></i><b>6.5</b> Example: Log-odds</a></li>
+<li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
+<li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
+<li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
+<li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
+<li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
+<li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
+<li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
+<li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
+<li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
+<li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
+<li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
+<li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="10.4" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-midge-wing-length-2"><i class="fa fa-check"></i><b>10.4</b> Example: Midge wing length</a></li>
+<li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
+<li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
+<li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
+<li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
+<li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
+<li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
+<li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
+<li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
+<li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.2</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics notes from summer 2021</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="group-comparisons" class="section level1" number="13">
+<h1><span class="header-section-number">Lecture 13</span> Group comparisons</h1>
+<p><tt>The following notes, mostly transcribed from Neath(0524,2021) lecture, summarize section 8.1 of Hoff(2009).</tt></p>
+<p>
+ 
+</p>
+<p>What’s going on with our masterplan? We have jumped from 07a to 08a there was to be a 07b but we’re skipping that at least for now. We were two days behind schedule, by cancelling the 07b lesson we’re now one day behind.</p>
+<div id="comparing-two-groups" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Comparing two groups</h2>
+<p>We have a concrete problem to motivate us</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="group-comparisons.html#cb127-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">52.11</span>, <span class="fl">57.65</span>, <span class="fl">66.44</span>, <span class="fl">44.68</span>, <span class="fl">40.57</span>, <span class="fl">35.04</span>, <span class="fl">50.71</span>, <span class="fl">66.17</span>,</span>
+<span id="cb127-2"><a href="group-comparisons.html#cb127-2" aria-hidden="true" tabindex="-1"></a>        <span class="fl">39.43</span>, <span class="fl">46.17</span>, <span class="fl">58.76</span>, <span class="fl">47.97</span>, <span class="fl">39.18</span>, <span class="fl">64.63</span>, <span class="fl">69.38</span>, <span class="fl">32.38</span>,</span>
+<span id="cb127-3"><a href="group-comparisons.html#cb127-3" aria-hidden="true" tabindex="-1"></a>        <span class="fl">29.98</span>, <span class="fl">59.32</span>, <span class="fl">43.04</span>, <span class="fl">57.83</span>, <span class="fl">46.07</span>, <span class="fl">47.74</span>, <span class="fl">48.66</span>, <span class="fl">40.80</span>,</span>
+<span id="cb127-4"><a href="group-comparisons.html#cb127-4" aria-hidden="true" tabindex="-1"></a>        <span class="fl">66.32</span>, <span class="fl">53.70</span>, <span class="fl">52.42</span>, <span class="fl">71.38</span>, <span class="fl">59.66</span>, <span class="fl">47.52</span>, <span class="fl">39.51</span>)</span>
+<span id="cb127-5"><a href="group-comparisons.html#cb127-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-6"><a href="group-comparisons.html#cb127-6" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">52.87</span>, <span class="fl">50.03</span>, <span class="fl">41.51</span>, <span class="fl">37.42</span>, <span class="fl">64.42</span>, <span class="fl">45.44</span>, <span class="fl">46.06</span>, <span class="fl">46.37</span>,</span>
+<span id="cb127-7"><a href="group-comparisons.html#cb127-7" aria-hidden="true" tabindex="-1"></a>        <span class="fl">46.66</span>, <span class="fl">29.01</span>, <span class="fl">35.69</span>, <span class="fl">49.16</span>, <span class="fl">55.90</span>, <span class="fl">45.84</span>, <span class="fl">35.44</span>, <span class="fl">43.21</span>,</span>
+<span id="cb127-8"><a href="group-comparisons.html#cb127-8" aria-hidden="true" tabindex="-1"></a>        <span class="fl">48.36</span>, <span class="fl">74.14</span>, <span class="fl">46.76</span>, <span class="fl">36.97</span>, <span class="fl">43.84</span>, <span class="fl">43.24</span>, <span class="fl">56.90</span>, <span class="fl">47.64</span>,</span>
+<span id="cb127-9"><a href="group-comparisons.html#cb127-9" aria-hidden="true" tabindex="-1"></a>        <span class="fl">38.84</span>, <span class="fl">42.96</span>, <span class="fl">41.58</span>, <span class="fl">45.96</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="group-comparisons.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">list</span>(y1, y2), <span class="at">ylab=</span><span class="st">&quot;score&quot;</span>, </span>
+<span id="cb128-2"><a href="group-comparisons.html#cb128-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">names=</span><span class="fu">c</span>(<span class="st">&quot;school 1&quot;</span>, <span class="st">&quot;school 2&quot;</span>), <span class="at">col=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-88"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-88-1.png" alt="Boxplots of samples of 10th grade math scores from two schools" width="672" />
+<p class="caption">
+Figure 13.1: Boxplots of samples of 10th grade math scores from two schools
+</p>
+</div>
+<p>The appearance is: mean score at school 1 is higher than that at school 2. But these 31 and 28 students are not the entire the entire school, they are just a sample from a larger population of 10th grade students. So might this difference in mean score be attributable to sampling error? i.e, might a different set of 31 and 28 students give different means? How do we test this?</p>
+<p>Let <span class="math inline">\(\theta_1 =\)</span> mean score at school 1 (that’s the population mean!) <span class="math inline">\(\theta_2 =\)</span> mean score at school 2 (population mean!)</p>
+<p>We want to test:</p>
+<p><span class="math inline">\(H_0: \theta_1 = \theta_2\)</span> against</p>
+<p><span class="math inline">\(H_a: \theta_1 \neq \theta_2\)</span></p>
+<p>If we assume that both populations are normal with the same variance just possibly different mean then we can conduct this test by two-sample t-test .</p>
+<p>The <span class="math inline">\(t\)</span>-statistic:</p>
+<p><span class="math display">\[
+t(\boldsymbol y_1, \boldsymbol y_2) = \frac{\bar y_1 - \bar y_2}{s_p\sqrt{1/n_1 + 1/n_2}}, \text{ where } s_p^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1 + n_2 -2}
+\]</span>
+This is the classic test statistic for classical hypothesis testing (not bayesian). Our best estimate of <span class="math inline">\(\sigma\)</span> (assuming equal variance) is the pooled sample standard deviation. A test statistic measures the difference between the data you got and the data you’d have expected if <span class="math inline">\(H_0\)</span>(null hypothesis) were true. The data we got had a difference in means of about 4.66 points. What we’d expect if <span class="math inline">\(H_0\)</span> were true is no difference in sample means.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="group-comparisons.html#cb129-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(y1);  y1bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(y1);  s1 <span class="ot">&lt;-</span> <span class="fu">sd</span>(y1);</span>
+<span id="cb129-2"><a href="group-comparisons.html#cb129-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(y2);  y2bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(y2);  s2 <span class="ot">&lt;-</span> <span class="fu">sd</span>(y2);</span>
+<span id="cb129-3"><a href="group-comparisons.html#cb129-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-4"><a href="group-comparisons.html#cb129-4" aria-hidden="true" tabindex="-1"></a>y1bar<span class="sc">-</span>y2bar</span></code></pre></div>
+<pre><code>## [1] 4.663</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="group-comparisons.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pooled sample standard deviation</span></span>
+<span id="cb131-2"><a href="group-comparisons.html#cb131-2" aria-hidden="true" tabindex="-1"></a>(sp      <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ( (n1<span class="dv">-1</span>)<span class="sc">*</span>s1<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (n2<span class="dv">-1</span>)<span class="sc">*</span>s2<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (n1<span class="sc">+</span>n2<span class="dv">-2</span>)) )</span></code></pre></div>
+<pre><code>## [1] 10.27</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="group-comparisons.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="co"># test-statistic</span></span>
+<span id="cb133-2"><a href="group-comparisons.html#cb133-2" aria-hidden="true" tabindex="-1"></a>(t.stat <span class="ot">&lt;-</span> (y1bar<span class="sc">-</span> y2bar) <span class="sc">/</span> (sp <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>n1 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2)) )</span></code></pre></div>
+<pre><code>## [1] 1.742</code></pre>
+<p>We get t-stat <span class="math inline">\(= 1.74\)</span>. The difference in sample means that we observed is <span class="math inline">\(1.74\)</span> standard errors greater than the difference we’d expect to observe if <span class="math inline">\(H_0\)</span> were true.</p>
+<p>If <span class="math inline">\(H_0\)</span> is true the <span class="math inline">\(t\)</span>-statistic has a null sampling distribution that is the t-distribution with degrees of freedom <span class="math inline">\(= n_1 + n_2 - 2=57\)</span>. We expect the t-stat to not be far out in the t-distribution.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="group-comparisons.html#cb135-1" aria-hidden="true" tabindex="-1"></a>tvals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.01</span>)</span>
+<span id="cb135-2"><a href="group-comparisons.html#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tvals, <span class="fu">dt</span>(tvals, <span class="at">df=</span>n1<span class="sc">+</span>n2<span class="dv">-2</span>), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">ylab=</span><span class="st">&quot;&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb135-3"><a href="group-comparisons.html#cb135-3" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="fl">1.74</span>,<span class="dv">0</span>,<span class="fl">1.74</span>, <span class="fu">dt</span>(<span class="fl">1.74</span>, <span class="at">df=</span>n1<span class="sc">+</span>n2<span class="dv">-2</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">3</span>)</span>
+<span id="cb135-4"><a href="group-comparisons.html#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="sc">-</span><span class="fl">1.74</span>,<span class="dv">0</span>,<span class="sc">-</span><span class="fl">1.74</span>, <span class="fu">dt</span>(<span class="fl">1.74</span>,<span class="at">df=</span>n1<span class="sc">+</span>n2<span class="dv">-2</span>), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-91"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-91-1.png" alt="The null distribution for testing equality of the population means. The pink line indicates the observed value of the t-statistic." width="672" />
+<p class="caption">
+Figure 13.2: The null distribution for testing equality of the population means. The pink line indicates the observed value of the t-statistic.
+</p>
+</div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="group-comparisons.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="co"># two-sided p-value </span></span>
+<span id="cb136-2"><a href="group-comparisons.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="fu">abs</span>(t.stat), <span class="at">df=</span>n1<span class="sc">+</span>n2<span class="dv">-2</span>))</span></code></pre></div>
+<pre><code>## [1] 0.08693</code></pre>
+<p>P-value is the measure of the strength against the null hypothesis. The smaller the p-value the more unlikely would be the data you got if the null hypothesis were true.</p>
+<p>If the two populations indeed follow the same normal population, then the <em>pre-experimental</em> probability of sampling a dataset that would generate a value of <span class="math inline">\(t(\boldsymbol Y_1, \boldsymbol Y_2)\)</span> greater in absolute value than 1.74 is 8.7%</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="group-comparisons.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Or just go</span></span>
+<span id="cb138-2"><a href="group-comparisons.html#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(y1, y2, <span class="at">var.equal=</span>T)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  y1 and y2
+## t = 1.7, df = 57, p-value = 0.09
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.6977 10.0234
+## sample estimates:
+## mean of x mean of y 
+##     50.81     46.15</code></pre>
+<p>For a two-sided alternative hypothesis the p-value counts both tail probabilities. P-value <span class="math inline">\(= 0.087\)</span> is generally considered (by convention) to be not very strong evidence against <span class="math inline">\(H_0.\)</span> The data we observed would have been not entirely unexpected with <span class="math inline">\(H_0\)</span> being true so it’s only weak evidence that <span class="math inline">\(H_0\)</span> is false.</p>
+<p>If our job is to estimate <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2,\)</span> the mean scores at the two schools, we have a decision to make. Should we combine the information at both schools and report pooled estimates for both?</p>
+<ul>
+<li><span class="math inline">\((n_1 \bar y_1+ n_2\bar y_2) / (n_1 + n_2)\)</span></li>
+</ul>
+<p>Or report separate estimates?</p>
+<ul>
+<li><span class="math inline">\(\hat \theta_1 = \bar y_1\)</span></li>
+<li><span class="math inline">\(\hat \theta_2 = \bar y_2\)</span></li>
+</ul>
+<p>One proposed recipe for making this decision is to do it based on the result of the significance test. Conduct a test of <span class="math inline">\(H_0: \theta_1 = \theta_2\)</span>. If you reject this <span class="math inline">\(H_0\)</span> then you’ll want to report separate estimates. If you fail to reject interpret this to mean we “accept” the null and report the the pooled estimate.</p>
+<p><em>Model selection based on p-values:</em></p>
+<p>A recipe for parameter estimation based on model selection (deciding between single mean or separate-means model).</p>
+<p>Test</p>
+<p><span class="math inline">\(H_0 : \theta_1 = \theta_2\)</span></p>
+<p>Reject if p-value <span class="math inline">\(&lt; \alpha\)</span>, take <span class="math inline">\(\alpha = 0.05\)</span></p>
+<p>If we reject report the separate estimates i.e., <span class="math inline">\(\hat \theta_1 = \bar y_1\)</span> and <span class="math inline">\(\hat \theta_2 = \bar y_2\)</span>.</p>
+<p>If we fail to reject then “accept” <span class="math inline">\(H_0\)</span> and report the combined estimate i.e., <span class="math inline">\(\hat{\theta}_{1}=\hat{\theta}_{2}=\left(\sum y_{i, 1}+\sum y_{i, 2}\right) /\left(n_{1}+n_{2}\right)\)</span></p>
+<p>This is not entirely satisfactory. In this example (following this recipe) our conclusion would be; Do not reject the null. So take the average score of all <span class="math inline">\(31 + 28 = 59\)</span> students as the estimated average score for both schools. On the other hand the data suggest <span class="math inline">\(\theta_1 &gt; \theta_2.\)</span> It wasn’t conclusive statistical proof but it’s what the data indicated. So maybe it would be better to use separate estimates. On the other hand, suppose we get a p-value of <span class="math inline">\(0.045\)</span> or <span class="math inline">\(0.049\)</span>? In general, if you are following a methodology that will do one thing if you get a p-value <span class="math inline">\(= 0.049\)</span> and something substantially different if you get a p-value of <span class="math inline">\(0.051\)</span> you need to rethink your life choices.</p>
+<p>Another way to think about this: We are saying that we will estimate <span class="math inline">\(\theta_1\)</span> (mean score in school 1) by a weighted average <span class="math inline">\(w\bar y_1 + (1-w) \bar y_2\)</span> (weighted average of the two school averages). It makes sense that <span class="math inline">\(w\)</span> is closer to 1 than 0 but maybe the observed scores of students at school 2 contain valuable info about the average score at school 1. That’s the big insight of <strong>hierarchical statistical models</strong> the idea that that data from different (but similar) sources can contribute to our estimation at the current source. This is obviously a very Bayesian idea.</p>
+<p>What that naïve testing-based recipe says: is either take <span class="math inline">\(w = 1\)</span> or take <span class="math inline">\(w \approx 1/2\)</span>. What if there’s a better answer somewhere in between? Wouldn’t it be cool to have a method that would return the estimate <span class="math inline">\(\hat \theta_1 = w\bar y_1 + (1-w) \bar y_2\)</span> and would tell us what <span class="math inline">\(w\)</span> should be?!</p>
+<p><span class="math display">\[
+w=\begin{cases} 1 \hspace{2.9cm} \text{ if } p &lt; 0.05\\
+n_1/(n_1+n_2) \quad \text{ otherwise }
+\end{cases}
+\]</span></p>
+<p>The method that does this is the Bayesian hierarchical model.</p>
+</div>
+<div id="bayesmodel" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> A Bayesian model</h2>
+<p>Let’s make a hierarchical Bayesian model for estimating two related means.</p>
+<p>Consider the sampling model:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Y_{i, 1} &amp;=\mu+\delta+\epsilon_{i, 1} \\
+Y_{i, 2} &amp;=\mu-\delta+\epsilon_{i, 2} \\
+\epsilon_{i, j} &amp; \sim \text { iid } \operatorname{Normal}\left(0, \sigma^{2}\right)
+\end{aligned}
+\]</span></p>
+<p>This model says: The <span class="math inline">\(i\)</span>th score at school <span class="math inline">\(j\)</span> is <span class="math inline">\(\mu + \delta\)</span> for <span class="math inline">\(j=1\)</span> or <span class="math inline">\(\mu -\delta\)</span> for <span class="math inline">\(j=2\)</span> plus <span class="math inline">\(\epsilon_{i,j}\)</span> (student random effect).</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> is the overall mean at both schools</li>
+<li><span class="math inline">\(i\)</span> is the unit, <span class="math inline">\(j\)</span> is the group(school effect)</li>
+</ul>
+<p><span class="math inline">\(\mu\)</span> and <span class="math inline">\(\delta\)</span> are model parameters. The third is <span class="math inline">\(\sigma^2\)</span> the variance of the random error term. A reparameterization of the two-means model is;</p>
+<ul>
+<li><span class="math inline">\(\theta_1 = \mu + \delta,\)</span></li>
+<li><span class="math inline">\(\theta_2 = \mu - \delta\)</span>,</li>
+<li><span class="math inline">\(\mu = (\theta_1+\theta_2) / 2\)</span></li>
+<li><span class="math inline">\(\delta = (\theta_1 - \theta_2) / 2\)</span>. Hence <span class="math inline">\(2\times\delta\)</span> is the difference in means</li>
+<li><span class="math inline">\(\sigma^2 =\)</span> variance among scores by students at the same school (within group variance)</li>
+</ul>
+<p>The <strong>conjugate prior</strong> for this model:</p>
+<p><span class="math inline">\(\mu \sim \text{Normal}(\mu_0, \gamma_0^2)\)</span></p>
+<p><span class="math inline">\(\delta \sim \text{Normal}(\delta_0, \tau_0^2)\)</span> and</p>
+<p><span class="math inline">\(\sigma^2 \sim\)</span> Inverse-gamma<span class="math inline">\((\nu_0/2,~\nu_0\sigma_0^2/2)\)</span></p>
+<p>
+ 
+</p>
+<p><strong>The posterior full conditionals:</strong></p>
+<p><span class="math inline">\(\{\mu|\boldsymbol y_1, \boldsymbol y_2,\delta,\sigma^2\} \sim \text{Normal}(\mu_n,\gamma_n^2)\)</span> where</p>
+<p><span class="math display">\[
+\begin{array}{l}
+\mu_{n}=\gamma_{n}^{2} \times\left[\frac{\mu_{0}}{\gamma_{0}^{2}}+\frac{\sum_{i=1}^{n_{1}}\left(y_{i, 1}-\delta\right)+\sum_{i=1}^{n_{2}}\left(y_{i, 2}+\delta\right)}{\sigma^{2}}\right] \\
+\gamma_{n}^{2}=\left[\frac{1}{\gamma_{0}^{2}}+\frac{n_{1}+n_{2}}{\sigma^{2}}\right]^{-1}
+\end{array}
+\]</span>
+What is going on above? Observe</p>
+<ul>
+<li><p><span class="math inline">\(E(\bar y_1 | \mu, \delta) = \mu + \delta\)</span></p></li>
+<li><p><span class="math inline">\(E(\bar y_2 | \mu, \delta) = \mu - \delta\)</span></p></li>
+<li><p><span class="math inline">\(E(\mu | y_1, \delta) = \bar y_1 - \delta\)</span></p></li>
+<li><p><span class="math inline">\(E(\mu | y_2, \delta) = \bar y_2 + \delta\)</span></p></li>
+</ul>
+<p><span class="math inline">\(1/\gamma_n^2 = 1/\gamma_0^2 + n_1/\sigma^2 + n_2/\sigma^2\)</span></p>
+<p>Posterior expectation <span class="math inline">\(\mu_n\)</span> is a weighted average of <span class="math inline">\(\mu_0\)</span> (weight is <span class="math inline">\(1 / \gamma_0^2\)</span> ) and <span class="math inline">\(\bar y_1\)</span> <span class="math inline">\(- \delta\)</span> (weight <span class="math inline">\(n_1/\sigma^2\)</span>) and <span class="math inline">\(\bar y_2 + \delta ~ (\)</span>weight of <span class="math inline">\(n_2/\sigma^2)\)</span></p>
+<p>Next we have;</p>
+<p><span class="math inline">\(\{\delta|\boldsymbol y_1, \boldsymbol y_2,\mu,\sigma^2\} \sim \text{Normal}(\delta_n,\tau_n^2)\)</span> where</p>
+<p><span class="math display">\[
+\begin{array}{l}
+\delta_{n}=\tau_{n}^{2} \times\left[\frac{\delta_{0}}{\tau_{0}^{2}}+\frac{\sum_{i=1}^{n_{1}}\left(y_{i, 1}-\mu\right)-\sum_{i=1}^{n_{2}}\left(y_{i, 2}-\mu\right)}{\sigma^{2}}\right]\\[0.05cm]
+\tau_{n}^{2}=\left[\frac{1}{\tau_{0}^{2}}+\frac{n_{1}+n_{2}}{\sigma^{2}}\right]^{-1}
+\end{array}
+\]</span></p>
+<p><span class="math inline">\(1/\tau_n^2 = 1 /\tau_0^2+n_1 / \sigma^2+n_2 / \sigma^2\)</span></p>
+<ul>
+<li><p><span class="math inline">\(E(\bar y_1 | \mu, \delta) = \mu + \delta\)</span></p></li>
+<li><p><span class="math inline">\(E(\bar y_2 | \mu, \delta) = \mu - \delta\)</span>, so</p></li>
+<li><p><span class="math inline">\(E(\delta | \mu, \bar y_1) = \bar y_1 - \mu\)</span></p></li>
+<li><p><span class="math inline">\(E(\delta | \mu, \bar y_2) = -(\bar y_2 - \mu)\)</span></p></li>
+</ul>
+<p>The posterior expectation <span class="math inline">\(\delta_n\)</span> is a weighted average of <span class="math inline">\(\delta_0\)</span> (weight <span class="math inline">\(1 / \tau_0^2\)</span> ) <span class="math inline">\(\bar y_1 - \mu\)</span> ( weight of <span class="math inline">\(n_1/\sigma^2\)</span> ) and <span class="math inline">\(\bar y_2 - \mu\)</span> (weight of <span class="math inline">\(n_2 / \sigma^2\)</span> )</p>
+<p>Finally, we have;</p>
+<p><span class="math inline">\(\{\sigma^2|\boldsymbol y_1, \boldsymbol y_2,\mu,\delta\} \sim \text{Inverse-gamma}(\nu_n/2,\nu_n\sigma_n^2/2)\)</span> where</p>
+<p><span class="math display">\[
+\begin{array}{l}
+\nu_{n}=\nu_{0}+n_{1}+n_{2}\\[0.05cm]
+\sigma_{n}^{2}=\frac{\sum_{i=1}^{n_{1}}\left(y_{i, 1}-[\mu+\delta]\right)^{2}+\sum_{i=1}^{n_{2}}\left(y_{i, 2}-[\mu-\delta]\right)^{2}}{n_1+n_2}
+\end{array}
+\]</span></p>
+<p>
+ 
+</p>
+<p>Student question: what us <span class="math inline">\(\tau_0?\)</span></p>
+<p>We’ve got more variances than we used to so we’re using more greek letters than ever before. Let’s get em straight. A greek letter with no subscript is a random variable and a greek letter with a subscript is a “constant” in this notation system) <span class="math inline">\(\sigma^2\)</span> represents the variance of the observed responses as usual. Its prior is Inverse-gamma<span class="math inline">\(( \nu_0/2 ,~ \nu_0\sigma_0^2/ 2)\)</span>. <span class="math inline">\(\gamma_0^2\)</span> and <span class="math inline">\(\tau_0^2\)</span> are the variances for the priors of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\delta\)</span> respectively. There are two unknown means <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span>. And we’ve reparameterized <span class="math inline">\(\theta_1 = \mu + \delta\)</span> and <span class="math inline">\(\theta_2 = \mu - \delta\)</span>. Our uncertainty about <span class="math inline">\(\mu\)</span> is measured by <span class="math inline">\(\gamma_0^2\)</span>. Our uncertainty about <span class="math inline">\(\delta\)</span> is measured by <span class="math inline">\(\tau_0^2\)</span></p>
+<div id="analysis-of-the-math-scores-data" class="section level3" number="13.2.1">
+<h3><span class="header-section-number">13.2.1</span> Analysis of the math scores data</h3>
+<p>We need:</p>
+<ul>
+<li><span class="math inline">\(\mu_0\)</span> (best guess at combined average)</li>
+<li><span class="math inline">\(\delta_0\)</span> (best guess at diff between the schools)</li>
+<li><span class="math inline">\(\gamma_0^2\)</span> and <span class="math inline">\(\tau_0^2\)</span> (the corresponding variances for those two things)</li>
+<li><span class="math inline">\(\sigma_0^2\)</span> our best guess at the within-school / between-students variance in scores</li>
+<li><span class="math inline">\(\nu_0\)</span></li>
+</ul>
+<p>Let <span class="math inline">\(\mu_0 = 50\)</span> and <span class="math inline">\(\sigma_0 = 10\)</span>(that’s the designed average score adn SD for this test), <span class="math inline">\(\delta_0= 0\)</span> (no prior info that one school is expected to have higher average than other). Scores range from 0 to 100 so let’s make <span class="math inline">\(\gamma_0 = 25\)</span> (mean <span class="math inline">\(\pm ~ \times2\)</span>SD = <span class="math inline">\(50\pm2\gamma_0\le100,\)</span> covers range of possible values). Let <span class="math inline">\(\tau_0^2=\gamma_0^2= 625\)</span>. To make that prior “diffuse” for <span class="math inline">\(\sigma^2?\)</span> take <span class="math inline">\(\nu_0 = 1\)</span></p>
+<p>How are we gonna do posterior simulation? We know the full conditionals:</p>
+<ul>
+<li><span class="math inline">\(p(\mu | \boldsymbol y_1,\boldsymbol y_2, \delta, \sigma^2)\)</span></li>
+<li><span class="math inline">\(p(\delta | \boldsymbol y_1,\boldsymbol y_2, \mu, \sigma^2)\)</span></li>
+<li><span class="math inline">\(p(\sigma^2 | \boldsymbol y_1,\boldsymbol y_2, \mu, \delta)\)</span></li>
+</ul>
+<p>This looks like a job for the Gibbs sampler</p>
+<p>If we want to sample <span class="math inline">\((X, Y, Z)\)</span> we can this if we know <span class="math inline">\(p(x)\)</span> and <span class="math inline">\(p(y|x)\)</span> and <span class="math inline">\(p(z | x, y)\)</span>. But, if all we know is <span class="math inline">\(p(x | y,z)\)</span>, <span class="math inline">\(p(y | x,z)\)</span>, and <span class="math inline">\(p(z| x, y)\)</span>, we can’t do direct simulation. That’s where the Gibbs sampler comes in. Not as good because the simulated draws may be correlated.</p>
+<p>With a Gibbs sampler: we need starting values! <span class="math inline">\(\phi^{(s)}\)</span> is generated from <span class="math inline">\(\phi^{(s-1)}\)</span>, so we need a <span class="math inline">\(\phi^{(0)}\)</span> to be able to get a <span class="math inline">\(phi^{(1)}\)</span>. But remember: You only need starting values for <span class="math inline">\(p-1\)</span> of the <span class="math inline">\(p\)</span> parameters.</p>
+<p>We’re gonna start by sampling <span class="math inline">\(\sigma^{2(1)}\sim p(\sigma^2 | y_1, y_2, \mu^{(0)}, \delta^{(0)})\)</span>.</p>
+<p>Sensible starting values are obvious! Let <span class="math inline">\(\mu =\)</span> overall average, <span class="math inline">\(\delta =\)</span> half the difference in means</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="group-comparisons.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyperparmeters</span></span>
+<span id="cb140-2"><a href="group-comparisons.html#cb140-2" aria-hidden="true" tabindex="-1"></a>mu<span class="fl">.0</span>     <span class="ot">&lt;-</span> <span class="dv">50</span> ;  gamma2<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">625</span>;</span>
+<span id="cb140-3"><a href="group-comparisons.html#cb140-3" aria-hidden="true" tabindex="-1"></a>delta<span class="fl">.0</span>  <span class="ot">&lt;-</span> <span class="dv">0</span>  ;  tau2<span class="fl">.0</span>   <span class="ot">&lt;-</span> <span class="dv">625</span>;</span>
+<span id="cb140-4"><a href="group-comparisons.html#cb140-4" aria-hidden="true" tabindex="-1"></a>sigma2<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">100</span>;   nu<span class="fl">.0</span>    <span class="ot">&lt;-</span> <span class="dv">1</span>  ;</span>
+<span id="cb140-5"><a href="group-comparisons.html#cb140-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-6"><a href="group-comparisons.html#cb140-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting values </span></span>
+<span id="cb140-7"><a href="group-comparisons.html#cb140-7" aria-hidden="true" tabindex="-1"></a>mu    <span class="ot">&lt;-</span> (y1bar <span class="sc">+</span> y2bar) <span class="sc">/</span> <span class="dv">2</span> </span>
+<span id="cb140-8"><a href="group-comparisons.html#cb140-8" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> (y1bar <span class="sc">-</span> y2bar) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb140-9"><a href="group-comparisons.html#cb140-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-10"><a href="group-comparisons.html#cb140-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Now let&#39;s generate the Markov chain!</span></span>
+<span id="cb140-11"><a href="group-comparisons.html#cb140-11" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb140-12"><a href="group-comparisons.html#cb140-12" aria-hidden="true" tabindex="-1"></a>mu.chain     <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S);  </span>
+<span id="cb140-13"><a href="group-comparisons.html#cb140-13" aria-hidden="true" tabindex="-1"></a>delta.chain  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S); </span>
+<span id="cb140-14"><a href="group-comparisons.html#cb140-14" aria-hidden="true" tabindex="-1"></a>sigma2.chain <span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="cn">NA</span>, S) ;</span>
+<span id="cb140-15"><a href="group-comparisons.html#cb140-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-16"><a href="group-comparisons.html#cb140-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb140-17"><a href="group-comparisons.html#cb140-17" aria-hidden="true" tabindex="-1"></a>{ <span class="co"># First update sigma2, then mu then delta</span></span>
+<span id="cb140-18"><a href="group-comparisons.html#cb140-18" aria-hidden="true" tabindex="-1"></a> sigma2   <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">rgamma</span>(<span class="dv">1</span>, (nu<span class="fl">.0</span> <span class="sc">+</span> n1 <span class="sc">+</span> n2) <span class="sc">/</span> <span class="dv">2</span>,  </span>
+<span id="cb140-19"><a href="group-comparisons.html#cb140-19" aria-hidden="true" tabindex="-1"></a>    (nu<span class="fl">.0</span><span class="sc">*</span>sigma2<span class="fl">.0</span> <span class="sc">+</span> <span class="fu">sum</span>( (y1 <span class="sc">-</span> mu <span class="sc">-</span> delta)<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">+</span> </span>
+<span id="cb140-20"><a href="group-comparisons.html#cb140-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sum</span>( (<span class="dv">2</span> <span class="sc">-</span> mu <span class="sc">+</span> delta)<span class="sc">^</span><span class="dv">2</span> ) ) <span class="sc">/</span> <span class="dv">2</span> )</span>
+<span id="cb140-21"><a href="group-comparisons.html#cb140-21" aria-hidden="true" tabindex="-1"></a> gamma2.n <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>gamma2<span class="fl">.0</span> <span class="sc">+</span> (n1<span class="sc">+</span>n2)<span class="sc">/</span>sigma2) </span>
+<span id="cb140-22"><a href="group-comparisons.html#cb140-22" aria-hidden="true" tabindex="-1"></a> mu.n     <span class="ot">&lt;-</span> gamma2.n <span class="sc">*</span> (mu<span class="fl">.0</span><span class="sc">/</span>gamma2<span class="fl">.0</span> <span class="sc">+</span> ( <span class="fu">sum</span>(y1<span class="sc">-</span>delta) <span class="sc">+</span> </span>
+<span id="cb140-23"><a href="group-comparisons.html#cb140-23" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">sum</span>(y2<span class="sc">+</span>delta) ) <span class="sc">/</span> sigma2 )</span>
+<span id="cb140-24"><a href="group-comparisons.html#cb140-24" aria-hidden="true" tabindex="-1"></a> mu      <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu.n, <span class="at">sd=</span><span class="fu">sqrt</span>(gamma2.n))</span>
+<span id="cb140-25"><a href="group-comparisons.html#cb140-25" aria-hidden="true" tabindex="-1"></a> tau2.n  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>tau2<span class="fl">.0</span> <span class="sc">+</span> (n1<span class="sc">+</span>n2)<span class="sc">/</span>sigma2)</span>
+<span id="cb140-26"><a href="group-comparisons.html#cb140-26" aria-hidden="true" tabindex="-1"></a> delta.n <span class="ot">&lt;-</span> tau2.n <span class="sc">*</span> (delta<span class="fl">.0</span><span class="sc">/</span>tau2<span class="fl">.0</span> <span class="sc">+</span> ( <span class="fu">sum</span>(y1<span class="sc">-</span>mu) <span class="sc">-</span> </span>
+<span id="cb140-27"><a href="group-comparisons.html#cb140-27" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">sum</span>(y2<span class="sc">-</span>mu)) <span class="sc">/</span> sigma2 )</span>
+<span id="cb140-28"><a href="group-comparisons.html#cb140-28" aria-hidden="true" tabindex="-1"></a> delta   <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>delta.n, <span class="at">sd=</span><span class="fu">sqrt</span>(tau2.n))</span>
+<span id="cb140-29"><a href="group-comparisons.html#cb140-29" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb140-30"><a href="group-comparisons.html#cb140-30" aria-hidden="true" tabindex="-1"></a> mu.chain[s]     <span class="ot">&lt;-</span> mu</span>
+<span id="cb140-31"><a href="group-comparisons.html#cb140-31" aria-hidden="true" tabindex="-1"></a> delta.chain[s]  <span class="ot">&lt;-</span> delta</span>
+<span id="cb140-32"><a href="group-comparisons.html#cb140-32" aria-hidden="true" tabindex="-1"></a> sigma2.chain[s] <span class="ot">&lt;-</span> sigma2</span>
+<span id="cb140-33"><a href="group-comparisons.html#cb140-33" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="group-comparisons.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb141-2"><a href="group-comparisons.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mu.chain<span class="sc">+</span>delta.chain, mu.chain<span class="sc">-</span>delta.chain,</span>
+<span id="cb141-3"><a href="group-comparisons.html#cb141-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span>xlab, <span class="at">ylab=</span>ylab,<span class="at">pch=</span><span class="dv">19</span>,<span class="at">cex=</span><span class="fl">0.3</span>)</span>
+<span id="cb141-4"><a href="group-comparisons.html#cb141-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-5"><a href="group-comparisons.html#cb141-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mu.chain, delta.chain,<span class="at">pch=</span><span class="dv">19</span>,<span class="at">cex=</span><span class="fl">0.3</span>,<span class="at">xlab=</span>xlab2,<span class="at">ylab=</span>ylab2)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-96"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-96-1.png" alt="Joint distribution for (theta1,theta2) and (mu,delta)." width="672" />
+<p class="caption">
+Figure 13.3: Joint distribution for (theta1,theta2) and (mu,delta).
+</p>
+</div>
+<p>This is the scatterplot of the joint posterior distribution of <span class="math inline">\((\theta_1, \theta_2).\)</span> <span class="math inline">\(\theta_1 = \mu + \delta\)</span>, <span class="math inline">\(\theta_2 = \mu - \delta\)</span>. They seem to be uncorrelated. <span class="math inline">\((\mu, \delta)\)</span> are likewise uncorrelated in their posterior distribution. This makes sense since we have an orthogonal transformation of the parameters.</p>
+<p>Student question: What is orthogonal transformation of the parameters?</p>
+<p>Ans: If <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> are independent then <span class="math inline">\((\theta_1 + \theta_2)/2\)</span> and <span class="math inline">\((\theta_1 - \theta_2) / 2\)</span> are also independent because (+1 +1) and (+1 -1) are orthogonal.</p>
+<p><span class="math inline">\(\begin{pmatrix} 0.5,0.5\\0.5,-.5 \end{pmatrix}^T=\begin{pmatrix} 0.5,0.5\\0.5,-.5 \end{pmatrix}^{-1}\)</span> (I think).</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="group-comparisons.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb142-2"><a href="group-comparisons.html#cb142-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-3"><a href="group-comparisons.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(mu.chain), <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">75</span>), <span class="at">lwd=</span><span class="dv">2</span>, </span>
+<span id="cb142-4"><a href="group-comparisons.html#cb142-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="fu">expression</span>(mu), <span class="at">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>) </span>
+<span id="cb142-5"><a href="group-comparisons.html#cb142-5" aria-hidden="true" tabindex="-1"></a>mu.vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">25</span>, <span class="dv">75</span>, .<span class="dv">10</span>)</span>
+<span id="cb142-6"><a href="group-comparisons.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(mu.vals,<span class="fu">dnorm</span>(mu.vals, mu<span class="fl">.0</span>, <span class="fu">sqrt</span>(gamma2<span class="fl">.0</span>)), </span>
+<span id="cb142-7"><a href="group-comparisons.html#cb142-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb142-8"><a href="group-comparisons.html#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
+<span id="cb142-9"><a href="group-comparisons.html#cb142-9" aria-hidden="true" tabindex="-1"></a>   <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Posterior&quot;</span>))</span>
+<span id="cb142-10"><a href="group-comparisons.html#cb142-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-11"><a href="group-comparisons.html#cb142-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(delta.chain), <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">25</span>, <span class="dv">25</span>), <span class="at">lwd=</span><span class="dv">2</span>,</span>
+<span id="cb142-12"><a href="group-comparisons.html#cb142-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="fu">expression</span>(delta), <span class="at">ylab=</span><span class="st">&quot;density&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb142-13"><a href="group-comparisons.html#cb142-13" aria-hidden="true" tabindex="-1"></a>delta.vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">25</span>, <span class="dv">25</span>, .<span class="dv">10</span>)</span>
+<span id="cb142-14"><a href="group-comparisons.html#cb142-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(delta.vals, <span class="fu">dnorm</span>(delta.vals, delta<span class="fl">.0</span>, <span class="fu">sqrt</span>(tau2<span class="fl">.0</span>)), </span>
+<span id="cb142-15"><a href="group-comparisons.html#cb142-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb142-16"><a href="group-comparisons.html#cb142-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
+<span id="cb142-17"><a href="group-comparisons.html#cb142-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Posterior&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-97"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-97-1.png" alt="Marginal posteriors of mu and delta." width="672" />
+<p class="caption">
+Figure 13.4: Marginal posteriors of mu and delta.
+</p>
+</div>
+<p>These plots show posteriors and priors for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\delta\)</span>. Our prior on <span class="math inline">\(\mu\)</span> was Normal(mean=50, sd=25). The posterior mean is shifted left a bit (because the combined average is a little less than 50). Our prior on <span class="math inline">\(\delta\)</span> is is Normal(0, sd=25). The posterior is shifted right a bit because we have some belief now that <span class="math inline">\(\theta_1 &gt; \theta_2\)</span></p>
+<p>Notice how these are very close.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="group-comparisons.html#cb143-1" aria-hidden="true" tabindex="-1"></a>(y1bar<span class="sc">+</span>y2bar)<span class="sc">/</span><span class="dv">2</span>; <span class="fu">mean</span>(mu.chain)</span></code></pre></div>
+<pre><code>## [1] 48.48</code></pre>
+<pre><code>## [1] 48.47</code></pre>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="group-comparisons.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(delta.chain)<span class="sc">*</span><span class="dv">2</span>; y1bar<span class="sc">-</span>y2bar</span></code></pre></div>
+<pre><code>## [1] 4.627</code></pre>
+<pre><code>## [1] 4.663</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="group-comparisons.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior belief about other quantities of interest</span></span>
+<span id="cb149-2"><a href="group-comparisons.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2*delta = theta1 - theta2</span></span>
+<span id="cb149-3"><a href="group-comparisons.html#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(<span class="dv">2</span><span class="sc">*</span>delta.chain, <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>))  </span></code></pre></div>
+<pre><code>##    2.5%   97.5% 
+## -0.4788  9.7720</code></pre>
+<p>We are 95% confident that the mean score at school 1 is between a half-point less and 9.75 points greater than the mean score at school 2 so this is consistent with our t-test inference were we got <span class="math inline">\([-0.698, 10.023]\)</span>. The data were not conclusive (no strong evidence that <span class="math inline">\(\theta_1 &gt; \theta_2\)</span> ) but the data suggested that. The Bayesian interval is a bit shorter than the t-test interval because we used some prior information.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="group-comparisons.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior belief that theta1 &gt; theta2</span></span>
+<span id="cb151-2"><a href="group-comparisons.html#cb151-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(delta.chain <span class="sc">&gt;</span> <span class="dv">0</span>)  </span></code></pre></div>
+<pre><code>## [1] 0.9616</code></pre>
+<p><span class="math inline">\(\delta = (\theta_1 - \theta_2) / 2\)</span>, <span class="math inline">\(\delta &gt; 0\)</span> means average score higher at school 1. Our posterior belief that the average score is higher at school 1 is about 96%.</p>
+<p>What’s the predictive probability a school 1 student outscores a school 2 student? It should be <span class="math inline">\(&gt; .5\)</span> but maybe not by much. Let’s see…</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="group-comparisons.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior predictive simulation </span></span>
+<span id="cb153-2"><a href="group-comparisons.html#cb153-2" aria-hidden="true" tabindex="-1"></a>y1.tilde <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(S, <span class="at">mean=</span>mu.chain<span class="sc">+</span>delta.chain,</span>
+<span id="cb153-3"><a href="group-comparisons.html#cb153-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sd=</span><span class="fu">sqrt</span>(sigma2.chain))</span>
+<span id="cb153-4"><a href="group-comparisons.html#cb153-4" aria-hidden="true" tabindex="-1"></a>y2.tilde <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(S, <span class="at">mean=</span>mu.chain<span class="sc">-</span>delta.chain,</span>
+<span id="cb153-5"><a href="group-comparisons.html#cb153-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sd=</span><span class="fu">sqrt</span>(sigma2.chain))</span>
+<span id="cb153-6"><a href="group-comparisons.html#cb153-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb153-7"><a href="group-comparisons.html#cb153-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y1.tilde <span class="sc">&gt;</span> y2.tilde)</span></code></pre></div>
+<pre><code>## [1] 0.6246</code></pre>
+<p>About a 62% probability that the school 1 student scores higher. What if there aren’t just two schools to compare what if there are 8 schools? Or 50 hospitals? Or 10 different counties?</p>
+<p>Looking back (right before <a href="group-comparisons.html#bayesmodel">13.2</a>) we said the ‘best estimate’ of <span class="math inline">\(\theta_1\)</span> should be somewhere between just <span class="math inline">\(\bar y_1\)</span> and a straight average of <span class="math inline">\(\bar y_1\)</span> &amp; <span class="math inline">\(\bar y_2\)</span>, but we didn’t actually solve that did we? No. But is there an ‘implicit’ <span class="math inline">\(w\)</span>? there must be, right? Let’s see!</p>
+<p><span class="math inline">\(\bar y_1 = 50.8\)</span> that would be the “no pooling” estimate.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="group-comparisons.html#cb155-1" aria-hidden="true" tabindex="-1"></a>y1bar</span></code></pre></div>
+<pre><code>## [1] 50.81</code></pre>
+<p>The average of the two schools <span class="math inline">\((\bar y_1 + \bar y_2) / 2 = 48.5\)</span>. That would be the “fully pooled”estimate (in Gelman’s terminology).</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="group-comparisons.html#cb157-1" aria-hidden="true" tabindex="-1"></a>(y1bar<span class="sc">+</span>y2bar)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 48.48</code></pre>
+<p>The “hierarchical model-based estimated” (which is what we did) SHOULD be between these two; <span class="math inline">\(\hat \theta_1 = \hat\mu+\hat\delta=50.78.\)</span> So it’s a lot closer to no pooling. It’s lowered just a bit (which makes sense).</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="group-comparisons.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(mu.chain<span class="sc">+</span>delta.chain)</span></code></pre></div>
+<pre><code>## [1] 50.78</code></pre>
+<p>So even though the classical model testing approach would lead to pooling the optimal answer is a lot closer to no pooling.</p>
+<p>The author (Hoff) lost me a bit on some pages from section 8.3. If you find yourself similarly lost don’t feel bad about that.</p>
+<p>Tomorrow: We will consider <span class="math inline">\(m\)</span> different groups not just two. Our model will say;</p>
+<p><span class="math inline">\(\{y_{i,j} | \theta, \sigma^2\} \sim\)</span> Normal<span class="math inline">\((\theta_j , \sigma^2)\)</span> where <span class="math inline">\(y_{i,j}\)</span> is the <span class="math inline">\(i\)</span>th response from the <span class="math inline">\(j\)</span>th group. <span class="math inline">\(i\)</span> goes from 1 to <span class="math inline">\(n_j\)</span>, <span class="math inline">\(j\)</span> goes up to <span class="math inline">\(m\)</span>. <span class="math inline">\(\theta_j\)</span> is the true mean for the <span class="math inline">\(j\)</span>th group. <span class="math inline">\(\{\theta_1, …., \theta_m | \mu, \tau\} \sim\)</span> iid Normal<span class="math inline">\(( \mu, \tau^2 )\)</span>.</p>
+<p>Think about the data coming about this way: There are a whole bunch of schools out there. Our data include a sample of <span class="math inline">\(m\)</span> of them. At each of these schools there are a whole bunch of students. We sample <span class="math inline">\(n_j\)</span> students at school <span class="math inline">\(j,\)</span> <span class="math inline">\(\theta_j\)</span> represents mean score at <span class="math inline">\(j\)</span>th school.</p>
+<p>The hierarchical model says:</p>
+<p><span class="math inline">\(y_{i,j} \sim\)</span> Normal<span class="math inline">\(( \theta_j , \sigma^2 )\)</span></p>
+<p><span class="math inline">\(\theta_1, …, \theta_m\)</span> are iid Normal<span class="math inline">\(( \mu, \tau^2 )\)</span>.</p>
+<p>So the <span class="math inline">\(\theta_j\)</span> are sampled from a population with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\tau^2\)</span>. So the model parameters are: <span class="math inline">\(\sigma^2\)</span> (within-school variance), <span class="math inline">\(\tau^2\)</span> (between-school variance ) and <span class="math inline">\(\mu\)</span> the overall mean. Note that the <span class="math inline">\(\theta_j\)</span>’s are not model parameters.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multivariate-normal.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bayesianS21.pdf", "bayesianS21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

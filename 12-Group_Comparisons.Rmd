@@ -1,0 +1,441 @@
+# Group comparisons
+
+\fontsize{14}{22}
+\selectfont
+
+```{r echo = FALSE, message = FALSE}
+rm(list=ls());  set.seed(20210520);
+knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
+```
+
+
+<tt>The following notes, mostly transcribed from Neath(0524,2021) lecture, summarize section 8.1 of Hoff(2009).</tt>
+
+<p>&nbsp;</p>
+
+What's going on with our masterplan? We have jumped from 07a to 08a there was to be a 07b but we're skipping that at least for now. We were two days behind schedule, by cancelling the 07b lesson we're now one day behind.
+
+## Comparing two groups
+
+We have a concrete problem to motivate us
+
+
+```{r}
+y1 <- c(52.11, 57.65, 66.44, 44.68, 40.57, 35.04, 50.71, 66.17,
+        39.43, 46.17, 58.76, 47.97, 39.18, 64.63, 69.38, 32.38,
+        29.98, 59.32, 43.04, 57.83, 46.07, 47.74, 48.66, 40.80,
+        66.32, 53.70, 52.42, 71.38, 59.66, 47.52, 39.51)
+
+y2 <- c(52.87, 50.03, 41.51, 37.42, 64.42, 45.44, 46.06, 46.37,
+        46.66, 29.01, 35.69, 49.16, 55.90, 45.84, 35.44, 43.21,
+        48.36, 74.14, 46.76, 36.97, 43.84, 43.24, 56.90, 47.64,
+        38.84, 42.96, 41.58, 45.96)
+```
+
+```{r fig.cap = "Boxplots of samples of 10th grade math scores from two schools"}
+boxplot(list(y1, y2), ylab="score", 
+        names=c("school 1", "school 2"), col=0)
+```
+The appearance is: mean score at school 1 is higher than that at school 2. But these 31 and 28 students are not the entire the entire school, they are just a sample from a larger population of 10th grade students. So might this difference in mean score be attributable to sampling error? i.e, might a different set of 31 and 28 students give different means? How do we test this?
+
+Let $\theta_1 =$ mean score at school 1 (that's the population mean!) $\theta_2 =$ mean score at school 2 (population mean!)
+
+We want to test:
+
+$H_0: \theta_1 = \theta_2$ against
+
+$H_a: \theta_1 \neq \theta_2$
+
+If we assume that both populations are normal with the same variance just possibly different mean then we can conduct this test by two-sample t-test .
+
+The $t$-statistic:
+
+$$
+t(\boldsymbol y_1, \boldsymbol y_2) = \frac{\bar y_1 - \bar y_2}{s_p\sqrt{1/n_1 + 1/n_2}}, \text{ where } s_p^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1 + n_2 -2}
+$$
+This is the classic test statistic for classical hypothesis testing (not bayesian). Our best estimate of $\sigma$ (assuming equal variance) is the pooled sample standard deviation. A test statistic measures the difference between the data you got and the data you'd have expected if $H_0$(null hypothesis) were true. The data we got had a difference in means of about 4.66 points. What we'd expect if $H_0$ were true is no difference in sample means.
+
+```{r}
+n1 <- length(y1);  y1bar <- mean(y1);  s1 <- sd(y1);
+n2 <- length(y2);  y2bar <- mean(y2);  s2 <- sd(y2);
+
+y1bar-y2bar
+```
+
+```{r}
+# pooled sample standard deviation
+(sp      <- sqrt( ( (n1-1)*s1^2 + (n2-1)*s2^2 ) / (n1+n2-2)) )
+# test-statistic
+(t.stat <- (y1bar- y2bar) / (sp * sqrt(1/n1 + 1/n2)) )
+```
+We get t-stat $= 1.74$. The difference in sample means that we observed is $1.74$ standard errors greater than the difference we'd expect to observe if $H_0$ were true.
+
+If $H_0$ is true the $t$-statistic has a null sampling distribution that is the t-distribution with degrees of freedom $= n_1 + n_2 - 2=57$. We expect the t-stat to not be far out in the t-distribution.
+
+```{r fig.cap = "The null distribution for testing equality of the population means. The pink line indicates the observed value of the t-statistic."}
+tvals <- seq(-4, 4, 0.01)
+plot(tvals, dt(tvals, df=n1+n2-2), type="l", lwd=2, ylab="",xlab="")
+segments(1.74,0,1.74, dt(1.74, df=n1+n2-2), col="red", lwd=2, lty=3)
+segments(-1.74,0,-1.74, dt(1.74,df=n1+n2-2), col="red", lwd=2, lty=3)
+```
+
+```{r}
+# two-sided p-value 
+2 * (1 - pt(abs(t.stat), df=n1+n2-2))
+```
+
+P-value is the measure of the strength against the null hypothesis. The smaller the p-value the more unlikely would be the data you got if the null hypothesis were true.
+
+If the two populations indeed follow the same normal population, then the *pre-experimental* probability of sampling a dataset that would generate a value of $t(\boldsymbol Y_1, \boldsymbol Y_2)$ greater in absolute value than 1.74 is 8.7%
+
+```{r}
+# Or just go
+t.test(y1, y2, var.equal=T)
+```
+
+
+For a two-sided alternative hypothesis the p-value counts both tail probabilities. P-value $= 0.087$ is generally considered (by convention) to be not very strong evidence against $H_0.$ The data we observed would have been not entirely unexpected with $H_0$ being true so it's only weak evidence that $H_0$ is false. 
+
+If our job is to estimate $\theta_1$ and $\theta_2,$ the mean scores at the two schools, we have a decision to make. Should we combine the information at both schools and report pooled estimates for both?
+
+* $(n_1  \bar y_1+ n_2\bar y_2) / (n_1 + n_2)$
+
+Or report separate estimates? 
+
+* $\hat \theta_1 = \bar y_1$
+* $\hat \theta_2 = \bar y_2$
+
+One proposed recipe for making this decision is to do it based on the result of the significance test. Conduct a test of $H_0: \theta_1 = \theta_2$. If you reject this $H_0$ then you'll want to report separate estimates. If you fail to reject interpret this to mean we "accept" the null and report the the pooled estimate.
+
+*Model selection based on p-values:*
+
+A recipe for parameter estimation based on model selection (deciding between single mean or separate-means model). 
+
+Test
+
+$H_0 :  \theta_1 = \theta_2$
+
+Reject if p-value $< \alpha$, take $\alpha = 0.05$
+
+If we reject report the separate estimates i.e., $\hat \theta_1 = \bar y_1$ and $\hat \theta_2 = \bar y_2$.
+
+If we fail to reject then "accept" $H_0$ and report the combined estimate i.e., $\hat{\theta}_{1}=\hat{\theta}_{2}=\left(\sum y_{i, 1}+\sum y_{i, 2}\right) /\left(n_{1}+n_{2}\right)$
+
+This is not entirely satisfactory. In this example (following this recipe) our conclusion would be; Do not reject the null. So take the average score of all $31 + 28 = 59$ students as the estimated average score for both schools. On the other hand the data suggest $\theta_1 > \theta_2.$ It wasn't conclusive statistical proof but it's what the data indicated. So maybe it would be better to use separate estimates. On the other hand, suppose we get a p-value of $0.045$ or $0.049$? In general, if you are following a methodology that will do one thing if you get a p-value $= 0.049$ and something substantially different if you get a p-value of $0.051$ you need to rethink your life choices. 
+
+Another way to think about this: We are saying that we will estimate $\theta_1$ (mean score in school 1) by a weighted average $w\bar y_1 + (1-w)  \bar y_2$ (weighted average of the two school averages). It makes sense that $w$ is closer to 1 than 0 but maybe the observed scores of students at school 2 contain valuable info about the average score at school 1. That's the big insight of **hierarchical statistical models** the idea that that data from different (but similar) sources can contribute to our estimation at the current source. This is obviously a very Bayesian idea.
+
+What that naïve testing-based recipe says: is either take $w = 1$ or take $w \approx 1/2$. What if there's a better answer somewhere in between? Wouldn't it be cool to have a method that would return the estimate $\hat \theta_1 = w\bar y_1 + (1-w)  \bar y_2$ and would tell us what $w$ should be?!
+
+$$
+w=\begin{cases} 1 \hspace{2.9cm} \text{ if } p < 0.05\\
+n_1/(n_1+n_2) \quad \text{ otherwise }
+\end{cases}
+$$
+
+The method that does this is the Bayesian hierarchical model.
+
+## A Bayesian model {#bayesmodel}
+
+Let's make a hierarchical Bayesian model for estimating two related means.
+
+Consider the sampling model:
+
+$$
+\begin{aligned}
+Y_{i, 1} &=\mu+\delta+\epsilon_{i, 1} \\
+Y_{i, 2} &=\mu-\delta+\epsilon_{i, 2} \\
+\epsilon_{i, j} & \sim \text { iid } \operatorname{Normal}\left(0, \sigma^{2}\right)
+\end{aligned}
+$$
+
+
+This model says: The $i$th score at school $j$ is $\mu + \delta$ for $j=1$ or $\mu -\delta$ for $j=2$ plus $\epsilon_{i,j}$ (student random effect).
+
+* $\mu$ is the overall mean at both schools
+* $i$ is the unit, $j$ is the group(school effect)
+
+$\mu$ and $\delta$ are model parameters. The third is $\sigma^2$ the variance of the random error term. A reparameterization of the two-means model is;
+
+* $\theta_1 = \mu + \delta,$ 
+* $\theta_2 = \mu - \delta$, 
+* $\mu = (\theta_1+\theta_2) / 2$
+* $\delta = (\theta_1 - \theta_2) / 2$. Hence $2\times\delta$ is the difference in means 
+* $\sigma^2 =$ variance among scores by students at the same school (within group variance)
+
+The **conjugate prior** for this model:
+
+$\mu \sim \text{Normal}(\mu_0, \gamma_0^2)$
+
+$\delta \sim \text{Normal}(\delta_0, \tau_0^2)$ and 
+
+$\sigma^2 \sim$ Inverse-gamma$(\nu_0/2,~\nu_0\sigma_0^2/2)$
+
+<p>&nbsp;</p>
+
+**The posterior full conditionals:**
+
+$\{\mu|\boldsymbol y_1, \boldsymbol y_2,\delta,\sigma^2\} \sim \text{Normal}(\mu_n,\gamma_n^2)$ where 
+
+$$
+\begin{array}{l}
+\mu_{n}=\gamma_{n}^{2} \times\left[\frac{\mu_{0}}{\gamma_{0}^{2}}+\frac{\sum_{i=1}^{n_{1}}\left(y_{i, 1}-\delta\right)+\sum_{i=1}^{n_{2}}\left(y_{i, 2}+\delta\right)}{\sigma^{2}}\right] \\
+\gamma_{n}^{2}=\left[\frac{1}{\gamma_{0}^{2}}+\frac{n_{1}+n_{2}}{\sigma^{2}}\right]^{-1}
+\end{array}
+$$
+What is going on above? Observe
+
+* $E(\bar y_1 | \mu, \delta) = \mu + \delta$ 
+* $E(\bar y_2 | \mu, \delta) = \mu - \delta$
+
+* $E(\mu | y_1, \delta) = \bar y_1 - \delta$
+* $E(\mu | y_2, \delta) = \bar y_2 + \delta$
+
+$1/\gamma_n^2 = 1/\gamma_0^2 + n_1/\sigma^2 + n_2/\sigma^2$
+
+Posterior expectation $\mu_n$ is a weighted average of $\mu_0$ (weight is $1 / \gamma_0^2$ ) and $\bar y_1$ $- \delta$ (weight $n_1/\sigma^2$) and $\bar y_2 + \delta ~ ($weight of $n_2/\sigma^2)$
+
+Next we have;
+
+$\{\delta|\boldsymbol y_1, \boldsymbol y_2,\mu,\sigma^2\} \sim \text{Normal}(\delta_n,\tau_n^2)$ where
+
+$$
+\begin{array}{l}
+\delta_{n}=\tau_{n}^{2} \times\left[\frac{\delta_{0}}{\tau_{0}^{2}}+\frac{\sum_{i=1}^{n_{1}}\left(y_{i, 1}-\mu\right)-\sum_{i=1}^{n_{2}}\left(y_{i, 2}-\mu\right)}{\sigma^{2}}\right]\\[0.05cm]
+\tau_{n}^{2}=\left[\frac{1}{\tau_{0}^{2}}+\frac{n_{1}+n_{2}}{\sigma^{2}}\right]^{-1}
+\end{array}
+$$
+
+$1/\tau_n^2 = 1 /\tau_0^2+n_1 / \sigma^2+n_2 / \sigma^2$
+
+* $E(\bar y_1 | \mu, \delta) = \mu + \delta$
+* $E(\bar y_2 | \mu, \delta) = \mu - \delta$, so
+
+* $E(\delta | \mu, \bar y_1) = \bar y_1 - \mu$
+* $E(\delta | \mu, \bar y_2)  = -(\bar y_2 - \mu)$
+
+The posterior expectation $\delta_n$ is a weighted average of $\delta_0$ (weight $1 / \tau_0^2$ ) $\bar y_1 - \mu$ ( weight of $n_1/\sigma^2$ ) and $\bar y_2 - \mu$ (weight of $n_2 / \sigma^2$ )
+
+Finally, we have;
+
+$\{\sigma^2|\boldsymbol y_1, \boldsymbol y_2,\mu,\delta\} \sim \text{Inverse-gamma}(\nu_n/2,\nu_n\sigma_n^2/2)$ where
+
+$$
+\begin{array}{l}
+\nu_{n}=\nu_{0}+n_{1}+n_{2}\\[0.05cm]
+\sigma_{n}^{2}=\frac{\sum_{i=1}^{n_{1}}\left(y_{i, 1}-[\mu+\delta]\right)^{2}+\sum_{i=1}^{n_{2}}\left(y_{i, 2}-[\mu-\delta]\right)^{2}}{n_1+n_2}
+\end{array}
+$$
+
+<p>&nbsp;</p>
+
+Student question: what us $\tau_0?$
+
+We've got more variances than we used to so we're using more greek letters than ever before. Let's get em straight. A greek letter with no subscript is a random variable and a greek letter with a subscript is a "constant" in this notation system) $\sigma^2$ represents the variance of the observed responses as usual. Its prior is Inverse-gamma$( \nu_0/2 ,~ \nu_0\sigma_0^2/ 2)$. $\gamma_0^2$ and $\tau_0^2$ are the variances for the priors of $\mu$ and $\delta$ respectively. There are two unknown means $\theta_1$ and $\theta_2$. And we've reparameterized $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$. Our uncertainty about $\mu$ is measured by $\gamma_0^2$. Our uncertainty about $\delta$ is measured by $\tau_0^2$
+
+
+### Analysis of the math scores data
+
+We need: 
+
+* $\mu_0$ (best guess at combined average)
+* $\delta_0$ (best guess at diff between the schools)
+* $\gamma_0^2$ and $\tau_0^2$ (the corresponding variances for those two things) 
+* $\sigma_0^2$ our best guess at the within-school / between-students variance in scores
+* $\nu_0$
+
+Let $\mu_0 = 50$ and $\sigma_0 = 10$(that's the designed average score adn SD for this test), $\delta_0= 0$ (no prior info that one school is expected to have higher average than other). Scores range from 0 to 100 so let's make $\gamma_0 = 25$ (mean $\pm ~ \times2$SD = $50\pm2\gamma_0\le100,$ covers range of possible values). Let $\tau_0^2=\gamma_0^2= 625$. To make that prior "diffuse" for $\sigma^2?$ take $\nu_0 = 1$
+
+
+How are we gonna do posterior simulation? We know the full conditionals:
+
+* $p(\mu  | \boldsymbol y_1,\boldsymbol y_2, \delta, \sigma^2)$
+* $p(\delta | \boldsymbol y_1,\boldsymbol y_2, \mu, \sigma^2)$
+* $p(\sigma^2 | \boldsymbol y_1,\boldsymbol y_2, \mu, \delta)$
+
+This looks like a job for the Gibbs sampler
+
+If we want to sample $(X, Y, Z)$ we can this if we know $p(x)$ and $p(y|x)$ and $p(z | x, y)$. But, if all we know is $p(x | y,z)$, $p(y | x,z)$, and $p(z| x, y)$, we can't do direct simulation. That's where the Gibbs sampler comes in. Not as good because the simulated draws may be correlated.
+
+With a Gibbs sampler: we need starting values! $\phi^{(s)}$ is generated from $\phi^{(s-1)}$, so we need a $\phi^{(0)}$ to be able to get a $phi^{(1)}$. But remember: You only need starting values for $p-1$ of the $p$ parameters.
+
+We're gonna start by sampling $\sigma^{2(1)}\sim p(\sigma^2 | y_1, y_2, \mu^{(0)}, \delta^{(0)})$. 
+
+Sensible starting values are obvious! Let $\mu =$ overall average, $\delta =$ half the difference in means
+
+
+```{r}
+# Hyperparmeters
+mu.0     <- 50 ;  gamma2.0 <- 625;
+delta.0  <- 0  ;  tau2.0   <- 625;
+sigma2.0 <- 100;   nu.0    <- 1  ;
+
+# Starting values 
+mu    <- (y1bar + y2bar) / 2 
+delta <- (y1bar - y2bar) / 2
+
+# Now let's generate the Markov chain!
+S <- 5000
+mu.chain     <- rep(NA, S);  
+delta.chain  <- rep(NA, S); 
+sigma2.chain <-rep(NA, S) ;
+
+for(s in 1:S)
+{ # First update sigma2, then mu then delta
+ sigma2   <- 1/rgamma(1, (nu.0 + n1 + n2) / 2,  
+    (nu.0*sigma2.0 + sum( (y1 - mu - delta)^2 ) + 
+      sum( (2 - mu + delta)^2 ) ) / 2 )
+ gamma2.n <- 1 / (1/gamma2.0 + (n1+n2)/sigma2) 
+ mu.n     <- gamma2.n * (mu.0/gamma2.0 + ( sum(y1-delta) + 
+                     sum(y2+delta) ) / sigma2 )
+ mu      <- rnorm(1, mean=mu.n, sd=sqrt(gamma2.n))
+ tau2.n  <- 1 / (1/tau2.0 + (n1+n2)/sigma2)
+ delta.n <- tau2.n * (delta.0/tau2.0 + ( sum(y1-mu) - 
+                      sum(y2-mu)) / sigma2 )
+ delta   <- rnorm(1, mean=delta.n, sd=sqrt(tau2.n))
+ 
+ mu.chain[s]     <- mu
+ delta.chain[s]  <- delta
+ sigma2.chain[s] <- sigma2
+ }
+```
+
+```{r include = FALSE}
+ylab=expression(theta[2])
+xlab=expression(theta[1])
+ylab2=expression(delta)
+xlab2=expression(mu)
+```
+
+```{r fig.cap="Joint distribution for (theta1,theta2) and (mu,delta)."}
+par(mfrow=c(1,2))
+plot(mu.chain+delta.chain, mu.chain-delta.chain,
+  xlab=xlab, ylab=ylab,pch=19,cex=0.3)
+
+plot(mu.chain, delta.chain,pch=19,cex=0.3,xlab=xlab2,ylab=ylab2)
+```
+This is the scatterplot of the joint posterior distribution of $(\theta_1, \theta_2).$  $\theta_1 = \mu + \delta$, $\theta_2 = \mu - \delta$. They seem to be uncorrelated. $(\mu,  \delta)$ are likewise uncorrelated in their posterior distribution. This makes sense since we have an orthogonal transformation of the parameters.
+
+
+Student question: What is orthogonal transformation of the parameters?
+
+Ans: If $\theta_1$ and $\theta_2$ are independent then $(\theta_1 + \theta_2)/2$ and $(\theta_1 - \theta_2)  / 2$ are also independent because (+1 +1) and (+1 -1) are orthogonal.
+
+$\begin{pmatrix} 0.5,0.5\\0.5,-.5 \end{pmatrix}^T=\begin{pmatrix} 0.5,0.5\\0.5,-.5 \end{pmatrix}^{-1}$ (I think).
+
+```{r fig.cap = "Marginal posteriors of mu and delta."}
+par(mfrow=c(1,2))
+
+plot(density(mu.chain), xlim=c(25, 75), lwd=2, 
+  xlab=expression(mu), ylab="density", main="") 
+mu.vals <- seq(25, 75, .10)
+lines(mu.vals,dnorm(mu.vals, mu.0, sqrt(gamma2.0)), 
+  lwd=2, col="pink")
+legend("topright", inset=.05, lwd=2, col=c("pink", "black"), 
+   legend=c("Prior", "Posterior"))
+
+plot(density(delta.chain), xlim=c(-25, 25), lwd=2,
+  xlab=expression(delta), ylab="density", main="")
+delta.vals <- seq(-25, 25, .10)
+lines(delta.vals, dnorm(delta.vals, delta.0, sqrt(tau2.0)), 
+  lwd=2, col="pink")
+legend("topleft", inset=.05, lwd=2, col=c("pink", "black"), 
+   legend=c("Prior", "Posterior"))
+```
+
+These plots show posteriors and priors for $\mu$ and $\delta$. Our prior on $\mu$ was Normal(mean=50, sd=25). The posterior mean is shifted left a bit (because the combined average is a little less than 50). Our prior on $\delta$ is is Normal(0, sd=25). The posterior is shifted right a bit because we have some belief now that $\theta_1 > \theta_2$
+
+Notice how these are very close.
+```{r}
+(y1bar+y2bar)/2; mean(mu.chain)
+```
+
+```{r}
+mean(delta.chain)*2; y1bar-y2bar
+```
+
+```{r}
+# Posterior belief about other quantities of interest
+# 2*delta = theta1 - theta2
+quantile(2*delta.chain, c(.025, .975))  
+```
+
+We are 95% confident that the mean score at school 1 is between a half-point less and 9.75 points greater than the mean score at school 2 so this is consistent with our t-test inference were we got $[-0.698, 10.023]$. The data were not conclusive (no strong evidence that $\theta_1 > \theta_2$ ) but the data suggested that. The Bayesian interval is a bit shorter than the t-test interval because we used some prior information.
+
+
+```{r}
+# Posterior belief that theta1 > theta2
+mean(delta.chain > 0)  
+```
+
+$\delta = (\theta_1 - \theta_2) / 2$, $\delta > 0$ means average score higher at school 1. Our posterior belief that the average score is higher at school 1 is about 96%. 
+
+
+
+What's the predictive probability a school 1 student outscores a school 2 student? It should be $> .5$ but maybe not by much. Let's see...
+```{r}
+# Posterior predictive simulation 
+y1.tilde <- rnorm(S, mean=mu.chain+delta.chain,
+                  sd=sqrt(sigma2.chain))
+y2.tilde <- rnorm(S, mean=mu.chain-delta.chain,
+                  sd=sqrt(sigma2.chain))
+
+mean(y1.tilde > y2.tilde)
+```
+
+About a 62% probability that the school 1 student scores higher. What if there aren't just two schools to compare what if there are 8 schools? Or 50 hospitals? Or 10 different counties?
+
+
+Looking back (right before \@ref(bayesmodel)) we said the 'best estimate' of $\theta_1$ should be somewhere between just $\bar y_1$ and a straight average of $\bar y_1$ & $\bar y_2$, but we didn't actually solve that did we? No. But is there an 'implicit' $w$? there must be, right? Let's see!
+
+$\bar y_1 = 50.8$ that would be the "no pooling" estimate. 
+```{r}
+y1bar
+```
+
+The average of the two schools $(\bar y_1 + \bar y_2) / 2 = 48.5$. That would be the "fully pooled"estimate (in Gelman's terminology).
+
+```{r}
+(y1bar+y2bar)/2
+```
+
+The "hierarchical model-based estimated" (which is what we did) SHOULD be between these two; $\hat \theta_1 = \hat\mu+\hat\delta=50.78.$ So it's a lot closer to no pooling. It's lowered just a bit (which makes sense).
+
+```{r}
+mean(mu.chain+delta.chain)
+```
+
+So even though the classical model testing approach would lead to pooling the optimal answer is a lot closer to no pooling.
+
+
+The author (Hoff) lost me a bit on some pages from section 8.3. If you find yourself similarly lost don't feel bad about that.
+
+
+
+Tomorrow: We will consider $m$ different groups not just two. Our model will say;
+
+$\{y_{i,j} | \theta, \sigma^2\} \sim$ Normal$(\theta_j ,  \sigma^2)$ where $y_{i,j}$ is the $i$th response from the $j$th group. $i$ goes from 1 to $n_j$, $j$ goes up to $m$. $\theta_j$ is the true mean for the $j$th group. $\{\theta_1, …., \theta_m | \mu, \tau\} \sim$ iid Normal$( \mu, \tau^2 )$.
+
+Think about the data coming about this way: There are a whole bunch of schools out there. Our data include a sample of $m$ of them. At each of these schools there are a whole bunch of students. We sample $n_j$ students at school $j,$ $\theta_j$ represents mean score at $j$th school. 
+
+The hierarchical model says: 
+
+$y_{i,j} \sim$ Normal$( \theta_j , \sigma^2 )$ 
+
+$\theta_1, …, \theta_m$ are iid Normal$( \mu, \tau^2 )$. 
+
+So the $\theta_j$ are sampled from a population with mean $\mu$ and variance $\tau^2$. So the model parameters are: $\sigma^2$ (within-school variance), $\tau^2$ (between-school variance ) and $\mu$ the overall mean. Note that the $\theta_j$'s are not model parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

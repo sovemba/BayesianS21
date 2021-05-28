@@ -24,7 +24,7 @@
 <meta name="author" content="Chisom Onyishi" />
 
 
-<meta name="date" content="2021-05-27" />
+<meta name="date" content="2021-05-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="joint-inference-for-normal-mean-and-variance.html"/>
 <link rel="next" href="mcmc-diagnostics.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,48 +137,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a><ul>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
 <li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a><ul>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
 <li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
 <li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
 <li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a><ul>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
-<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a><ul>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a><ul>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
 <li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a><ul>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a><ul>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a><ul>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
 <li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
 <li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
 <li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a><ul>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
 <li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
 <li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
@@ -187,27 +198,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
 <li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a><ul>
-<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a><ul>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
 <li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
 <li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
 <li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a><ul>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
 <li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
 <li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
 <li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a><ul>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
 <li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
 <li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
 <li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a><ul>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
 <li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
 <li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
@@ -215,25 +231,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
 <li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
 <li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
-<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a><ul>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
 <li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a><ul>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
 <li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
 <li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
 <li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a><ul>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
 <li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
 <li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
 <li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
 <li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.2</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -255,25 +283,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="gibbs-sampler" class="section level1">
+<div id="gibbs-sampler" class="section level1" number="10">
 <h1><span class="header-section-number">Lecture 10</span> Gibbs sampler</h1>
 <p><tt>The following notes, mostly transcribed from Neath(0517,2021) lecture, summarize sections(6.1-6.4) of Hoff(2009).</tt></p>
 <p>
  
 </p>
-<div id="review-of-conjugate-prior-for-normal-model" class="section level2">
+<div id="review-of-conjugate-prior-for-normal-model" class="section level2" number="10.1">
 <h2><span class="header-section-number">10.1</span> Review of conjugate prior for normal model</h2>
 <p>We write our model; <span class="math inline">\(n\)</span> observations from a normal population with mean <span class="math inline">\(\theta\)</span> and variance <span class="math inline">\(\sigma^2\)</span> and we want to do Bayesian inference about <span class="math inline">\(\theta\)</span> (and maybe <span class="math inline">\(\sigma^2\)</span>). The conjugate prior for this model is: <span class="math inline">\(\sigma^2 \sim \text{InverseGamma}(a = \nu_0 / 2, b = \nu_0\sigma_0^2 / 2).\)</span></p>
 <p>Where does this come from? (Review)</p>
 <p><span class="math inline">\(X \sim\)</span> Inverse gamma means <span class="math inline">\(X = 1 / Z\)</span> where <span class="math inline">\(Z \sim\)</span> gamma distribution. When we say the conjugate prior for a normal variance is the inverse gamma that’s equivalent to saying the conjugate prior for a normal precision(precision = 1 / variance) is the gamma distribution. The conjugate prior for <span class="math inline">\((\theta, \sigma^2)\)</span> is completed by <span class="math inline">\(\theta | \sigma^2 \sim \text{Normal}( \mu_0, \sigma^2 / \kappa_0 )\)</span>. The variance depending on <span class="math inline">\(\sigma^2\)</span> makes sense because the distribution is specified conditionally on <span class="math inline">\(\sigma^2.\)</span></p>
-<p>Back to that gamma distribution. The reparameterization from the usual gamma(<span class="math inline">\(a =\)</span> shape, <span class="math inline">\(b =\)</span> rate) to <span class="math inline">\((a = \nu_0 /2, b = \nu_0 \sigma^2_0 / 2)\)</span> is strategic. <span class="math inline">\(\sigma^2_0\)</span> is the “prior best guess” and <span class="math inline">\(\nu_0\)</span> measures the strength of belief in that best guess. More precisely, this prior contributes exactly the same information to the posterior as would <span class="math inline">\(\nu_0\)</span> observations with a sample variance of <span class="math inline">\(\sigma_0^2.\)</span> This conjugate prior represents a “prior sample of size <span class="math inline">\(\nu_0\)</span>” “with a sample variance of <span class="math inline">\(\sigma_0^2\)</span>”. Similarly (and more straightforwardly) the prior on <span class="math inline">\(\theta\)</span> contributes to the posterior exactly what would be contributed by <span class="math inline">\(\kappa_0\)</span> observations with a sample mean of <span class="math inline">\(\mu_0\)</span>.</p>
+<p>Back to that gamma distribution. The reparameterization from the usual gamma(<span class="math inline">\(a =\)</span> shape, <span class="math inline">\(b =\)</span> rate) to <span class="math inline">\((a = \nu_0 /2, b = \nu_0 \sigma^2_0 / 2)\)</span> is strategic. <span class="math inline">\(\sigma^2_0\)</span> is the “prior best guess” and <span class="math inline">\(\nu_0\)</span> measures the strength of belief in that best guess. More precisely, this prior contributes exactly the same information to the posterior as would <span class="math inline">\(\nu_0\)</span> observations with a sample variance of <span class="math inline">\(\sigma_0^2.\)</span> This conjugate prior represents a “prior sample of size <span class="math inline">\(\nu_0\)</span>” “with a sample variance of <span class="math inline">\(\sigma_0^2\)</span>.” Similarly (and more straightforwardly) the prior on <span class="math inline">\(\theta\)</span> contributes to the posterior exactly what would be contributed by <span class="math inline">\(\kappa_0\)</span> observations with a sample mean of <span class="math inline">\(\mu_0\)</span>.</p>
 <p>The parameters in the normal conjugate prior are; <span class="math inline">\(\mu_0\)</span> (prior sample mean) <span class="math inline">\(\kappa_0\)</span> (prior sample size for the mean) <span class="math inline">\(\sigma_0^2\)</span> (prior sample variance) <span class="math inline">\(\nu_0\)</span> (prior sample size for variance). Then the updating is very intuitive; <span class="math display">\[\theta | \sigma^2, y_1, …, y_n \sim \text{Normal}( \mu_n,  \sigma^2 / \kappa_n), ~~\kappa_n = \kappa_0 + n,~ \mu_n = (\kappa_0 \mu_0 + n \bar y)/ (\kappa_0 + n)\]</span></p>
 <p>Question: How to decide a proper <span class="math inline">\(\kappa_0\)</span>? If you’re uncertain, take <span class="math inline">\(\kappa_0\)</span> to be small relative to <span class="math inline">\(n\)</span> and it doesn’t really matter.</p>
 <p>One of the strengths of the Bayesian paradigm is that it allows the incorporation of prior information. But in practice, non informative priors are much more commonly used (<span class="math inline">\(\kappa_0\)</span> is small relative to <span class="math inline">\(n\)</span>), thus the posterior is mostly determined by the results of the data, experiment, sample, etc. Though, this is not the only reason we use Bayesian Statistics. We also like the updates and the interpretations in terms of probability.</p>
-<p>Back in chapter 5 (our previous class in fact) we skipped some stuff about “improper priors”. Given this line of questioning maybe we should “un-skip” this section some time in the next few days</p>
+<p>Back in chapter 5 (our previous class in fact) we skipped some stuff about “improper priors.” Given this line of questioning maybe we should “un-skip” this section some time in the next few days</p>
 <p>The punchline: There is a way to do Bayesian inference and not incorporate ANY prior information (be “objective”). You still have some decisions to make regarding the prior distribution but they’re in terms of form not content. It will often be (usually be) very similar in terms of the substantive conclusions if not exactly the same to the frequentist. But there are some very complex models (maybe we get to this stuff toward the end of our course) where the Bayesian answer is actually a lot easier to get to than the frequentist.</p>
 </div>
-<div id="a-semiconjugate-prior-distribution" class="section level2">
+<div id="a-semiconjugate-prior-distribution" class="section level2" number="10.2">
 <h2><span class="header-section-number">10.2</span> A semiconjugate prior distribution</h2>
 <p>For today’s class, we’re still doing normal model but suppose I don’t like the “conjugate prior” above. I don’t like that the conjugate prior forces me to describe my uncertatinty about <span class="math inline">\(\theta\)</span> conditionally on <span class="math inline">\(\sigma^2\)</span> what if my prior knowledge of <span class="math inline">\(\theta\)</span> and my prior knowledge of <span class="math inline">\(\sigma^2\)</span> have nothing to do with each other and I want my prior on <span class="math inline">\(\theta\)</span> to be independent of my prior on <span class="math inline">\(\sigma^2\)</span>. This joint prior distribution is ‘semiconjugate’ for the normal model.
 <span class="math display">\[
@@ -307,7 +335,7 @@ With <span class="math inline">\(\sigma^2\)</span> fixed this would be the conju
 \]</span></p>
 <p>and <span class="math inline">\(s_{n}^{2}(\theta)=\sum\left(y_{i}-\theta\right)^{2} / n\)</span>, the unbiased estimator of <span class="math inline">\(\sigma^{2}\)</span> if <span class="math inline">\(\theta\)</span> were known. The <span class="math inline">\(\sigma_n^2(\theta)\)</span> parameter is a weighted average of <span class="math inline">\(\sigma_0^2\)</span> and the sample variance around <span class="math inline">\(\theta\)</span>.</p>
 </div>
-<div id="gibbs-sampling" class="section level2">
+<div id="gibbs-sampling" class="section level2" number="10.3">
 <h2><span class="header-section-number">10.3</span> Gibbs sampling</h2>
 <p>Here’s our predicament; to sample from the posterior <span class="math inline">\(p(\theta, \sigma^2 | y_1, …, y_n)\)</span> it would be sufficient to be able to sample from <span class="math inline">\(p(\theta | y_1, …, y_n)\)</span> and <span class="math inline">\(p(\sigma^2 | \theta, y_1, …, y_n)\)</span>. But the marginal of <span class="math inline">\(\theta\)</span> is not nice. Similarly, we could also sample from the posterior <span class="math inline">\(p(\theta , \sigma^2 | y_1, …., y_n)\)</span> if we could sample from <span class="math inline">\(p(\theta | \sigma^2, y_1, …, y_n)\)</span> and <span class="math inline">\(p(\sigma^2 | y_1, ….,y_n)\)</span>, but the marginal of <span class="math inline">\(\sigma^2\)</span> is also not nice. So we have answers for both of the conditionals i.e., <span class="math inline">\(p(\sigma^2 | \theta, y_1, …, y_n)\)</span> and <span class="math inline">\(p(\theta | \sigma^2, y_1, …, y_n)\)</span>, but not either of the marginals.</p>
 <p>Just thinking about a pair of random variables call them <span class="math inline">\((X_1, X_2)\)</span>. I can write their joint density as <span class="math inline">\(f(x_1, x_2) = f(x_1)f(x_2 | x_1)\)</span> or <span class="math inline">\(f(x_1, x_2) = f(x_2 )f(x_1 | x_2)\)</span>. But if I don’t know <span class="math inline">\(f(x_1)\)</span> or <span class="math inline">\(f(x_2)\)</span> but I know both of <span class="math inline">\(f(x_1|x_2)\)</span> and <span class="math inline">\(f(x_2 | x_1)\)</span>. what can I do with this? I can do a <strong>Gibbs sampler!</strong></p>
@@ -316,7 +344,7 @@ With <span class="math inline">\(\sigma^2\)</span> fixed this would be the conju
 and <span class="math inline">\((\theta, \sigma^2)^{(1)}\)</span> would be a sample from the joint distribution <span class="math inline">\(p(\theta, \sigma | y_1,...,y_n).\)</span> Additionally, <span class="math inline">\(\theta^{(1)}\)</span> can be considered a sample from the marginal distribution <span class="math inline">\(p(\theta | y_1,...,y_n).\)</span> From this <span class="math inline">\(\theta\)</span>-value, we can generate
 <span class="math display">\[\sigma^{2(2)} \sim p(\sigma^2 | \theta^{(1)}, y_1,...,y_n)\]</span>
 so now we got <span class="math inline">\((\theta^{(1)}, \sigma^{2(2)}) \sim p(\theta , \sigma^2 | y_1,...,y_n),\)</span> thus <span class="math inline">\(\sigma^{2(2)} \sim p(\sigma^2 | y_1,...,y_n).\)</span> Now sample <span class="math inline">\(\theta^{(2)} \sim p(\theta | \sigma^{2(2)}, y_1,...,y_n)\)</span> etc.</p>
-<p>So the answer to the question : What can we do with both conditional distributions (but neither marginal distribution)? “with” here means “the means to simulate samples from”. Well if we could just get a starting point <span class="math inline">\(\sigma^{2(1)}\)</span> we could simulate a sequence such that each element in this sequence is marginally drawn from the joint posterior distribution <span class="math inline">\(p(\theta, \sigma^2 | y).\)</span> One complication here is that the draws would not be independent. You see why? <span class="math inline">\(\theta^{(1)} \sim p(\theta | y), \theta^{(2)} \sim p(\theta | y)\)</span> but they are not independent because <span class="math inline">\(\theta^{(2)}\)</span> is drawn conditionally on <span class="math inline">\(\sigma^{2(2)}\)</span> and <span class="math inline">\(\sigma^{2(2)}\)</span> is drawn conditionally on <span class="math inline">\(\theta^{(1)}\)</span> and as a result there is dependence between <span class="math inline">\(\theta^{(2)}\)</span> and <span class="math inline">\(\theta^{(1)}\)</span>. We’ll worry about that tomorrow.</p>
+<p>So the answer to the question : What can we do with both conditional distributions (but neither marginal distribution)? “with” here means “the means to simulate samples from.” Well if we could just get a starting point <span class="math inline">\(\sigma^{2(1)}\)</span> we could simulate a sequence such that each element in this sequence is marginally drawn from the joint posterior distribution <span class="math inline">\(p(\theta, \sigma^2 | y).\)</span> One complication here is that the draws would not be independent. You see why? <span class="math inline">\(\theta^{(1)} \sim p(\theta | y), \theta^{(2)} \sim p(\theta | y)\)</span> but they are not independent because <span class="math inline">\(\theta^{(2)}\)</span> is drawn conditionally on <span class="math inline">\(\sigma^{2(2)}\)</span> and <span class="math inline">\(\sigma^{2(2)}\)</span> is drawn conditionally on <span class="math inline">\(\theta^{(1)}\)</span> and as a result there is dependence between <span class="math inline">\(\theta^{(2)}\)</span> and <span class="math inline">\(\theta^{(1)}\)</span>. We’ll worry about that tomorrow.</p>
 <p>This iterative sampling for the iteratively updated conditional distributions is called the <strong>Gibbs sampler</strong>. We’ll define it here in our 2-parameter model.</p>
 <p>The algorithm goes:</p>
 <ol style="list-style-type: decimal">
@@ -325,25 +353,25 @@ so now we got <span class="math inline">\((\theta^{(1)}, \sigma^{2(2)}) \sim p(\
 <li>let <span class="math inline">\(\phi^{(s+1)}=\left(\theta^{(s+1)}, \sigma^{2(s+1)}\right)\)</span>.</li>
 </ol>
 <p>The code:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="gibbs-sampler.html#cb87-1"></a>n      &lt;-<span class="st"> </span><span class="kw">length</span>(y)</span>
-<span id="cb87-2"><a href="gibbs-sampler.html#cb87-2"></a>ybar   &lt;-<span class="st"> </span><span class="kw">mean</span>(y)  </span>
-<span id="cb87-3"><a href="gibbs-sampler.html#cb87-3"></a>s2     &lt;-<span class="st"> </span><span class="kw">var</span>(y) </span>
-<span id="cb87-4"><a href="gibbs-sampler.html#cb87-4"></a>S      &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb87-5"><a href="gibbs-sampler.html#cb87-5"></a>phi    &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, S, <span class="dv">2</span>)</span>
-<span id="cb87-6"><a href="gibbs-sampler.html#cb87-6"></a></span>
-<span id="cb87-7"><a href="gibbs-sampler.html#cb87-7"></a><span class="co"># starting values</span></span>
-<span id="cb87-8"><a href="gibbs-sampler.html#cb87-8"></a>theta  &lt;-<span class="st"> </span>ybar <span class="co"># sample mean</span></span>
-<span id="cb87-9"><a href="gibbs-sampler.html#cb87-9"></a>sigma2 &lt;-<span class="st"> </span>(nu<span class="fl">.0</span><span class="op">*</span>sigma2<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>(n<span class="dv">-1</span>)<span class="op">*</span>s2) <span class="op">/</span><span class="st"> </span>(nu<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n)</span>
-<span id="cb87-10"><a href="gibbs-sampler.html#cb87-10"></a></span>
-<span id="cb87-11"><a href="gibbs-sampler.html#cb87-11"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>S){</span>
-<span id="cb87-12"><a href="gibbs-sampler.html#cb87-12"></a>  tau2.n &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">/</span>tau2<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n<span class="op">/</span>sigma2)</span>
-<span id="cb87-13"><a href="gibbs-sampler.html#cb87-13"></a>  mu.n   &lt;-<span class="st"> </span>tau2.n <span class="op">*</span><span class="st"> </span>(mu<span class="fl">.0</span><span class="op">/</span>tau2<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n<span class="op">*</span>ybar<span class="op">/</span>sigma2)</span>
-<span id="cb87-14"><a href="gibbs-sampler.html#cb87-14"></a>  theta  &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean=</span>mu.n, <span class="dt">sd=</span><span class="kw">sqrt</span>(tau2.n))</span>
-<span id="cb87-15"><a href="gibbs-sampler.html#cb87-15"></a>  sigma2 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="kw">rgamma</span>(<span class="dv">1</span>, (nu<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>n)<span class="op">/</span><span class="dv">2</span>, </span>
-<span id="cb87-16"><a href="gibbs-sampler.html#cb87-16"></a>        (nu<span class="fl">.0</span><span class="op">*</span>sigma2<span class="fl">.0</span> <span class="op">+</span><span class="st"> </span>(n<span class="dv">-1</span>)<span class="op">*</span>s2 <span class="op">+</span><span class="st"> </span>n<span class="op">*</span>(ybar<span class="op">-</span>theta)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="dv">2</span>)</span>
-<span id="cb87-17"><a href="gibbs-sampler.html#cb87-17"></a>  </span>
-<span id="cb87-18"><a href="gibbs-sampler.html#cb87-18"></a>      phi[s,] &lt;-<span class="st"> </span><span class="kw">c</span>(theta, sigma2)</span>
-<span id="cb87-19"><a href="gibbs-sampler.html#cb87-19"></a>    }</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="gibbs-sampler.html#cb87-1" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb87-2"><a href="gibbs-sampler.html#cb87-2" aria-hidden="true" tabindex="-1"></a>ybar   <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)  </span>
+<span id="cb87-3"><a href="gibbs-sampler.html#cb87-3" aria-hidden="true" tabindex="-1"></a>s2     <span class="ot">&lt;-</span> <span class="fu">var</span>(y) </span>
+<span id="cb87-4"><a href="gibbs-sampler.html#cb87-4" aria-hidden="true" tabindex="-1"></a>S      <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb87-5"><a href="gibbs-sampler.html#cb87-5" aria-hidden="true" tabindex="-1"></a>phi    <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, <span class="dv">2</span>)</span>
+<span id="cb87-6"><a href="gibbs-sampler.html#cb87-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-7"><a href="gibbs-sampler.html#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="co"># starting values</span></span>
+<span id="cb87-8"><a href="gibbs-sampler.html#cb87-8" aria-hidden="true" tabindex="-1"></a>theta  <span class="ot">&lt;-</span> ybar <span class="co"># sample mean</span></span>
+<span id="cb87-9"><a href="gibbs-sampler.html#cb87-9" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> (nu<span class="fl">.0</span><span class="sc">*</span>sigma2<span class="fl">.0</span> <span class="sc">+</span> (n<span class="dv">-1</span>)<span class="sc">*</span>s2) <span class="sc">/</span> (nu<span class="fl">.0</span> <span class="sc">+</span> n)</span>
+<span id="cb87-10"><a href="gibbs-sampler.html#cb87-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-11"><a href="gibbs-sampler.html#cb87-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S){</span>
+<span id="cb87-12"><a href="gibbs-sampler.html#cb87-12" aria-hidden="true" tabindex="-1"></a>  tau2.n <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>tau2<span class="fl">.0</span> <span class="sc">+</span> n<span class="sc">/</span>sigma2)</span>
+<span id="cb87-13"><a href="gibbs-sampler.html#cb87-13" aria-hidden="true" tabindex="-1"></a>  mu.n   <span class="ot">&lt;-</span> tau2.n <span class="sc">*</span> (mu<span class="fl">.0</span><span class="sc">/</span>tau2<span class="fl">.0</span> <span class="sc">+</span> n<span class="sc">*</span>ybar<span class="sc">/</span>sigma2)</span>
+<span id="cb87-14"><a href="gibbs-sampler.html#cb87-14" aria-hidden="true" tabindex="-1"></a>  theta  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu.n, <span class="at">sd=</span><span class="fu">sqrt</span>(tau2.n))</span>
+<span id="cb87-15"><a href="gibbs-sampler.html#cb87-15" aria-hidden="true" tabindex="-1"></a>  sigma2 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">rgamma</span>(<span class="dv">1</span>, (nu<span class="fl">.0</span> <span class="sc">+</span> n)<span class="sc">/</span><span class="dv">2</span>, </span>
+<span id="cb87-16"><a href="gibbs-sampler.html#cb87-16" aria-hidden="true" tabindex="-1"></a>        (nu<span class="fl">.0</span><span class="sc">*</span>sigma2<span class="fl">.0</span> <span class="sc">+</span> (n<span class="dv">-1</span>)<span class="sc">*</span>s2 <span class="sc">+</span> n<span class="sc">*</span>(ybar<span class="sc">-</span>theta)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb87-17"><a href="gibbs-sampler.html#cb87-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb87-18"><a href="gibbs-sampler.html#cb87-18" aria-hidden="true" tabindex="-1"></a>      phi[s,] <span class="ot">&lt;-</span> <span class="fu">c</span>(theta, sigma2)</span>
+<span id="cb87-19"><a href="gibbs-sampler.html#cb87-19" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div>
 <p>This R code assumes we have a data vector <span class="math inline">\(\boldsymbol{y}\)</span> and parameter variables <span class="math inline">\(\mu_0=\texttt{mu.0}\)</span>, <span class="math inline">\(\tau_0^2=\texttt{tau2.0}\)</span> (the parameters of the normal prior on <span class="math inline">\(\theta\)</span>) <span class="math inline">\(\nu_0=\texttt{nu.0},\)</span> <span class="math inline">\(\sigma_0^2=\texttt{sigma2.0}\)</span>(parameters of the inverse gamma prior on <span class="math inline">\(\sigma^2\)</span>).</p>
 <p>As we learn more of these Markov chain Monte Carlo methods we’ll see this structure more and more. Where the simulation step is not done by</p>
 <pre><code>theta.sim &lt;- r&quot;dist&quot; ( S, … )</code></pre>
@@ -351,23 +379,23 @@ so now we got <span class="math inline">\((\theta^{(1)}, \sigma^{2(2)}) \sim p(\
 <p>The object <span class="math inline">\(\phi=\texttt{phi}\)</span> in this code is the matrix of simulations. The <span class="math inline">\(s\)</span>th row of <span class="math inline">\(\texttt{phi}\)</span> is the <span class="math inline">\(s\)</span>th iteration of the Gibbs sampler. The first column of <span class="math inline">\(\texttt{phi}\)</span> is the <span class="math inline">\(\theta\)</span>-components the second column is the <span class="math inline">\(\sigma^2\)</span> components. See Hoff’s book. He does mean and precision.</p>
 <p>Note: <span class="math inline">\(s_{n}^{2}(\theta)=\sum\left(y_{i}-\theta\right)^{2} / n\)</span>,so {<span class="math inline">\(\sigma^2 | \theta, y\)</span>} depends on <span class="math inline">\(\sum (y_i - \theta)^2.\)</span> Recalculating this for every updated <span class="math inline">\(\theta\)</span> is inefficient. Instead of calculating <span class="math inline">\(\sum (y_i - \theta)^2\)</span> for each updated <span class="math inline">\(\theta\)</span> value we use <span class="math inline">\(s_{n}^{2}(\theta)=(n-1)s^2+n(\bar y - \theta)^2\)</span> and only recalculate <span class="math inline">\((\bar y - \theta)^2\)</span>.</p>
 </div>
-<div id="example-midge-wing-length-2" class="section level2">
+<div id="example-midge-wing-length-2" class="section level2" number="10.4">
 <h2><span class="header-section-number">10.4</span> Example: Midge wing length</h2>
 <p>Our prior information about these insects leads us to expect mean <span class="math inline">\(\texttt{mu.0 = 1.9}\)</span></p>
 <p>What variance to put on that? the logic that went into <span class="math inline">\(\texttt{tau2.0 = .95^2?}\)</span> was to give low prior probability to <span class="math inline">\(\theta &lt; 0.\)</span></p>
 <p>Expected sd around 0.10 or so, so set <span class="math inline">\(\sigma_0^2= (.10)^2 = .01\)</span> and then set <span class="math inline">\(\nu_0 = 1.\)</span></p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="gibbs-sampler.html#cb89-1"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="dt">mgp=</span><span class="kw">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
-<span id="cb89-2"><a href="gibbs-sampler.html#cb89-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb89-3"><a href="gibbs-sampler.html#cb89-3"></a><span class="co"># First the joint dist of (theta, sigma2)</span></span>
-<span id="cb89-4"><a href="gibbs-sampler.html#cb89-4"></a><span class="kw">plot</span>(phi, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;sigma2&quot;</span>)</span>
-<span id="cb89-5"><a href="gibbs-sampler.html#cb89-5"></a><span class="kw">points</span>(phi, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span>.<span class="dv">75</span>)</span>
-<span id="cb89-6"><a href="gibbs-sampler.html#cb89-6"></a><span class="co"># Now the marginal dist of theta</span></span>
-<span id="cb89-7"><a href="gibbs-sampler.html#cb89-7"></a><span class="kw">plot</span>(<span class="kw">density</span>(phi[,<span class="dv">1</span>]), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">xlab=</span><span class="st">&quot;theta&quot;</span>, </span>
-<span id="cb89-8"><a href="gibbs-sampler.html#cb89-8"></a>  <span class="dt">ylab=</span><span class="st">&quot;p(theta|y1,...,yn)&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb89-9"><a href="gibbs-sampler.html#cb89-9"></a><span class="kw">abline</span>(<span class="dt">v=</span> <span class="kw">quantile</span>(phi[,<span class="dv">1</span>], <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.975</span>)), <span class="dt">lty=</span><span class="dv">2</span>)</span>
-<span id="cb89-10"><a href="gibbs-sampler.html#cb89-10"></a><span class="co"># Now the marginal of sigma2</span></span>
-<span id="cb89-11"><a href="gibbs-sampler.html#cb89-11"></a><span class="kw">plot</span>(<span class="kw">density</span>(phi[,<span class="dv">2</span>]), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">xlab=</span><span class="st">&quot;sigma2&quot;</span>, </span>
-<span id="cb89-12"><a href="gibbs-sampler.html#cb89-12"></a>  <span class="dt">ylab=</span><span class="st">&quot;p(sigma2|y1,...,yn)&quot;</span>, <span class="dt">main=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="gibbs-sampler.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>),<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
+<span id="cb89-2"><a href="gibbs-sampler.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb89-3"><a href="gibbs-sampler.html#cb89-3" aria-hidden="true" tabindex="-1"></a><span class="co"># First the joint dist of (theta, sigma2)</span></span>
+<span id="cb89-4"><a href="gibbs-sampler.html#cb89-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(phi, <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">col=</span><span class="st">&quot;gray&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;sigma2&quot;</span>)</span>
+<span id="cb89-5"><a href="gibbs-sampler.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(phi, <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span>.<span class="dv">75</span>)</span>
+<span id="cb89-6"><a href="gibbs-sampler.html#cb89-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now the marginal dist of theta</span></span>
+<span id="cb89-7"><a href="gibbs-sampler.html#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(phi[,<span class="dv">1</span>]), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xlab=</span><span class="st">&quot;theta&quot;</span>, </span>
+<span id="cb89-8"><a href="gibbs-sampler.html#cb89-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">&quot;p(theta|y1,...,yn)&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb89-9"><a href="gibbs-sampler.html#cb89-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span> <span class="fu">quantile</span>(phi[,<span class="dv">1</span>], <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>)), <span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb89-10"><a href="gibbs-sampler.html#cb89-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Now the marginal of sigma2</span></span>
+<span id="cb89-11"><a href="gibbs-sampler.html#cb89-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(phi[,<span class="dv">2</span>]), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xlab=</span><span class="st">&quot;sigma2&quot;</span>, </span>
+<span id="cb89-12"><a href="gibbs-sampler.html#cb89-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">&quot;p(sigma2|y1,...,yn)&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-60"></span>
 <img src="bayesianS21_files/figure-html/unnamed-chunk-60-1.png" alt="The ﬁrst panel shows 1,000 iterations of the Gibbs sampler. The second and third panels give kernel density estimates to the distributions of Gibbs samples of theta and sigma2. Vertical dashed bars on the second plot indicate 2.5% and 97.5% quantiles of the Gibbs samples of theta." width="672" />
 <p class="caption">
@@ -384,20 +412,20 @@ Figure 10.1: The ﬁrst panel shows 1,000 iterations of the Gibbs sampler. The s
 <p>
  
 </p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="gibbs-sampler.html#cb90-1"></a><span class="co"># Confidence interval for population mean</span></span>
-<span id="cb90-2"><a href="gibbs-sampler.html#cb90-2"></a><span class="kw">quantile</span>(phi[,<span class="dv">1</span>], <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="gibbs-sampler.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence interval for population mean</span></span>
+<span id="cb90-2"><a href="gibbs-sampler.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(phi[,<span class="dv">1</span>], <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span></code></pre></div>
 <pre><code>##  2.5%   50% 97.5% 
 ## 1.716 1.806 1.903</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="gibbs-sampler.html#cb92-1"></a><span class="co"># Confidence interval for population variance </span></span>
-<span id="cb92-2"><a href="gibbs-sampler.html#cb92-2"></a><span class="kw">quantile</span>(phi[,<span class="dv">2</span>], <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="gibbs-sampler.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence interval for population variance </span></span>
+<span id="cb92-2"><a href="gibbs-sampler.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(phi[,<span class="dv">2</span>], <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span></code></pre></div>
 <pre><code>##     2.5%      50%    97.5% 
 ## 0.007533 0.017341 0.053634</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="gibbs-sampler.html#cb94-1"></a><span class="co"># Confidence interval for population standard deviation</span></span>
-<span id="cb94-2"><a href="gibbs-sampler.html#cb94-2"></a><span class="kw">quantile</span>(<span class="kw">sqrt</span>(phi[,<span class="dv">2</span>]), <span class="kw">c</span>(.<span class="dv">025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="gibbs-sampler.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confidence interval for population standard deviation</span></span>
+<span id="cb94-2"><a href="gibbs-sampler.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(<span class="fu">sqrt</span>(phi[,<span class="dv">2</span>]), <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span></code></pre></div>
 <pre><code>##    2.5%     50%   97.5% 
 ## 0.08679 0.13169 0.23159</code></pre>
 </div>
-<div id="discrete-approximation-of-posterior-distribution" class="section level2">
+<div id="discrete-approximation-of-posterior-distribution" class="section level2" number="10.5">
 <h2><span class="header-section-number">10.5</span> Discrete approximation of posterior distribution</h2>
 <p>Let’s be real general here. Suppose you have a single-parameter <span class="math inline">\(\theta\)</span>. You can write the posterior <span class="math inline">\(p(\theta|y) = c\times p(\theta)p(y | \theta) = p(\theta) p(y | \theta) / p(y). ~~ p(y)\)</span> depends on integrating <span class="math inline">\(\theta\)</span> out of the numerator of this thing. That may be hard. So here’s a thing you can do. Pick a bunch of <span class="math inline">\(\theta\)</span> values, <span class="math inline">\(\theta^{(1)} &lt; \theta^{(2)} &lt; … &lt; \theta^{(S)}\)</span>. I’m using the notation of MC simulation but it’s not that these are fixed points.</p>
 <p><span class="math inline">\(Pr(\theta &lt; \theta^{(1)} |y) = 0\)</span></p>
@@ -407,33 +435,33 @@ Figure 10.1: The ﬁrst panel shows 1,000 iterations of the Gibbs sampler. The s
 <p>Now suppose you had two parameters <span class="math inline">\(p(\theta_1, \theta_2 | y)\)</span>. You can do the exact same thing except it doesn’t require double the computation. What does it require? If I split the range of <span class="math inline">\(\theta\)</span> into 100 points. I had to compute the posterior 100 times. If I split the range of <span class="math inline">\(\theta^{(1)}\)</span> and the range of <span class="math inline">\(\theta^{(2)}\)</span> into 100 points each, I have to calculate the posterior <span class="math inline">\(100^2\)</span> times. Still fine. What if I had 16 parameters <span class="math inline">\((\theta_1, \theta_2, …., \theta_{16} ) = \boldsymbol\theta\)</span>. Then I couldn’t do discrete approximation any more but I could still do a Gibbs sampler (or some other MCMC approach). So that’s going to become our go-to method.</p>
 <p>See Hoff chapter 6.2 for more information on discrete approximation.</p>
 </div>
-<div id="example-3" class="section level2">
+<div id="example-3" class="section level2" number="10.6">
 <h2><span class="header-section-number">10.6</span> Example</h2>
 <p>The R-code below evaluates <span class="math inline">\(p(\theta, 1/\sigma^2| y_1 ,..., y_n )\)</span> on a <span class="math inline">\(121\times250\)</span> grid of evenly <span class="math inline">\(1/\sigma^2\)</span> spaced parameter values, with <span class="math inline">\(\theta \in \{{ 1.500, 1.505, . . . , 2.095, 2.100 \}}\)</span> and <span class="math inline">\(1/\sigma^2 \in \{ 1, 2, . . . , 249, 250 \}\)</span>.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="gibbs-sampler.html#cb96-1"></a>theta    &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="fl">1.5</span>, <span class="fl">2.1</span>, <span class="fl">.005</span>)</span>
-<span id="cb96-2"><a href="gibbs-sampler.html#cb96-2"></a>I.sig2   &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">250</span>, <span class="dv">1</span>)</span>
-<span id="cb96-3"><a href="gibbs-sampler.html#cb96-3"></a>G        &lt;-<span class="st"> </span><span class="kw">length</span>(theta);  H &lt;-<span class="st"> </span><span class="kw">length</span>(I.sig2); <span class="co">#121 #250</span></span>
-<span id="cb96-4"><a href="gibbs-sampler.html#cb96-4"></a>log.post &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, G, H); </span>
-<span id="cb96-5"><a href="gibbs-sampler.html#cb96-5"></a></span>
-<span id="cb96-6"><a href="gibbs-sampler.html#cb96-6"></a><span class="cf">for</span>(g <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>G)</span>
-<span id="cb96-7"><a href="gibbs-sampler.html#cb96-7"></a>{ <span class="cf">for</span>(h <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>H)</span>
-<span id="cb96-8"><a href="gibbs-sampler.html#cb96-8"></a>  { log.post[g,h] &lt;-<span class="st"> </span></span>
-<span id="cb96-9"><a href="gibbs-sampler.html#cb96-9"></a><span class="st">         </span><span class="kw">dnorm</span>(theta[g], mu<span class="fl">.0</span>, <span class="dv">1</span><span class="op">/</span><span class="kw">sqrt</span>(tau2<span class="fl">.0</span>), <span class="dt">log=</span>T) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb96-10"><a href="gibbs-sampler.html#cb96-10"></a><span class="st">         </span><span class="kw">dgamma</span>(I.sig2[h], nu<span class="fl">.0</span><span class="op">/</span><span class="dv">2</span>, nu<span class="fl">.0</span><span class="op">*</span>sigma2<span class="fl">.0</span><span class="op">/</span><span class="dv">2</span>, <span class="dt">log=</span>T) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb96-11"><a href="gibbs-sampler.html#cb96-11"></a><span class="st">         </span><span class="kw">sum</span>(<span class="kw">dnorm</span>(y, theta[g], <span class="dv">1</span><span class="op">/</span><span class="kw">sqrt</span>(I.sig2[h]), <span class="dt">log=</span>T)) </span>
-<span id="cb96-12"><a href="gibbs-sampler.html#cb96-12"></a>}} </span>
-<span id="cb96-13"><a href="gibbs-sampler.html#cb96-13"></a>post.grid &lt;-<span class="st"> </span><span class="kw">exp</span>(log.post);  <span class="kw">rm</span>(log.post);</span>
-<span id="cb96-14"><a href="gibbs-sampler.html#cb96-14"></a>post.grid &lt;-<span class="st"> </span>post.grid <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(post.grid)  </span></code></pre></div>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="gibbs-sampler.html#cb97-1"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>),<span class="dt">mgp=</span><span class="kw">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
-<span id="cb97-2"><a href="gibbs-sampler.html#cb97-2"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb97-3"><a href="gibbs-sampler.html#cb97-3"></a>contours &lt;-<span class="st"> </span><span class="kw">c</span>(.<span class="dv">001</span>, <span class="fl">.01</span>, <span class="kw">seq</span>(.<span class="dv">05</span>, <span class="fl">.95</span>, <span class="fl">.10</span>)) <span class="op">*</span><span class="st"> </span><span class="kw">max</span>(post.grid)</span>
-<span id="cb97-4"><a href="gibbs-sampler.html#cb97-4"></a></span>
-<span id="cb97-5"><a href="gibbs-sampler.html#cb97-5"></a><span class="kw">contour</span>(theta, I.sig2, post.grid, <span class="dt">levels=</span>contours, <span class="dt">drawlabels=</span>F, </span>
-<span id="cb97-6"><a href="gibbs-sampler.html#cb97-6"></a>  <span class="dt">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;1/sigma2&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Joint distribution&quot;</span>)</span>
-<span id="cb97-7"><a href="gibbs-sampler.html#cb97-7"></a><span class="kw">plot</span>(theta, <span class="kw">apply</span>(post.grid, <span class="dv">1</span>, sum), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, </span>
-<span id="cb97-8"><a href="gibbs-sampler.html#cb97-8"></a>  <span class="dt">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Probability&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Marginal of mean&quot;</span>)</span>
-<span id="cb97-9"><a href="gibbs-sampler.html#cb97-9"></a><span class="kw">plot</span>(I.sig2, <span class="kw">apply</span>(post.grid, <span class="dv">2</span>, sum), <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, </span>
-<span id="cb97-10"><a href="gibbs-sampler.html#cb97-10"></a>  <span class="dt">xlab=</span><span class="st">&quot;1/sigma2&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Probability&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Marginal of precision&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="gibbs-sampler.html#cb96-1" aria-hidden="true" tabindex="-1"></a>theta    <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">1.5</span>, <span class="fl">2.1</span>, .<span class="dv">005</span>)</span>
+<span id="cb96-2"><a href="gibbs-sampler.html#cb96-2" aria-hidden="true" tabindex="-1"></a>I.sig2   <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">250</span>, <span class="dv">1</span>)</span>
+<span id="cb96-3"><a href="gibbs-sampler.html#cb96-3" aria-hidden="true" tabindex="-1"></a>G        <span class="ot">&lt;-</span> <span class="fu">length</span>(theta);  H <span class="ot">&lt;-</span> <span class="fu">length</span>(I.sig2); <span class="co">#121 #250</span></span>
+<span id="cb96-4"><a href="gibbs-sampler.html#cb96-4" aria-hidden="true" tabindex="-1"></a>log.post <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, G, H); </span>
+<span id="cb96-5"><a href="gibbs-sampler.html#cb96-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="gibbs-sampler.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(g <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>G)</span>
+<span id="cb96-7"><a href="gibbs-sampler.html#cb96-7" aria-hidden="true" tabindex="-1"></a>{ <span class="cf">for</span>(h <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>H)</span>
+<span id="cb96-8"><a href="gibbs-sampler.html#cb96-8" aria-hidden="true" tabindex="-1"></a>  { log.post[g,h] <span class="ot">&lt;-</span> </span>
+<span id="cb96-9"><a href="gibbs-sampler.html#cb96-9" aria-hidden="true" tabindex="-1"></a>         <span class="fu">dnorm</span>(theta[g], mu<span class="fl">.0</span>, <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(tau2<span class="fl">.0</span>), <span class="at">log=</span>T) <span class="sc">+</span> </span>
+<span id="cb96-10"><a href="gibbs-sampler.html#cb96-10" aria-hidden="true" tabindex="-1"></a>         <span class="fu">dgamma</span>(I.sig2[h], nu<span class="fl">.0</span><span class="sc">/</span><span class="dv">2</span>, nu<span class="fl">.0</span><span class="sc">*</span>sigma2<span class="fl">.0</span><span class="sc">/</span><span class="dv">2</span>, <span class="at">log=</span>T) <span class="sc">+</span> </span>
+<span id="cb96-11"><a href="gibbs-sampler.html#cb96-11" aria-hidden="true" tabindex="-1"></a>         <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, theta[g], <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(I.sig2[h]), <span class="at">log=</span>T)) </span>
+<span id="cb96-12"><a href="gibbs-sampler.html#cb96-12" aria-hidden="true" tabindex="-1"></a>}} </span>
+<span id="cb96-13"><a href="gibbs-sampler.html#cb96-13" aria-hidden="true" tabindex="-1"></a>post.grid <span class="ot">&lt;-</span> <span class="fu">exp</span>(log.post);  <span class="fu">rm</span>(log.post);</span>
+<span id="cb96-14"><a href="gibbs-sampler.html#cb96-14" aria-hidden="true" tabindex="-1"></a>post.grid <span class="ot">&lt;-</span> post.grid <span class="sc">/</span> <span class="fu">sum</span>(post.grid)  </span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="gibbs-sampler.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">1</span>),<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>))</span>
+<span id="cb97-2"><a href="gibbs-sampler.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb97-3"><a href="gibbs-sampler.html#cb97-3" aria-hidden="true" tabindex="-1"></a>contours <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">001</span>, .<span class="dv">01</span>, <span class="fu">seq</span>(.<span class="dv">05</span>, .<span class="dv">95</span>, .<span class="dv">10</span>)) <span class="sc">*</span> <span class="fu">max</span>(post.grid)</span>
+<span id="cb97-4"><a href="gibbs-sampler.html#cb97-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="gibbs-sampler.html#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(theta, I.sig2, post.grid, <span class="at">levels=</span>contours, <span class="at">drawlabels=</span>F, </span>
+<span id="cb97-6"><a href="gibbs-sampler.html#cb97-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;1/sigma2&quot;</span>, <span class="at">main=</span><span class="st">&quot;Joint distribution&quot;</span>)</span>
+<span id="cb97-7"><a href="gibbs-sampler.html#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">apply</span>(post.grid, <span class="dv">1</span>, sum), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, </span>
+<span id="cb97-8"><a href="gibbs-sampler.html#cb97-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;theta&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Probability&quot;</span>, <span class="at">main=</span><span class="st">&quot;Marginal of mean&quot;</span>)</span>
+<span id="cb97-9"><a href="gibbs-sampler.html#cb97-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(I.sig2, <span class="fu">apply</span>(post.grid, <span class="dv">2</span>, sum), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, </span>
+<span id="cb97-10"><a href="gibbs-sampler.html#cb97-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;1/sigma2&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Probability&quot;</span>, <span class="at">main=</span><span class="st">&quot;Marginal of precision&quot;</span>)</span></code></pre></div>
 <p><img src="bayesianS21_files/figure-html/discrete%20approximation%20plot-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The first panel gives the discrete approximation to the joint distribution of <span class="math inline">\((\theta, 1/\sigma^2).\)</span></p>
 
