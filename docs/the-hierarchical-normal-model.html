@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="group-comparisons.html"/>
-
+<link rel="next" href="linear-regression.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -263,7 +263,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html"><i class="fa fa-check"></i><b>14</b> The hierarchical normal model</a></li>
+<li class="chapter" data-level="14" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html"><i class="fa fa-check"></i><b>14</b> The hierarchical normal model</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#postinf"><i class="fa fa-check"></i><b>14.1</b> Posterior inference</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-distributions-of-mu-and-tau2"><i class="fa fa-check"></i><b>14.1.1</b> Full conditional distributions of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span></a></li>
+<li class="chapter" data-level="14.1.2" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-of-theta_j"><i class="fa fa-check"></i><b>14.1.2</b> Full conditional of <span class="math inline">\(\theta_j\)</span></a></li>
+<li class="chapter" data-level="14.1.3" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-of-sigma2"><i class="fa fa-check"></i><b>14.1.3</b> Full conditional of <span class="math inline">\(\sigma^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#example-math-scores-in-u.s.-public-schools"><i class="fa fa-check"></i><b>14.2</b> Example: Math scores in U.S. public schools</a></li>
+<li class="chapter" data-level="14.3" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#posterior-approximation"><i class="fa fa-check"></i><b>14.3</b> Posterior approximation</a></li>
+<li class="chapter" data-level="14.4" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#mcmc-diagnostics-1"><i class="fa fa-check"></i><b>14.4</b> MCMC diagnostics</a></li>
+<li class="chapter" data-level="14.5" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#shrinkage"><i class="fa fa-check"></i><b>14.5</b> Shrinkage</a></li>
+<li class="chapter" data-level="14.6" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#ranking-the-groups"><i class="fa fa-check"></i><b>14.6</b> Ranking the groups</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>15</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="linear-regression.html"><a href="linear-regression.html#example-oxygen-uptake"><i class="fa fa-check"></i><b>15.1</b> Example: Oxygen uptake</a></li>
+<li class="chapter" data-level="15.2" data-path="linear-regression.html"><a href="linear-regression.html#least-squares-estimation"><i class="fa fa-check"></i><b>15.2</b> Least squares estimation</a></li>
+<li class="chapter" data-level="15.3" data-path="linear-regression.html"><a href="linear-regression.html#least-squares-estimation-for-oxygen-uptake-data"><i class="fa fa-check"></i><b>15.3</b> Least squares estimation for oxygen uptake data</a></li>
+<li class="chapter" data-level="15.4" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-estimation-for-a-regression-model"><i class="fa fa-check"></i><b>15.4</b> Bayesian estimation for a regression model</a></li>
+<li class="chapter" data-level="15.5" data-path="linear-regression.html"><a href="linear-regression.html#unit-information-prior"><i class="fa fa-check"></i><b>15.5</b> Unit information prior</a></li>
+<li class="chapter" data-level="15.6" data-path="linear-regression.html"><a href="linear-regression.html#zellners-g-prior"><i class="fa fa-check"></i><b>15.6</b> Zellner’s <span class="math inline">\(g\)</span>-prior</a></li>
+<li class="chapter" data-level="15.7" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-analysis-using-invariant-g-prior"><i class="fa fa-check"></i><b>15.7</b> Bayesian analysis using invariant <span class="math inline">\(g\)</span>-prior</a></li>
+<li class="chapter" data-level="15.8" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-analysis-using-semiconjugate-prior"><i class="fa fa-check"></i><b>15.8</b> Bayesian analysis using semiconjugate prior</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -286,16 +310,526 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="the-hierarchical-normal-model" class="section level1" number="14">
 <h1><span class="header-section-number">Lecture 14</span> The hierarchical normal model</h1>
-<p></p>
+<p><tt>The following notes, mostly transcribed from Neath(0525,2021) lecture, summarize sections(8.3 and 8.4) of Hoff(2009).</tt></p>
+<p>
+ 
+</p>
+<p>In section 8.3 there’s some theoretical justification to the hierarchical model based on exchangeability arguments. We won’t need that.</p>
+<p>The hierarchical model is good because it makes sense and it leads to more precise yet justified inference than competitor models.</p>
+<p>Here’s why it makes sense. From last class, we know that our data consist of scores on math tests for 1993 10th grade students. <span class="math inline">\(Y_i =\)</span> score of <span class="math inline">\(i\)</span>th student <span class="math inline">\(i = 1, 2, …, 1993\)</span>, and assume that conditional on <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma^2\)</span> the <span class="math inline">\(y_i\)</span> are independent Normal<span class="math inline">\((\theta, \sigma^2).\)</span> Assign prior distributions to <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma^2,\)</span> update using Bayes rule and make inference based on the posterior distribution. That would be fine. But there’s something I didn’t tell you last class. The data is not actually 1993 randomly selected students but rather there are 100 randomly selected high schools all having a 10th grade enrollment of 400 or greater, and from any particular high school we selected between 5 and 32 students for a total of 1993. For that reason it does not makes sense to treat the 1993 responses as exchangeable. Two students from the same school are reasonably expected to be more similar to each other than would be two students from two different schools. However, within any particular school <span class="math inline">\(j,\)</span> the <span class="math inline">\(n_j\)</span> students in the sample at school <span class="math inline">\(j\)</span> can be modeled as exchangeable.</p>
+<p>Let <span class="math inline">\(\theta_j =\)</span> mean score at school <span class="math inline">\(j\)</span> and we’ll say the <span class="math inline">\(Y_{i,j} ~(\)</span>score of <span class="math inline">\(i\)</span>th student at school <span class="math inline">\(j)\)</span> are conditionally on <span class="math inline">\(\theta_j\)</span> iid Normal<span class="math inline">\(( \theta_j , \sigma^2_j)\)</span>.</p>
+<p>What about the <span class="math inline">\(\theta_j?\)</span> The <span class="math inline">\(m=100\)</span> schools are a random sample from some population of schools (there’s a lot more than 100) so it is justified to assume <span class="math inline">\(\theta_1, \theta_2, …, \theta_{100}\)</span> (mean scores of the 100 schools) are exchangeable. Remember de Finetti’s theorem says: If the data are exchangeable they follow a “conditional iid” model. So our model will say <span class="math inline">\(\{\theta_1, …, \theta_m | \mu, \tau^2\} \stackrel{\text{iid}}\sim\)</span> Normal<span class="math inline">\(( \mu, \tau^2 )\)</span>. That’s the first level of the hierarchy. The <span class="math inline">\(\theta_j\)</span> are not observable! what is observable is what’s happening at the next level of the hierarchy.</p>
+<p>The next level; <span class="math inline">\(Y_{i,j} | \theta_j \stackrel{\text{iid}}\sim\)</span> Normal<span class="math inline">\((\theta_j, \sigma^2)\)</span>. We will assume that the variances at each school are the same. Is this assumption justified? Probably not. Does that really matter? Probably not so much. It will not negatively affect our inference about <span class="math inline">\(\theta_j,\)</span> and interpretation is more straightforward.</p>
+<p>The model says;</p>
+<p>Observed data: <span class="math inline">\(y_{i,j}\)</span>, <span class="math inline">\(i = 1, …, n_j, ~~ j = 1, …., m\)</span></p>
+<p><span class="math inline">\(\{Y_{i,j} | \theta, \sigma^2\} \stackrel{\text{indep}}{\sim}\)</span> Normal<span class="math inline">\((\theta_j, \sigma^2 )\)</span></p>
+<p><span class="math inline">\(\{\theta_1, …, \theta_m | \mu, \tau^2 \}~ \stackrel{\text{iid}}{\sim}\)</span> Normal<span class="math inline">\(( \mu, \tau^2 )\)</span></p>
+<p>So we have observable random quantities, unobservable random quantities, and model parameters. What’s what?</p>
+<p>The observable data are <span class="math inline">\(y_{i,j}\)</span>, the test scores of students in the sample.</p>
+<p>Unobservable random quantities are the <span class="math inline">\(\theta_j\)</span>.</p>
+<p>The model parameters are:</p>
+<ul>
+<li><span class="math inline">\(\sigma^2 = \text{Var}( Y_{i,j} | \theta_j, \sigma^2 )\)</span></li>
+<li><span class="math inline">\(\mu = E( \theta_j | \mu, \tau^2)\)</span></li>
+<li><span class="math inline">\(\tau^2 = \text{Var}(\theta_j | \mu, \tau^2 )\)</span></li>
+</ul>
+<p>Note:</p>
+<p>The sampling distribution of <span class="math inline">\(\{ Y_{i,j} | \mu, \sigma^2 , \tau^2\}\)</span> is normal. By laws of probability we know that if <span class="math inline">\(X | Z=z \sim\)</span> Normal<span class="math inline">\((z, \sigma^2)\)</span> ( say <span class="math inline">\(y|\theta\)</span> ) and <span class="math inline">\(Z \sim\)</span> Normal<span class="math inline">\(( \mu, \tau^2)\)</span> ( say <span class="math inline">\(\theta|\mu\)</span> is normal ) then <span class="math inline">\(X \sim\)</span> Normal ( then <span class="math inline">\(y\)</span> is normal).</p>
+<p><span class="math inline">\(E(Y_{i,j} | \mu, \sigma^2 , \tau^2) = \mu\)</span></p>
+<p>Remember that <span class="math inline">\(E( E[X|Z] ) = E(X),\)</span> so</p>
+<p><span class="math display">\[
+\begin{aligned}
+E(Y_{i,j} | \mu, \sigma^2 , \tau^2)  &amp;= E(E[Y_{i,j} | \theta_j,\sigma^2]|\mu, \sigma^2 , \tau^2)\\
+ &amp;= E(\theta_j|\mu, \sigma^2 , \tau^2)=\mu
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\text{Var}( Y_{i,j}| \mu, \sigma^2, \tau^2 ) = \sigma^2 + \tau^2\)</span> because <span class="math inline">\(E(\text{Var}[X|Z] ) + \text{Var}(E[X|Z] ) = \text{Var}(X).\)</span></p>
+<p>What do <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau^2\)</span> represent in this model?</p>
+<p><span class="math inline">\(\sigma^2 = \text{Var}( Y_{i,j} | \theta_j, \sigma^2)\)</span> measures the variation in scores between students of the same school. <span class="math inline">\(\tau^2 = \text{Var}(\theta_j | \mu, \tau^2)\)</span> measures variation between mean scores at different schools.</p>
+<p>So we write; Total variation in student scores = variation between schools + variation between students of same school (i.e., variation within school). It is an assumption of the model that this is the same for all schools. Obviously this is not the case but it is a simplifying assumption.</p>
+<p>We are interested in inference about <span class="math inline">\(\mu\)</span> as well as in estimating (“predicting”) the <span class="math inline">\(\theta_j\)</span> and also <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau^2\)</span> (the within-school and between-school variation in scores). Let’s do it!</p>
+<p>We need to talk about <strong>priors!</strong> Our model parameters are:</p>
+<p>overall mean <span class="math inline">\(\mu,\)</span> within-group variance <span class="math inline">\(\sigma^2,\)</span> between-group variance <span class="math inline">\(\tau^2\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^{2} &amp; \sim \operatorname{inverse-gamma}\left(\nu_{0} / 2, \nu_{0} \sigma_{0}^{2} / 2\right)\\
+\tau^{2} &amp; \sim \operatorname{inverse-gamma}\left(\eta_{0} / 2, \eta_{0} \tau_{0}^{2} / 2\right)\\
+\mu &amp; \sim \operatorname{Normal}\left(\mu_{0}, \gamma_{0}^{2}\right)
+\end{aligned}
+\]</span></p>
+<p>A greek letter with a subscript is a constant (or at least being conditioned on) a greek letter with no subscript is a parameter (and hence a random quantity).</p>
+<div id="postinf" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Posterior inference</h2>
+<p>We will do posterior inference by the Gibbs sampler. The joint posterior <span class="math inline">\(p(\theta_1, …, \theta_m, \mu, \tau^2, \sigma^2 | \boldsymbol y_1,...,\boldsymbol y_m )\)</span> is not readily solvable. But what is solvable is the set of full conditional distributions.</p>
+<p><span class="math display">\[
+\begin{equation}
+\begin{array}{l}
+p\left(\theta_{1}, \ldots, \theta_{m}, \mu, \tau^{2}, \sigma^{2} \mid \boldsymbol y_{1},\ldots, \boldsymbol{y}_{m}\right)\\
+\propto p\left(\mu, \tau^{2}, \sigma^{2}\right) p\left(\theta_{1}, \ldots, \theta_{m} \mid \mu, \tau^{2}, \sigma^{2}\right) p\left(\boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m} \mid \theta_{1}, \ldots, \theta_{m}, \mu, \tau^{2}, \sigma^{2}\right) \\
+=p(\mu) p\left(\tau^{2}\right) p\left(\sigma^{2}\right)\left\{\prod_{j=1}^{m} p\left(\theta_{j} \mid \mu, \tau^{2}\right)\right\}\left\{\prod_{j=1}^{m} \prod_{i=1}^{n_{j}} p\left(y_{i, j} \mid \theta_{j}, \sigma^{2}\right)\right\}
+\end{array}
+\end{equation}
+\]</span>
+Our priors on <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span> and <span class="math inline">\(\sigma^2\)</span> are independent hence the first factorization. The sampling distribution of <span class="math inline">\(\theta_j\)</span> is (conditionally) iid Normal<span class="math inline">\((\mu,\tau^2)\)</span> and independent of <span class="math inline">\(\sigma^2.\)</span> Conditionally on the <span class="math inline">\(\theta_j\)</span>
+the observed data are independent of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span>.</p>
+<p>
+ 
+</p>
+<p align="center">
+<img src="/Users/OnyishiChisom/Desktop/DESKTOP%20STUFF/0Education%20ish/Columbia/Summer%202021/BAYESIAN%20STATISTICS%20STATGR5224/Lecture_notes/525_08b_Hierarchical_Normal/hierarchy.png" style="width:52.0%" />
+</p>
+<p><span class="math display">\[\text{Figure 8.3 on page 133}\]</span></p>
+<p>
+ 
+</p>
+<p>Looking at the figure notice that</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span> describe the population of schools</li>
+<li>the <span class="math inline">\(\theta_j\)</span> are a sample from that population</li>
+<li><span class="math inline">\(y_j = y_{1,j} , …., y_{n_j, j}\)</span> are a sample from the population that <span class="math inline">\(\theta_j\)</span> describes</li>
+<li>Those variables depend on <span class="math inline">\(\sigma^2\)</span> as well.</li>
+<li>There’s a layer of separation between the data and <span class="math inline">\((\mu, \tau^2)\)</span>. Conditionally on the <span class="math inline">\(\theta\)</span>’s the <span class="math inline">\(y_{i,j}\)</span> and <span class="math inline">\((\mu, \tau^2)\)</span> are independent.</li>
+</ul>
+<p>We will make use of this when deriving full conditionals.</p>
+<p>You might think deriving the full conditionals would involve a lot of messy math and it would, except we don’t need it to because we’ve already done that math! Solving the full conditionals for this model is all about recognizing where what we know from univariate normal model applies to things with different names / notations.</p>
+<div id="full-conditional-distributions-of-mu-and-tau2" class="section level3" number="14.1.1">
+<h3><span class="header-section-number">14.1.1</span> Full conditional distributions of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span></h3>
+<p><span class="math inline">\(p(\mu, \tau^2 | \theta, \sigma^2, y) = p(\mu, \tau^2 | \theta)\)</span></p>
+<p>Logically: Our goal is to estimate the overall mean score at 5 schools. If we know the overall mean score for 3 of those schools then we have no use for data from those three schools.</p>
+<p>Further, <span class="math inline">\(p(\mu, \tau^2 | \theta_1, …, \theta_m)\)</span> is just the univariate normal model! what we called <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\sigma^2\)</span> before are now <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span> and what we called <span class="math inline">\(y_i\)</span> before are now the <span class="math inline">\(\theta_j\)</span> ( akin to <span class="math inline">\(p(\theta, \sigma^2 | y_1, …, y_n)\)</span> ).</p>
+<p>
+ 
+</p>
+<p><span class="math display">\[
+\begin{array}{l}
+p\left(\mu \mid \theta_{1}, \ldots, \theta_{m}, \tau^{2}, \sigma^{2}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p(\mu) \prod p\left(\theta_{j} \mid \mu, \tau^{2}\right) \\
+p\left(\tau^{2} \mid \theta_{1}, \ldots, \theta_{m}, \mu, \sigma^{2}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p\left(\tau^{2}\right) \prod p\left(\theta_{j} \mid \mu, \tau^{2}\right)
+\end{array}
+\]</span></p>
+<p>We have</p>
+<p><span class="math display">\[
+\mu \mid \theta_{1}, \ldots, \theta_{m}, \tau^{2} \sim \text { Normal}\left(\frac{\mu_{0} / \gamma_{0}^{2}+m \bar{\theta} / \tau^{2}}{1 / \gamma_{0}^{2}+m / \tau^{2}}, \frac{1}{1 / \gamma_{0}^{2}+m / \tau^{2}}\right)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\tau^{2} \mid \theta_{1}, \ldots, \theta_{m}, \mu \sim \operatorname{inverse-gamma}\left(\frac{\eta_{0}+m}{2}, \frac{\eta_{0} \tau_{0}^{2}+\sum\left(\theta_{j}-\mu\right)^{2}}{2}\right)
+\]</span></p>
+<p><span class="math inline">\(\eta_0\)</span> represents our prior “degrees of freedom” for the between-schools variance <span class="math inline">\(\tau^2.\)</span> Conditional on mean for <span class="math inline">\(m\)</span> of those schools we get “posterior degrees of freedom” <span class="math inline">\(\eta_0 + m.\)</span></p>
+</div>
+<div id="full-conditional-of-theta_j" class="section level3" number="14.1.2">
+<h3><span class="header-section-number">14.1.2</span> Full conditional of <span class="math inline">\(\theta_j\)</span></h3>
+<p><span class="math inline">\(\theta_j : j = 1, …, m.\)</span></p>
+<p><span class="math display">\[
+p\left(\theta_{j} \mid \mu, \tau^{2}, \sigma^{2}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p\left(\theta_{j} \mid \mu, \tau^{2}\right) \prod_{i=1}^{n_{j}} p\left(y_{i, j} \mid \theta_{j}, \sigma^{2}\right)
+\]</span></p>
+<p>Conditionally on { <span class="math inline">\(\mu, \tau^2, \sigma^2, \boldsymbol y_j\)</span> }, the <span class="math inline">\(\theta_j\)</span> are independent of each other as well as independent of the data from the other groups.</p>
+<p><span class="math display">\[
+\theta_{j} \mid \mu, \tau^{2}, \sigma^{2}, \boldsymbol{y}_{j} \sim \text { Normal}\left(\frac{\mu / \tau^{2}+n_{j} \bar{y}_{j} / \sigma^{2}}{1 / \tau^{2}+n_{j} / \sigma^{2}}, \frac{1}{1 / \tau^{2}+n_{j} / \sigma^{2}}\right)
+\]</span></p>
+</div>
+<div id="full-conditional-of-sigma2" class="section level3" number="14.1.3">
+<h3><span class="header-section-number">14.1.3</span> Full conditional of <span class="math inline">\(\sigma^2\)</span></h3>
+<p>It’s going to involve the sample variances within schools for all <span class="math inline">\(m\)</span> different schools. We have <span class="math inline">\(\nu_0\)</span> “prior observations” with sample variance of <span class="math inline">\(\sigma_0^2\)</span>. We have a total of <span class="math inline">\(n_1 + n_2 + … + n_m\)</span> observations of “sample variance.”</p>
+<p>
+ 
+</p>
+<p><span class="math display">\[
+p\left(\sigma^{2} \mid \theta_{1}, \ldots, \theta_{m}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p\left(\sigma^{2}\right) \prod_{j=1}^{m} \prod_{i=1}^{n_{j}} p\left(y_{i, j} \mid \theta_{j}, \sigma^{2}\right)
+\]</span></p>
+<span class="math display">\[
+\sigma^{2} \mid \boldsymbol{\theta}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m} \sim \text { inverse-gamma }\left(\frac{\nu_{0}+\sum n_{j}}{2}, \frac{\nu_{0} \sigma_{0}^{2}+\sum \sum\left(y_{i, j}-\theta_{j}\right)^{2}}{2}\right)
+\]</span>
+<p>
+ 
+</p>
+<p>This is a “semi-conjugate” model. Not fully conjugate because our priors are independent but these parameters are NOT independent in the posterior but the full conditional posteriors have the same form as the marginal priors.</p>
+<p>We have all the tools! We can do posterior approximations using the Gibbs sampler. Yay for us!</p>
+</div>
+</div>
+<div id="example-math-scores-in-u.s.-public-schools" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Example: Math scores in U.S. public schools</h2>
+<p>Because the sample sizes are different it’s not gonna work to store the whole data set in a matrix we need a list.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="the-hierarchical-normal-model.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile the school means, medians, and standard deviations</span></span>
+<span id="cb159-2"><a href="the-hierarchical-normal-model.html#cb159-2" aria-hidden="true" tabindex="-1"></a>m     <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(Data[,<span class="dv">1</span>])) <span class="co"># number of schools is m=100</span></span>
+<span id="cb159-3"><a href="the-hierarchical-normal-model.html#cb159-3" aria-hidden="true" tabindex="-1"></a>y.all <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb159-4"><a href="the-hierarchical-normal-model.html#cb159-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-5"><a href="the-hierarchical-normal-model.html#cb159-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, m);  ybar <span class="ot">&lt;-</span> ymed <span class="ot">&lt;-</span>  s2 <span class="ot">&lt;-</span> n</span>
+<span id="cb159-6"><a href="the-hierarchical-normal-model.html#cb159-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-7"><a href="the-hierarchical-normal-model.html#cb159-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb159-8"><a href="the-hierarchical-normal-model.html#cb159-8" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb159-9"><a href="the-hierarchical-normal-model.html#cb159-9" aria-hidden="true" tabindex="-1"></a> y       <span class="ot">&lt;-</span> Data[Data[,<span class="dv">1</span>]<span class="sc">==</span>j, <span class="dv">2</span>]</span>
+<span id="cb159-10"><a href="the-hierarchical-normal-model.html#cb159-10" aria-hidden="true" tabindex="-1"></a> n[j]    <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb159-11"><a href="the-hierarchical-normal-model.html#cb159-11" aria-hidden="true" tabindex="-1"></a> ybar[j] <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb159-12"><a href="the-hierarchical-normal-model.html#cb159-12" aria-hidden="true" tabindex="-1"></a> ymed[j] <span class="ot">&lt;-</span> <span class="fu">median</span>(y)</span>
+<span id="cb159-13"><a href="the-hierarchical-normal-model.html#cb159-13" aria-hidden="true" tabindex="-1"></a> s2[j]   <span class="ot">&lt;-</span> <span class="fu">var</span>(y)</span>
+<span id="cb159-14"><a href="the-hierarchical-normal-model.html#cb159-14" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb159-15"><a href="the-hierarchical-normal-model.html#cb159-15" aria-hidden="true" tabindex="-1"></a> y.all[[j]] <span class="ot">&lt;-</span> y;  <span class="fu">rm</span>(y); </span>
+<span id="cb159-16"><a href="the-hierarchical-normal-model.html#cb159-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>In this plot we have 100 different schools. The school id 1, 2, …, 100 is just an id it’s not numerically meaningful so the “scatterplot” idea isn’t really applicable here. So if order is not meaningful we can choose any order we like so let’s choose the one that corresponds to increasing sample mean.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="the-hierarchical-normal-model.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">1</span>,m), <span class="fu">range</span>(y.all), <span class="at">type=</span><span class="st">&quot;n&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;math score&quot;</span>, </span>
+<span id="cb160-2"><a href="the-hierarchical-normal-model.html#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;rank of school-specific average&quot;</span>) </span>
+<span id="cb160-3"><a href="the-hierarchical-normal-model.html#cb160-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-4"><a href="the-hierarchical-normal-model.html#cb160-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb160-5"><a href="the-hierarchical-normal-model.html#cb160-5" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb160-6"><a href="the-hierarchical-normal-model.html#cb160-6" aria-hidden="true" tabindex="-1"></a> j <span class="ot">&lt;-</span> <span class="fu">order</span>(ybar)[k]</span>
+<span id="cb160-7"><a href="the-hierarchical-normal-model.html#cb160-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">points</span>( <span class="fu">rep</span>(k, n[j]), y.all[[j]], <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span>.<span class="dv">5</span>) </span>
+<span id="cb160-8"><a href="the-hierarchical-normal-model.html#cb160-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">segments</span>(k, <span class="fu">min</span>(y.all[[j]]), k, <span class="fu">max</span>(y.all[[j]]) )</span>
+<span id="cb160-9"><a href="the-hierarchical-normal-model.html#cb160-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb160-10"><a href="the-hierarchical-normal-model.html#cb160-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb160-11"><a href="the-hierarchical-normal-model.html#cb160-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(ybar))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-109"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-109-1.png" alt="Plot of all data, arranged in ascending order of school-specific average score" width="672" />
+<p class="caption">
+Figure 14.1: Plot of all data, arranged in ascending order of school-specific average score
+</p>
+</div>
+<p>This plot helps us see the between-schools versus within-schools variation in the observed scores and what we see is within-school variation is much greater i.e, <span class="math inline">\(\sigma^2 &gt; \tau^2.\)</span></p>
+<p>
+ 
+</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="the-hierarchical-normal-model.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(ybar); <span class="fu">mean</span>(s2) <span class="co"># mean(sapply(y.all, var))</span></span></code></pre></div>
+<pre><code>## [1] 30.99</code></pre>
+<pre><code>## [1] 82.94</code></pre>
+<p>The between-group-means sample variance is 31. The average within-groups variance is 82. This is consistent with the picture above. Most of the groups are pretty close to each other, whereas the variability within a group can vary quite a lot.</p>
+<p>
+ 
+</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="the-hierarchical-normal-model.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram of school averages</span></span>
+<span id="cb164-2"><a href="the-hierarchical-normal-model.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(ybar, <span class="at">freq=</span>F, <span class="at">right=</span>F, <span class="at">breaks=</span><span class="dv">30</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-111"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-111-1.png" alt="Empirical distribution of sample means" width="672" />
+<p class="caption">
+Figure 14.2: Empirical distribution of sample means
+</p>
+</div>
+<p><span class="math inline">\(\bar y_j\)</span> vary from about 35 to about 65.</p>
+<p>
+ 
+</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="the-hierarchical-normal-model.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">which.min</span>(ybar),<span class="fu">which.max</span>(ybar))</span></code></pre></div>
+<pre><code>## [1]  5 67</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="the-hierarchical-normal-model.html#cb167-1" aria-hidden="true" tabindex="-1"></a>ybar[<span class="fu">c</span>(<span class="fu">which.min</span>(ybar), <span class="fu">which.max</span>(ybar))]</span></code></pre></div>
+<pre><code>## [1] 36.58 65.02</code></pre>
+<p>When it comes to estimating the <span class="math inline">\(\theta_j,\)</span> taking an overall average is probably not such a great idea. Clearly the average score at school 67 is greater than the average score at school 5. Should we just estimate the school averages by the sample averages? We could do that but some of those estimates would have very high variance because some of the sample sizes are really small. E.g. school 67 has a sample size of 4.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="the-hierarchical-normal-model.html#cb169-1" aria-hidden="true" tabindex="-1"></a>n[<span class="dv">67</span>]</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>
+ 
+</p>
+<p>Let’s look at a visual relationship between sample size and averages.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="the-hierarchical-normal-model.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ybar <span class="sc">~</span> n, <span class="at">xlab=</span><span class="st">&quot;sample size&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;sample mean&quot;</span>)</span>
+<span id="cb171-2"><a href="the-hierarchical-normal-model.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(ybar))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-114"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-114-1.png" alt="Relationship between sample mean versus sample size for the 100 schools" width="672" />
+<p class="caption">
+Figure 14.3: Relationship between sample mean versus sample size for the 100 schools
+</p>
+</div>
+<p>There’s no real trend in this plot, but there is something going on here. The schools whose sample mean tends to be farthest from the overall mean tend to be schools where there is a low sample size. This relationship between sample averages and sample size is fairly common in hierarchical datasets. Remember that variance of the sample average <span class="math inline">\(=\sigma^2/n_j\)</span> depends on the sample size so the more the sample size, the closer to the sample average.</p>
+<p>This has me thinking… School 67 has an average score of 65 but it’s only based on 4 students! so what’s your best estimate of <span class="math inline">\(\theta_{67}\)</span>?</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="the-hierarchical-normal-model.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(n[<span class="dv">67</span>],ybar[<span class="dv">67</span>],<span class="fu">mean</span>(ybar))</span></code></pre></div>
+<pre><code>## [1]  4.00 65.02 48.13</code></pre>
+<p>Is it 65(no pooling)? Is it 48(full pooling)? Should it be somewhere in between? I’m thinking it should be somewhere in between. There is reason to believe the average score is higher at this school (higher than the overall average), but it’s probably not as high as the sample average indicates being it’s only 4 students.</p>
+<p>The two-stage sampling scheme (see <a href="the-hierarchical-normal-model.html#postinf">14.1</a>) is important, but the BIG IDEA is that under this model we can use information in <span class="math inline">\(\mathbf Y_1, \mathbf Y_2, …, \mathbf Y_{m-1}\)</span> to inform our inference about <span class="math inline">\(\theta_m\)</span>. Those other <span class="math inline">\(\mathbf Y_j\)</span> won’t have as much influence on our inference about <span class="math inline">\(\theta_m\)</span> as <span class="math inline">\(Y_m\)</span> will but they won’t be ignored either.</p>
+</div>
+<div id="posterior-approximation" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> Posterior approximation</h2>
+<p>We need prior distributions for</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span> (overall mean); we need<span class="math inline">\((\mu_0, \gamma_0^2)\)</span></li>
+<li><span class="math inline">\(\sigma^2\)</span>(within-group variance); we need<span class="math inline">\((\nu_0, \sigma_0^2)\)</span></li>
+<li><span class="math inline">\(\tau^2\)</span> (between-groups variance); we need<span class="math inline">\((\eta_0, \tau_0^2)\)</span></li>
+</ul>
+<p>The test is purported to have an average score of 50 and variance of 100. That 100 includes both within-school and between-school variance. So we actually have prior belief that <span class="math inline">\(\sigma^2 + \tau^2\)</span> should be close to 100. Between school variance cannot be more than 100 so we take <span class="math inline">\(\tau_0^2 = 100\)</span>. We also take <span class="math inline">\(\sigma_0^2 = 100\)</span>. These are overstatements since <span class="math inline">\(\sigma^2 + \tau^2 \approx 100,\)</span> but it won’t affect our inference that much because we got lots of data. Now the Gibbs sampler!</p>
+<ol style="list-style-type: decimal">
+<li>sample <span class="math inline">\(\mu^{(s+1)} \sim p\left(\mu \mid \theta_{1}^{(s)}, \ldots, \theta_{m}^{(s)}, \tau^{2(s)}\right)\)</span>;</li>
+<li>sample <span class="math inline">\(\tau^{2(s)} \sim p\left(\tau^{2} \mid \theta_{1}^{(s)}, \ldots, \theta_{m}^{(s)}, \mu^{(s+1)}\right)\)</span>;</li>
+<li>sample <span class="math inline">\(\sigma^{2(s)} \sim p\left(\sigma^{2} \mid \theta_{1}^{(s)}, \ldots, \theta_{m}^{(s)}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right)\)</span></li>
+<li>for each <span class="math inline">\(j \in\{1, \ldots, m\}\)</span>, sample <span class="math inline">\(\theta_{j}^{(s+1)} \sim p\left(\theta_{j} \mid \mu^{(s+1)}, \tau^{2(s+1)}, \sigma^{2(s+1)}, \boldsymbol{y}_{j}\right)\)</span></li>
+</ol>
+<p>It doesn’t matter what order your Gibbs sampler goes in. It just matters that you use the most updated values (which is the easiest way to code, as it happens).</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="the-hierarchical-normal-model.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior parameters</span></span>
+<span id="cb174-2"><a href="the-hierarchical-normal-model.html#cb174-2" aria-hidden="true" tabindex="-1"></a>nu<span class="fl">.0</span>  <span class="ot">&lt;-</span> <span class="dv">1</span> ;  sigma2<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">100</span>;</span>
+<span id="cb174-3"><a href="the-hierarchical-normal-model.html#cb174-3" aria-hidden="true" tabindex="-1"></a>eta<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">1</span> ;    tau2<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">100</span>;</span>
+<span id="cb174-4"><a href="the-hierarchical-normal-model.html#cb174-4" aria-hidden="true" tabindex="-1"></a>mu<span class="fl">.0</span>  <span class="ot">&lt;-</span> <span class="dv">50</span>;  gamma2<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">25</span> ;</span>
+<span id="cb174-5"><a href="the-hierarchical-normal-model.html#cb174-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-6"><a href="the-hierarchical-normal-model.html#cb174-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting values for the Gibbs sampler </span></span>
+<span id="cb174-7"><a href="the-hierarchical-normal-model.html#cb174-7" aria-hidden="true" tabindex="-1"></a>theta  <span class="ot">&lt;-</span> ybar          <span class="co"># group sample means</span></span>
+<span id="cb174-8"><a href="the-hierarchical-normal-model.html#cb174-8" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(s2)      <span class="co"># average of within-group variances </span></span>
+<span id="cb174-9"><a href="the-hierarchical-normal-model.html#cb174-9" aria-hidden="true" tabindex="-1"></a>mu     <span class="ot">&lt;-</span> <span class="fu">mean</span>(theta);  <span class="co"># overall average</span></span>
+<span id="cb174-10"><a href="the-hierarchical-normal-model.html#cb174-10" aria-hidden="true" tabindex="-1"></a>tau2   <span class="ot">&lt;-</span> <span class="fu">var</span>(theta)    <span class="co"># between-groups variance</span></span>
+<span id="cb174-11"><a href="the-hierarchical-normal-model.html#cb174-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-12"><a href="the-hierarchical-normal-model.html#cb174-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Now run the Gibbs sampler!</span></span>
+<span id="cb174-13"><a href="the-hierarchical-normal-model.html#cb174-13" aria-hidden="true" tabindex="-1"></a>S            <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb174-14"><a href="the-hierarchical-normal-model.html#cb174-14" aria-hidden="true" tabindex="-1"></a>theta.chain  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, m)</span>
+<span id="cb174-15"><a href="the-hierarchical-normal-model.html#cb174-15" aria-hidden="true" tabindex="-1"></a>sigma2.chain <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S); </span>
+<span id="cb174-16"><a href="the-hierarchical-normal-model.html#cb174-16" aria-hidden="true" tabindex="-1"></a>mu.chain     <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S); </span>
+<span id="cb174-17"><a href="the-hierarchical-normal-model.html#cb174-17" aria-hidden="true" tabindex="-1"></a>tau2.chain   <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S);</span>
+<span id="cb174-18"><a href="the-hierarchical-normal-model.html#cb174-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-19"><a href="the-hierarchical-normal-model.html#cb174-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)  <span class="co"># Update theta&#39;s, then sigma2, then mu, then tau2</span></span>
+<span id="cb174-20"><a href="the-hierarchical-normal-model.html#cb174-20" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb174-21"><a href="the-hierarchical-normal-model.html#cb174-21" aria-hidden="true" tabindex="-1"></a> V.theta <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>tau2 <span class="sc">+</span> n<span class="sc">/</span>sigma2)</span>
+<span id="cb174-22"><a href="the-hierarchical-normal-model.html#cb174-22" aria-hidden="true" tabindex="-1"></a> m.theta <span class="ot">&lt;-</span> V.theta <span class="sc">*</span> (mu<span class="sc">/</span>tau2 <span class="sc">+</span> n<span class="sc">*</span>ybar<span class="sc">/</span>sigma2)</span>
+<span id="cb174-23"><a href="the-hierarchical-normal-model.html#cb174-23" aria-hidden="true" tabindex="-1"></a> theta   <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(m, <span class="at">mean=</span>m.theta, <span class="at">sd=</span><span class="fu">sqrt</span>(V.theta))</span>
+<span id="cb174-24"><a href="the-hierarchical-normal-model.html#cb174-24" aria-hidden="true" tabindex="-1"></a> <span class="do">#####</span></span>
+<span id="cb174-25"><a href="the-hierarchical-normal-model.html#cb174-25" aria-hidden="true" tabindex="-1"></a> nu.n <span class="ot">&lt;-</span> nu<span class="fl">.0</span> <span class="sc">+</span> <span class="fu">sum</span>(n)</span>
+<span id="cb174-26"><a href="the-hierarchical-normal-model.html#cb174-26" aria-hidden="true" tabindex="-1"></a> ss.n <span class="ot">&lt;-</span> nu<span class="fl">.0</span> <span class="sc">*</span> sigma2<span class="fl">.0</span></span>
+<span id="cb174-27"><a href="the-hierarchical-normal-model.html#cb174-27" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){ ss.n <span class="ot">&lt;-</span> ss.n <span class="sc">+</span> <span class="fu">sum</span>( (y.all[[j]] <span class="sc">-</span> theta[j])<span class="sc">^</span><span class="dv">2</span> ) }</span>
+<span id="cb174-28"><a href="the-hierarchical-normal-model.html#cb174-28" aria-hidden="true" tabindex="-1"></a> sigma2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">rgamma</span>(<span class="dv">1</span>, nu.n<span class="sc">/</span><span class="dv">2</span>, ss.n<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb174-29"><a href="the-hierarchical-normal-model.html#cb174-29" aria-hidden="true" tabindex="-1"></a> <span class="do">#####</span></span>
+<span id="cb174-30"><a href="the-hierarchical-normal-model.html#cb174-30" aria-hidden="true" tabindex="-1"></a> V.mu <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>gamma2<span class="fl">.0</span> <span class="sc">+</span> m<span class="sc">/</span>tau2)</span>
+<span id="cb174-31"><a href="the-hierarchical-normal-model.html#cb174-31" aria-hidden="true" tabindex="-1"></a> m.mu <span class="ot">&lt;-</span> V.mu <span class="sc">*</span> (mu<span class="fl">.0</span><span class="sc">/</span>gamma2<span class="fl">.0</span> <span class="sc">+</span> <span class="fu">sum</span>(theta)<span class="sc">/</span>tau2)</span>
+<span id="cb174-32"><a href="the-hierarchical-normal-model.html#cb174-32" aria-hidden="true" tabindex="-1"></a> mu   <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>m.mu, <span class="at">sd=</span><span class="fu">sqrt</span>(V.mu))</span>
+<span id="cb174-33"><a href="the-hierarchical-normal-model.html#cb174-33" aria-hidden="true" tabindex="-1"></a> <span class="do">#####</span></span>
+<span id="cb174-34"><a href="the-hierarchical-normal-model.html#cb174-34" aria-hidden="true" tabindex="-1"></a> eta.m <span class="ot">&lt;-</span> eta<span class="fl">.0</span> <span class="sc">+</span> m </span>
+<span id="cb174-35"><a href="the-hierarchical-normal-model.html#cb174-35" aria-hidden="true" tabindex="-1"></a> ssq.m <span class="ot">&lt;-</span> eta<span class="fl">.0</span> <span class="sc">*</span> tau2<span class="fl">.0</span> <span class="sc">+</span> <span class="fu">sum</span>( (theta<span class="sc">-</span>mu)<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb174-36"><a href="the-hierarchical-normal-model.html#cb174-36" aria-hidden="true" tabindex="-1"></a> tau2  <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">rgamma</span>(<span class="dv">1</span>, eta.m<span class="sc">/</span><span class="dv">2</span>, ssq.m<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb174-37"><a href="the-hierarchical-normal-model.html#cb174-37" aria-hidden="true" tabindex="-1"></a> <span class="do">#####</span></span>
+<span id="cb174-38"><a href="the-hierarchical-normal-model.html#cb174-38" aria-hidden="true" tabindex="-1"></a> theta.chain[s,] <span class="ot">&lt;-</span> theta ;   mu.chain[s]  <span class="ot">&lt;-</span> mu</span>
+<span id="cb174-39"><a href="the-hierarchical-normal-model.html#cb174-39" aria-hidden="true" tabindex="-1"></a> sigma2.chain[s] <span class="ot">&lt;-</span> sigma2;  tau2.chain[s] <span class="ot">&lt;-</span> tau2</span>
+<span id="cb174-40"><a href="the-hierarchical-normal-model.html#cb174-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Notice that there is no loop needed for <span class="math inline">\(\texttt{theta = theta[1], theta[2], ….,theta[100]}\)</span></p>
+</div>
+<div id="mcmc-diagnostics-1" class="section level2" number="14.4">
+<h2><span class="header-section-number">14.4</span> MCMC diagnostics</h2>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="the-hierarchical-normal-model.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the chain into 10 blocks, and make comparative boxplots by block </span></span>
+<span id="cb175-2"><a href="the-hierarchical-normal-model.html#cb175-2" aria-hidden="true" tabindex="-1"></a>block <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">rep</span>(S<span class="sc">/</span><span class="dv">10</span>,<span class="dv">10</span>))</span>
+<span id="cb175-3"><a href="the-hierarchical-normal-model.html#cb175-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),<span class="at">mar=</span><span class="fu">c</span>(<span class="fl">2.75</span>,<span class="fl">2.75</span>,.<span class="dv">5</span>,.<span class="dv">5</span>),<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.7</span>,.<span class="dv">7</span>,<span class="dv">0</span>))</span>
+<span id="cb175-4"><a href="the-hierarchical-normal-model.html#cb175-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb175-5"><a href="the-hierarchical-normal-model.html#cb175-5" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(mu.chain <span class="sc">~</span> block)</span>
+<span id="cb175-6"><a href="the-hierarchical-normal-model.html#cb175-6" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(sigma2.chain <span class="sc">~</span> block)</span>
+<span id="cb175-7"><a href="the-hierarchical-normal-model.html#cb175-7" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(tau2.chain <span class="sc">~</span> block)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-117"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-117-1.png" alt="Stationarity plots of the MCMC samples of mu, sigma2, tau2" width="672" />
+<p class="caption">
+Figure 14.4: Stationarity plots of the MCMC samples of mu, sigma2, tau2
+</p>
+</div>
+<p>This is an alternative to trace plots which get messy when you have a lot of iterations. These are called “stationarity plots.” Take your <span class="math inline">\(S\)</span> updates. Break your chain ( which consist of <span class="math inline">\(S\)</span> iterations) into <span class="math inline">\(10\)</span> pieces ( each is <span class="math inline">\(S/10\)</span> values ) and look at the boxplots. For each block, if the chain is stationary that means the distribution of the early iterations is the same as that of the later iterations (we should not see a trend in the boxplots). Also, if the starting value for the Gibbs chain were a draw from the target distribution then stationarity would hold exactly.</p>
+<p>No issue with stationarity here. It would have been VERY surprising to see a non-stationarity problem suggested by these plots for our example because we used a Gibbs sampler with reasonable starting values. For other more complicated plots that we will study in the upcoming weeks, these plots will become more than just a formality to check them.</p>
+<p>
+ 
+</p>
+<p>Stationarity was one of the two complicating factors in the use of MCMC versus ordinary Monte Carlo. The other was mixing aka autocorrelation aka the draws are NOT independent. Is that an issue in our example? Let see!</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="the-hierarchical-normal-model.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),<span class="at">mar=</span><span class="fu">c</span>(<span class="fl">2.75</span>,<span class="fl">2.75</span>,.<span class="dv">5</span>,.<span class="dv">5</span>),<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.7</span>,.<span class="dv">7</span>,<span class="dv">0</span>))</span>
+<span id="cb176-2"><a href="the-hierarchical-normal-model.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(mu.chain, <span class="at">main=</span><span class="st">&quot;&quot;</span>);<span class="fu">acf</span>(sigma2.chain, <span class="at">main=</span><span class="st">&quot;&quot;</span>);<span class="fu">acf</span>(tau2.chain, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-118"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-118-1.png" alt="Sample autocorrelation functions of mu, sigma2, tau2, respectively" width="672" />
+<p class="caption">
+Figure 14.5: Sample autocorrelation functions of mu, sigma2, tau2, respectively
+</p>
+</div>
+<p>Not at all. There’s some autocorrelation, but not much!</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="the-hierarchical-normal-model.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">acf</span>(mu.chain, <span class="at">plot=</span>F)<span class="sc">$</span>acf[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,,<span class="dv">1</span>],<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 1.000 0.147 0.021 0.000</code></pre>
+<p>The lag-1 autocorrelation <span class="math inline">\(\rho[1] = 0.15\)</span> for the <span class="math inline">\(\mu\)</span>-chain. Also, <span class="math inline">\(\mu^{(s)}\)</span> is somewhat correlated with <span class="math inline">\(\mu^{(s-1)}\)</span> but practically zero correlation with <span class="math inline">\(\mu^{(s-2)}\)</span>.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="the-hierarchical-normal-model.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">acf</span>(sigma2.chain, <span class="at">plot=</span>F)<span class="sc">$</span>acf[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,,<span class="dv">1</span>],<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 1.000 0.037 0.001 0.028</code></pre>
+<p>Even better story in the <span class="math inline">\(\sigma^2\)</span></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="the-hierarchical-normal-model.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">acf</span>(tau2.chain, <span class="at">plot=</span>F)<span class="sc">$</span>acf[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,,<span class="dv">1</span>],<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 1.000 0.337 0.105 0.033</code></pre>
+<p>Slightly worse one in the <span class="math inline">\(\tau^2\)</span> chain.</p>
+<p>
+ 
+</p>
+<p><strong>Effective sample sizes</strong></p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="the-hierarchical-normal-model.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mcmcse)</span>
+<span id="cb183-2"><a href="the-hierarchical-normal-model.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">ess</span>(mu.chain), <span class="fu">ess</span>(sigma2.chain), <span class="fu">ess</span>(tau2.chain))</span></code></pre></div>
+<pre><code>## [1] 3508 4210 2128</code></pre>
+<p>Nominal sample size was 5000, so these effective sample sizes are not bad at all. This is because there’s so little autocorrelation. Note that we got the worse autocorrelation for <span class="math inline">\(\tau^2\)</span> which is consitent with <span class="math inline">\(\tau^2\)</span> having the least effective sample size.</p>
+<p>
+ 
+</p>
+<p>Next, let’s use the Gibbs draws to describe our posterior beliefs about <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\tau^2\)</span> and <span class="math inline">\(\theta_1, \theta_2, …, \theta_{100}.\)</span></p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="the-hierarchical-normal-model.html#cb185-1" aria-hidden="true" tabindex="-1"></a>quants.mu <span class="ot">&lt;-</span> <span class="fu">quantile</span>(mu.chain, <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span></code></pre></div>
+<p>Posterior 95% interval for <span class="math inline">\(\mu\)</span> is <span class="math inline">\([47.1, 49.2]\)</span></p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="the-hierarchical-normal-model.html#cb186-1" aria-hidden="true" tabindex="-1"></a>quants.sigma2 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(sigma2.chain, <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span></code></pre></div>
+<p>For <span class="math inline">\(\sigma^2\)</span> our posterior interval is <span class="math inline">\([79.7, 90.5]\)</span> <span class="math inline">\(\sigma\)</span> between <span class="math inline">\(8.9\)</span> to <span class="math inline">\(9.5.\)</span></p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="the-hierarchical-normal-model.html#cb187-1" aria-hidden="true" tabindex="-1"></a>quants.tau2 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(tau2.chain, <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span></code></pre></div>
+<p>95% interval for <span class="math inline">\(\tau^2\)</span> is <span class="math inline">\([17.4, 34.6]\)</span></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="the-hierarchical-normal-model.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>),<span class="at">mar=</span><span class="fu">c</span>(<span class="fl">2.75</span>,<span class="fl">2.75</span>,.<span class="dv">5</span>,.<span class="dv">5</span>),<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.7</span>,.<span class="dv">7</span>,<span class="dv">0</span>))</span>
+<span id="cb188-2"><a href="the-hierarchical-normal-model.html#cb188-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-3"><a href="the-hierarchical-normal-model.html#cb188-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(mu.chain), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xlab=</span><span class="st">&quot;mu&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;p(mu|y)&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb188-4"><a href="the-hierarchical-normal-model.html#cb188-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>quants.mu, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb188-5"><a href="the-hierarchical-normal-model.html#cb188-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-6"><a href="the-hierarchical-normal-model.html#cb188-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(sigma2.chain), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xlab=</span><span class="st">&quot;sigma2&quot;</span>, </span>
+<span id="cb188-7"><a href="the-hierarchical-normal-model.html#cb188-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">&quot;p(sigma2|y)&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb188-8"><a href="the-hierarchical-normal-model.html#cb188-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>quants.sigma2, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb188-9"><a href="the-hierarchical-normal-model.html#cb188-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb188-10"><a href="the-hierarchical-normal-model.html#cb188-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(tau2.chain), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xlab=</span><span class="st">&quot;tau2&quot;</span>, </span>
+<span id="cb188-11"><a href="the-hierarchical-normal-model.html#cb188-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">&quot;p(tau2|y)&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb188-12"><a href="the-hierarchical-normal-model.html#cb188-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>quants.tau2, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-126"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-126-1.png" alt="Posterior summaries of mu, sigma2 and tau2 with 2.5%, 50% and 97.5% quantiles given by vertical lines." width="672" />
+<p class="caption">
+Figure 14.6: Posterior summaries of mu, sigma2 and tau2 with 2.5%, 50% and 97.5% quantiles given by vertical lines.
+</p>
+</div>
+<p>
+ 
+</p>
+<p>The sample average of the <span class="math inline">\(j\)</span>th column in the <span class="math inline">\(\texttt{theta.chain}\)</span> matrix approximates the marginal posterior mean <span class="math inline">\(E[\theta_j|y]\)</span>. For example the marginal posterior density for <span class="math inline">\(\theta_1\)</span> is below.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="the-hierarchical-normal-model.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(theta.chain[,<span class="dv">1</span>], <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">col =</span> <span class="st">&quot;pink&quot;</span>, <span class="at">freq=</span><span class="cn">FALSE</span>, </span>
+<span id="cb189-2"><a href="the-hierarchical-normal-model.html#cb189-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="fu">expression</span>(theta[<span class="dv">1</span>]), <span class="at">border=</span><span class="st">&quot;lightpink&quot;</span>)</span>
+<span id="cb189-3"><a href="the-hierarchical-normal-model.html#cb189-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(theta.chain[,<span class="dv">1</span>]), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-127"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-127-1.png" alt="marginal posterior density for theta1" width="672" />
+<p class="caption">
+Figure 14.7: marginal posterior density for theta1
+</p>
+</div>
+<hr />
+<p>
+ 
+</p>
+<p>Let’s talk about school 67. Average score was 65, but it was only 4 students.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="the-hierarchical-normal-model.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">c</span>(n[<span class="dv">67</span>],ybar[<span class="dv">67</span>],<span class="fu">mean</span>(ybar)),<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1]  4.0 65.0 48.1</code></pre>
+<p>How will our model estimate <span class="math inline">\(\theta_{67}?\)</span> Is it gonna be 65, 48, or somewhere in between? let’s see</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="the-hierarchical-normal-model.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(theta.chain[,<span class="dv">67</span>])</span></code></pre></div>
+<pre><code>## [1] 57.25</code></pre>
+<p>
+ 
+</p>
+</div>
+<div id="shrinkage" class="section level2" number="14.5">
+<h2><span class="header-section-number">14.5</span> Shrinkage</h2>
+<p>One of the primary strength of the hierarchical model for data like this is that the hierarchical model allows us to borrow information from other groups to estimate group means. That is <span class="math inline">\(\hat \theta_{73}\)</span> will depend mostly on <span class="math inline">\(\bar y_{73}\)</span> but will also make use of the <span class="math inline">\(\bar y\)</span>’s for all the other schools. How much use? Depends mostly on: <span class="math inline">\(n_{73}\)</span>. If this value is big there will be little shrinkage if <span class="math inline">\(n_{73}\)</span> is low there will be more shrinkage.</p>
+<p>
+ 
+</p>
+<p>The sample average of the <span class="math inline">\(j\)</span>th column in the <span class="math inline">\(\texttt{theta.chain}\)</span> matrix approximates the marginal posterior mean <span class="math inline">\(E(\theta_j | Y).\)</span></p>
+<p><span class="math display">\[
+\mathrm{E}\left(\theta_{j} \mid \boldsymbol{y}_{j}, \mu, \tau, \sigma\right)=\frac{\bar{y}_{j} n_{j} / \sigma^{2}+\mu / \tau^{2}}{n_{j} / \sigma^{2}+1 / \tau^{2}}
+\]</span>
+The above is conditional on the other parameter values and that conditional expectation is a weighted average of <span class="math inline">\(\mu\)</span> (the prior mean which gets weight <span class="math inline">\(1/\tau^2\)</span> ) and <span class="math inline">\(\bar y_j\)</span> ( the group <span class="math inline">\(j\)</span> sample mean which gets weight <span class="math inline">\(n_j / \sigma^2\)</span> ). Another way to say this is that the expected value of <span class="math inline">\(\theta_j\)</span> is pulled from <span class="math inline">\(\bar y_j\)</span> back towards <span class="math inline">\(\mu.\)</span> That phenomenon is called shrinkage. It “shrinks” the variability between the groups. Hence, our estimates <span class="math inline">\(\hat \theta_1 , \hat \theta_2, …, \hat \theta_{100}\)</span> are going to be less variable than the sample means <span class="math inline">\(\bar y_1, \bar y_2, …, \bar y_{100}\)</span>. The <span class="math inline">\(\hat \theta\)</span>’s are going to be “shrunk” back toward the overall average.</p>
+<p>
+ 
+</p>
+<p>The following plot shows <span class="math inline">\(\hat \theta_j = E(\theta_j|\boldsymbol y_1,...,\boldsymbol y_m)\)</span> versus <span class="math inline">\(\bar y_j\)</span> for each group.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="the-hierarchical-normal-model.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mgp=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</span>
+<span id="cb194-2"><a href="the-hierarchical-normal-model.html#cb194-2" aria-hidden="true" tabindex="-1"></a>theta.hat <span class="ot">&lt;-</span> <span class="fu">apply</span>(theta.chain, <span class="dv">2</span>, mean)</span>
+<span id="cb194-3"><a href="the-hierarchical-normal-model.html#cb194-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta.hat <span class="sc">~</span> ybar, <span class="at">ylim=</span><span class="fu">range</span>(ybar), <span class="at">pch=</span><span class="dv">19</span>, <span class="at">ylab =</span> </span>
+<span id="cb194-4"><a href="the-hierarchical-normal-model.html#cb194-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">expression</span>(<span class="fu">hat</span>(theta)), <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">bar</span>(y)))</span>
+<span id="cb194-5"><a href="the-hierarchical-normal-model.html#cb194-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>);  <span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(ybar), <span class="at">lty=</span><span class="dv">2</span>);</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:shr"></span>
+<img src="bayesianS21_files/figure-html/shr-1.png" alt="Study the shrinkage effect" width="672" />
+<p class="caption">
+Figure 14.8: Study the shrinkage effect
+</p>
+</div>
+<p>In this problem the shrinkage is not huge. The points on this plot are <span class="math inline">\((\bar y_j, \hat \theta_j ).\)</span> If we were doing entirely separate estimates with no pooling of information among the different schools all the points would sit right on the diagonal dashed line. If there was no between-school variability and the 1993 students were just a random sample from the population of all students we would get the dashed horizontal line is what we’d get. We don’t believe both! What we believe is somewhere in between.</p>
+<p>
+ 
+</p>
+<p>How much shrinkage is happening? If we define shrinkage as the magnitude of the difference between <span class="math inline">\(\hat \theta\)</span> and <span class="math inline">\(\bar y\)</span> i.e, <span class="math inline">\(\bar y - \boldsymbol {\hat\theta}\)</span>, and we plot shrinkage versus the sample size we get:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="the-hierarchical-normal-model.html#cb195-1" aria-hidden="true" tabindex="-1"></a>shrink <span class="ot">&lt;-</span> <span class="fu">abs</span>(theta.hat <span class="sc">-</span> ybar)</span>
+<span id="cb195-2"><a href="the-hierarchical-normal-model.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(shrink <span class="sc">~</span> n, <span class="at">pch=</span><span class="dv">19</span>)</span>
+<span id="cb195-3"><a href="the-hierarchical-normal-model.html#cb195-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">lowess</span>(shrink <span class="sc">~</span> n), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:shrink"></span>
+<img src="bayesianS21_files/figure-html/shrink-1.png" alt="Shrinkage as a function of sample size." width="672" />
+<p class="caption">
+Figure 14.9: Shrinkage as a function of sample size.
+</p>
+</div>
+<p>In general (it’s not a perfect association because there’s other things going on too) the bigger the sample size the less shrunk the estimate is going to be.</p>
+</div>
+<div id="ranking-the-groups" class="section level2" number="14.6">
+<h2><span class="header-section-number">14.6</span> Ranking the groups</h2>
+<p>Suppose our job is to rank the schools from 1 to 100 in terms of <span class="math inline">\(E(\theta_j | Y )\)</span>. What we’d find is: It is NOT the same ranking as ranking them by sample average. We’ll illustrate this by comparing two of the schools. Consider school 46 and school 82.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="the-hierarchical-normal-model.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduce Figure 8.9 on page 142 of Hoff (2009)</span></span>
+<span id="cb196-2"><a href="the-hierarchical-normal-model.html#cb196-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-3"><a href="the-hierarchical-normal-model.html#cb196-3" aria-hidden="true" tabindex="-1"></a>xlim <span class="ot">&lt;-</span> <span class="fu">range</span>(<span class="fu">c</span>(y.all[[<span class="dv">46</span>]], y.all[[<span class="dv">82</span>]]))</span>
+<span id="cb196-4"><a href="the-hierarchical-normal-model.html#cb196-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-5"><a href="the-hierarchical-normal-model.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(theta.chain[,<span class="dv">46</span>], <span class="at">adj=</span><span class="dv">2</span>), <span class="at">xlim=</span>xlim, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>, </span>
+<span id="cb196-6"><a href="the-hierarchical-normal-model.html#cb196-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;Math score&quot;</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">06</span>, .<span class="dv">22</span>))</span>
+<span id="cb196-7"><a href="the-hierarchical-normal-model.html#cb196-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(theta.chain[,<span class="dv">82</span>], <span class="at">adj=</span><span class="dv">2</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb196-8"><a href="the-hierarchical-normal-model.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
+<span id="cb196-9"><a href="the-hierarchical-normal-model.html#cb196-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y.all[[<span class="dv">46</span>]], <span class="fu">rep</span>(<span class="sc">-</span>.<span class="dv">02</span>, n[<span class="dv">46</span>]), <span class="at">pch=</span><span class="dv">19</span>)  </span>
+<span id="cb196-10"><a href="the-hierarchical-normal-model.html#cb196-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(ybar[<span class="dv">46</span>], <span class="sc">-</span>.<span class="dv">02</span>, <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span><span class="fl">2.5</span>)</span>
+<span id="cb196-11"><a href="the-hierarchical-normal-model.html#cb196-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="sc">-</span>.<span class="dv">02</span>)</span>
+<span id="cb196-12"><a href="the-hierarchical-normal-model.html#cb196-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(y.all[[<span class="dv">82</span>]], <span class="fu">rep</span>(<span class="sc">-</span>.<span class="dv">04</span>, n[<span class="dv">82</span>]), <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, <span class="at">pch=</span><span class="dv">19</span>)</span>
+<span id="cb196-13"><a href="the-hierarchical-normal-model.html#cb196-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(ybar[<span class="dv">82</span>], <span class="sc">-</span>.<span class="dv">04</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, <span class="at">pch=</span><span class="dv">19</span>, <span class="at">cex=</span><span class="fl">2.5</span>)</span>
+<span id="cb196-14"><a href="the-hierarchical-normal-model.html#cb196-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="sc">-</span>.<span class="dv">04</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb196-15"><a href="the-hierarchical-normal-model.html#cb196-15" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="fu">mean</span>(mu.chain), <span class="dv">0</span>, <span class="fu">mean</span>(mu.chain), <span class="dv">1</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb196-16"><a href="the-hierarchical-normal-model.html#cb196-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), </span>
+<span id="cb196-17"><a href="the-hierarchical-normal-model.html#cb196-17" aria-hidden="true" tabindex="-1"></a>   <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;pink&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
+<span id="cb196-18"><a href="the-hierarchical-normal-model.html#cb196-18" aria-hidden="true" tabindex="-1"></a>   <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;School 46&quot;</span>, <span class="st">&quot;School 82&quot;</span>, <span class="st">&quot; E(mu|Y)&quot;</span>) )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-130"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-130-1.png" alt="Compare posterior distributions of theta[46] and theta[82]" width="672" />
+<p class="caption">
+Figure 14.10: Compare posterior distributions of theta[46] and theta[82]
+</p>
+</div>
+<p>The black curve is the posterior of <span class="math inline">\(\theta_{46}\)</span> the pink one is the posterior of <span class="math inline">\(\theta_{82}.\)</span> <span class="math inline">\(E(\theta_j|Y)\)</span> is bigger for <span class="math inline">\(j=82\)</span> than for <span class="math inline">\(j=46\)</span>, hence our belief is that <span class="math inline">\(\theta_{82} &gt; \theta_{46}\)</span>. Just under these posterior densities we’ve got some dotplots with the “raw data” scores for these two groups. The black points are school 46 <span class="math inline">\((n_{46} = 21).\)</span> The pink points are for school 82 <span class="math inline">\((n_{82} = 4)\)</span>. The biggest point is the average value. Note the big pink dot is to the left of the big black one. In other words, <span class="math inline">\(\bar y_{82} &lt; \bar y_{46}.\)</span></p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="the-hierarchical-normal-model.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(ybar[<span class="dv">46</span>],ybar[<span class="dv">82</span>]) <span class="co"># sample mean</span></span></code></pre></div>
+<pre><code>## [1] 40.18 38.76</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="the-hierarchical-normal-model.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(theta.hat[<span class="dv">46</span>],theta.hat[<span class="dv">82</span>]) <span class="co"># posterior mean</span></span></code></pre></div>
+<pre><code>## [1] 41.37 42.55</code></pre>
+<p>So the relation between these quantities is reversed! <span class="math inline">\(\theta_{82} &gt; \theta_{46}\)</span> but <span class="math inline">\(\bar y_{82} &lt; \bar y_{46}.\)</span></p>
+<p>How can this be? Shrinkage! (Because there’s so little data for group 82 that estimate gets shrunk toward the overall mean by more than does the estimate for group 46.)</p>
+<p>Every <span class="math inline">\(\hat \theta\)</span> is a weighted average of <span class="math inline">\(\bar y_j\)</span> (the school-specific mean) and <span class="math inline">\(&quot;\bar y_\bullet&quot;\)</span> the grand mean over all schools. How much weight is shifted from the particular school to the overall mean depends on the school sample size.</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="the-hierarchical-normal-model.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(n[<span class="dv">46</span>],n[<span class="dv">82</span>])    <span class="co">#sample size</span></span></code></pre></div>
+<pre><code>## [1] 21  5</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="the-hierarchical-normal-model.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(s2[<span class="dv">46</span>],s2[<span class="dv">82</span>])  <span class="co">#sample variance</span></span></code></pre></div>
+<pre><code>## [1] 105.0 124.5</code></pre>
+<p>The smaller the sample size is the greater weight is given to the overall mean rather than that specific group mean. School 46 had an average score of 40 but sample size of 21 so shrinkage back up to overall mean (dashed vertical line) is just a little bit. School 82 has only <span class="math inline">\(n=5\)</span> students so while their average score was 38.8 because there’s so much variance in this estimate we shrink it back up to the point where it actually passes up the value of school 46.</p>
+<p>Interpretation: While the average score was lower at school 82 the evidence of a “low true average” is stronger for school 46 because it was based on a larger sample size.</p>
+<p>How often does this happen?
+Looking again at figure <a href="the-hierarchical-normal-model.html#fig:shrink">14.9</a>, if there were no reorderings going on, the trend would be
+monotone i.e., you wouldn’t have any jumping around. However you see some jumping around in the top right. The school with the highest <span class="math inline">\(\bar y\)</span> does not have the highest <span class="math inline">\(\hat \theta\)</span>. At least two schools are higher. What schools are those?</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="the-hierarchical-normal-model.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(ybar)[<span class="dv">98</span><span class="sc">:</span><span class="dv">100</span>];<span class="fu">order</span>(theta.hat)[<span class="dv">98</span><span class="sc">:</span><span class="dv">100</span>]</span></code></pre></div>
+<pre><code>## [1] 79 51 67</code></pre>
+<pre><code>## [1] 67 79 51</code></pre>
+<p>The top performing schools in terms of <span class="math inline">\(\bar y\)</span> were 67 then 51 then 79, however, the top performing schools in terms of <span class="math inline">\(\hat \theta\)</span> were 67 then 79 then 51.</p>
+<p>67 has the highest <span class="math inline">\(\bar y\)</span> but the lowest <span class="math inline">\(\hat \theta\)</span> of the three. What must be true of the sample sizes for these three schools? It must be that <span class="math inline">\(n_{67}\)</span> is the smallest since it’s getting shrunk the most toward the overall mean <code>mean(ybar)=48</code>. Let’s see</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="the-hierarchical-normal-model.html#cb208-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rbind</span>(<span class="fu">c</span>(ybar[<span class="dv">79</span>],ybar[<span class="dv">51</span>],ybar[<span class="dv">67</span>]),</span>
+<span id="cb208-2"><a href="the-hierarchical-normal-model.html#cb208-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">c</span>(theta.hat[<span class="dv">79</span>],theta.hat[<span class="dv">51</span>],theta.hat[<span class="dv">67</span>]),</span>
+<span id="cb208-3"><a href="the-hierarchical-normal-model.html#cb208-3" aria-hidden="true" tabindex="-1"></a>                   n[<span class="fu">c</span>(<span class="dv">79</span>, <span class="dv">51</span>, <span class="dv">67</span>)]),<span class="dv">1</span>)</span>
+<span id="cb208-4"><a href="the-hierarchical-normal-model.html#cb208-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;school 79&quot;</span>, <span class="st">&quot;school 51&quot;</span>, <span class="st">&quot;school 67&quot;</span>)</span>
+<span id="cb208-5"><a href="the-hierarchical-normal-model.html#cb208-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ybar&quot;</span>, <span class="st">&quot;theta.hat&quot;</span>, <span class="st">&quot;sample size&quot;</span>)</span>
+<span id="cb208-6"><a href="the-hierarchical-normal-model.html#cb208-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(mat)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">school 79</th>
+<th align="right">school 51</th>
+<th align="right">school 67</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ybar</td>
+<td align="right">61.7</td>
+<td align="right">64.4</td>
+<td align="right">65.0</td>
+</tr>
+<tr class="even">
+<td align="left">theta.hat</td>
+<td align="right">58.8</td>
+<td align="right">61.8</td>
+<td align="right">57.2</td>
+</tr>
+<tr class="odd">
+<td align="left">sample size</td>
+<td align="right">13.0</td>
+<td align="right">19.0</td>
+<td align="right">4.0</td>
+</tr>
+</tbody>
+</table>
+<p>While the highest observed performance was achieved by school 67 the strongest evidence of a high-achieving school exists for school 51.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="group-comparisons.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="group-comparisons.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

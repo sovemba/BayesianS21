@@ -410,9 +410,9 @@ mean(mu.chain+delta.chain)
 
 So even though the classical model testing approach would lead to pooling the optimal answer is a lot closer to no pooling.
 
+<p>&nbsp;</p>
 
 The author (Hoff) lost me a bit on some pages from section 8.3. If you find yourself similarly lost don't feel bad about that.
-
 
 
 Tomorrow: We will consider $m$ different groups not just two. Our model will say;

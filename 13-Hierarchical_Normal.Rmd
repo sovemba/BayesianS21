@@ -1,4 +1,6 @@
+
 # The hierarchical normal model
+
 
 
 ```{r echo = FALSE, message = FALSE}
@@ -7,4 +9,584 @@ knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
 
 
-\texttt{The following notes, mostly transcribed from Neath(0525,2021) lecture, summarize sections(8.3 and 8.4) of Hoff(2009).}
+<tt>The following notes, mostly transcribed from Neath(0525,2021) lecture, summarize sections(8.3 and 8.4) of Hoff(2009).</tt>
+
+<p>&nbsp;</p>
+
+In section 8.3 there's some theoretical justification to the hierarchical model based on exchangeability arguments. We won't need that.
+
+
+The hierarchical model is good because it makes sense and it leads to more precise yet justified inference than competitor models. 
+
+Here's why it makes sense. From last class, we know that our data consist of scores on math tests for 1993 10th grade students. $Y_i =$ score of $i$th student $i = 1, 2, …, 1993$, and assume that conditional on $\theta$ and $\sigma^2$ the $y_i$ are independent Normal$(\theta, \sigma^2).$ Assign prior distributions to $\theta$ and $\sigma^2,$ update using Bayes rule and make inference based on the posterior distribution. That would be fine. But there's something I didn't tell you last class. The data is not actually 1993 randomly selected students but rather there are 100 randomly selected high schools all having a 10th grade enrollment of 400 or greater, and from any particular high school we selected between 5 and 32 students for a total of 1993. For that reason it does not makes sense to treat the 1993 responses as exchangeable. Two students from the same school are reasonably expected to be more similar to each other than would be two students from two different schools. However, within any particular school $j,$ the $n_j$ students in the sample at school $j$ can be modeled as exchangeable.
+
+Let $\theta_j =$ mean score at school $j$ and we'll say the $Y_{i,j} ~($score of $i$th student at school $j)$ are conditionally on $\theta_j$ iid Normal$( \theta_j ,  \sigma^2_j)$. 
+
+What about the $\theta_j?$ The $m=100$ schools are a random sample from some population of schools (there's a lot more than 100) so it is justified to assume $\theta_1, \theta_2, …, \theta_{100}$ (mean scores of the 100 schools) are exchangeable. Remember de Finetti's theorem says: If the data are exchangeable they follow a "conditional iid" model. So our model will say $\{\theta_1, …, \theta_m | \mu, \tau^2\} \stackrel{\text{iid}}\sim$ Normal$( \mu, \tau^2 )$. That's the first level of the hierarchy. The $\theta_j$ are not observable! what is observable is what's happening at the next level of the hierarchy.
+
+The next level; $Y_{i,j} | \theta_j \stackrel{\text{iid}}\sim$ Normal$(\theta_j,  \sigma^2)$. We will assume that the variances at each school are the same. Is this assumption justified? Probably not. Does that really matter? Probably not so much. It will not negatively affect our inference about $\theta_j,$ and interpretation is more straightforward.
+
+The model says;
+
+Observed data: $y_{i,j}$,   $i = 1, …, n_j, ~~ j = 1, …., m$
+
+$\{Y_{i,j} | \theta, \sigma^2\} \stackrel{\text{indep}}{\sim}$  Normal$(\theta_j, \sigma^2  )$ 
+
+$\{\theta_1, …, \theta_m | \mu, \tau^2 \}~ \stackrel{\text{iid}}{\sim}$  Normal$( \mu,  \tau^2 )$
+
+So we have observable random quantities, unobservable random quantities, and model parameters. What's what? 
+
+The observable data are $y_{i,j}$, the test scores of students in the sample. 
+
+Unobservable random quantities are the $\theta_j$. 
+
+The model parameters are:
+
+* $\sigma^2 = \text{Var}( Y_{i,j} | \theta_j, \sigma^2 )$ 
+* $\mu = E( \theta_j | \mu, \tau^2)$ 
+* $\tau^2 = \text{Var}(\theta_j | \mu, \tau^2 )$
+
+Note:
+
+The sampling distribution of $\{ Y_{i,j} | \mu, \sigma^2 , \tau^2\}$ is normal. By laws of probability we know that if $X | Z=z \sim$ Normal$(z, \sigma^2)$ ( say $y|\theta$ ) and $Z \sim$ Normal$( \mu,  \tau^2)$ ( say $\theta|\mu$ is normal ) then $X \sim$ Normal ( then $y$ is normal).
+
+
+$E(Y_{i,j} | \mu, \sigma^2 , \tau^2) = \mu$
+
+Remember that $E( E[X|Z] ) = E(X),$ so
+
+$$
+\begin{aligned}
+E(Y_{i,j} | \mu, \sigma^2 , \tau^2)  &= E(E[Y_{i,j} | \theta_j,\sigma^2]|\mu, \sigma^2 , \tau^2)\\
+ &= E(\theta_j|\mu, \sigma^2 , \tau^2)=\mu
+\end{aligned}
+$$
+
+$\text{Var}( Y_{i,j}| \mu, \sigma^2, \tau^2 ) = \sigma^2 + \tau^2$ because $E(\text{Var}[X|Z] ) + \text{Var}(E[X|Z] ) = \text{Var}(X).$
+
+What do $\sigma^2$ and $\tau^2$ represent in this model? 
+
+$\sigma^2 = \text{Var}( Y_{i,j} | \theta_j, \sigma^2)$ measures the variation in scores between students of the same school. $\tau^2 = \text{Var}(\theta_j | \mu, \tau^2)$ measures variation between mean scores at different schools. 
+
+So we write; Total variation in student scores = variation between schools + variation between students of same school (i.e., variation within school). It is an assumption of the model that this is the same for all schools. Obviously this is not the case but it is a simplifying assumption.
+
+
+We are interested in inference about $\mu$ as well as in estimating ("predicting") the $\theta_j$ and also $\sigma^2$ and $\tau^2$ (the within-school and between-school variation in scores). Let's do it!
+
+
+We need to talk about **priors!** Our model parameters are: 
+
+overall mean $\mu,$ within-group variance $\sigma^2,$ between-group variance $\tau^2$.
+
+$$
+\begin{aligned}
+\sigma^{2} & \sim \operatorname{inverse-gamma}\left(\nu_{0} / 2, \nu_{0} \sigma_{0}^{2} / 2\right)\\
+\tau^{2} & \sim \operatorname{inverse-gamma}\left(\eta_{0} / 2, \eta_{0} \tau_{0}^{2} / 2\right)\\
+\mu & \sim \operatorname{Normal}\left(\mu_{0}, \gamma_{0}^{2}\right)
+\end{aligned}
+$$
+
+A greek letter with a subscript is a constant (or at least being conditioned on) a greek letter with no subscript is a parameter (and hence a random quantity).
+
+## Posterior inference {#postinf}
+
+We will do posterior inference by the Gibbs sampler. The joint posterior $p(\theta_1, …, \theta_m, \mu, \tau^2, \sigma^2 | \boldsymbol y_1,...,\boldsymbol y_m )$ is not readily solvable. But what is solvable is the set of full conditional distributions.
+
+$$
+\begin{equation}
+\begin{array}{l}
+p\left(\theta_{1}, \ldots, \theta_{m}, \mu, \tau^{2}, \sigma^{2} \mid \boldsymbol y_{1},\ldots, \boldsymbol{y}_{m}\right)\\
+\propto p\left(\mu, \tau^{2}, \sigma^{2}\right) p\left(\theta_{1}, \ldots, \theta_{m} \mid \mu, \tau^{2}, \sigma^{2}\right) p\left(\boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m} \mid \theta_{1}, \ldots, \theta_{m}, \mu, \tau^{2}, \sigma^{2}\right) \\
+=p(\mu) p\left(\tau^{2}\right) p\left(\sigma^{2}\right)\left\{\prod_{j=1}^{m} p\left(\theta_{j} \mid \mu, \tau^{2}\right)\right\}\left\{\prod_{j=1}^{m} \prod_{i=1}^{n_{j}} p\left(y_{i, j} \mid \theta_{j}, \sigma^{2}\right)\right\}
+\end{array}
+\end{equation}
+$$
+Our priors on $\mu$ and $\tau^2$ and $\sigma^2$ are independent hence the first factorization. The sampling distribution of $\theta_j$ is (conditionally) iid Normal$(\mu,\tau^2)$ and independent of $\sigma^2.$ Conditionally on the $\theta_j$
+the observed data are independent of $\mu$ and $\tau^2$.
+
+<p>&nbsp;</p>
+
+<p align="center">
+![](/Users/OnyishiChisom/Desktop/DESKTOP STUFF/0Education ish/Columbia/Summer 2021/BAYESIAN STATISTICS STATGR5224/Lecture_notes/525_08b_Hierarchical_Normal/hierarchy.png){width=55%}
+</p>
+
+
+$$\text{Figure 8.3 on page 133}$$
+
+<p>&nbsp;</p>
+
+Looking at the figure notice that
+
+* $\mu$ and $\tau^2$ describe the population of schools
+* the $\theta_j$ are a sample from that population 
+* $y_j = y_{1,j} , …., y_{n_j, j}$ are a sample from the population that $\theta_j$ describes
+* Those variables depend on $\sigma^2$ as well.
+* There's a layer of separation between the data and $(\mu, \tau^2)$. Conditionally on the $\theta$'s the $y_{i,j}$ and $(\mu, \tau^2)$ are independent.
+
+We will make use of this when deriving full conditionals. 
+
+You might think deriving the full conditionals would involve a lot of messy math and it would, except we don't need it to because we've already done that math! Solving the full conditionals for this model is all about recognizing where what we know from univariate normal model applies to things with different names / notations.
+
+### Full conditional distributions of $\mu$ and $\tau^2$
+
+$p(\mu, \tau^2 | \theta, \sigma^2, y) = p(\mu, \tau^2 | \theta)$
+
+Logically: Our goal is to estimate the overall mean score at 5 schools. If we know the overall mean score for 3 of those schools then we have no use for data from those three schools.
+
+Further, $p(\mu, \tau^2 | \theta_1, …, \theta_m)$ is just the univariate normal model! what we called $\theta$ and $\sigma^2$ before are now $\mu$ and $\tau^2$  and what we called $y_i$ before are now the $\theta_j$ ( akin to $p(\theta, \sigma^2 | y_1, …, y_n)$ ).
+
+<p>&nbsp;</p>
+
+$$
+\begin{array}{l}
+p\left(\mu \mid \theta_{1}, \ldots, \theta_{m}, \tau^{2}, \sigma^{2}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p(\mu) \prod p\left(\theta_{j} \mid \mu, \tau^{2}\right) \\
+p\left(\tau^{2} \mid \theta_{1}, \ldots, \theta_{m}, \mu, \sigma^{2}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p\left(\tau^{2}\right) \prod p\left(\theta_{j} \mid \mu, \tau^{2}\right)
+\end{array}
+$$
+
+We have
+
+$$
+\mu \mid \theta_{1}, \ldots, \theta_{m}, \tau^{2} \sim \text { Normal}\left(\frac{\mu_{0} / \gamma_{0}^{2}+m \bar{\theta} / \tau^{2}}{1 / \gamma_{0}^{2}+m / \tau^{2}}, \frac{1}{1 / \gamma_{0}^{2}+m / \tau^{2}}\right)
+$$
+
+and
+
+$$
+\tau^{2} \mid \theta_{1}, \ldots, \theta_{m}, \mu \sim \operatorname{inverse-gamma}\left(\frac{\eta_{0}+m}{2}, \frac{\eta_{0} \tau_{0}^{2}+\sum\left(\theta_{j}-\mu\right)^{2}}{2}\right)
+$$
+
+$\eta_0$ represents our prior "degrees of freedom" for the between-schools variance $\tau^2.$ Conditional on mean for $m$ of those schools we get "posterior degrees of freedom" $\eta_0 + m.$
+
+### Full conditional of $\theta_j$
+
+$\theta_j  :  j = 1, …, m.$
+
+$$
+p\left(\theta_{j} \mid \mu, \tau^{2}, \sigma^{2}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p\left(\theta_{j} \mid \mu, \tau^{2}\right) \prod_{i=1}^{n_{j}} p\left(y_{i, j} \mid \theta_{j}, \sigma^{2}\right)
+$$
+
+Conditionally on { $\mu, \tau^2, \sigma^2, \boldsymbol y_j$ }, the $\theta_j$ are independent of each other as well as independent of the data from the other groups. 
+
+
+$$
+\theta_{j} \mid \mu, \tau^{2}, \sigma^{2}, \boldsymbol{y}_{j} \sim \text { Normal}\left(\frac{\mu / \tau^{2}+n_{j} \bar{y}_{j} / \sigma^{2}}{1 / \tau^{2}+n_{j} / \sigma^{2}}, \frac{1}{1 / \tau^{2}+n_{j} / \sigma^{2}}\right)
+$$
+
+### \Large Full conditional of $\sigma^2$
+
+It's going to involve the sample variances within schools for all $m$ different schools. We have $\nu_0$ "prior observations" with sample variance of $\sigma_0^2$. We have a total of $n_1 + n_2 + … + n_m$ observations of "sample variance".
+
+<p>&nbsp;</p>
+
+$$
+p\left(\sigma^{2} \mid \theta_{1}, \ldots, \theta_{m}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right) \propto p\left(\sigma^{2}\right) \prod_{j=1}^{m} \prod_{i=1}^{n_{j}} p\left(y_{i, j} \mid \theta_{j}, \sigma^{2}\right)
+$$
+
+$$
+\sigma^{2} \mid \boldsymbol{\theta}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m} \sim \text { inverse-gamma }\left(\frac{\nu_{0}+\sum n_{j}}{2}, \frac{\nu_{0} \sigma_{0}^{2}+\sum \sum\left(y_{i, j}-\theta_{j}\right)^{2}}{2}\right)
+$$
+<p>&nbsp;</p>
+
+This is a "semi-conjugate" model. Not fully conjugate because our priors are independent but these parameters are NOT independent in the posterior but the full conditional posteriors have the same form as the marginal priors.
+
+We have all the tools! We can do posterior approximations using the Gibbs sampler. Yay for us!
+ 
+## Example: Math scores in U.S. public schools
+
+```{r include = FALSE}
+Data <- read.csv("/Users/OnyishiChisom/Desktop/DESKTOP STUFF/0Education ish/Columbia/Summer 2021/BAYESIAN STATISTICS STATGR5224/Lecture_notes/525_08b_Hierarchical_Normal/mathscores.csv", header=TRUE)
+dim(Data);  names(Data)
+```
+
+Because the sample sizes are different it's not gonna work to store the whole data set in a matrix we need a list.
+
+```{r}
+# Compile the school means, medians, and standard deviations
+m     <- length(unique(Data[,1])) # number of schools is m=100
+y.all <- list()
+
+n <- rep(NA, m);  ybar <- ymed <-  s2 <- n
+
+for(j in 1:m)
+{
+ y       <- Data[Data[,1]==j, 2]
+ n[j]    <- length(y)
+ ybar[j] <- mean(y)
+ ymed[j] <- median(y)
+ s2[j]   <- var(y)
+ 
+ y.all[[j]] <- y;  rm(y); 
+}
+```
+
+In this plot we have 100 different schools. The school id 1, 2, …, 100 is just an id it's not numerically meaningful so the "scatterplot" idea isn't really applicable here. So if order is not meaningful we can choose any order we like so let's choose the one that corresponds to increasing sample mean. 
+
+```{r fig.cap = "Plot of all data, arranged in ascending order of school-specific average score"}
+plot(c(1,m), range(y.all), type="n", ylab="math score", 
+  xlab="rank of school-specific average") 
+
+for(k in 1:m)
+{
+ j <- order(ybar)[k]
+ points( rep(k, n[j]), y.all[[j]], pch=19, cex=.5) 
+ segments(k, min(y.all[[j]]), k, max(y.all[[j]]) )
+}
+
+abline(h=mean(ybar))
+```
+
+
+This plot helps us see the between-schools versus within-schools variation in the observed scores and what we see is within-school variation is much greater i.e, $\sigma^2 > \tau^2.$
+
+<p>&nbsp;</p>
+
+```{r}
+var(ybar); mean(s2) # mean(sapply(y.all, var))
+```
+
+The between-group-means sample variance is 31. The average within-groups variance is 82. This is consistent with the picture above. Most of the groups are pretty close to each other, whereas the variability within a group can vary quite a lot.
+
+<p>&nbsp;</p>
+
+```{r fig.cap = "Empirical distribution of sample means"}
+# Histogram of school averages
+hist(ybar, freq=F, right=F, breaks=30, main="", col="pink")
+```
+
+$\bar y_j$ vary from about 35 to about 65.
+
+<p>&nbsp;</p>
+
+```{r}
+c(which.min(ybar),which.max(ybar))
+ybar[c(which.min(ybar), which.max(ybar))]
+```
+
+When it comes to estimating the $\theta_j,$ taking an overall average is probably not such a great idea. Clearly the average score at school 67 is greater than the average score at school 5. Should we just estimate the school averages by the sample averages? We could do that but some of those estimates would have very high variance because some of the sample sizes are really small. E.g. school 67 has a sample size of 4.
+
+```{r}
+n[67]
+```
+
+<p>&nbsp;</p>
+
+Let's look at a visual relationship between sample size and averages.
+
+```{r fig.cap="Relationship between sample mean versus sample size for the 100 schools"}
+plot(ybar ~ n, xlab="sample size", ylab="sample mean")
+abline(h=mean(ybar))
+```
+
+There's no real trend in this plot, but there is something going on here. The schools whose sample mean tends to be farthest from the overall mean tend to be schools where there is a low sample size. This relationship between sample averages and sample size is fairly common in hierarchical datasets. Remember that variance of the sample average $=\sigma^2/n_j$ depends on the sample size so the more the sample size, the closer to the sample average.
+
+This has me thinking... School 67 has an average score of 65 but it's only based on 4 students! so what's your best estimate of $\theta_{67}$?
+
+```{r}
+c(n[67],ybar[67],mean(ybar))
+```
+
+Is it 65(no pooling)? Is it 48(full pooling)? Should it be somewhere in between? I'm thinking it should be somewhere in between. There is reason to believe the average score is higher at this school (higher than the overall average), but it's probably not as high as the sample average indicates being it's only 4 students.
+
+The two-stage sampling scheme (see \@ref(postinf)) is important, but the BIG IDEA is that under this model we can use information in $\mathbf Y_1, \mathbf Y_2, …, \mathbf Y_{m-1}$ to inform our inference about $\theta_m$. Those other $\mathbf Y_j$ won't have as much influence on our inference about $\theta_m$ as $Y_m$ will but they won't be ignored either.
+
+
+## Posterior approximation
+
+We need prior distributions for 
+
+* $\mu$ (overall mean); we need$(\mu_0, \gamma_0^2)$
+* $\sigma^2$(within-group variance); we need$(\nu_0, \sigma_0^2)$
+* $\tau^2$ (between-groups variance); we need$(\eta_0, \tau_0^2)$
+
+The test is purported to have an average score of 50 and variance of 100. That 100 includes both within-school and between-school variance. So we actually have prior belief that $\sigma^2 + \tau^2$ should be close to 100. Between school variance cannot be more than 100 so we take $\tau_0^2 = 100$. We also take $\sigma_0^2 = 100$. These are overstatements since $\sigma^2 + \tau^2 \approx 100,$ but it won't affect our inference that much because we got lots of data. Now the Gibbs sampler!
+
+
+1. sample $\mu^{(s+1)} \sim p\left(\mu \mid \theta_{1}^{(s)}, \ldots, \theta_{m}^{(s)}, \tau^{2(s)}\right)$;
+2. sample $\tau^{2(s)} \sim p\left(\tau^{2} \mid \theta_{1}^{(s)}, \ldots, \theta_{m}^{(s)}, \mu^{(s+1)}\right)$;
+3. sample $\sigma^{2(s)} \sim p\left(\sigma^{2} \mid \theta_{1}^{(s)}, \ldots, \theta_{m}^{(s)}, \boldsymbol{y}_{1}, \ldots, \boldsymbol{y}_{m}\right)$
+4. for each $j \in\{1, \ldots, m\}$, sample $\theta_{j}^{(s+1)} \sim p\left(\theta_{j} \mid \mu^{(s+1)}, \tau^{2(s+1)}, \sigma^{2(s+1)}, \boldsymbol{y}_{j}\right)$
+
+It doesn't matter what order your Gibbs sampler goes in. It just matters that you use the most updated values (which is the easiest way to code, as it happens).
+
+
+
+```{r}
+# Prior parameters
+nu.0  <- 1 ;  sigma2.0 <- 100;
+eta.0 <- 1 ;    tau2.0 <- 100;
+mu.0  <- 50;  gamma2.0 <- 25 ;
+
+# Starting values for the Gibbs sampler 
+theta  <- ybar          # group sample means
+sigma2 <- mean(s2)      # average of within-group variances 
+mu     <- mean(theta);  # overall average
+tau2   <- var(theta)    # between-groups variance
+
+# Now run the Gibbs sampler!
+S            <- 5000
+theta.chain  <- matrix(NA, S, m)
+sigma2.chain <- rep(NA, S); 
+mu.chain     <- rep(NA, S); 
+tau2.chain   <- rep(NA, S);
+
+for(s in 1:S)  # Update theta's, then sigma2, then mu, then tau2
+{
+ V.theta <- 1 / (1/tau2 + n/sigma2)
+ m.theta <- V.theta * (mu/tau2 + n*ybar/sigma2)
+ theta   <- rnorm(m, mean=m.theta, sd=sqrt(V.theta))
+ #####
+ nu.n <- nu.0 + sum(n)
+ ss.n <- nu.0 * sigma2.0
+ for(j in 1:m){ ss.n <- ss.n + sum( (y.all[[j]] - theta[j])^2 ) }
+ sigma2 <- 1 / rgamma(1, nu.n/2, ss.n/2)
+ #####
+ V.mu <- 1 / (1/gamma2.0 + m/tau2)
+ m.mu <- V.mu * (mu.0/gamma2.0 + sum(theta)/tau2)
+ mu   <- rnorm(1, mean=m.mu, sd=sqrt(V.mu))
+ #####
+ eta.m <- eta.0 + m 
+ ssq.m <- eta.0 * tau2.0 + sum( (theta-mu)^2 )
+ tau2  <- 1 / rgamma(1, eta.m/2, ssq.m/2)
+ #####
+ theta.chain[s,] <- theta ;   mu.chain[s]  <- mu
+ sigma2.chain[s] <- sigma2;  tau2.chain[s] <- tau2
+}
+```
+
+Notice that there is no loop needed for $\texttt{theta = theta[1], theta[2], ….,theta[100]}$
+
+
+## MCMC diagnostics
+
+```{r fig.cap = "Stationarity plots of the MCMC samples of mu, sigma2, tau2"}
+# Split the chain into 10 blocks, and make comparative boxplots by block 
+block <- rep(1:10, rep(S/10,10))
+par(mfrow=c(1,3),mar=c(2.75,2.75,.5,.5),mgp=c(1.7,.7,0))
+
+boxplot(mu.chain ~ block)
+boxplot(sigma2.chain ~ block)
+boxplot(tau2.chain ~ block)
+```
+This is an alternative to trace plots which get messy when you have a lot of iterations. These are called "stationarity plots". Take your $S$ updates. Break your chain ( which consist of $S$ iterations) into $10$ pieces ( each is $S/10$ values ) and look at the boxplots. For each block, if the chain is stationary that means the distribution of the early iterations is the same as that of the later iterations (we should not see a trend in the boxplots). Also, if the starting value for the Gibbs chain were a draw from the target distribution then stationarity would hold exactly.
+
+No issue with stationarity here. It would have been VERY surprising to see a non-stationarity problem suggested by these plots for our example because we used a Gibbs sampler with reasonable starting values. For other more complicated plots that we will study in the upcoming weeks, these plots will become more than just a formality to check them.
+
+<p>&nbsp;</p>
+
+Stationarity was one of the two complicating factors in the use of MCMC versus ordinary Monte Carlo. The other was mixing aka autocorrelation aka the draws are NOT independent. Is that an issue in our example? Let see!
+
+```{r fig.cap = "Sample autocorrelation functions of mu, sigma2, tau2, respectively"}
+par(mfrow=c(1,3),mar=c(2.75,2.75,.5,.5),mgp=c(1.7,.7,0))
+acf(mu.chain, main="");acf(sigma2.chain, main="");acf(tau2.chain, main="")
+```
+Not at all. There's some autocorrelation, but not much! 
+
+```{r}
+round(acf(mu.chain, plot=F)$acf[1:4,,1],3)
+```
+The lag-1 autocorrelation $\rho[1] = 0.15$ for the $\mu$-chain. Also, $\mu^{(s)}$ is somewhat correlated with $\mu^{(s-1)}$ but practically zero correlation with $\mu^{(s-2)}$.
+
+```{r}
+round(acf(sigma2.chain, plot=F)$acf[1:4,,1],3)
+```
+Even better story in the $\sigma^2$
+
+```{r}
+round(acf(tau2.chain, plot=F)$acf[1:4,,1],3)
+```
+
+Slightly worse one in the $\tau^2$ chain.
+
+<p>&nbsp;</p>
+
+**Effective sample sizes**
+
+```{r message = FALSE}
+library(mcmcse)
+c(ess(mu.chain), ess(sigma2.chain), ess(tau2.chain))
+```
+
+Nominal sample size was 5000, so these effective sample sizes are not bad at all. This is because there's so little autocorrelation. Note that we got the worse autocorrelation for $\tau^2$ which is consitent with $\tau^2$ having the least effective sample size.
+
+<p>&nbsp;</p>
+
+Next, let's use the Gibbs draws to describe our posterior beliefs about $\mu$ and $\sigma^2$ and $\tau^2$ and $\theta_1, \theta_2, …, \theta_{100}.$
+
+
+```{r}
+quants.mu <- quantile(mu.chain, c(.025, .5, .975))
+```
+
+Posterior 95% interval for $\mu$ is $[47.1, 49.2]$
+
+```{r}
+quants.sigma2 <- quantile(sigma2.chain, c(.025, .5, .975))
+```
+
+For $\sigma^2$ our posterior interval is $[79.7, 90.5]$ $\sigma$ between $8.9$ to $9.5.$
+
+```{r}
+quants.tau2 <- quantile(tau2.chain, c(.025, .5, .975))
+```
+
+95% interval for $\tau^2$ is $[17.4, 34.6]$
+
+```{r fig.cap="Posterior summaries of mu, sigma2 and tau2 with 2.5%, 50% and 97.5% quantiles given by vertical lines."}
+par(mfrow=c(1,3),mar=c(2.75,2.75,.5,.5),mgp=c(1.7,.7,0))
+
+plot(density(mu.chain), lwd=2, xlab="mu", ylab="p(mu|y)", main="")
+abline(v=quants.mu, col="pink", lty=c(3,2,3))
+
+plot(density(sigma2.chain), lwd=2, xlab="sigma2", 
+  ylab="p(sigma2|y)", main="")
+abline(v=quants.sigma2, col="pink", lty=c(3,2,3))
+
+plot(density(tau2.chain), lwd=2, xlab="tau2", 
+  ylab="p(tau2|y)", main="")
+abline(v=quants.tau2, col="pink", lty=c(3,2,3))
+```
+
+<p>&nbsp;</p>
+
+The sample average of the $j$th column in the $\texttt{theta.chain}$ matrix approximates the marginal posterior mean $E[\theta_j|y]$. For example the marginal posterior density for $\theta_1$ is below.
+
+```{r fig.cap="marginal posterior density for theta1"}
+hist(theta.chain[,1], main = "", col = "pink", freq=FALSE, 
+     xlab=expression(theta[1]), border="lightpink")
+lines(density(theta.chain[,1]), col="red", lwd=2)
+```
+
+-----------------
+
+<p>&nbsp;</p>
+
+Let's talk about school 67. Average score was 65, but it was only 4 students.
+
+```{r}
+round(c(n[67],ybar[67],mean(ybar)),1)
+```
+
+How will our model estimate $\theta_{67}?$ Is it gonna be 65, 48, or somewhere in between? let's see
+
+```{r}
+mean(theta.chain[,67])
+```
+
+<p>&nbsp;</p>
+
+## Shrinkage
+
+One of the primary strength of the hierarchical model for data like this is that the hierarchical model allows us to borrow information from other groups to estimate group means. That is $\hat \theta_{73}$ will depend mostly on $\bar y_{73}$ but will also make use of the $\bar y$'s for all the other schools. How much use? Depends mostly on: $n_{73}$. If this value is big there will be little shrinkage if $n_{73}$ is low there will be more shrinkage.
+
+<p>&nbsp;</p>
+
+The sample average of the $j$th column in the $\texttt{theta.chain}$ matrix approximates the marginal posterior mean $E(\theta_j | Y).$
+
+
+$$
+\mathrm{E}\left(\theta_{j} \mid \boldsymbol{y}_{j}, \mu, \tau, \sigma\right)=\frac{\bar{y}_{j} n_{j} / \sigma^{2}+\mu / \tau^{2}}{n_{j} / \sigma^{2}+1 / \tau^{2}}
+$$
+The above is conditional on the other parameter values and that conditional expectation is a weighted average of $\mu$ (the prior mean which gets weight $1/\tau^2$ ) and $\bar y_j$ ( the group $j$ sample mean which gets weight $n_j / \sigma^2$ ). Another way to say this is that the expected value of $\theta_j$ is pulled from $\bar y_j$ back towards $\mu.$ That phenomenon is called shrinkage. It "shrinks" the variability between the groups. Hence, our estimates $\hat \theta_1 , \hat \theta_2, …, \hat \theta_{100}$ are going to be less variable than the sample means $\bar y_1, \bar y_2, …, \bar y_{100}$. The $\hat \theta$'s are going to be "shrunk" back toward the overall average. 
+
+<p>&nbsp;</p>
+
+The following plot shows $\hat \theta_j = E(\theta_j|\boldsymbol y_1,...,\boldsymbol y_m)$ versus $\bar y_j$ for each group.
+
+```{r shr, fig.cap="Study the shrinkage effect"}
+par(mgp=c(2,0.5,0))
+theta.hat <- apply(theta.chain, 2, mean)
+plot(theta.hat ~ ybar, ylim=range(ybar), pch=19, ylab = 
+       expression(hat(theta)), xlab=expression(bar(y)))
+abline(0, 1, lty=2);  abline(h=mean(ybar), lty=2);
+```
+
+In this problem the shrinkage is not huge. The points on this plot are $(\bar y_j, \hat \theta_j ).$ If we were doing entirely separate estimates with no pooling of information among the different schools all the points would sit right on the diagonal dashed line. If there was no between-school variability and the 1993 students were just a random sample from the population of all students we would get the dashed horizontal line is what we'd get. We don't believe both! What we believe is somewhere in between.
+
+<p>&nbsp;</p>
+
+How much shrinkage is happening? If we define shrinkage as the magnitude of the difference between $\hat \theta$ and $\bar y$ i.e, $\bar y - \boldsymbol {\hat\theta}$, and we plot shrinkage versus the sample size we get:
+
+```{r shrink, fig.cap="Shrinkage as a function of sample size."}
+shrink <- abs(theta.hat - ybar)
+plot(shrink ~ n, pch=19)
+lines(lowess(shrink ~ n), lty=2, lwd=2)
+```
+
+In general (it's not a perfect association because there's other things going on too) the bigger the sample size the less shrunk the estimate is going to be.
+
+## Ranking the groups
+
+Suppose our job is to rank the schools from 1 to 100 in terms of $E(\theta_j | Y )$. What we'd find is: It is NOT the same ranking as ranking them by sample average. We'll illustrate this by comparing two of the schools. Consider school 46 and school 82. 
+
+```{r fig.cap = "Compare posterior distributions of theta[46] and theta[82]"}
+# Reproduce Figure 8.9 on page 142 of Hoff (2009)
+
+xlim <- range(c(y.all[[46]], y.all[[82]]))
+
+plot(density(theta.chain[,46], adj=2), xlim=xlim, lwd=2, main="", 
+  xlab="Math score", ylim=c(-.06, .22))
+lines(density(theta.chain[,82], adj=2), lwd=2, col="pink")
+abline(h=0)
+points(y.all[[46]], rep(-.02, n[46]), pch=19)  
+points(ybar[46], -.02, pch=19, cex=2.5)
+abline(h=-.02)
+points(y.all[[82]], rep(-.04, n[82]), col="pink", pch=19)
+points(ybar[82], -.04, col="pink", pch=19, cex=2.5)
+abline(h=-.04, col="pink")
+segments(mean(mu.chain), 0, mean(mu.chain), 1, lty=2, lwd=2)
+legend("topright", inset=.05, lwd=2, lty=c(1,1,2), 
+   col=c("black", "pink", "black"), 
+   legend=c("School 46", "School 82", " E(mu|Y)") )
+```
+
+
+The black curve is the posterior of $\theta_{46}$ the pink one is the posterior of $\theta_{82}.$ $E(\theta_j|Y)$ is bigger for $j=82$ than for $j=46$, hence our belief is that $\theta_{82} > \theta_{46}$. Just under these posterior densities we've got some dotplots with the "raw data" scores for these two groups. The black points are school 46 $(n_{46} = 21).$ The pink points are for school 82 $(n_{82} = 4)$. The biggest point is the average value. Note the big pink dot is to the left of the big black one. In other words, $\bar y_{82} < \bar y_{46}.$ 
+
+```{r}
+c(ybar[46],ybar[82]) # sample mean
+c(theta.hat[46],theta.hat[82]) # posterior mean
+```
+
+So the relation between these quantities is reversed! $\theta_{82} > \theta_{46}$ but $\bar y_{82} < \bar y_{46}.$
+
+How can this be? Shrinkage! (Because there's so little data for group 82 that estimate gets shrunk toward the overall mean by more than does the estimate for group 46.)
+
+Every $\hat \theta$ is a weighted average of $\bar y_j$ (the school-specific mean) and $"\bar y_\bullet"$ the grand mean over all schools. How much weight is shifted from the particular school to the overall mean depends on the school sample size. 
+
+```{r}
+c(n[46],n[82])    #sample size
+c(s2[46],s2[82])  #sample variance
+```
+
+The smaller the sample size is the greater weight is given to the overall mean rather than that specific group mean. School 46 had an average score of 40 but sample size of 21 so shrinkage back up to overall mean (dashed vertical line) is just a little bit. School 82 has only $n=5$ students so while their average score was 38.8 because there's so much variance in this estimate we shrink it back up to the point where it actually passes up the value of school 46.
+
+Interpretation: While the average score was lower at school 82 the evidence of a "low true average" is stronger for school 46 because it was based on a larger sample size.
+
+How often does this happen? 
+Looking again at figure \@ref(fig:shrink), if there were no reorderings going on, the trend would be 
+monotone i.e., you wouldn't have any jumping around. However you see some jumping around in the top right. The school with the highest $\bar y$ does not have the highest $\hat \theta$. At least two schools are higher. What schools are those? 
+
+```{r}
+order(ybar)[98:100];order(theta.hat)[98:100]
+```
+
+The top performing schools in terms of $\bar y$ were 67 then 51 then 79, however, the top performing schools in terms of $\hat \theta$ were 67 then 79 then 51.
+
+67 has the highest $\bar y$ but the lowest $\hat \theta$ of the three. What must be true of the sample sizes for these three schools? It must be that $n_{67}$ is the smallest since it's getting shrunk the most toward the overall mean `mean(ybar)=48`. Let's see
+
+```{r}
+mat <- round(rbind(c(ybar[79],ybar[51],ybar[67]),
+                   c(theta.hat[79],theta.hat[51],theta.hat[67]),
+                   n[c(79, 51, 67)]),1)
+colnames(mat) <- c("school 79", "school 51", "school 67")
+rownames(mat) <- c("ybar", "theta.hat", "sample size")
+knitr::kable(mat)
+```
+
+While the highest observed performance was achieved by school 67 the strongest evidence of a high-achieving school exists for school 51.
+
+
+
+
+
