@@ -113,3 +113,4 @@ group-comparisons
 comparing-two-groups
 bayesmodel
 analysis-of-the-math-scores-data
+the-hierarchical-normal-model
