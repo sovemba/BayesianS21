@@ -1,3 +1,4 @@
+
 # Linear Regression
 
 
@@ -45,9 +46,9 @@ $$
 \end{cases}
 $$
 
-We could ignore age and just compare the six men who did the running with the six men who did aerobics but that would be throwing away crucial information because the effect of the exercise program on lung function may vary by age and we want to account for that. It wouldn't be wrong to ignore it just wouldn't be the best analysis we can do. Remember we randomly assigned so there shouldn't be a systematic tendency for the younger men to do one program and the older men to do another program, but there might be just by chance variation.
+We could ignore age and just compare the six men who did the running with the six men who did aerobics but that would be throwing away crucial information because the effect of the exercise program on lung function may vary by age and we want to account for that. It wouldn't be wrong to ignore it just wouldn't be the best analysis we can do. Remember we randomly assigned exercise program so there shouldn't be a systematic tendency for the younger men to do one program and the older men to do another program, but there might be just by chance variation.
 
-There's no really strong indication of a complex relationship so let's not model a complex relationship. Let's keep it simple and assume that the relationship between change in oxygen uptake and age is a straight line and that there is one line for running and a different for aerobics. We are effectively gonna fit two regression lines.
+There's no really strong indication of a complex relationship (e.g., adding quadratic terms) so let's not model a complex relationship. Let's keep it simple and assume that the relationship between change in oxygen uptake and age is a straight line and that there is one line for running and a different line for aerobics. We are effectively gonna fit two regression lines.
 
 <p>&nbsp;</p>
 
@@ -63,17 +64,17 @@ Y_i=\beta_1x_{i,1}+\beta_2\texttt{program}+\beta_3\texttt{age}+\beta_4\texttt{pr
 $$
 
 
-$x_{i,1} = 1$ for every subject $i$. This is the intercept. This notation is common in bayesian statistics, where intercept is $\beta_1$ rather than $\alpha$ of $\beta_0$.
+$x_{i,1} = 1$ for every subject $i$. This is the intercept. This notation is common in bayesian statistics, where intercept is $\beta_1$ rather than $\alpha$ or $\beta_0$
 
 $x_{i,2}$ is the exercise program indicator; $x_{i,2} = 0$ for running, $x_{i,2} = 1$ for aerobics
 
 $x_{i,3} =$ age in years of subject $i$
 
-$x_{i,4} = x_{i,2} \times x_{i,3}$
+$x_{i,4} = x_{i,2} \times x_{i,3}$ is the interaction term
 
 
 
-We're fitting separate regression lines for the two exercise programs there are two slopes and two intercepts there better be 4 parameters $\beta_1, \beta_2, \beta_3, \beta_4$. We will further assume that the error term the $\epsilon_i \stackrel{\text{iid}}\sim$ Normal$(0 ,\sigma^2 )$. This is all conditional on $\boldsymbol\beta = (\beta_1, \beta_2, \beta_3, \beta_4)$ and $\sigma^2$ (the parameters).
+We're fitting separate regression lines for the two exercise programs so there are two slopes and two intercepts. We will further assume that the error term $\epsilon_i \stackrel{\text{iid}}\sim$ Normal$(0 ,\sigma^2 )$. This is all conditional on the parameters $\boldsymbol\beta = (\beta_1, \beta_2, \beta_3, \beta_4)$ and $\sigma^2$.
 
 $$
 \begin{array}{l}
@@ -86,7 +87,7 @@ $\beta_3$ is the slope for the running program, $\beta_3 + \beta_4$ is the slope
 
 ## Least squares estimation
 
-If we were doing maximum likelihood we'd write out only the likelihood part of the model, there would be no rule for a prior distribution reflecting prior belief about $\boldsymbol\beta$ and $\sigma^2$ there would only be a likelihood and it would be:
+If we were doing maximum likelihood we'd write out only the likelihood part of the model, there would be no rule for a prior distribution reflecting prior belief about $\boldsymbol\beta$ and $\sigma^2,$ there would only be a likelihood and it would be:
 
 $$
 \begin{array}{l}
@@ -128,7 +129,7 @@ $$
 \end{array}\right)
 $$
 
-The vector of responses $\mathbf{Y} = (Y_1, Y_2, …, Y_n)$ has an $n$-variate normal distribution with a mean of $\mathbf{X}\boldsymbol\beta$. $\mathbf{X}$ is an $n \times p$ matrix. The rows of $\mathbf{X}$ correspond to the $n$ units the columns of $\mathbf{X}$ correspond to $p$ regressors.
+The vector of responses $\mathbf{Y} = (Y_1, Y_2, …, Y_n)$ has an $n$-variate normal distribution with a mean of $\mathbf{X}\boldsymbol\beta$. $\mathbf{X}$ is an $n \times p$ matrix. The rows of $\mathbf{X}$ correspond to the $n$ units, the columns of $\mathbf{X}$ correspond to $p$ regressors.
 
 The sampling density depend on $\boldsymbol\beta$ only through the squared residuals $SSR(\boldsymbol\beta) = \sum{ (y_i - \boldsymbol\beta^T \boldsymbol x_i )^2 }.$ So we can do vector calculus to find the value of $\boldsymbol \beta$ that minimizes this $SSR$ (sum of squared residuals) which is the same thing as $RSS$ (residual sum of squares).
 
@@ -147,7 +148,7 @@ $$
 \end{aligned}
 $$
 
-$d/d\boldsymbol\beta$ is a $p$-vector, the $j$-th entry is the partial derivative with respect to $\beta_j$. And if the matrix $\mathbf{X}$ has full rank, $p < n$ (there are not more variables than observations), and the columns are linearly independent (there is not a redundant variable). Then $\mathbf{X}^T\mathbf{X}$ is invertible and $\hat{\boldsymbol\beta}$, the MLE of $\boldsymbol\beta$ is unique.
+$d/d\boldsymbol\beta$ is a $p$-vector, the $j$-th entry is the partial derivative with respect to $\beta_j$. And if the matrix $\mathbf{X}$ has full rank, $p < n$ (there are not more variables than observations), and the columns are linearly independent (there is not a redundant variable), then $\mathbf{X}^T\mathbf{X}$ is invertible and $\hat{\boldsymbol\beta}$, the MLE of $\boldsymbol\beta$ is unique.
 
 
 ## Least squares estimation for oxygen uptake data
@@ -175,7 +176,12 @@ lm(y~program + age + program:age)$coeff
 
 So we have $E(Y_i) = -51.29 +13.11 \texttt{program} + 2.09\texttt{age}-0.32\texttt{program:age}$
 
-<p>&nbsp;</p>
+
+The intercept for aerobics is higher than that for running.
+
+The slope for running is $2.19$ and the slope for aerobics is $2.095-0.318 = 1.78.$ Let's see..
+
+
 
 ```{r}
 plot(y ~ age, pch=19+2*program, bg=c("black","pink")[program+1],
@@ -187,7 +193,6 @@ abline(h=0)
 abline(b[1]+b[2], b[3]+b[4], lwd=2, col="pink");  rm(b);
 ```
 
-The intercept for aerobics is higher than that for running. The slope for running is $2.19$ and the slope for aerobics is $2.095-0.318 = 1.78.$
 
 <p>&nbsp;</p>
 
@@ -197,7 +202,7 @@ An unbiased estimator for $\sigma^2 = SSR(\hat{\boldsymbol\beta}_{ols})/(n-p) = 
 (sigma2.hat <- sum( (y - X %*% beta.hat.ols)^2 ) / (n-p))
 ```
 
-Although we are not doing maximum likelihood and we're not worried about unbiasedness, we will use this quantities for our bayesian inference.
+Although we are not doing maximum likelihood and we're not worried about unbiasedness, we will use these quantities for our bayesian inference.
 
 <p>&nbsp;</p>
 
@@ -209,11 +214,12 @@ SE <- as.vector(sqrt(diag(sigma2.hat * solve(t(X) %*% X))))
 beta.hat.ols / SE
 ```
 
-If you take $\boldsymbol{\hat\beta}/SE(\boldsymbol{\hat\beta})$ and this ratio is not bigger (in absolute value) than at least 2 or so then there is no compelling evidence of what sign that $\beta_j$ has. Could be negative, could be positive. That's the case (in these data) for $\beta_2$ and $\beta_4.$ The statistical evidence of an age association is fairly strong but the statistical evidence of a program effect
-(difference between running and aerobics) is not so strong. This model (separate intercepts and separate slopes) is more complicated than you might at first think. In particular, it's not justified to conclude "no program effect" just because $\beta_2$ and $\beta_4$ are both indistinguishable from zero. Maybe we can make sharper conclusions from a Bayesian analysis.
+If you take $\boldsymbol{\hat\beta}/SE(\boldsymbol{\hat\beta})$ and this ratio is not bigger (in absolute value) than at least 2 or so then there is no compelling evidence of what sign that $\beta_j$ has. Could be negative, could be positive. That's the case (in these data) for $\beta_2$(program) and $\beta_4$(program:age). The statistical evidence of an age association is fairly strong (3.9) but the statistical evidence of a program effect
+(difference between running and aerobics) is not so strong (0.83).
 
+This model (separate intercepts and separate slopes) is more complicated than you might at first think. In particular, it's not justified to conclude "no program effect" just because $\beta_2$ and $\beta_4$ are both indistinguishable from zero.
 
-Recall that we have: $E(Y_i) = \beta_1 +\beta_2\texttt{program}+\beta_3\texttt{age}+\beta_4\texttt{program:age}$
+Maybe we can make sharper conclusions from a Bayesian analysis.
 
 
 <p>&nbsp;</p>
@@ -226,7 +232,7 @@ $$
 \{~\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{\beta}, \sigma^{2}~\} \sim \operatorname{Normal}_{n}\left(\mathbf{X} \boldsymbol{\beta}, \sigma^{2} \mathbf{I}\right),
 $$
 
-Everything in a regression analysis is conditional on $\mathbf{X}$. The mean depends on $\boldsymbol\beta$ the variance is $\sigma^2$. So you might think the conjugate priors are $p$-variate normal distribution for $\boldsymbol\beta$ and inverse-gamma for $\sigma^2$? You would be right. 
+Everything in a regression analysis is conditional on $\mathbf{X}$. The mean depends on $\boldsymbol\beta$ the variance is $\sigma^2$. If you think the conjugate priors are $p$-variate normal distribution for $\boldsymbol\beta$ and inverse-gamma for $\sigma^2$ you would be right. 
 
 $$
 \boldsymbol\beta \sim \operatorname{Normal}_{p}\boldsymbol(\boldsymbol\beta_0,\boldsymbol\Sigma_0)
@@ -248,7 +254,7 @@ Posterior precision = prior precision $(\boldsymbol \Sigma_0^{-1})$ + sampling p
 
 Remember that the covariance matrix of $\boldsymbol{\hat\beta}_{ols}$ is $\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}$ so the sampling precision of $\boldsymbol \beta$ is $(1 / \sigma^2) (\mathbf{X}^T \mathbf{X})$. 
 
-The posterior expectation (the mean vector) is a weighted average of the prior mean $\boldsymbol\beta_0$ and the OLS estimate $\hat{\boldsymbol\beta}$. They are weighted by their precision matrices. Wait a sec how is $\mathbf{X}^T \boldsymbol y / \sigma^2$ a multiple of $\hat{\boldsymbol\beta}?$
+The posterior expectation (the mean vector) is a weighted average of the prior mean $\boldsymbol\beta_0$ and the OLS estimate $\hat{\boldsymbol\beta}$. They are weighted by their precision matrices. Wait a sec. How is $\mathbf{X}^T \boldsymbol y / \sigma^2$ a multiple of $\hat{\boldsymbol\beta}?$
 
 $\hat{\boldsymbol\beta}$ times its precision matrix is 
 
@@ -274,7 +280,9 @@ $$
 where $SSR(\boldsymbol\beta) = \sum{ (y_i - \boldsymbol\beta^T \boldsymbol x_i )^2 }.$
 
 
-Posterior sum of squares = prior sum of squares plus data sum of squares. The conditional distribution of $\boldsymbol\beta$ given $\sigma^2$ (and the data) is nice, the conditional distribution of $\sigma^2$ given $\boldsymbol\beta$ (and the data) is nice so posterior simulation here is gonna be done by Gibbs sampler!
+Posterior sum of squares = prior sum of squares + data sum of squares. 
+
+The conditional distribution of $\boldsymbol\beta$ given $\sigma^2$ and the data is nice, the conditional distribution of $\sigma^2$ given $\boldsymbol\beta$ and the data is nice so posterior simulation here is gonna be done by Gibbs sampler!
 
 Given { $\boldsymbol \beta^{(s)}, \sigma^{2(s)}$ }, we sample new values by:
 
@@ -289,7 +297,21 @@ a) compute $\operatorname{SSR}\left(\boldsymbol{\beta}^{(s+1)}\right)$
 b) sample $\sigma^{2(s+1)} \sim$ inverse-gamma $\left(\left[\nu_{0}+n\right] / 2,\left[\nu_{0} \sigma_{0}^{2}+\operatorname{SSR}\left(\boldsymbol{\beta}^{(s+1)}\right)\right] / 2\right)$.
 
 
-However priors can be tough to come by. Regression problem with lots of predictor variables, how could you EVER come up with a sensible prior for such a problem. In a typical multiple regression problem before we've analyzed the data we generally have no idea what to expect. So what are things we can do? We'll discuss two. Unit information prior and Zellner's g-prior.
+This is fine, but it requires coming up with a sensible prior meaning we need a guess at $\boldsymbol\beta$ and a guess at $\sigma^2$ but not just that but also a measure of our confidence in those guesses. On your homework this week (Exercise 9.1) you are not told what prior to use. Which means you need to specify $\boldsymbol \beta_0$(prior expectation), $\boldsymbol \Sigma_0$ (covariance matrix for the $\boldsymbol \beta$-vector), $\nu_0$ and $\sigma_0^2$ ( prior for $\sigma^2$ ). Use this semiconjugate prior. We're told most response values are between 22 and 24 seconds. So if 95% of observations are in a window of width 2 units that means; 
+
+$$
+4SD = 2 \implies SD=1/2
+$$
+
+* Take $\sigma_0^2 = 1/4$ 
+* $\nu_0$ is the prior sample size which the guess of $\sigma_0^2$ is based on, so take $\nu_0 = 1$
+* $\boldsymbol\beta_0 = (\beta_{01}, \beta_{02}).$ $\beta_{01}$ is the intercept which is expected time in first week set that to $23$. $\beta_{02}$ represents the slope which is to say the bi-weekly expected change. I say $\beta_{02} = 0$ 
+* $\boldsymbol \Sigma_0?$ set the covariance terms to 0. If the $SD$ is 1/2 maybe be "diffuse" in the prior and set these $SD$s to double that? That makes $\boldsymbol \Sigma_0 = \{\{1,0\},\{0,1\}\}.$ 
+
+<p>&nbsp;</p>
+
+Some regression problems have lots of predictor variables, how could you EVER come up with a sensible prior for such a problem. In a typical multiple regression problem before we've analyzed the data we generally have no idea what to expect. So what are things we can do? We'll discuss two. Unit information prior and Zellner's $g$-prior.
+
 
 ## Unit information prior 
 
@@ -299,7 +321,7 @@ Take:
 
 $\nu_0=1$, $\sigma_0^2 = \hat \sigma^2_{ols}$, ${\boldsymbol\beta_0} = \hat {\boldsymbol\beta}_{ols}$, $\boldsymbol\Sigma_0 = n \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}$ 
 
-because $\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}$ represents the "sampling variance". take our prior to be consistent with that but $n$ times as diffuse. 
+because $\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}$ represents the "sampling variance". take our prior to be consistent with that but $n$ times as diffuse (spread out over a large area; not concentrated). 
 
 "Such a distribution cannot be strictly considered a real prior distribution, as it requires knowledge of $\boldsymbol y$ to be constructed. However, it only uses a small amount of the information in $\boldsymbol y$ , and can be loosely thought of as the prior distribution of a person with unbiased but weak prior information."
 
@@ -309,15 +331,23 @@ Effectively what the unit information prior does is; prior says exactly what the
 
 Set $\boldsymbol\beta_0 = \boldsymbol0$.
 
-That's not our prior belief at all! It just means that as a result of this prior estimate our posterior estimate will be shrunk back toward zero (but not by very much).
+That's not our prior belief at all! What does this do? Well if $\boldsymbol \Sigma_0$ is full of big numbers to the extent that it does influence the posterior it will be in a way of nudging the $\boldsymbol\beta$-values back toward zero. That may not be a thing we want but it is not a terrible outcome either.
 
-Set the prior covariance matrix in this prior $g\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}.$
+Set the prior covariance matrix $\boldsymbol \Sigma_0$ to $g\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}.$
 
 Take $g$ big, most commonly $g = n$, and in that case the $g$-prior is also a version of a unit information prior.
 
-$\text{Var}[\boldsymbol\beta | \sigma^2,\boldsymbol y, \mathbf{X}] = g/(g+1) \times \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}$,  $E[\boldsymbol\beta | \sigma^2,\boldsymbol y, \mathbf{X}] = g/(g+1) \times (\mathbf{X}^T \mathbf{X})^{-1}\mathbf{X}^T \boldsymbol y.$
+$$
+\text{Var}[\boldsymbol\beta | \sigma^2,\boldsymbol y, \mathbf{X}] = g/(g+1) \times \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}
+$$  
 
-The g-prior is not semiconjugate it's fully conjugate! Hence, we don't need the Gibbs sampler because the posterior satisfies $\{\sigma^2 | \boldsymbol y, \mathbf X\}$ is inverse-gamma UNCONDITIONALLY on $\boldsymbol\beta$.
+$$
+E[\boldsymbol\beta | \sigma^2,\boldsymbol y, \mathbf{X}] = g/(g+1) \times (\mathbf{X}^T \mathbf{X})^{-1}\mathbf{X}^T \boldsymbol y
+$$
+
+
+This is the fully conjugate prior where $\sigma^2 \sim$ inverse-gamma and $\boldsymbol\beta | \sigma^2 \sim$ Normal$( 0, \sigma^2 \Omega )$ for some positive definite matrix $\Omega.$ In the $g$-prior, that matrix $\Omega$ is $g(\mathbf{X}^T \mathbf{X})^{-1}.$ What is $g?$ $g > 0$ (only requirement) but the bigger $g$ is the less influential the prior is. So we'll see commonly $g=n$. In the semiconjugate prior $\boldsymbol\beta$ and $\sigma^2$ are independent in the prior but not in the posterior so posterior approximation is based on Gibbs sampler. However, in the fully conjugate prior where $\sigma^2 \sim$ inverse-gamma and $\boldsymbol\beta | \sigma^2 \sim$ Normal, the posterior has those forms also! The posterior satisfies $\{\sigma^2 | \boldsymbol y, \mathbf X\}$ is inverse-gamma UNCONDITIONALLY on $\boldsymbol\beta$
+
 
 Here's the recipe for posterior simulation $($a sample value of $\left(\boldsymbol{\beta}, \sigma^{2}\right)$ from $p(\boldsymbol{\beta}, \sigma^{2} \mid \boldsymbol{y}, \mathbf{X}))$ under the $g$-prior. It's not a Gibbs sampler it will produce independent draws.
 
@@ -325,7 +355,12 @@ Here's the recipe for posterior simulation $($a sample value of $\left(\boldsymb
 
 2. sample $\boldsymbol{\beta} \sim$ Normal $_{p}\left[\frac{g}{g+1} \widehat{\boldsymbol{\beta}}_{\text {ols }}, \frac{g}{g+1} \sigma^{2}\left(\mathbf{X}^{T} \mathbf{X}\right)^{-1}\right].$
 
-There's all these different approaches that are basically the same, just pick one and run it.
+where
+
+$$
+\operatorname{SSR}_{g}^{z}=\boldsymbol{y}^{T}\left(\mathbf{I}-\frac{g}{g+1} \mathbf{X}_{z}\left(\mathbf{X}_{z}^{T} \mathbf{X}_{z}\right)^{-1} \mathbf{X}_{z}^{T}\right) \boldsymbol{y}
+$$
+
 
 ## Bayesian analysis using invariant $g$-prior 
 
@@ -365,20 +400,26 @@ round(g/(g+1) * beta.hat.ols, 2)
 So we have: 
 
 $$
-E(Y_i)=-47.35+12.10\texttt{program}+1.93\texttt{age}-0.29\texttt{program:age}
+E(Y)=-47.35+12.10\texttt{program}+1.93\texttt{age}-0.29\texttt{program:age}
 $$
-The OLS result was $E(Y_i) = -51.29 x_{i,1} +13.11\texttt{program}+2.09\texttt{age}+-0.32\texttt{program:age}$
+
+
+The OLS result was 
+
+$$
+E(Y) = -51.29 +13.11\texttt{program}+2.09\texttt{age}+-0.32\texttt{program:age}
+$$
 
 ```{r}
 # Reproduce Figure 9.3 on page 160 of Hoff (2009)
 par(mfrow=c(1,3))
 
 plot(beta.sim[,c(2,4)], xlab=expression(beta[2]), ylab=expression(beta[4]), cex=.5, pch=19) 
-abline(h=0, col="gray");  abline(v=0, col="gray");
-hist(beta.sim[,2], freq=F, right=F, col="gray", breaks=40,
+abline(h=0);  abline(v=0)
+hist(beta.sim[,2], freq=F, right=F, col="pink", breaks=40,
   xlab=expression(beta[2]), main="");  
 lines(density(beta.sim[,2]), lwd=2);  abline(v=0, lty=2, lwd=2)
-hist(beta.sim[,4], freq=F, right=F, col="gray", breaks=40,
+hist(beta.sim[,4], freq=F, right=F, col="pink", breaks=40,
   xlab=expression(beta[4]), main="");
 lines(density(beta.sim[,4]), lwd=2);  abline(v=0, lty=2, lwd=2)
 ```
@@ -404,85 +445,95 @@ $$
 Expected response to aerobics at age $x =$ $\beta_{1}+\beta_{3}\texttt{age}+\beta_2 + \beta_4 \texttt{age}$. So if we assumed that $\beta_2= \beta_4= 0$, then we would have an identical line for both groups.
 
 
-The quantity that is of primary interest. It's not $\beta_2$. It's not $\beta_4$. As justified above it's $\beta_2 + \beta_4 x$. So let's do posterior inference about $\beta_2 + \beta_4 x$ for $x = 20, 21, …, 31$
+The quantity that is of primary interest is not $\beta_2$ nor is it $\beta_4$. As justified above it's $\beta_2 + \beta_4 x$. So let's do posterior inference about $\beta_2 + \beta_4 x$ for $x = 20, 21, …, 31$
 
 ```{r "Ninety-ﬁve percent conﬁdence intervals for the difference in expected change scores between aerobics subjects and running subjects."}
 # Compute posterior distributions of beta2 + beta4*x for x-values over the range of ages in the study
 
-# range(age) # 30 to 31
-xvals       <- 20:31
+xvals       <- 20:31 # range(age) 
 Effect.post <- beta.sim[,c(2,4)] %*% rbind(rep(1,length(xvals)),xvals)
 probs       <- c(.025, .25, .5, .75, .975) 
 
 Effect.quants           <- apply(Effect.post, 2, quantile, prob=probs)
 colnames(Effect.quants) <- xvals
 
-boxplot(Effect.quants, ylim=c(-10, 15), 
+boxplot(Effect.quants, ylim=c(-10, 15), col="pink",
   xlab="age", ylab=expression(beta[2]+beta[4]*"age"))
-abline(h=0, col="gray")
+abline(h=0)
 ```
 
+The data seem to suggest that aerobics is more effective although the difference reduces with age. The estimated effect (difference between aerobics and running) is strongest at age 20 but the evidence for an effect is strongest at age 23 or 24. Why would that be? It's not sample sizes, it's a leverage thing. Estimation of $\beta_2 + \beta_4x$ is most precise for intermediate values of $x$ and most variable at the endpoints of the range of $x$-values. 
 
 
 ## Bayesian analysis using semiconjugate prior
 
-```{r}
-# Here we use a version of the 'unit information prior' idea
+Here we use a version of the 'unit information prior' idea.
 
-beta.0  <- beta.hat.ols;  
-Sigma.0 <- n * sigma2.hat * solve(t(X) %*% X)
-nu.0    <- 1;  sigma2.0 <- sigma2.hat;
-S       <- 5000
+The "unit information prior" is a prior distribution that is perfectly consistent with the data. It's not a true prior.
+
+* $\nu_0 = 1$ 
+* $\sigma_0^2 = \hat\sigma^2_{ols}$ 
+* $\beta_0 = \hat\beta_{ols}$ 
+* $\boldsymbol \Sigma_0 = \hat\sigma^2_{ols}(\mathbf{X}^T\mathbf{X})^{-1}\times n$ (times by $n$ or a big number)
+
+
+
+```{r}
+beta.0   <- beta.hat.ols;  
+Sigma.0  <- n * sigma2.hat * solve(t(X) %*% X)
+nu.0     <- 1
+sigma2.0 <- sigma2.hat
+S        <- 5000
 
 Sigma0.Inv   <- solve(Sigma.0) # Invert once, not every time 
 beta.chain   <- matrix(NA, S, p)
 sigma2.chain <- rep(NA, S)
 
-
 # Starting values
-beta <- beta.0;  sigma2 <- sigma2.0;
+beta   <- beta.0
+sigma2 <- sigma2.0
+
 for(s in 1:S)
 {
- ###
  # Update beta first 
- ###
  V.beta <- solve( Sigma0.Inv + t(X) %*% X / sigma2 )
  m.beta <- V.beta %*% (Sigma0.Inv %*% beta.0 + t(X) %*% y / sigma2)
- beta <- rmvnorm(1, mean=m.beta, sigma=V.beta)[1,]
- ###
+ beta   <- rmvnorm(1, mean=m.beta, sigma=V.beta)[1,]
  # Now update sigma2
- ###
  SSR <- sum( (y - X%*%beta)^2 ) 
  sigma2 <- 1 / rgamma(1, (nu.0 + n)/2, (nu.0*sigma2.0 + SSR)/2)
- ### 
  # Now save updated values
- ###
- beta.chain[s,] <- beta;  sigma2.chain[s] <- sigma2
+ beta.chain[s,]  <- beta 
+ sigma2.chain[s] <- sigma2
 }
 ```
 
 ```{r}
-apply(beta.chain, 2, mean)  # beta.hat = E[beta|y]  
-beta.hat.ols                # compare with ols estimate
+rbind(apply(beta.chain, 2, mean),  # beta.hat = E[beta|y]  
+      beta.hat.ols)                # compare with ols estimate
 ```
 
 ```{r}
-apply(beta.chain, 2, sd)  # posterior standard deviation
-SE                        # compare with standard error of ols
+rbind(apply(beta.chain, 2, sd),  # posterior standard deviation
+      SE)                        # compare with standard error of ols
 ```
 
 ```{r}
-mean(sigma2.chain);  sigma2.hat
+c(mean(sigma2.chain), sigma2.hat)
 ```
 
+```{r}
+median(sigma2.chain)
+```
+The median of $\texttt{sigma2.chain}$ is closer to the ols estimate of $\sigma^2$
 
+### Prediction problem
+
+Consider two 30-year-old men, one undertakes a running program and the other undertakes a step aerobics program
 
 ```{r}
-# Consider two 30-year-old men, one undertakes a running program and 
-# the other undertakes a step aerobics program
-
-x.run <- c(1, 0, 30, 0)
-x.step <- c(1, 1, 30, 30)
+x.run  <- c(1, 0, 30, 0)  # beta vector for new observation
+x.step <- c(1, 1, 30, 30) # beta vector
 ytilde.run <- rnorm(S, mean=as.vector(beta.chain %*% x.run), 
   sd=sqrt(sigma2.chain))
 ytilde.step <- rnorm(S, mean=as.vector(beta.chain %*% x.step), 
@@ -491,16 +542,21 @@ ytilde.step <- rnorm(S, mean=as.vector(beta.chain %*% x.step),
 
 
 Plot the posterior predictive distributions for their change in maximum oxygen uptake
+
 ```{r}
 par(mfrow=c(1,2))
-hist(ytilde.run, freq=F, right=F, breaks=50, col="gray", 
+hist(ytilde.run, freq=F, right=F, breaks=50, col="pink", 
   xlab="Change in O2 uptake after running program", main="")
 lines(density(ytilde.run), lwd=2)
-hist(ytilde.step, freq=F, right=F, breaks=50, col="gray",
+hist(ytilde.step, freq=F, right=F, breaks=50, col="pink",
   xlab="Change in O2 uptake after aerobics", main="")
 lines(density(ytilde.step), lwd=2)
 ```
 
+* The runner's posterior predictive distribution is centered around 10 or 12 so will probably be positive.
+* The posterior predictive distribution looks a little higher for the aerobics guy 
+
+<p>&nbsp;</p>
 
 What is the posterior probability that the man who does step aerobics achieves a better result?
 
@@ -509,7 +565,6 @@ mean(ytilde.step > ytilde.run)
 ```
 
 Estimate about a 72% chance the man doing aerobics gets a better result than the man who does running
-
 
 
 

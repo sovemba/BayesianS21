@@ -107,7 +107,7 @@ the observed data are independent of $\mu$ and $\tau^2$.
 <p>&nbsp;</p>
 
 <p align="center">
-![](/Users/OnyishiChisom/Desktop/DESKTOP STUFF/0Education ish/Columbia/Summer 2021/BAYESIAN STATISTICS STATGR5224/Lecture_notes/525_08b_Hierarchical_Normal/hierarchy.png){width=55%}
+![](/Users/OnyishiChisom/Documents/Rmarkdown/bayesianS21/_bookdown_files/bayesianS21_files/figure-html/hierarchy.png){width=55%}
 </p>
 
 

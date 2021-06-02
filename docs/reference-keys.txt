@@ -143,3 +143,4 @@ unit-information-prior
 zellners-g-prior
 bayesian-analysis-using-invariant-g-prior
 bayesian-analysis-using-semiconjugate-prior
+prediction-problem
