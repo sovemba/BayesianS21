@@ -1,7 +1,7 @@
 
 # Model Selection
 
-```{r setup, echo = FALSE, message = FALSE}
+```{r echo = FALSE, message = FALSE}
 rm(list=ls());  library(mvtnorm);  set.seed(20210526);
 knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 ```
@@ -10,6 +10,271 @@ knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
 <tt>The following notes, mostly transcribed from Neath(0601,2021) lecture, summarize section (9.3) of Hoff(2009).</tt>
 
 <p>&nbsp;</p>
+
+
+## Review
+
+12 units of healthy male age 20 to 31 undertake a 12-week exercise program either running or step aerobics. Response is change in maximum oxygen uptake. Predictor variables are age in years and program (either running or aerobics). So there's a grouping variable (two groups) and there's a quantitative predictor variable (age). 
+
+$$
+\begin{array}{l}
+\int yp(y|\boldsymbol x)dy = E(Y|\boldsymbol x) = \beta_1 +\beta_2\texttt{program}+\beta_3\texttt{age}+\beta_4\texttt{program:age} = \boldsymbol \beta^T\boldsymbol x\\
+\text{running}=\mathrm{E}[Y \mid \boldsymbol{x}] = \beta_{1}+\beta_{3}\texttt{age } \\
+\text{aerobics}=\mathrm{E}[Y \mid \boldsymbol{x}] = \left(\beta_{1} + \beta_{2}\right) + \left(\beta_{3} + \beta_{4}\right)\texttt{age }
+\end{array}
+$$
+
+Expected response is linear in age with the possibility of different lines for running versus aerobics hence we have 5 model parameters; 2 slopes, 2 intercepts and residual variance. 
+
+A semiconjugate prior is the $p$-variate normal for the $\boldsymbol \beta$ vector (regression coefficients) and inverse gamma for the variance. In that case full conditionals are; $p$-variate normal for $\boldsymbol \beta$ it's inverse-gamma for $\sigma^2.$ Great, we can do a Gibbs sampler.
+
+
+Updating $\boldsymbol{\beta}$ :
+
+a) compute $\mathbf{V}=\operatorname{Var}\left[\boldsymbol{\beta} \mid \boldsymbol{y}, \mathbf{X}, \sigma^{2(s)}\right]$ and $\mathbf{m}=\mathrm{E}\left[\boldsymbol{\beta} \mid \boldsymbol{y}, \mathbf{X}, \sigma^{2(s)}\right]$
+b) sample $\boldsymbol{\beta}^{(s+1)} \sim$ multivariate $\operatorname{normal}(\mathbf{m}, \mathbf{V})$
+
+At each update compute the covariance matrix and the mean vector for the full conditional of $\boldsymbol \beta$ ( that depends on the current state of $\sigma^2$ )
+
+Updating $\sigma^{2}$ :
+
+a) compute $\operatorname{SSR}\left(\boldsymbol{\beta}^{(s+1)}\right)$
+b) sample $\sigma^{2(s+1)} \sim$ inverse-gamma $\left(\left[\nu_{0}+n\right] / 2,\left[\nu_{0} \sigma_{0}^{2}+\operatorname{SSR}\left(\boldsymbol{\beta}^{(s+1)}\right)\right] / 2\right)$.
+
+
+The degrees of freedom parameter increases $\nu_0$ in the prior to $\nu_0 + n$ in the posterior. The sum of squares parameter goes from $\nu_0 \sigma_0^2$ in the prior to $\nu_0\sigma_0^2 + SSR$ in the posterior. $SSR= \sum(y_i-\boldsymbol \beta^T \boldsymbol x_i)^2$ is the sum of the squared residuals.
+
+
+Priors are hard to come by in regression problems that's why default things are useful. The 'unit information prior' (perfectly consistent with the data) is a good default prior for Bayesian linear regression and so is Zellner's $g$-prior. And that's what we're gonna be using in the rest of today's class. The $g$-prior is motivated by a desired invariance property which requires that $\boldsymbol\beta_0 = \boldsymbol0$ and $\boldsymbol \Sigma_0 = g\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}.$
+
+
+
+## Bayesian model comparison
+
+In your regression class you considered regression problems with lots of potential predictor variables, and the question of interest is: Which are important predictors and which are not? We have $p$ potential predictors and the model says $y_i = \beta_1x_{i,1} + \beta_2x_{i,2} + … + \beta_px_{i,p} + \epsilon_i.$ Some of the $\beta$'s are zero and some are not. We write $\beta_j = z_j b_j$ where $z_j \in \{0,1\}$. This is strategic because a model is defined by its associated $z$-vector. Each such $z$-vector identifies a possible model. By "model" here we mean a collection of variables that are included (where others are excluded).
+
+For example in the oxygen data;
+
+* $E[Y|\boldsymbol{x,b,z}=(1,1,1,1)]=b_1x_1+b_2x_2+b_3x_3+b_4x_4=b_1+b_2\texttt{program}+b_3\texttt{age}+b_2\texttt{program:age}$ is the full model
+
+* $E[Y|\boldsymbol{x,b,z}=(1,0,1,0)]=b_1x_1+b_3x_3=b_1+b_3\texttt{age}$ is one intercept one slope = no group difference at all 
+
+* $E[Y|\boldsymbol{x,b,z}=(1,1,0,0)]=b_1x_1+b_2x_2=b_1+b_2\texttt{program}$ means that there's a group effect but there's no age effect 
+
+* $E[Y|\boldsymbol{x,b,z}=(1,1,1,0)]=b_1x_1+b_2x_2+b_3x_3=b_1+b_2\texttt{program}+b_3\texttt{age}$ means separate intercepts but a common slope (parallel mean). Age effect is the same for both groups, and the group difference is the same at all ages.
+
+If there are $p$ predictor variables there are $2^p$ such regressions models. They may not all be relevant. For example in this model it doesn't make sense to have a zero in the first position. Bayesian model selection works by; <mark>assign a prior distribution to all possible $z$-vectors of length $p$, compute their posterior probabilities and make conclusions.</mark>
+
+posterior probability of a particular model:
+
+$$
+p(\boldsymbol z | \boldsymbol y,\mathbf{X}) = p(\boldsymbol z)p(\boldsymbol y | \boldsymbol z,\mathbf{X}) / p(\boldsymbol y)=c \times p(\boldsymbol z)p(\boldsymbol y | \boldsymbol z,\mathbf{X})
+$$ 
+The thing we need to be able to compute is the likelihood, $p(\boldsymbol y | \mathbf{X},\boldsymbol z).$ 
+
+We know the likelihood is dependent on $\boldsymbol\beta$ and $\sigma^2$! But what we need is priors on $\boldsymbol\beta$ and $\sigma^2$ then integrate $\boldsymbol\beta$ and $\sigma^2$ out to get $p(\boldsymbol y | \mathbf{X}, z).$ 
+
+$$
+\begin{aligned}
+p(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}) &=\iint p\left(\boldsymbol{y}, \boldsymbol{\beta}, \sigma^{2} \mid \mathbf{X}, \boldsymbol{z}\right)\, d \boldsymbol{\beta} d \sigma^{2} \\
+&=\iint p\left(\boldsymbol{y} \mid \boldsymbol{\beta}, \mathbf{X}, \boldsymbol{z}, \sigma^{2}\right) p\left(\boldsymbol{\beta} \mid \mathbf{X}, \boldsymbol{z}, \sigma^{2}\right) p(\sigma^{2}|\boldsymbol z)\, d \boldsymbol{\beta} d \sigma^{2}
+\end{aligned}
+$$
+
+Recap: each $p$-vector of zeros and ones which we denote with $\boldsymbol z$ represents a possible model (set of active and inactive predictor variables). We assign prior probabilities to those models probably in some kind of uniform way. To get the posterior probabilities we need the marginal 'probabilty' of the data $p(\boldsymbol y | \mathbf{X},\boldsymbol z).$ It's marginal in the sense that it's unconditional on $\boldsymbol\beta$ and $\sigma^2$.
+
+Notation: $\mathbf{X}_z$ is the $\mathbf{X}$-matrix but only the columns corresponding to $z_j = 1.$ $\mathbf{X}$ has $n$ rows and $p$ columns. so $\mathbf{X}_z$ has $n$ rows and $p_z$ columns ( as many columns as there are $z_j = 1$ ).
+
+We're using the fully conjugate prior. Priors on $\boldsymbol \beta$ and $\sigma^2$ are conditional on $\boldsymbol z$. They have to be because for the $j$'s with $z_j = 0$, $\beta_j = 0.$
+
+$$
+\begin{array}{r}
+\boldsymbol{\beta}_{z} \mid \mathbf{X}_{z}, \sigma^{2} \sim \operatorname{Normal}_{p_{z}}\left(\mathbf{0}, g \sigma^{2}\left[\mathbf{X}_{z}^{T} \mathbf{X}_{z}\right]^{-1}\right) \\
+\text { Also, } \sigma^{2} \sim \text { InverseGamma}\left(\nu_{0} / 2, \nu_{0} \sigma_{0}^{2} / 2\right)
+\end{array}
+$$
+
+On page 165 of Hoff $(2009)$, it is shown that
+
+$$
+p(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}) =\pi^{-n / 2} \frac{\Gamma\left(\left[\nu_{0}+n\right] / 2\right)}{\Gamma\left(\nu_{0} / 2\right)}(1+g)^{-p_{z} / 2} \frac{\left(\nu_{0} \sigma_{0}^{2}\right)^{\nu_{0} / 2}}{\left(\nu_{0} \sigma_{0}^{2}+\mathrm{SSR}_{g}^{z}\right)^{\left(\nu_{0}+n\right) / 2}}
+$$
+
+where
+
+$$
+\operatorname{SSR}_{g}^{z}=\boldsymbol{y}^{T}\left(\mathbf{I}-\frac{g}{g+1} \mathbf{X}_{z}\left(\mathbf{X}_{z}^{T} \mathbf{X}_{z}\right)^{-1} \mathbf{X}_{z}^{T}\right) \boldsymbol{y}
+$$
+We will set $g = n$ and $\nu_0 = 1.$ $\sigma_0^2$ will depend on $\boldsymbol z$! It will be the least squares estimate of $\sigma^2.$ Under model $\boldsymbol z$ the notation for this quantity $s^2_{z}.$
+
+<p>&nbsp;</p>
+
+The ratio of marginal probabilities for two competing models is called the **"Bayes factor"**
+
+$$
+\frac{p\left(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}_{a}\right)}{p\left(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}_{b}\right)}=(1+n)^{\left(p_{z_{a}}-p_{z_{b}}\right) / 2}\left(\frac{s_{z_{a}}^{2}}{s_{z_{b}}^{2}}\right)^{1 / 2}\left(\frac{s_{z_{b}}^{2}+\mathrm{SSR}_{g}^{z_{b}}}{s_{z_{a}}^{2}+\operatorname{SSR}_{g}^{z_{a}}}\right)^{(n+1) / 2}
+$$
+
+The Bayes factor can be interpreted as how much the data favor model $\boldsymbol z_a$  over model $\boldsymbol z_b$. Notice that it is essentially a balance between model complexity (number of parameters) and goodness of ﬁt (SSR). Bayes factor = 1 means data are equally likely under either model. Bayes factor > 1 means observed data are more likely under model $a$ than model $b$.
+
+
+## Example: Oxygen uptake
+
+We have $p=4$ which mean there are $2^p = 2^4 = 16$ possible linear regression models. They aren't all of interest. Here's five that are:
+
+$$
+\begin{array}{ll}
+\boldsymbol z & {\text{ Model }} \\
+\hline(1,0,0,0) & \beta_{1} \\
+(1,1,0,0) & \beta_{1}+\beta_{2} \times \texttt{group}_{i} \\
+(1,0,1,0) & \beta_{1}+\beta_{3} \times \texttt{age}_{i} \\
+(1,1,1,0) & \beta_{1}+\beta_{2} \times \texttt{group}_{i}+\beta_{3} \times \texttt{age}_{i} \\
+(1,1,1,1) & \beta_{1}+\beta_{2} \times \texttt{group}_{i}+\beta_{3} \times \texttt{age}_{i}+\beta_{4} \times \texttt{group}_{i} \times \texttt{age}_{i}
+\end{array}
+$$
+
+We will assign equal prior probabilities of one-fifth to each of these models. Let's compute $\log p(\boldsymbol y | \mathbf{X},\boldsymbol z)$ for each of the five models. 
+
+For all these Bayesian regression R programs we need $\boldsymbol y$ ( $n$-vector of responses ) and $\mathbf{X}$( $n \times p$ matrix of regressors ) 
+
+```{r}
+# Here 'program' is the indicator of exercise program (0 for 
+# running and 1 for step aerobics)
+program <- c( 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1)
+age     <-   c(23,22,22,25,27,20,31,23,27,28,22,24)
+y       <- c( -0.87,-10.74, -3.27, -1.97,  7.50, -7.25, 
+              17.05,  4.96, 10.40, 11.05,  0.26,  2.51)
+```
+
+
+```{r}
+# OLS estimation
+n <- length(y)
+X <- cbind(rep(1,n), program, age, program*age) 
+p <- dim(X)[2]
+
+rownames(X)  <- 1:n
+colnames(X)  <- paste("x", 1:p, sep="")
+beta.hat.ols <- as.vector(solve( t(X) %*% X ) %*% t(X) %*% y)
+sigma2.hat   <- sum( (y - X %*% beta.hat.ols)^2 ) / (n-p)
+```
+
+
+```{r}
+# Compute log.p(y|X,z) for the five models in consideration
+# Formula given at bottom of page 165
+
+lpy.X <- function(y, X, g=length(y), nu.0=1, sigma2.0= 
+  try(summary(lm(y ~ 0 + X))$sigma^2, silent=T)) 
+  {
+  n <- dim(X)[1]
+  p <- dim(X)[2];
+ if(p==0){ 
+   H.g       <- 0;  
+   sigma2.0  <- mean(y^2) }
+ if(p > 0){
+   H.g <- (g/(g+1)) * X %*% solve(t(X)%*%X) %*% t(X)}
+ SSR.g <- t(y) %*% (diag(n) - H.g) %*% y 
+ ###
+ -0.5 * ( n*log(pi) + p*log(1+g) + (nu.0+n) * 
+    log(nu.0*sigma2.0 + SSR.g) - nu.0*log(nu.0*sigma2.0) ) + 
+    lgamma((nu.0+n)/2) - lgamma(nu.0/2)
+}
+```
+
+
+
+```{r}
+#  indicators given as five rows of matrix z
+z <- matrix(c(
+  1,0,0,0,
+  1,1,0,0, 
+  1,0,1,0, 
+  1,1,1,0, 
+  1,1,1,1), byrow=T, 5, 4)
+
+colnames(z) <- paste("z",1:4, sep="")
+rownames(z) <- 1:5;
+log.p       <- rep(NA, 5)
+
+for(k in 1:5)
+{
+ log.p[k] <- lpy.X(y=y, X=X[,z[k,]==1,drop=F])
+}
+
+cbind(z, log.p)
+```
+$\texttt{log.p[k]}= \log p(\boldsymbol y|\mathbf X,\boldsymbol z)=$ log of marginal probability of data given model $k$ $(k = 1, 2, 3, 4, 5)$. 
+
+These are log-probability-densities, they are not probabilities so they don't add to anything meaningful. But we can compare. The data are most likely under model 4, than under models 3 and 5. The data are not very likely under models 1 and 2.
+
+<p>&nbsp;</p>
+
+Assuming equal prior probabilities on these 5 models we can compute the posterior probabilities. 
+
+
+$$
+p(\boldsymbol{z} \mid \boldsymbol{y}, \mathbf{X})=\frac{p(\boldsymbol{z}) p(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z})}{\sum_{\tilde{\boldsymbol{z}}} p(\tilde{\boldsymbol{z}}) p(\boldsymbol{y} \mid \mathbf{X}, \tilde{\boldsymbol{z}})}
+$$
+
+Assuming uniform prior probabilities on the five candidate models $p(z)$ are all equal.
+
+$p(\boldsymbol y | \mathbf{X},\boldsymbol z) = \texttt{exp(log.p)}$.
+
+```{r}
+prob.z <- exp(log.p) / sum(exp(log.p))
+round(cbind(z, log.p, prob.z), 2)
+```
+
+Posterior probability of model 4 is 0.63, posterior probability of model 5 is 0.19, posterior probability of model 1 or model 2 is basically zero. The data are consistent with an age effect, as the posterior probabilities of the three models that include age essentially sum to 1 (so the data is practically impossible without an age effect). The data is also indicative of a group effect(though weaker than age effect), as the combined probability for the three models with a group effect is 0.00+0.63+0.19=0.82.
+
+
+
+
+## Gibbs sampling and model averaging
+
+what if $p$ is big and $2^p$ is really big and there are LOTS of models under consideration? Remember the solution to this issue in ordinary regression? The solution would be to use stepwise search methods such as forward selection / backward elimination. That's not what we will do here.
+
+What we will do in Bayesian model selection is run a Gibbs sampler on the posterior probability distribution $p(\boldsymbol{z} \mid \boldsymbol{y}, \mathbf{X}).$ Gibbs sampler proceeds by; given $\boldsymbol z^{(s)}$ generate $\boldsymbol z^{(s+1)}.$ Do this a whole bunch of times and the observed proportions of particular $z$-values approximate the posterior probability of the corresponding model. 
+
+More precisely, generating values of $\left\{\boldsymbol{z}^{(s+1)}, \sigma^{2(s+1)}, \boldsymbol{\beta}^{(s+1)}\right\}$ from $\boldsymbol{z}^{(s)}$ is achieved with the following steps.
+
+1. Given current state $\boldsymbol{z}=\boldsymbol{z}^{(s)}$
+
+generate new state as follows
+
+2. For $j \in\{1,2, \ldots, p\}$ *in RANDOM ORDER*, replace $z_{j}$ with a sample from $p\left(z_{j} \mid \boldsymbol{y}, \mathbf{X}, \boldsymbol{z}_{-j}\right)$
+3. set $z^{(s+1)}=\boldsymbol{z}$
+4. Sample $\sigma^{2(s+1)} \sim p\left(\sigma^{2} \mid \boldsymbol{y}, \mathbf{X}, \boldsymbol{z}^{(s+1)}\right)$, and
+5. sample $\boldsymbol{\beta} \sim p\left(\boldsymbol{\beta} \mid \boldsymbol{y}, \mathbf{X}, \boldsymbol{z}^{(s+1)}, \sigma^{2(s+1)}\right)$
+
+
+Of course we don't just want to make inference about the model (if we were only interested in the active variables we would just do steps 1 to 3), we also want to estimate the model (steps 4 and 5). 
+
+
+R code to sample $\boldsymbol z^{(s+1)}$ given $\boldsymbol z^{(s)}$. 
+
+```{r eval = FALSE}
+# code for estimating the active variables [steps 1 to 3]
+z     <- rep(1, dim(X)[2])
+lpy.c <- lpy.X(y=y, X=X[,z==1, drop=F])
+S     <- 10000
+Z     <- matrix(NA, S, dim(S)[2])
+for(s in 1:S){
+  for(j in sample(1:dim(X)[2])){
+    zp    <- z;  
+    zp[j] <- 1 - zp[j]
+    lpy.p <- lpy.X(y=y, X=X[, zp==1, drop=F])
+    r     <- (lpy.p - lpy.c)*(-1)^(zp[j]==0)
+    #  r <- r + log(prior.z[j]) - log(1-prior.z[j])
+    z[j] <- rbinom(1, 1, 1/(1+exp(-r)))
+    if(z[j]==zp[j]) { lpy.c <- lpy.p }
+  }
+  Z[s,] <- z
+    }
+```
+
+You're gonna do a problem using this code for next week's homework. That's all for chapter 9.
 
 
 

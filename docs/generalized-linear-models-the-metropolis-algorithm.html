@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lecture 2 Exchangeability | Bayesian Statistics notes from summer 2021</title>
-  <meta name="description" content="Lecture 2 Exchangeability | Bayesian Statistics notes from summer 2021" />
+  <title>Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021</title>
+  <meta name="description" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021" />
   <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lecture 2 Exchangeability | Bayesian Statistics notes from summer 2021" />
+  <meta property="og:title" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lecture 2 Exchangeability | Bayesian Statistics notes from summer 2021" />
+  <meta name="twitter:title" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="binomial-1.html"/>
+<link rel="prev" href="model-selection.html"/>
+
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -319,83 +319,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exchangeability" class="section level1" number="2">
-<h1><span class="header-section-number">Lecture 2</span> Exchangeability</h1>
-<p><tt>The following notes, mostly transcribed from Neath(0504, 2021) lecture, summarize sections(2.5-2.8) of Hoff(2009).</tt></p>
-<div id="discrete-joint-distributions" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Discrete joint distributions</h2>
-<p>We will talk about joint probability distributions. <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are two discrete random variables. We can define a joint probability density function (joint pdf) <span class="math inline">\(p_{Y_1Y_2}(y_1, y_2) = Pr(Y_1 = y_1 \text{ and } Y_2 = y_2)\)</span>. We will also be interested in the marginal distributions e.g., the pdf of <span class="math inline">\(Y_1\)</span> only. We will use subscripts on the <span class="math inline">\(p\)</span> to be clear what density we’re talking about. I get the marginal of <span class="math inline">\(Y_1\)</span> from the joint of <span class="math inline">\((Y_1, Y_2)\)</span> by summing over the values that <span class="math inline">\(Y_2\)</span> can take.</p>
-<p>We can also speak of the conditional density of <span class="math inline">\(Y_2\)</span> given <span class="math inline">\(Y_1\)</span> which follows immediately from the definition of conditional probability! Recall that <span class="math inline">\(Pr( B | A ) = Pr(A \text{ and } B) / Pr(A)\)</span>. Conditional density of <span class="math inline">\(Y_2 | Y_1=y_1\)</span> equal the joint density of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> divided by the marginal of <span class="math inline">\(Y_1\)</span>.</p>
-<p>Given the joint density one can derive both marginals and both conditionals. Given the marginal of <span class="math inline">\(Y_1\)</span> and the conditional of <span class="math inline">\(Y_2\)</span> given <span class="math inline">\(Y_1\)</span> one can construct the joint density of <span class="math inline">\((Y_1, Y_2)\)</span>. <em>Given the two marginals, marginal of <span class="math inline">\(Y_1\)</span>, marginal of <span class="math inline">\(Y_2\)</span>, it is not possible to construct the joint density</em> (knowing the row and columns totals doesn’t mean you know how to complete a contingency table). The joint distribution contains all the information the marginals do not! All the joint probabilities, all the marginal probabilities, and all possible conditional probabilities.</p>
-<p>We will not always use these subscripts on our <span class="math inline">\(p\)</span>’s. We will just use a lower case <span class="math inline">\(p\)</span> to denote a probability density. We’ll know the ‘density of what’ by the argument to the function!</p>
-<p>If we are talking about a pair of continuous random variables then the pdf’s really are probability DENSITY functions they’re not actually probabilities at all. We get probabilities from them by solving integrals.</p>
-<p><strong>Proposition:</strong> <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> are two arbitrary rvs (random variables) with a joint distribution. That joint distribution is completely specified by the joint cdf. The ‘rigorous’ definition of a joint distribution starts with the joint cdf. The joint pdf is the function whose integral gives the joint cdf.</p>
-<p>Given a joint distribution of (<span class="math inline">\(Y_1, Y_2\)</span>), the marginal distribution of <span class="math inline">\(Y_1\)</span> is found by (summing over <span class="math inline">\(Y_2\)</span> values in the discrete case) (in the continuous case it’s integrating over all the <span class="math inline">\(Y_2\)</span> values). Although probability densities are not strictly probabilities, conditional densities can be defined analogously. The conditional density of <span class="math inline">\(Y_2 | Y_1 = y_1\)</span> is found by joint density of <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> divided by marginal density of <span class="math inline">\(Y_1\)</span>.</p>
-<p>We can define a pair of rvs so that <span class="math inline">\(Y_1\)</span> is discrete and <span class="math inline">\(Y_2\)</span> is continuous. We still have <span class="math inline">\(p(y_1, y_2) = p(y_1) p(y_2 | y_1)\)</span> and <span class="math inline">\(p(y_1, y_2) = p(y_2) p(y_1 | y_2)\)</span>. Probabilities are found by summing over values of the discrete one and integrating over values of the continuous one.</p>
-</div>
-<div id="bayesrule" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Bayes’ rule and parameter estimation</h2>
-<p>Let <span class="math inline">\(\theta =\)</span> proportion of people who have a certain characteristic.</p>
-<p>E.g., public opinion poll: Approve of performance of President Biden? Yes or No? <span class="math inline">\(\theta\)</span> would be the proportion of people who would answer yes, <span class="math inline">\(0 &lt; \theta &lt; 1\)</span></p>
-<p>Is <span class="math inline">\(\theta\)</span> discrete or continuous? If there are 300 million people in the population of interest then the possible values are 0, 1/300,000,000, 2/300,000,000, …, 299,999,999/300,000,000, 1. But that’s kind of stupid. It’s continuous. It makes most sense to treat <span class="math inline">\(\theta\)</span> as continuous, <span class="math inline">\(0 &lt; \theta &lt; 1\)</span>.</p>
-<p>What if <span class="math inline">\(Y =\)</span> number of people sampled who answer YES to “Approve of President Biden?” The population size is millions the sample size is hundreds? Here it does make sense to use a discrete probability model for <span class="math inline">\(Y\)</span>.</p>
-<p><span class="math inline">\(\theta\)</span> is the value we want to know, <span class="math inline">\(Y = y\)</span> is the quantity we’re able to observe. <em>Statistical inference</em> is making induction about <span class="math inline">\(\theta\)</span> based on observation of <span class="math inline">\(Y = y\)</span>. For a classical (non-Bayesian) analysis this requires a probability model for <span class="math inline">\(Y\)</span> that depends on <span class="math inline">\(\theta\)</span>. In Bayesian statistics it requires a joint probability model for <span class="math inline">\((Y , \theta)\)</span>!</p>
-<p>Where frequentist statistics treats <span class="math inline">\(\theta\)</span> as fixed (unknown but fixed) Bayesian statistics treats it as a random variable. The justification for this? Our belief about the value of <span class="math inline">\(\theta\)</span> is measured by a probability dist! Start with what we believe about <span class="math inline">\(\theta\)</span> before we’ve observed any data. Those beliefs determine the marginal distribution <span class="math inline">\(p(\theta)\)</span>. We call this the <em>prior distribution</em>. Then we have (just as in non-Bayesian statistics) probability distribution for <span class="math inline">\(Y\)</span> that depends on <span class="math inline">\(\theta\)</span>. In Bayesian statistics we make it explicit that this is a CONDITIONAL probability, conditional on the value of <span class="math inline">\(\theta\)</span>. After data are observed we want to update our beliefs about <span class="math inline">\(\theta\)</span>. Use Bayes’ rule! <span class="math inline">\(p(\theta | y) = p(\theta, y) / p(y) = p(\theta) p(y | \theta) / p(y)\)</span>. This is called the posterior distribution (because it comes after observing the data).</p>
-<p>If <span class="math inline">\(\theta_a\)</span> and <span class="math inline">\(\theta_b\)</span> are two possible values of <span class="math inline">\(\theta\)</span> our belief in <span class="math inline">\(\theta_a\)</span> versus <span class="math inline">\(\theta_b\)</span> is defined by the ratio of their posterior probabilities (or posterior densities). That ratio depends on <span class="math inline">\(p(\theta_a) / p(\theta_b)\)</span> ratio of ‘prior probabilities’ and <span class="math inline">\(p(y | \theta_a) / p(y | \theta_b)\)</span> which is the ratio of the ‘likelihoods.’</p>
-<p>Note! One need not calculate the marginal probability <span class="math inline">\(p(y)\)</span> to calculate this ratio! That’s an important observation! Bayes’ rule tells us <span class="math inline">\(p(\theta | y) = p(\theta) p(y | \theta) / p(y)\)</span>. Thinking of this thing as a function of <span class="math inline">\(\theta\)</span> we can write <span class="math inline">\(p(\theta | y) = c \times p(\theta) \times p(y | \theta)\)</span>.</p>
-<p>Are you familiar with this “proportional to” symbol? You will be! We say <span class="math inline">\(f(x) \propto g(x)\)</span> if there exists a constant <span class="math inline">\(c &gt; 0\)</span> such that
-<span class="math inline">\(f(x) = c \times g(x) ~\forall ~x\)</span>. <span class="math inline">\(p(\theta | y)\)</span> is a probability density. It integrates to 1. The function <span class="math inline">\(p(\theta) p(y | \theta)\)</span>
-(a function of <span class="math inline">\(\theta\)</span>) integrates to something positive. Dividing by that positive thing would give us the normalized posterior density. Not dividing by that thing gives us an unnormalized posterior density which is just as good. Often solving for <span class="math inline">\(p(y)\)</span> explicitly is impossible (or nearly impossible) :( But we’ll see in this course, turns out that doesn’t really matter the important information about the posterior is contained in the numerator of the posterior expression that is <span class="math inline">\(p(\theta ) p(y | \theta)\)</span> which are not hard to solve :)</p>
-</div>
-<div id="independent-random-variables" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Independent random variables</h2>
-<p>Continuing with probability review.</p>
-<p><span class="math inline">\(Y_1, Y_2, \ldots , Y_n\)</span> are independent if their joint probability density factors into the product of their marginal probability densities. If these densities are specified conditionally on the value of <span class="math inline">\(\theta\)</span> (where <span class="math inline">\(\theta\)</span> is a random variable) we say <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> are conditionally independent given <span class="math inline">\(\theta\)</span>. If <span class="math inline">\(Y_1, Y_2, \ldots, Y_n\)</span> are generated from a common process, then the marginal densities of the <span class="math inline">\(Y_i\)</span> (conditional on <span class="math inline">\(\theta\)</span>) are all the same. If <span class="math inline">\(\theta =\)</span> Biden’s true approval rate <span class="math inline">\(Pr(Y_1 = 1 | \theta) = Pr(Y_2 = 1 | \theta) = … = \theta\)</span>. In such a case we’ll say <span class="math inline">\(Y_1, Y_2, …,\)</span> are conditionally iid.</p>
-</div>
-<div id="exchangeability-1" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Exchangeability</h2>
-<p>In Bayesian statistical models we generally assume conditional independence which does not imply independence it implies a different condition called exchangeability.</p>
-<p><span class="math display">\[
-Y_i= 
-\begin{cases}
-1 \text{ if subject answers yes }\\
-0 \text{ if subject answers no (or doesn&#39;t answer) }
-\end{cases}
-\]</span></p>
-<p>We will pick 10 survey respondents out of very very many (thousands) at random <span class="math inline">\(Y_i = 1\)</span> if the <span class="math inline">\(i\)</span>th one answers yes. There are <span class="math inline">\(2^{10} = 1024\)</span> possible realizations of <span class="math inline">\((y_1, y_2, …, y_{10})\)</span>. What’s the probability for each? Here are 3 of those 1024 possible sequences
-<span class="math display">\[
-\begin{array}{l}
-p(1, 0, 0, 1, 0, 1, 1, 0, 1, 1) = ?\\
-p(1, 0, 1, 0, 1, 1, 0, 1, 1, 0) = ?\\
-p(1, 1, 0, 0, 1, 1, 0, 0, 1, 1) = ?\\
-\end{array}
-\]</span></p>
-<p>I’m thinking their probabilities should all be equal. Note that each of these sequences contains six <span class="math inline">\(1&#39;\)</span>s and four <span class="math inline">\(0&#39;\)</span>s. Does it seem reasonable to assume Pr(yes, yes, no) = Pr(yes, no, yes) = Pr(no, yes, yes)? I’d say it does! The technical term for this condition is <strong>exchangeability</strong>. <span class="math inline">\(y_1, y_2, …, y_n\)</span> are a sequence of values then the probability of observing <span class="math inline">\(Y_1 = y_1, Y_2 = y_2, … , Y_n = y_n\)</span> and the probability of observing <span class="math inline">\(Y_1 = y_2, Y_2 = y_1\)</span>, etc are the same. This is called exchangeability. Exchangeability holds in models where the subscript label contains no information about the outcome.</p>
-<p><em>Does exchangeability imply independence?</em> NO.</p>
-<p><span class="math inline">\(Y_1, Y_2 , …\)</span> are conditionally independent given <span class="math inline">\(\theta\)</span>, but unconditionally they’re not independent. Think about <span class="math inline">\(Pr(Y_{10} = 1).\)</span> My answer to this would be whatever is my best guess of the overall success proportion <span class="math inline">\(\theta\)</span>. What about <span class="math inline">\(Pr(Y_{10} = 1 | Y_1 = Y_2 = … = Y_9 = 1)?\)</span></p>
-<p>Suppose first probability is <span class="math inline">\(a\)</span>, second probability is <span class="math inline">\(b\)</span>. I don’t think we want <span class="math inline">\(a = b\)</span>! In fact, <span class="math inline">\(a&lt;b\)</span>.</p>
-<p>What about conditionally on <span class="math inline">\(\theta\)</span>, given that <span class="math inline">\(\theta\)</span> is the true success probability (for the population)?</p>
-<ul>
-<li><p><span class="math inline">\(Pr(Y_{10} = 1 | \theta) \approx \theta?\)</span> yes</p></li>
-<li><p><span class="math inline">\(Pr(Y_{10} = 1 | Y_1, …, Y_9 , \theta) \approx \theta?\)</span> yes</p></li>
-</ul>
-<p>These are 10 independent draws from a large population. Imagine a huge bowl of jelly beans, green ones and red ones. I know the proportion that are green is <span class="math inline">\(\theta.\)</span> <span class="math inline">\(Pr(10\)</span>th pick is green | <span class="math inline">\(\theta) = \theta,~ Pr(10\)</span>th pick is green | first <span class="math inline">\(9\)</span> picks, <span class="math inline">\(\theta)\)</span> is about <span class="math inline">\(\theta\)</span>. It’s a huge bowl so sampling without replacement is essentially the same thing as sampling with replacement. Given that 80% of this population is happy. If only 4 of the first 9 answered yes that doesn’t change my probability for the 10th, it’s still going to be .80.</p>
-<p>True or false: <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> and … and <span class="math inline">\(Y_9\)</span> and <span class="math inline">\(Y_{10}\)</span> are independent. We’re gonna see in a minute this statement is false. The true statement is <span class="math inline">\(Y_1, Y_2, … , Y_9, Y_{10}\)</span> are CONDITIONALLY independent given <span class="math inline">\(\theta.\)</span> <span class="math inline">\(Pr(Y_i = 1 | \theta , Y_j,~ j \neq i) = \theta.\)</span> Probability of zero is <span class="math inline">\(1-\theta.\)</span> That’s the joint probability conditionally on <span class="math inline">\(\theta.\)</span> Unconditionally it’s… You take the conditional probability multiply by the marginal of <span class="math inline">\(\theta\)</span> integrate <span class="math inline">\(\theta\)</span> out of it!</p>
-<p>So we see <span class="math inline">\(Y_1, Y_2, ... Y_n\)</span> are exchangeable. They are not iid because they’re not independent, because unconditionally on <span class="math inline">\(\theta,\)</span> <span class="math inline">\(Y_{10}\)</span> is not marginally independent of <span class="math inline">\(Y_1, Y_2, …, Y_9\)</span> because <span class="math inline">\(Y_{10}\)</span> depends on <span class="math inline">\(\theta\)</span> and <span class="math inline">\(Y_1, Y_2, …, Y_9\)</span> contain information about <span class="math inline">\(\theta\)</span>. We do not have <span class="math inline">\(a=b\)</span> above, but we do have exchangeability. That is, joint distribution is preserved under re-labeling of the subscripts (permutation of labels).</p>
-<p><strong>Proposition:</strong></p>
-<p>If <span class="math inline">\(\theta \sim p(\theta),\)</span> <span class="math inline">\(Y_1, … Y_n | \theta\)</span> are iid then <span class="math inline">\(Y_1, …, Y_n\)</span> are exchangeable. The proof is straightforward it’s given in Section 2.7 or 2.8 of Hoff.</p>
-<p>The converse is also true. i.e., If <span class="math inline">\(Y_1, …, Y_n\)</span> are an exchangeable sequence of rvs then there exists a prior distribution <span class="math inline">\(\theta\)</span> and conditional distribution <span class="math inline">\(Y_i | \theta\)</span> such that <span class="math inline">\(Y_1, …, Y_n | \theta\)</span> are iid <span class="math inline">\(p(y_i | \theta)\)</span> where <span class="math inline">\(\theta \sim p(\theta)\)</span>. That result is known as di Finetti’s theorem.</p>
-<p><em>Why is this important</em>? This means that any situation where modeling observed values as being exchangeable is appropriate then a Bayesian statistical analysis is also appropriate.</p>
+<div id="generalized-linear-models-the-metropolis-algorithm" class="section level1" number="17">
+<h1><span class="header-section-number">Lecture 17</span> Generalized Linear Models; the Metropolis Algorithm</h1>
+<p><tt>The following notes, mostly transcribed from Neath(0602,2021) lecture, summarize sections (10.1-10.3) of Hoff(2009).</tt></p>
+<p>
+ 
+</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="binomial-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="model-selection.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

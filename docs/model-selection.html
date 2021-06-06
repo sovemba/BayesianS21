@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lecture 16 Model Selection | Bayesian Statistics notes from summer 2021</title>
+  <meta name="description" content="Lecture 16 Model Selection | Bayesian Statistics notes from summer 2021" />
+  <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lecture 16 Model Selection | Bayesian Statistics notes from summer 2021" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lecture 16 Model Selection | Bayesian Statistics notes from summer 2021" />
+  
+  
+  
+
+<meta name="author" content="Chisom Onyishi" />
+
+
+<meta name="date" content="2021-06-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="linear-regression.html"/>
+<link rel="next" href="generalized-linear-models-the-metropolis-algorithm.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
+<li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
+<li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
+<li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
+<li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
+<li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
+<li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
+<li class="chapter" data-level="6.4" data-path="monte-carlo.html"><a href="monte-carlo.html#posterior-inference-for-arbitrary-functions"><i class="fa fa-check"></i><b>6.4</b> Posterior inference for arbitrary functions</a></li>
+<li class="chapter" data-level="6.5" data-path="monte-carlo.html"><a href="monte-carlo.html#example-log-odds"><i class="fa fa-check"></i><b>6.5</b> Example: Log-odds</a></li>
+<li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
+<li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
+<li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
+<li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
+<li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
+<li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
+<li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
+<li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
+<li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
+<li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
+<li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
+<li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="10.4" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-midge-wing-length-2"><i class="fa fa-check"></i><b>10.4</b> Example: Midge wing length</a></li>
+<li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
+<li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
+<li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
+<li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
+<li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
+<li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
+<li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
+<li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
+<li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.2</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.2.1</b> Analysis of the math scores data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html"><i class="fa fa-check"></i><b>14</b> The hierarchical normal model</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#postinf"><i class="fa fa-check"></i><b>14.1</b> Posterior inference</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-distributions-of-mu-and-tau2"><i class="fa fa-check"></i><b>14.1.1</b> Full conditional distributions of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span></a></li>
+<li class="chapter" data-level="14.1.2" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-of-theta_j"><i class="fa fa-check"></i><b>14.1.2</b> Full conditional of <span class="math inline">\(\theta_j\)</span></a></li>
+<li class="chapter" data-level="14.1.3" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-of-sigma2"><i class="fa fa-check"></i><b>14.1.3</b> Full conditional of <span class="math inline">\(\sigma^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#example-math-scores-in-u.s.-public-schools"><i class="fa fa-check"></i><b>14.2</b> Example: Math scores in U.S. public schools</a></li>
+<li class="chapter" data-level="14.3" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#posterior-approximation"><i class="fa fa-check"></i><b>14.3</b> Posterior approximation</a></li>
+<li class="chapter" data-level="14.4" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#mcmc-diagnostics-1"><i class="fa fa-check"></i><b>14.4</b> MCMC diagnostics</a></li>
+<li class="chapter" data-level="14.5" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#shrinkage"><i class="fa fa-check"></i><b>14.5</b> Shrinkage</a></li>
+<li class="chapter" data-level="14.6" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#ranking-the-groups"><i class="fa fa-check"></i><b>14.6</b> Ranking the groups</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>15</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="linear-regression.html"><a href="linear-regression.html#example-oxygen-uptake"><i class="fa fa-check"></i><b>15.1</b> Example: Oxygen uptake</a></li>
+<li class="chapter" data-level="15.2" data-path="linear-regression.html"><a href="linear-regression.html#least-squares-estimation"><i class="fa fa-check"></i><b>15.2</b> Least squares estimation</a></li>
+<li class="chapter" data-level="15.3" data-path="linear-regression.html"><a href="linear-regression.html#least-squares-estimation-for-oxygen-uptake-data"><i class="fa fa-check"></i><b>15.3</b> Least squares estimation for oxygen uptake data</a></li>
+<li class="chapter" data-level="15.4" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-estimation-for-a-regression-model"><i class="fa fa-check"></i><b>15.4</b> Bayesian estimation for a regression model</a></li>
+<li class="chapter" data-level="15.5" data-path="linear-regression.html"><a href="linear-regression.html#unit-information-prior"><i class="fa fa-check"></i><b>15.5</b> Unit information prior</a></li>
+<li class="chapter" data-level="15.6" data-path="linear-regression.html"><a href="linear-regression.html#zellners-g-prior"><i class="fa fa-check"></i><b>15.6</b> Zellner’s <span class="math inline">\(g\)</span>-prior</a></li>
+<li class="chapter" data-level="15.7" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-analysis-using-invariant-g-prior"><i class="fa fa-check"></i><b>15.7</b> Bayesian analysis using invariant <span class="math inline">\(g\)</span>-prior</a></li>
+<li class="chapter" data-level="15.8" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-analysis-using-semiconjugate-prior"><i class="fa fa-check"></i><b>15.8</b> Bayesian analysis using semiconjugate prior</a>
+<ul>
+<li class="chapter" data-level="15.8.1" data-path="linear-regression.html"><a href="linear-regression.html#prediction-problem"><i class="fa fa-check"></i><b>15.8.1</b> Prediction problem</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>16</b> Model Selection</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="model-selection.html"><a href="model-selection.html#review"><i class="fa fa-check"></i><b>16.1</b> Review</a></li>
+<li class="chapter" data-level="16.2" data-path="model-selection.html"><a href="model-selection.html#bayesian-model-comparison"><i class="fa fa-check"></i><b>16.2</b> Bayesian model comparison</a></li>
+<li class="chapter" data-level="16.3" data-path="model-selection.html"><a href="model-selection.html#example-oxygen-uptake-1"><i class="fa fa-check"></i><b>16.3</b> Example: Oxygen uptake</a></li>
+<li class="chapter" data-level="16.4" data-path="model-selection.html"><a href="model-selection.html#gibbs-sampling-and-model-averaging"><i class="fa fa-check"></i><b>16.4</b> Gibbs sampling and model averaging</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html"><i class="fa fa-check"></i><b>17</b> Generalized Linear Models; the Metropolis Algorithm</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics notes from summer 2021</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model-selection" class="section level1" number="16">
+<h1><span class="header-section-number">Lecture 16</span> Model Selection</h1>
+<p><tt>The following notes, mostly transcribed from Neath(0601,2021) lecture, summarize section (9.3) of Hoff(2009).</tt></p>
+<p>
+ 
+</p>
+<div id="review" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Review</h2>
+<p>12 units of healthy male age 20 to 31 undertake a 12-week exercise program either running or step aerobics. Response is change in maximum oxygen uptake. Predictor variables are age in years and program (either running or aerobics). So there’s a grouping variable (two groups) and there’s a quantitative predictor variable (age).</p>
+<p><span class="math display">\[
+\begin{array}{l}
+\int yp(y|\boldsymbol x)dy = E(Y|\boldsymbol x) = \beta_1 +\beta_2\texttt{program}+\beta_3\texttt{age}+\beta_4\texttt{program:age} = \boldsymbol \beta^T\boldsymbol x\\
+\text{running}=\mathrm{E}[Y \mid \boldsymbol{x}] = \beta_{1}+\beta_{3}\texttt{age } \\
+\text{aerobics}=\mathrm{E}[Y \mid \boldsymbol{x}] = \left(\beta_{1} + \beta_{2}\right) + \left(\beta_{3} + \beta_{4}\right)\texttt{age }
+\end{array}
+\]</span></p>
+<p>Expected response is linear in age with the possibility of different lines for running versus aerobics hence we have 5 model parameters; 2 slopes, 2 intercepts and residual variance.</p>
+<p>A semiconjugate prior is the <span class="math inline">\(p\)</span>-variate normal for the <span class="math inline">\(\boldsymbol \beta\)</span> vector (regression coefficients) and inverse gamma for the variance. In that case full conditionals are; <span class="math inline">\(p\)</span>-variate normal for <span class="math inline">\(\boldsymbol \beta\)</span> it’s inverse-gamma for <span class="math inline">\(\sigma^2.\)</span> Great, we can do a Gibbs sampler.</p>
+<p>Updating <span class="math inline">\(\boldsymbol{\beta}\)</span> :</p>
+<ol style="list-style-type: lower-alpha">
+<li>compute <span class="math inline">\(\mathbf{V}=\operatorname{Var}\left[\boldsymbol{\beta} \mid \boldsymbol{y}, \mathbf{X}, \sigma^{2(s)}\right]\)</span> and <span class="math inline">\(\mathbf{m}=\mathrm{E}\left[\boldsymbol{\beta} \mid \boldsymbol{y}, \mathbf{X}, \sigma^{2(s)}\right]\)</span></li>
+<li>sample <span class="math inline">\(\boldsymbol{\beta}^{(s+1)} \sim\)</span> multivariate <span class="math inline">\(\operatorname{normal}(\mathbf{m}, \mathbf{V})\)</span></li>
+</ol>
+<p>At each update compute the covariance matrix and the mean vector for the full conditional of <span class="math inline">\(\boldsymbol \beta\)</span> ( that depends on the current state of <span class="math inline">\(\sigma^2\)</span> )</p>
+<p>Updating <span class="math inline">\(\sigma^{2}\)</span> :</p>
+<ol style="list-style-type: lower-alpha">
+<li>compute <span class="math inline">\(\operatorname{SSR}\left(\boldsymbol{\beta}^{(s+1)}\right)\)</span></li>
+<li>sample <span class="math inline">\(\sigma^{2(s+1)} \sim\)</span> inverse-gamma <span class="math inline">\(\left(\left[\nu_{0}+n\right] / 2,\left[\nu_{0} \sigma_{0}^{2}+\operatorname{SSR}\left(\boldsymbol{\beta}^{(s+1)}\right)\right] / 2\right)\)</span>.</li>
+</ol>
+<p>The degrees of freedom parameter increases <span class="math inline">\(\nu_0\)</span> in the prior to <span class="math inline">\(\nu_0 + n\)</span> in the posterior. The sum of squares parameter goes from <span class="math inline">\(\nu_0 \sigma_0^2\)</span> in the prior to <span class="math inline">\(\nu_0\sigma_0^2 + SSR\)</span> in the posterior. <span class="math inline">\(SSR= \sum(y_i-\boldsymbol \beta^T \boldsymbol x_i)^2\)</span> is the sum of the squared residuals.</p>
+<p>Priors are hard to come by in regression problems that’s why default things are useful. The ‘unit information prior’ (perfectly consistent with the data) is a good default prior for Bayesian linear regression and so is Zellner’s <span class="math inline">\(g\)</span>-prior. And that’s what we’re gonna be using in the rest of today’s class. The <span class="math inline">\(g\)</span>-prior is motivated by a desired invariance property which requires that <span class="math inline">\(\boldsymbol\beta_0 = \boldsymbol0\)</span> and <span class="math inline">\(\boldsymbol \Sigma_0 = g\sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}.\)</span></p>
+</div>
+<div id="bayesian-model-comparison" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Bayesian model comparison</h2>
+<p>In your regression class you considered regression problems with lots of potential predictor variables, and the question of interest is: Which are important predictors and which are not? We have <span class="math inline">\(p\)</span> potential predictors and the model says <span class="math inline">\(y_i = \beta_1x_{i,1} + \beta_2x_{i,2} + … + \beta_px_{i,p} + \epsilon_i.\)</span> Some of the <span class="math inline">\(\beta\)</span>’s are zero and some are not. We write <span class="math inline">\(\beta_j = z_j b_j\)</span> where <span class="math inline">\(z_j \in \{0,1\}\)</span>. This is strategic because a model is defined by its associated <span class="math inline">\(z\)</span>-vector. Each such <span class="math inline">\(z\)</span>-vector identifies a possible model. By “model” here we mean a collection of variables that are included (where others are excluded).</p>
+<p>For example in the oxygen data;</p>
+<ul>
+<li><p><span class="math inline">\(E[Y|\boldsymbol{x,b,z}=(1,1,1,1)]=b_1x_1+b_2x_2+b_3x_3+b_4x_4=b_1+b_2\texttt{program}+b_3\texttt{age}+b_2\texttt{program:age}\)</span> is the full model</p></li>
+<li><p><span class="math inline">\(E[Y|\boldsymbol{x,b,z}=(1,0,1,0)]=b_1x_1+b_3x_3=b_1+b_3\texttt{age}\)</span> is one intercept one slope = no group difference at all</p></li>
+<li><p><span class="math inline">\(E[Y|\boldsymbol{x,b,z}=(1,1,0,0)]=b_1x_1+b_2x_2=b_1+b_2\texttt{program}\)</span> means that there’s a group effect but there’s no age effect</p></li>
+<li><p><span class="math inline">\(E[Y|\boldsymbol{x,b,z}=(1,1,1,0)]=b_1x_1+b_2x_2+b_3x_3=b_1+b_2\texttt{program}+b_3\texttt{age}\)</span> means separate intercepts but a common slope (parallel mean). Age effect is the same for both groups, and the group difference is the same at all ages.</p></li>
+</ul>
+<p>If there are <span class="math inline">\(p\)</span> predictor variables there are <span class="math inline">\(2^p\)</span> such regressions models. They may not all be relevant. For example in this model it doesn’t make sense to have a zero in the first position. Bayesian model selection works by; <mark>assign a prior distribution to all possible <span class="math inline">\(z\)</span>-vectors of length <span class="math inline">\(p\)</span>, compute their posterior probabilities and make conclusions.</mark></p>
+<p>posterior probability of a particular model:</p>
+<p><span class="math display">\[
+p(\boldsymbol z | \boldsymbol y,\mathbf{X}) = p(\boldsymbol z)p(\boldsymbol y | \boldsymbol z,\mathbf{X}) / p(\boldsymbol y)=c \times p(\boldsymbol z)p(\boldsymbol y | \boldsymbol z,\mathbf{X})
+\]</span>
+The thing we need to be able to compute is the likelihood, <span class="math inline">\(p(\boldsymbol y | \mathbf{X},\boldsymbol z).\)</span></p>
+<p>We know the likelihood is dependent on <span class="math inline">\(\boldsymbol\beta\)</span> and <span class="math inline">\(\sigma^2\)</span>! But what we need is priors on <span class="math inline">\(\boldsymbol\beta\)</span> and <span class="math inline">\(\sigma^2\)</span> then integrate <span class="math inline">\(\boldsymbol\beta\)</span> and <span class="math inline">\(\sigma^2\)</span> out to get <span class="math inline">\(p(\boldsymbol y | \mathbf{X}, z).\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+p(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}) &amp;=\iint p\left(\boldsymbol{y}, \boldsymbol{\beta}, \sigma^{2} \mid \mathbf{X}, \boldsymbol{z}\right)\, d \boldsymbol{\beta} d \sigma^{2} \\
+&amp;=\iint p\left(\boldsymbol{y} \mid \boldsymbol{\beta}, \mathbf{X}, \boldsymbol{z}, \sigma^{2}\right) p\left(\boldsymbol{\beta} \mid \mathbf{X}, \boldsymbol{z}, \sigma^{2}\right) p(\sigma^{2}|\boldsymbol z)\, d \boldsymbol{\beta} d \sigma^{2}
+\end{aligned}
+\]</span></p>
+<p>Recap: each <span class="math inline">\(p\)</span>-vector of zeros and ones which we denote with <span class="math inline">\(\boldsymbol z\)</span> represents a possible model (set of active and inactive predictor variables). We assign prior probabilities to those models probably in some kind of uniform way. To get the posterior probabilities we need the marginal ‘probabilty’ of the data <span class="math inline">\(p(\boldsymbol y | \mathbf{X},\boldsymbol z).\)</span> It’s marginal in the sense that it’s unconditional on <span class="math inline">\(\boldsymbol\beta\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Notation: <span class="math inline">\(\mathbf{X}_z\)</span> is the <span class="math inline">\(\mathbf{X}\)</span>-matrix but only the columns corresponding to <span class="math inline">\(z_j = 1.\)</span> <span class="math inline">\(\mathbf{X}\)</span> has <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns. so <span class="math inline">\(\mathbf{X}_z\)</span> has <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p_z\)</span> columns ( as many columns as there are <span class="math inline">\(z_j = 1\)</span> ).</p>
+<p>We’re using the fully conjugate prior. Priors on <span class="math inline">\(\boldsymbol \beta\)</span> and <span class="math inline">\(\sigma^2\)</span> are conditional on <span class="math inline">\(\boldsymbol z\)</span>. They have to be because for the <span class="math inline">\(j\)</span>’s with <span class="math inline">\(z_j = 0\)</span>, <span class="math inline">\(\beta_j = 0.\)</span></p>
+<p><span class="math display">\[
+\begin{array}{r}
+\boldsymbol{\beta}_{z} \mid \mathbf{X}_{z}, \sigma^{2} \sim \operatorname{Normal}_{p_{z}}\left(\mathbf{0}, g \sigma^{2}\left[\mathbf{X}_{z}^{T} \mathbf{X}_{z}\right]^{-1}\right) \\
+\text { Also, } \sigma^{2} \sim \text { InverseGamma}\left(\nu_{0} / 2, \nu_{0} \sigma_{0}^{2} / 2\right)
+\end{array}
+\]</span></p>
+<p>On page 165 of Hoff <span class="math inline">\((2009)\)</span>, it is shown that</p>
+<p><span class="math display">\[
+p(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}) =\pi^{-n / 2} \frac{\Gamma\left(\left[\nu_{0}+n\right] / 2\right)}{\Gamma\left(\nu_{0} / 2\right)}(1+g)^{-p_{z} / 2} \frac{\left(\nu_{0} \sigma_{0}^{2}\right)^{\nu_{0} / 2}}{\left(\nu_{0} \sigma_{0}^{2}+\mathrm{SSR}_{g}^{z}\right)^{\left(\nu_{0}+n\right) / 2}}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\operatorname{SSR}_{g}^{z}=\boldsymbol{y}^{T}\left(\mathbf{I}-\frac{g}{g+1} \mathbf{X}_{z}\left(\mathbf{X}_{z}^{T} \mathbf{X}_{z}\right)^{-1} \mathbf{X}_{z}^{T}\right) \boldsymbol{y}
+\]</span>
+We will set <span class="math inline">\(g = n\)</span> and <span class="math inline">\(\nu_0 = 1.\)</span> <span class="math inline">\(\sigma_0^2\)</span> will depend on <span class="math inline">\(\boldsymbol z\)</span>! It will be the least squares estimate of <span class="math inline">\(\sigma^2.\)</span> Under model <span class="math inline">\(\boldsymbol z\)</span> the notation for this quantity <span class="math inline">\(s^2_{z}.\)</span></p>
+<p>
+ 
+</p>
+<p>The ratio of marginal probabilities for two competing models is called the <strong>“Bayes factor”</strong></p>
+<p><span class="math display">\[
+\frac{p\left(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}_{a}\right)}{p\left(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z}_{b}\right)}=(1+n)^{\left(p_{z_{a}}-p_{z_{b}}\right) / 2}\left(\frac{s_{z_{a}}^{2}}{s_{z_{b}}^{2}}\right)^{1 / 2}\left(\frac{s_{z_{b}}^{2}+\mathrm{SSR}_{g}^{z_{b}}}{s_{z_{a}}^{2}+\operatorname{SSR}_{g}^{z_{a}}}\right)^{(n+1) / 2}
+\]</span></p>
+<p>The Bayes factor can be interpreted as how much the data favor model <span class="math inline">\(\boldsymbol z_a\)</span> over model <span class="math inline">\(\boldsymbol z_b\)</span>. Notice that it is essentially a balance between model complexity (number of parameters) and goodness of ﬁt (SSR). Bayes factor = 1 means data are equally likely under either model. Bayes factor &gt; 1 means observed data are more likely under model <span class="math inline">\(a\)</span> than model <span class="math inline">\(b\)</span>.</p>
+</div>
+<div id="example-oxygen-uptake-1" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> Example: Oxygen uptake</h2>
+<p>We have <span class="math inline">\(p=4\)</span> which mean there are <span class="math inline">\(2^p = 2^4 = 16\)</span> possible linear regression models. They aren’t all of interest. Here’s five that are:</p>
+<p><span class="math display">\[
+\begin{array}{ll}
+\boldsymbol z &amp; {\text{ Model }} \\
+\hline(1,0,0,0) &amp; \beta_{1} \\
+(1,1,0,0) &amp; \beta_{1}+\beta_{2} \times \texttt{group}_{i} \\
+(1,0,1,0) &amp; \beta_{1}+\beta_{3} \times \texttt{age}_{i} \\
+(1,1,1,0) &amp; \beta_{1}+\beta_{2} \times \texttt{group}_{i}+\beta_{3} \times \texttt{age}_{i} \\
+(1,1,1,1) &amp; \beta_{1}+\beta_{2} \times \texttt{group}_{i}+\beta_{3} \times \texttt{age}_{i}+\beta_{4} \times \texttt{group}_{i} \times \texttt{age}_{i}
+\end{array}
+\]</span></p>
+<p>We will assign equal prior probabilities of one-fifth to each of these models. Let’s compute <span class="math inline">\(\log p(\boldsymbol y | \mathbf{X},\boldsymbol z)\)</span> for each of the five models.</p>
+<p>For all these Bayesian regression R programs we need <span class="math inline">\(\boldsymbol y\)</span> ( <span class="math inline">\(n\)</span>-vector of responses ) and <span class="math inline">\(\mathbf{X}\)</span>( <span class="math inline">\(n \times p\)</span> matrix of regressors )</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="model-selection.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here &#39;program&#39; is the indicator of exercise program (0 for </span></span>
+<span id="cb242-2"><a href="model-selection.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="co"># running and 1 for step aerobics)</span></span>
+<span id="cb242-3"><a href="model-selection.html#cb242-3" aria-hidden="true" tabindex="-1"></a>program <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb242-4"><a href="model-selection.html#cb242-4" aria-hidden="true" tabindex="-1"></a>age     <span class="ot">&lt;-</span>   <span class="fu">c</span>(<span class="dv">23</span>,<span class="dv">22</span>,<span class="dv">22</span>,<span class="dv">25</span>,<span class="dv">27</span>,<span class="dv">20</span>,<span class="dv">31</span>,<span class="dv">23</span>,<span class="dv">27</span>,<span class="dv">28</span>,<span class="dv">22</span>,<span class="dv">24</span>)</span>
+<span id="cb242-5"><a href="model-selection.html#cb242-5" aria-hidden="true" tabindex="-1"></a>y       <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="sc">-</span><span class="fl">0.87</span>,<span class="sc">-</span><span class="fl">10.74</span>, <span class="sc">-</span><span class="fl">3.27</span>, <span class="sc">-</span><span class="fl">1.97</span>,  <span class="fl">7.50</span>, <span class="sc">-</span><span class="fl">7.25</span>, </span>
+<span id="cb242-6"><a href="model-selection.html#cb242-6" aria-hidden="true" tabindex="-1"></a>              <span class="fl">17.05</span>,  <span class="fl">4.96</span>, <span class="fl">10.40</span>, <span class="fl">11.05</span>,  <span class="fl">0.26</span>,  <span class="fl">2.51</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="model-selection.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># OLS estimation</span></span>
+<span id="cb243-2"><a href="model-selection.html#cb243-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb243-3"><a href="model-selection.html#cb243-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">1</span>,n), program, age, program<span class="sc">*</span>age) </span>
+<span id="cb243-4"><a href="model-selection.html#cb243-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)[<span class="dv">2</span>]</span>
+<span id="cb243-5"><a href="model-selection.html#cb243-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb243-6"><a href="model-selection.html#cb243-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(X)  <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n</span>
+<span id="cb243-7"><a href="model-selection.html#cb243-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X)  <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;x&quot;</span>, <span class="dv">1</span><span class="sc">:</span>p, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb243-8"><a href="model-selection.html#cb243-8" aria-hidden="true" tabindex="-1"></a>beta.hat.ols <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">solve</span>( <span class="fu">t</span>(X) <span class="sc">%*%</span> X ) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y)</span>
+<span id="cb243-9"><a href="model-selection.html#cb243-9" aria-hidden="true" tabindex="-1"></a>sigma2.hat   <span class="ot">&lt;-</span> <span class="fu">sum</span>( (y <span class="sc">-</span> X <span class="sc">%*%</span> beta.hat.ols)<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> (n<span class="sc">-</span>p)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="model-selection.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute log.p(y|X,z) for the five models in consideration</span></span>
+<span id="cb244-2"><a href="model-selection.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Formula given at bottom of page 165</span></span>
+<span id="cb244-3"><a href="model-selection.html#cb244-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb244-4"><a href="model-selection.html#cb244-4" aria-hidden="true" tabindex="-1"></a>lpy.X <span class="ot">&lt;-</span> <span class="cf">function</span>(y, X, <span class="at">g=</span><span class="fu">length</span>(y), <span class="at">nu.0=</span><span class="dv">1</span>, <span class="at">sigma2.0=</span> </span>
+<span id="cb244-5"><a href="model-selection.html#cb244-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">try</span>(<span class="fu">summary</span>(<span class="fu">lm</span>(y <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> X))<span class="sc">$</span>sigma<span class="sc">^</span><span class="dv">2</span>, <span class="at">silent=</span>T)) </span>
+<span id="cb244-6"><a href="model-selection.html#cb244-6" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb244-7"><a href="model-selection.html#cb244-7" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)[<span class="dv">1</span>]</span>
+<span id="cb244-8"><a href="model-selection.html#cb244-8" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)[<span class="dv">2</span>];</span>
+<span id="cb244-9"><a href="model-selection.html#cb244-9" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span>(p<span class="sc">==</span><span class="dv">0</span>){ </span>
+<span id="cb244-10"><a href="model-selection.html#cb244-10" aria-hidden="true" tabindex="-1"></a>   H.g       <span class="ot">&lt;-</span> <span class="dv">0</span>;  </span>
+<span id="cb244-11"><a href="model-selection.html#cb244-11" aria-hidden="true" tabindex="-1"></a>   sigma2<span class="fl">.0</span>  <span class="ot">&lt;-</span> <span class="fu">mean</span>(y<span class="sc">^</span><span class="dv">2</span>) }</span>
+<span id="cb244-12"><a href="model-selection.html#cb244-12" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="dv">0</span>){</span>
+<span id="cb244-13"><a href="model-selection.html#cb244-13" aria-hidden="true" tabindex="-1"></a>   H.g <span class="ot">&lt;-</span> (g<span class="sc">/</span>(g<span class="sc">+</span><span class="dv">1</span>)) <span class="sc">*</span> X <span class="sc">%*%</span> <span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X) <span class="sc">%*%</span> <span class="fu">t</span>(X)}</span>
+<span id="cb244-14"><a href="model-selection.html#cb244-14" aria-hidden="true" tabindex="-1"></a> SSR.g <span class="ot">&lt;-</span> <span class="fu">t</span>(y) <span class="sc">%*%</span> (<span class="fu">diag</span>(n) <span class="sc">-</span> H.g) <span class="sc">%*%</span> y </span>
+<span id="cb244-15"><a href="model-selection.html#cb244-15" aria-hidden="true" tabindex="-1"></a> <span class="do">###</span></span>
+<span id="cb244-16"><a href="model-selection.html#cb244-16" aria-hidden="true" tabindex="-1"></a> <span class="sc">-</span><span class="fl">0.5</span> <span class="sc">*</span> ( n<span class="sc">*</span><span class="fu">log</span>(pi) <span class="sc">+</span> p<span class="sc">*</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">+</span>g) <span class="sc">+</span> (nu<span class="fl">.0</span><span class="sc">+</span>n) <span class="sc">*</span> </span>
+<span id="cb244-17"><a href="model-selection.html#cb244-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>(nu<span class="fl">.0</span><span class="sc">*</span>sigma2<span class="fl">.0</span> <span class="sc">+</span> SSR.g) <span class="sc">-</span> nu<span class="fl">.0</span><span class="sc">*</span><span class="fu">log</span>(nu<span class="fl">.0</span><span class="sc">*</span>sigma2<span class="fl">.0</span>) ) <span class="sc">+</span> </span>
+<span id="cb244-18"><a href="model-selection.html#cb244-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lgamma</span>((nu<span class="fl">.0</span><span class="sc">+</span>n)<span class="sc">/</span><span class="dv">2</span>) <span class="sc">-</span> <span class="fu">lgamma</span>(nu<span class="fl">.0</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb244-19"><a href="model-selection.html#cb244-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="model-selection.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co">#  indicators given as five rows of matrix z</span></span>
+<span id="cb245-2"><a href="model-selection.html#cb245-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb245-3"><a href="model-selection.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,</span>
+<span id="cb245-4"><a href="model-selection.html#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>, </span>
+<span id="cb245-5"><a href="model-selection.html#cb245-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>, </span>
+<span id="cb245-6"><a href="model-selection.html#cb245-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>, </span>
+<span id="cb245-7"><a href="model-selection.html#cb245-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">byrow=</span>T, <span class="dv">5</span>, <span class="dv">4</span>)</span>
+<span id="cb245-8"><a href="model-selection.html#cb245-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-9"><a href="model-selection.html#cb245-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(z) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;z&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb245-10"><a href="model-selection.html#cb245-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(z) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>;</span>
+<span id="cb245-11"><a href="model-selection.html#cb245-11" aria-hidden="true" tabindex="-1"></a>log.p       <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">5</span>)</span>
+<span id="cb245-12"><a href="model-selection.html#cb245-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-13"><a href="model-selection.html#cb245-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb245-14"><a href="model-selection.html#cb245-14" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb245-15"><a href="model-selection.html#cb245-15" aria-hidden="true" tabindex="-1"></a> log.p[k] <span class="ot">&lt;-</span> <span class="fu">lpy.X</span>(<span class="at">y=</span>y, <span class="at">X=</span>X[,z[k,]<span class="sc">==</span><span class="dv">1</span>,<span class="at">drop=</span>F])</span>
+<span id="cb245-16"><a href="model-selection.html#cb245-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb245-17"><a href="model-selection.html#cb245-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-18"><a href="model-selection.html#cb245-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(z, log.p)</span></code></pre></div>
+<pre><code>##   z1 z2 z3 z4  log.p
+## 1  1  0  0  0 -44.33
+## 2  1  1  0  0 -42.35
+## 3  1  0  1  0 -37.66
+## 4  1  1  1  0 -36.42
+## 5  1  1  1  1 -37.60</code></pre>
+<p><span class="math inline">\(\texttt{log.p[k]}= \log p(\boldsymbol y|\mathbf X,\boldsymbol z)=\)</span> log of marginal probability of data given model <span class="math inline">\(k\)</span> <span class="math inline">\((k = 1, 2, 3, 4, 5)\)</span>.</p>
+<p>These are log-probability-densities, they are not probabilities so they don’t add to anything meaningful. But we can compare. The data are most likely under model 4, than under models 3 and 5. The data are not very likely under models 1 and 2.</p>
+<p>
+ 
+</p>
+<p>Assuming equal prior probabilities on these 5 models we can compute the posterior probabilities.</p>
+<p><span class="math display">\[
+p(\boldsymbol{z} \mid \boldsymbol{y}, \mathbf{X})=\frac{p(\boldsymbol{z}) p(\boldsymbol{y} \mid \mathbf{X}, \boldsymbol{z})}{\sum_{\tilde{\boldsymbol{z}}} p(\tilde{\boldsymbol{z}}) p(\boldsymbol{y} \mid \mathbf{X}, \tilde{\boldsymbol{z}})}
+\]</span></p>
+<p>Assuming uniform prior probabilities on the five candidate models <span class="math inline">\(p(z)\)</span> are all equal.</p>
+<p><span class="math inline">\(p(\boldsymbol y | \mathbf{X},\boldsymbol z) = \texttt{exp(log.p)}\)</span>.</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="model-selection.html#cb247-1" aria-hidden="true" tabindex="-1"></a>prob.z <span class="ot">&lt;-</span> <span class="fu">exp</span>(log.p) <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">exp</span>(log.p))</span>
+<span id="cb247-2"><a href="model-selection.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cbind</span>(z, log.p, prob.z), <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   z1 z2 z3 z4  log.p prob.z
+## 1  1  0  0  0 -44.33   0.00
+## 2  1  1  0  0 -42.35   0.00
+## 3  1  0  1  0 -37.66   0.18
+## 4  1  1  1  0 -36.42   0.63
+## 5  1  1  1  1 -37.60   0.19</code></pre>
+<p>Posterior probability of model 4 is 0.63, posterior probability of model 5 is 0.19, posterior probability of model 1 or model 2 is basically zero. The data are consistent with an age effect, as the posterior probabilities of the three models that include age essentially sum to 1 (so the data is practically impossible without an age effect). The data is also indicative of a group effect(though weaker than age effect), as the combined probability for the three models with a group effect is 0.00+0.63+0.19=0.82.</p>
+</div>
+<div id="gibbs-sampling-and-model-averaging" class="section level2" number="16.4">
+<h2><span class="header-section-number">16.4</span> Gibbs sampling and model averaging</h2>
+<p>what if <span class="math inline">\(p\)</span> is big and <span class="math inline">\(2^p\)</span> is really big and there are LOTS of models under consideration? Remember the solution to this issue in ordinary regression? The solution would be to use stepwise search methods such as forward selection / backward elimination. That’s not what we will do here.</p>
+<p>What we will do in Bayesian model selection is run a Gibbs sampler on the posterior probability distribution <span class="math inline">\(p(\boldsymbol{z} \mid \boldsymbol{y}, \mathbf{X}).\)</span> Gibbs sampler proceeds by; given <span class="math inline">\(\boldsymbol z^{(s)}\)</span> generate <span class="math inline">\(\boldsymbol z^{(s+1)}.\)</span> Do this a whole bunch of times and the observed proportions of particular <span class="math inline">\(z\)</span>-values approximate the posterior probability of the corresponding model.</p>
+<p>More precisely, generating values of <span class="math inline">\(\left\{\boldsymbol{z}^{(s+1)}, \sigma^{2(s+1)}, \boldsymbol{\beta}^{(s+1)}\right\}\)</span> from <span class="math inline">\(\boldsymbol{z}^{(s)}\)</span> is achieved with the following steps.</p>
+<ol style="list-style-type: decimal">
+<li>Given current state <span class="math inline">\(\boldsymbol{z}=\boldsymbol{z}^{(s)}\)</span></li>
+</ol>
+<p>generate new state as follows</p>
+<ol start="2" style="list-style-type: decimal">
+<li>For <span class="math inline">\(j \in\{1,2, \ldots, p\}\)</span> <em>in RANDOM ORDER</em>, replace <span class="math inline">\(z_{j}\)</span> with a sample from <span class="math inline">\(p\left(z_{j} \mid \boldsymbol{y}, \mathbf{X}, \boldsymbol{z}_{-j}\right)\)</span></li>
+<li>set <span class="math inline">\(z^{(s+1)}=\boldsymbol{z}\)</span></li>
+<li>Sample <span class="math inline">\(\sigma^{2(s+1)} \sim p\left(\sigma^{2} \mid \boldsymbol{y}, \mathbf{X}, \boldsymbol{z}^{(s+1)}\right)\)</span>, and</li>
+<li>sample <span class="math inline">\(\boldsymbol{\beta} \sim p\left(\boldsymbol{\beta} \mid \boldsymbol{y}, \mathbf{X}, \boldsymbol{z}^{(s+1)}, \sigma^{2(s+1)}\right)\)</span></li>
+</ol>
+<p>Of course we don’t just want to make inference about the model (if we were only interested in the active variables we would just do steps 1 to 3), we also want to estimate the model (steps 4 and 5).</p>
+<p>R code to sample <span class="math inline">\(\boldsymbol z^{(s+1)}\)</span> given <span class="math inline">\(\boldsymbol z^{(s)}\)</span>.</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="model-selection.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># code for estimating the active variables [steps 1 to 3]</span></span>
+<span id="cb249-2"><a href="model-selection.html#cb249-2" aria-hidden="true" tabindex="-1"></a>z     <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">dim</span>(X)[<span class="dv">2</span>])</span>
+<span id="cb249-3"><a href="model-selection.html#cb249-3" aria-hidden="true" tabindex="-1"></a>lpy.c <span class="ot">&lt;-</span> <span class="fu">lpy.X</span>(<span class="at">y=</span>y, <span class="at">X=</span>X[,z<span class="sc">==</span><span class="dv">1</span>, <span class="at">drop=</span>F])</span>
+<span id="cb249-4"><a href="model-selection.html#cb249-4" aria-hidden="true" tabindex="-1"></a>S     <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb249-5"><a href="model-selection.html#cb249-5" aria-hidden="true" tabindex="-1"></a>Z     <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, <span class="fu">dim</span>(S)[<span class="dv">2</span>])</span>
+<span id="cb249-6"><a href="model-selection.html#cb249-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S){</span>
+<span id="cb249-7"><a href="model-selection.html#cb249-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(X)[<span class="dv">2</span>])){</span>
+<span id="cb249-8"><a href="model-selection.html#cb249-8" aria-hidden="true" tabindex="-1"></a>    zp    <span class="ot">&lt;-</span> z;  </span>
+<span id="cb249-9"><a href="model-selection.html#cb249-9" aria-hidden="true" tabindex="-1"></a>    zp[j] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> zp[j]</span>
+<span id="cb249-10"><a href="model-selection.html#cb249-10" aria-hidden="true" tabindex="-1"></a>    lpy.p <span class="ot">&lt;-</span> <span class="fu">lpy.X</span>(<span class="at">y=</span>y, <span class="at">X=</span>X[, zp<span class="sc">==</span><span class="dv">1</span>, <span class="at">drop=</span>F])</span>
+<span id="cb249-11"><a href="model-selection.html#cb249-11" aria-hidden="true" tabindex="-1"></a>    r     <span class="ot">&lt;-</span> (lpy.p <span class="sc">-</span> lpy.c)<span class="sc">*</span>(<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>(zp[j]<span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb249-12"><a href="model-selection.html#cb249-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#  r &lt;- r + log(prior.z[j]) - log(1-prior.z[j])</span></span>
+<span id="cb249-13"><a href="model-selection.html#cb249-13" aria-hidden="true" tabindex="-1"></a>    z[j] <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span>r)))</span>
+<span id="cb249-14"><a href="model-selection.html#cb249-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(z[j]<span class="sc">==</span>zp[j]) { lpy.c <span class="ot">&lt;-</span> lpy.p }</span>
+<span id="cb249-15"><a href="model-selection.html#cb249-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb249-16"><a href="model-selection.html#cb249-16" aria-hidden="true" tabindex="-1"></a>  Z[s,] <span class="ot">&lt;-</span> z</span>
+<span id="cb249-17"><a href="model-selection.html#cb249-17" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div>
+<p>You’re gonna do a problem using this code for next week’s homework. That’s all for chapter 9.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="generalized-linear-models-the-metropolis-algorithm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bayesianS21.pdf", "bayesianS21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

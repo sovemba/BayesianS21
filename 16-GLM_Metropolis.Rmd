@@ -1,0 +1,18 @@
+
+# Generalized Linear Models; the Metropolis Algorithm
+
+```{r echo = FALSE, message = FALSE}
+rm(list=ls());  set.seed(20210527); library(mvtnorm)
+knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
+```
+
+
+<tt>The following notes, mostly transcribed from Neath(0602,2021) lecture, summarize sections (10.1-10.3) of Hoff(2009).</tt>
+
+<p>&nbsp;</p>
+
+
+
+
+
+

@@ -144,3 +144,9 @@ zellners-g-prior
 bayesian-analysis-using-invariant-g-prior
 bayesian-analysis-using-semiconjugate-prior
 prediction-problem
+model-selection
+review
+bayesian-model-comparison
+example-oxygen-uptake-1
+gibbs-sampling-and-model-averaging
+generalized-linear-models-the-metropolis-algorithm
