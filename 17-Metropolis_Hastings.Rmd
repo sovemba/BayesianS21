@@ -1,0 +1,17 @@
+
+# Metropolis-Hastings
+
+```{r echo = FALSE, message = FALSE}
+rm(list=ls());  set.seed(20210601); 
+knitr::opts_chunk$set(fig.align = 'center', message = FALSE)
+```
+
+
+<tt>The following notes, mostly transcribed from Neath(0603,2021) lecture, summarize sections (10.4-10.5) of Hoff(2009).</tt>
+
+<p>&nbsp;</p>
+
+
+
+
+

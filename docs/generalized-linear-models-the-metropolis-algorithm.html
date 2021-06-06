@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021</title>
-  <meta name="description" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021" />
+  <title>Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics lecture notes</title>
+  <meta name="description" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics lecture notes" />
   <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021" />
+  <meta property="og:title" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics lecture notes" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics notes from summer 2021" />
+  <meta name="twitter:title" content="Lecture 17 Generalized Linear Models; the Metropolis Algorithm | Bayesian Statistics lecture notes" />
   
   
   
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="model-selection.html"/>
-
+<link rel="next" href="metropolis-hastings.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -298,7 +298,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.3" data-path="model-selection.html"><a href="model-selection.html#example-oxygen-uptake-1"><i class="fa fa-check"></i><b>16.3</b> Example: Oxygen uptake</a></li>
 <li class="chapter" data-level="16.4" data-path="model-selection.html"><a href="model-selection.html#gibbs-sampling-and-model-averaging"><i class="fa fa-check"></i><b>16.4</b> Gibbs sampling and model averaging</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html"><i class="fa fa-check"></i><b>17</b> Generalized Linear Models; the Metropolis Algorithm</a></li>
+<li class="chapter" data-level="17" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html"><i class="fa fa-check"></i><b>17</b> Generalized Linear Models; the Metropolis Algorithm</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#example-song-sparrow-reproductive-success"><i class="fa fa-check"></i><b>17.1</b> Example: Song sparrow reproductive success</a></li>
+<li class="chapter" data-level="17.2" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#poisson-regression"><i class="fa fa-check"></i><b>17.2</b> Poisson regression</a></li>
+<li class="chapter" data-level="17.3" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#logistic-regression"><i class="fa fa-check"></i><b>17.3</b> Logistic regression</a></li>
+<li class="chapter" data-level="17.4" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#posterior-approximations"><i class="fa fa-check"></i><b>17.4</b> Posterior approximations</a></li>
+<li class="chapter" data-level="17.5" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#the-metropolis-algorithm"><i class="fa fa-check"></i><b>17.5</b> The Metropolis algorithm</a></li>
+<li class="chapter" data-level="17.6" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#example-normal-distribution-with-known-variance"><i class="fa fa-check"></i><b>17.6</b> Example: Normal distribution with known variance</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#output-of-metropolis-algorithm"><i class="fa fa-check"></i><b>17.6.1</b> Output of Metropolis Algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#the-metropolis-algorithm-for-poisson-regression"><i class="fa fa-check"></i><b>17.7</b> The Metropolis algorithm for Poisson regression</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="metropolis-hastings.html"><a href="metropolis-hastings.html"><i class="fa fa-check"></i><b>18</b> Metropolis-Hastings</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -311,7 +324,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics notes from summer 2021</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics lecture notes</a>
           </h1>
         </div>
 
@@ -325,15 +338,396 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>
  
 </p>
+<div id="example-song-sparrow-reproductive-success" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> Example: Song sparrow reproductive success</h2>
+<p>A sample from a population of 52 female song sparrows was studied over the course of a summer and their reproductive activities were recorded. In particular, the age and number of new oﬀspring were recorded for each sparrow.</p>
+<p>This is a regression problem with just one predictor variable; age in years of female song sparrow. Response variable is <span class="math inline">\(y =\)</span> number of offspring. Possible values of <span class="math inline">\(y\)</span> are 0, 1, 2, 3, …, realized values in our data are 0, 1, 2, …, 7</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 52 birds, response is &#39;fledged&#39; = number of offspring</span></span>
+<span id="cb250-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictor variable is age in years (1 to 6)</span></span>
+<span id="cb250-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-4" aria-hidden="true" tabindex="-1"></a>fledged <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, </span>
+<span id="cb250-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, </span>
+<span id="cb250-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb250-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-8"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-8" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, </span>
+<span id="cb250-9"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-9" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, </span>
+<span id="cb250-10"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb250-10" aria-hidden="true" tabindex="-1"></a>   <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(age); <span class="fu">table</span>(fledged)</span></code></pre></div>
+<pre><code>## age
+##  1  2  3  4  5  6 
+## 10  9  9 16  7  1</code></pre>
+<pre><code>## fledged
+##  0  1  2  3  4  5  6  7 
+##  7  9 18  6  4  3  4  1</code></pre>
+<p>When a predictor variable is discrete like this it’s sometimes better to look at boxplots rather than a scatterplot</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="fl">1.5</span>,<span class="dv">1</span>),<span class="at">mgp=</span><span class="fu">c</span>(<span class="fl">1.75</span>,.<span class="dv">75</span>,<span class="dv">0</span>),<span class="at">oma=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">0</span>),<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb254-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(fledged <span class="sc">~</span> <span class="fu">as.factor</span>(age), <span class="at">range=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, </span>
+<span id="cb254-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;age&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;offspring&quot;</span>)</span>
+<span id="cb254-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb254-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fledged <span class="sc">~</span> age, <span class="at">cex=</span><span class="fl">0.7</span>, <span class="at">ylab=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-166"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-166-1.png" alt="Graphical summary of data: Boxplots by age" width="672" />
+<p class="caption">
+Figure 17.1: Graphical summary of data: Boxplots by age
+</p>
+</div>
+<p>What does the relationship between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> look like? It goes from 2 down to 6 so it’s definitely a negative relationship. However, from 1 to 2 it increases and this makes sense in terms of the subject matter. What kind of model can capture this increasing then decreasing shape? Not a linear model! We’re gonna fit a quadratic model where <span class="math inline">\(E(Y | X=x) = \beta_1 + \beta_2x + \beta_3x^2.\)</span></p>
+<p>What are some potential problems with this model? Stated differently, if we fit this model to these data what is likely to be the case as far as estimated value of <span class="math inline">\(E(Y | X=7)?\)</span> It is likely to be negative. There’s a natural work-around for this problem. (I’m never thrilled with just saying oh there’s curvature let’s do quadratic instead of linear but I don’t have a better idea.)</p>
+<p>If the response is binary we want to model <span class="math inline">\(E(Y ) = Pr(Y=1)\)</span> and we want to ensure that fitted probabilities are between 0 and 1, the most popular way of guaranteeing this is logistic regression. You don’t say <span class="math inline">\(E(Y) = \beta x\)</span> but rather <span class="math inline">\(\text{logit}[ E(Y) ] = \beta x,\)</span> where <span class="math inline">\(\text{logit}( p ) = \log ( p / (1-p) ).\)</span> So you’re modelling the log odds as being a linear function. In our problem we don’t have the same issue because we are not modeling a value that is between zero and one but we are trying to fit a value that only takes positive values.</p>
+<p>The <strong>“generalized linear model”</strong> approach is; Instead of saying <span class="math inline">\(E(Y | X=x) = \beta_1 + \beta_2x + \beta_3x^2,\)</span> we’ll say <span class="math inline">\(g( E[Y|x] ) = \beta_1 + \beta_2x + \beta_3x^2.\)</span> <span class="math inline">\(g\)</span> is called the link function. In this problem where the response is a count variable and natural to model as following a Poisson distribution, a natural link function to use is the log because <span class="math inline">\(E(Y | x)\)</span> has to be <span class="math inline">\(&gt; 0\)</span> but <span class="math inline">\(\log( E[Y|x] )\)</span> can be anything. The log function <span class="math inline">\(\log(x)\)</span> maps the domain <span class="math inline">\((0,\infty)\)</span> to <span class="math inline">\((-\infty,\infty).\)</span></p>
+<p>Expected offspring given age <span class="math inline">\(=x= E(Y | x) =\theta_x\)</span> for <span class="math inline">\(x=\)</span> { 1, 2, 3, … ,6 }. We could model the log-mean of <span class="math inline">\(Y\)</span> in terms of this regression:</p>
+<p><span class="math display">\[\log E(Y|x)=\log (\theta_x) = \beta_1 + \beta_2x + \beta_3x^2\]</span>
+which means that</p>
+<p><span class="math display">\[
+E(Y|x)=\exp\{\beta_1+\beta_2x+\beta_3x^2\} &gt;0
+\]</span></p>
+</div>
+<div id="poisson-regression" class="section level2" number="17.2">
+<h2><span class="header-section-number">17.2</span> Poisson regression</h2>
+<p>The resulting model,</p>
+<p><span class="math display">\[
+Y|\boldsymbol x \sim \text{Poisson}(e^{\boldsymbol\beta^T \boldsymbol x})
+\]</span></p>
+<p>In the GLM terminology this model uses the log link function. Lots of people want to say this model has an exponential link function, but no. The convention is <span class="math inline">\(E(Y|x) = h(\boldsymbol\beta^T \boldsymbol x ).\)</span> <span class="math inline">\(h\)</span> is the inverse link the inverse of <span class="math inline">\(h\)</span> is <span class="math inline">\(g\)</span> satisfies <span class="math inline">\(g( E[y|x] ) = \boldsymbol\beta^T \boldsymbol x.\)</span> <span class="math inline">\(g\)</span> is called the link function.</p>
+<p>The Poisson regression model is a type of <mark>generalized linear model, a model which relates a function of the expectation to a linear predictor of the form <span class="math inline">\(\boldsymbol \beta^T\boldsymbol x\)</span>.</mark></p>
+</div>
+<div id="logistic-regression" class="section level2" number="17.3">
+<h2><span class="header-section-number">17.3</span> Logistic regression</h2>
+<p>If <span class="math inline">\(Y\)</span> is a binary variable, <span class="math inline">\(E(Y |\boldsymbol x) = Pr(Y=1|\boldsymbol x) = \theta_x\)</span> must satisfy <span class="math inline">\(0 &lt; \theta_x &lt; 1.\)</span> So we can’t say <span class="math inline">\(\theta_x = \boldsymbol \beta^T\boldsymbol x.\)</span> If we do this we’re likely to get estimated probabilities less than 0 and/or greater than 1. Instead we’ll reparameterize as</p>
+<p><span class="math display">\[
+\log\left( \frac{\theta_x}{1-\theta_x} \right) = \text{logit}(\theta_x) = \boldsymbol\beta^T \boldsymbol x
+\]</span></p>
+<p>so the function <span class="math inline">\(g(u) = \log( u/(1-u) )\)</span> relating the mean to the linear predictor is called the logit function. So the <em>“logistic regression model” is a binary regression model with the logit link.</em> If you do a little bit of algebra, you can see the inverse of the logit function;</p>
+<p>If <span class="math inline">\(\boldsymbol\beta^T \boldsymbol x = \log( \theta_x/(1-\theta_x) )\)</span> then</p>
+<p><span class="math display">\[
+\theta_x = \frac{1}{( 1 + \exp(-\boldsymbol\beta^T\boldsymbol x) )} = \frac{\exp(\boldsymbol\beta^T\boldsymbol x)}{1+\exp(\boldsymbol\beta^T\boldsymbol x)} \quad \theta_x \in \{0,1\}
+\]</span></p>
+<p>
+ 
+</p>
+<p>Student question: I still don’t understand where Poisson comes in?</p>
+<p>Ans: Because the response is a count variable. There’s two different issues. To model the sparrows reproductive success data, we need (1) a relationship between <span class="math inline">\(E(Y | x)\)</span> and <span class="math inline">\(x\)</span> and that’s where <span class="math inline">\(\log( E[Y|x] ) = \log(\theta_x) = \beta_1 + \beta_2x + \beta_3 x^2\)</span> came in.(2) we also need a probability model! as that’s just the expected value. We’re gonna use Bayes rule to estimate <span class="math inline">\(\boldsymbol \beta = (\beta_1, \beta_2, \beta_3),\)</span> so we need a prior distribution <span class="math inline">\(p(\boldsymbol \beta)\)</span> and we need a sampling distribution <span class="math inline">\(p(\boldsymbol y | \boldsymbol \beta, \boldsymbol x)\)</span> and that’s where the Poisson distribution comes in.</p>
+<p>Are all GLMs with log link Poisson regression? NO. Does Poisson regression always use the log link? Not by definition but in practical terms, YES, pretty much always.</p>
+</div>
+<div id="posterior-approximations" class="section level2" number="17.4">
+<h2><span class="header-section-number">17.4</span> Posterior approximations</h2>
+<p>The Poisson regression model and logistic regression model are actually simpler than ordinary linear regression in one respect: There is no need for a variance parameter. If I tell you that <span class="math inline">\(Y |x \sim\)</span> Poisson<span class="math inline">\((e^{\boldsymbol\beta^T \boldsymbol x}).\)</span> I’ve specified the variance also since <span class="math inline">\(E(Y|x)=\text{Var}(Y|x)\)</span>. On the other hand, if I tell you that <span class="math inline">\(Y | x \sim\)</span> Normal with mean <span class="math inline">\(\boldsymbol\beta^T \boldsymbol x\)</span> we still need to estimate the variance. That said, in pretty much every other way Poisson regression and logistic regression are more complicated. The math does not work out so nice for both as it does for linear regression. For linear regression one can write out <span class="math inline">\(p(\boldsymbol y | \boldsymbol\beta, \sigma^2, X)\)</span> and see conjugate priors for <span class="math inline">\((\boldsymbol\beta, \sigma^2)\)</span> are normal and inverse gamma which is nice! On the other hand, if <span class="math inline">\(Y | x \sim\)</span> Poisson<span class="math inline">\(( e^{\boldsymbol\beta^T \boldsymbol x} ),\)</span> there is no conjugate prior for <span class="math inline">\(\boldsymbol \beta\)</span>.</p>
+<p>If there’s no conjugate prior then we are not restricted in what we do. Suppose <span class="math inline">\(\boldsymbol\beta \sim\)</span> Normal<span class="math inline">\(_p(\boldsymbol \beta_0, \boldsymbol\Sigma_0 ),\)</span> we can write <span class="math inline">\(p(\boldsymbol \beta | \boldsymbol y, \mathbf{X}) = c\times p(\boldsymbol \beta) p(y | \boldsymbol \beta, \mathbf{X}).\)</span> How are we gonna approximate this posterior distribution? In linear regression we’ve used Monte Carlo sampling (possibly Gibbs sampler) to approximate features of the posterior distribution. That’s not gonna be so straightforward for GLMs, so we need a new method.</p>
+</div>
+<div id="the-metropolis-algorithm" class="section level2" number="17.5">
+<h2><span class="header-section-number">17.5</span> The Metropolis algorithm</h2>
+<p>Target distribution is the posterior distribution</p>
+<p><span class="math display">\[
+p(\theta | y) = \frac{p(\theta ) p(y | \theta)}{\int p(\theta&#39; ) p(y | \theta&#39;)d\theta&#39;} = c\times p(\theta ) p(y | \theta)
+\]</span></p>
+<p>The constant does not depend on <span class="math inline">\(\theta\)</span>. In general we can’t solve this constant explicitly. But turns out that for the Metropolis algorithm we don’t have to.</p>
+<p>We want to sample random draws <span class="math inline">\(\theta^{(s)} \sim p(\theta | y)\)</span> and use those to approximate posterior probabilities, moments, quantiles etc. The reason Monte Carlo works is that when we take a Monte Carlo sample the condition below just kind of happens</p>
+<p><span class="math display">\[
+\frac{\#\left\{\theta^{(s)} \text { &#39;s in the collection }=\theta_{a}\right\}}{\#\left\{\theta^{(s)} \text { &#39;s in the collection }=\theta_{b}\right\}} \approx \frac{p\left(\theta_{a} \mid y\right)}{p\left(\theta_{b} \mid y\right)}
+\]</span></p>
+<p>Is there a way to achieve this condition other than <span class="math inline">\(\theta^{(s)} \sim p(\theta | y)?\)</span> That’s exactly what the Metropolis algorithm is shooting for.</p>
+<p>Suppose current value is <span class="math inline">\(\theta^{(s)}\)</span> and we need to generate <span class="math inline">\(\theta^{(s+1)}.\)</span> Suppose we have generated a proposal <span class="math inline">\(\theta^*\)</span> close to <span class="math inline">\(\theta^{(s)}.\)</span> If <span class="math inline">\(\theta^*\)</span> has higher probability under the target distribution then we want <span class="math inline">\(\theta^*\)</span> in our sample. If <span class="math inline">\(\theta^*\)</span> is a less probable <span class="math inline">\(\theta\)</span>-value than <span class="math inline">\(\theta^{(s)}\)</span> we maybe don’t want it but we don’t just throw it out either. Just because it has low probability desn’t mean it has zero probability.</p>
+<p>Define</p>
+<p><span class="math display">\[
+r=\frac{p\left(\theta^{*} \mid y\right)}{p\left(\theta^{(s)} \mid y\right)}=\frac{p\left(y \mid \theta^{*}\right) p\left(\theta^{*}\right)}{p(y)} \frac{p(y)}{p\left(y \mid \theta^{(s)}\right) p(\theta(s))}=\frac{p\left(y \mid \theta^{*}\right) p\left(\theta^{*}\right)}{p\left(y \mid \theta^{(s)}\right) p\left(\theta^{(s)}\right)}
+\]</span></p>
+<p>This is the key to why Metropolis algorithm is usable for classes of models where direct simulation is not feasible, because this ratio <span class="math inline">\(r\)</span> depends on the prior density which we can compute and the sampling probability which we can compute whereas the marginal probability <span class="math inline">\(p(y) = \int{p(y | \theta)p(\theta) d \theta }\)</span> which we can’t always compute cancels out anyway! so we don’t have to!</p>
+<p>The logic goes; we have current value <span class="math inline">\(\theta^{(s)}\)</span> and we have proposed value <span class="math inline">\(\theta^*.\)</span> If <span class="math inline">\(r &gt; 1\)</span> we like <span class="math inline">\(\theta^*,\)</span> so set <span class="math inline">\(\theta^{(s+1)} = \theta^*.\)</span> If <span class="math inline">\(r &lt; 1\)</span> we don’t necessarily like <span class="math inline">\(\theta^*\)</span> any better than <span class="math inline">\(\theta^{(s)}\)</span>. In this case we’ll set <span class="math inline">\(\theta^{(s+1)}\)</span> to <span class="math inline">\(\theta^*\)</span> with probability <span class="math inline">\(r\)</span> and <span class="math inline">\(\theta^{(s+1)} = \theta^{(s)}\)</span> with probability <span class="math inline">\(1 - r\)</span>. If you’re familiar with rejection sampling this may seem familiar but it’s not that. In rejection sampling when a proposal is rejected it’s thrown out and we try again. In the Metropolis algorithm when a proposal is rejected we keep the current state.</p>
+<p>I still didn’t tell you where <span class="math inline">\(\theta^*\)</span> comes from. It comes from a proposal distribution <span class="math inline">\(\theta^* \sim J( \theta | \theta^{(s)} )\)</span> where the Metropolis algorithm requires that this probability distribution be symmetric around <span class="math inline">\(\theta^{(s)}.\)</span> Symmetric means; the probability of proposing <span class="math inline">\(\theta^* = \theta_b\)</span> given that <span class="math inline">\(\theta^{(s)} = \theta_a\)</span> is equal to the probability of proposing <span class="math inline">\(\theta^* = \theta_a\)</span> given that <span class="math inline">\(\theta^{(s)} = \theta_b\)</span>. For example uniform distribution centered at <span class="math inline">\(\theta^{(s)},\)</span> Normal distribution with mean <span class="math inline">\(= \theta^{(s)},\)</span> both work.</p>
+<ul>
+<li><p><span class="math inline">\(J(\theta^*|\theta^{(s)}) =\)</span> uniform<span class="math inline">\((\theta^{(s)}-\delta,\theta^{(s)}+\delta)\)</span></p></li>
+<li><p><span class="math inline">\(J(\theta^*|\theta^{(s)}) =\)</span> normal<span class="math inline">\((\theta^{(s)},\delta^2)\)</span></p></li>
+</ul>
+<p>Given <span class="math inline">\(\theta^{(s)}\)</span>, the Metropolis algorithm generates a value of <span class="math inline">\(\theta^{(s+1)}\)</span> as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Sample the proposal <span class="math inline">\(\theta^{*} \sim J\left(\theta \mid \theta^{(s)}\right)\)</span>;</li>
+<li>Compute the acceptance ratio <span class="math inline">\(r\)</span></li>
+<li>Accept or reject the proposal. i.e., set</li>
+</ol>
+<p><span class="math display">\[
+\theta^{(s+1)}=\begin{cases}
+\theta^{*} &amp;\text { with probability } \min (r, 1)\\
+\theta^{(s)} &amp;\text { with probability } 1-\min (r, 1)
+\end{cases}
+\]</span></p>
+<p>Step 3 can be accomplished by sampling <span class="math inline">\(u \sim\)</span> uniform<span class="math inline">\((0, 1)\)</span> and setting <span class="math inline">\(\theta^{(s+1)} = \theta^*\)</span> if <span class="math inline">\(u &lt; r\)</span> and setting <span class="math inline">\(\theta^{(s+1)} = \theta^{(s)}\)</span> otherwise.</p>
+</div>
+<div id="example-normal-distribution-with-known-variance" class="section level2" number="17.6">
+<h2><span class="header-section-number">17.6</span> Example: Normal distribution with known variance</h2>
+<p>This is a toy example. The value of the Metropolis algorithm is that it can work in problems where simpler methods don’t work. When we say “this example is a toy problem” we mean this is a problem where simpler methods do work. The value of a toy problem is we know the answer.</p>
+<p>Inference about a normal mean with variance known.</p>
+<p>Let <span class="math inline">\(\theta \sim\)</span> Normal<span class="math inline">\((\mu, \tau^2)\)</span> and <span class="math inline">\(\{y_1,...,y_n|\theta\} \sim\)</span> Normal<span class="math inline">\((\theta, \sigma^2),\)</span> the posterior distribution of <span class="math inline">\(\theta\)</span> is Normal<span class="math inline">\((\mu_n = 10.03, \tau_n^2=0.20)\)</span></p>
+<p>But suppose we didn’t know the above. The algorithm requires</p>
+<ol style="list-style-type: decimal">
+<li><p>generate <span class="math inline">\(\texttt{theta.star} \sim\)</span>Normal<span class="math inline">\(( \theta^{(s)}, \delta^2 )=\)</span> Normal<span class="math inline">\(( 0, 2 )\)</span></p></li>
+<li><p>Compute acceptance ratio. In this case, <span class="math inline">\(\texttt{log.r}\)</span></p></li>
+</ol>
+<p><span class="math display">\[
+\log(r)=\log \left( \frac{p\left(\theta^{*} \mid \boldsymbol{y}\right)}{p\left(\theta^{(s)} \mid \boldsymbol{y}\right)}\right) =\sum_{i=1}^{n} \left[\texttt{log dnorm}(y_{i}, \theta^{*}, \sigma) - \texttt{log dnorm}(y_{i}, \theta^{(s)}, \sigma)\right]\\ \quad + \texttt{log dnorm}(\theta^{*}, \mu, \tau) - \texttt{log dnorm}(\theta^{(s)}, \mu, \tau)
+\]</span></p>
+<p>The log of products and ratios is the sum and difference of logs. That’s a more numerically stable way to compute these things. It prevents “overflow / underflow.” overflow is what happens when you tell a computer to compute a number that’s bigger than the biggest number the computer knows.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Accept with probability <span class="math inline">\(r\)</span> = accept if <span class="math inline">\(\texttt{(log(runif(1)) &lt; log.r)}\)</span>.</li>
+</ol>
+<p>Just like with the Gibbs sampler we still gotta start somewhere for Metropolis algorithm. For the sake of this example we start at zero. However, zero is not a good starting point. The target distribution is Normal(mean=10, sd=0.44). Zero is an utterly impossible value in this target distribution! as it’s wayyy out in the tail. So what does the algorithm do when you start it at a ridiculous value?</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Metropolis algorithm for Normal mean (variance known)</span></span>
+<span id="cb255-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="dv">1</span>;  tau2 <span class="ot">&lt;-</span> <span class="dv">10</span>;  mu <span class="ot">&lt;-</span> <span class="dv">5</span>;</span>
+<span id="cb255-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-3" aria-hidden="true" tabindex="-1"></a>y      <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">9.37</span>, <span class="fl">10.18</span>, <span class="fl">9.16</span>, <span class="fl">11.60</span>, <span class="fl">10.33</span>) </span>
+<span id="cb255-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-4" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(y);  ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb255-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-6" aria-hidden="true" tabindex="-1"></a>mu.n   <span class="ot">&lt;-</span> (mu<span class="sc">/</span>tau2 <span class="sc">+</span> n<span class="sc">*</span>ybar<span class="sc">/</span>sigma2) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>tau2 <span class="sc">+</span> n<span class="sc">/</span>sigma2)</span>
+<span id="cb255-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-7" aria-hidden="true" tabindex="-1"></a>tau2.n <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>tau2 <span class="sc">+</span> n<span class="sc">/</span>sigma2)</span>
+<span id="cb255-8"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-9"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-9" aria-hidden="true" tabindex="-1"></a>theta  <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># starting value</span></span>
+<span id="cb255-10"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-10" aria-hidden="true" tabindex="-1"></a>delta2 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb255-11"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-11" aria-hidden="true" tabindex="-1"></a>S      <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb255-12"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb255-13"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-13" aria-hidden="true" tabindex="-1"></a>theta.chain <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S)</span>
+<span id="cb255-14"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb255-15"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-15" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb255-16"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-16" aria-hidden="true" tabindex="-1"></a> theta.star <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, theta, <span class="fu">sqrt</span>(delta2))</span>
+<span id="cb255-17"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-17" aria-hidden="true" tabindex="-1"></a> log.r <span class="ot">&lt;-</span> ( <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, theta.star, <span class="fu">sqrt</span>(sigma2), <span class="at">log=</span>T) ) <span class="sc">+</span> </span>
+<span id="cb255-18"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">dnorm</span>(theta.star, mu, <span class="fu">sqrt</span>(tau2), <span class="at">log=</span>T) ) <span class="sc">-</span> </span>
+<span id="cb255-19"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-19" aria-hidden="true" tabindex="-1"></a>          ( <span class="fu">sum</span>(<span class="fu">dnorm</span>(y, theta, <span class="fu">sqrt</span>(sigma2), <span class="at">log=</span>T) ) <span class="sc">+</span> </span>
+<span id="cb255-20"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">dnorm</span>(theta, mu, <span class="fu">sqrt</span>(tau2), <span class="at">log=</span>T) )</span>
+<span id="cb255-21"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-21" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span>(<span class="fu">log</span>(<span class="fu">runif</span>(<span class="dv">1</span>)) <span class="sc">&lt;</span> log.r) { theta <span class="ot">&lt;-</span> theta.star }</span>
+<span id="cb255-22"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-22" aria-hidden="true" tabindex="-1"></a> theta.chain[s]   <span class="ot">&lt;-</span> theta</span>
+<span id="cb255-23"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb255-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb256-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, theta.chain[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>], <span class="at">type=</span><span class="st">&quot;l&quot;</span>, </span>
+<span id="cb256-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;iteration&quot;</span>, <span class="at">ylab=</span><span class="fu">expression</span>(theta)) </span>
+<span id="cb256-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb256-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb256-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now the next 1000</span></span>
+<span id="cb256-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb256-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1001</span><span class="sc">:</span><span class="dv">2000</span>, theta.chain[<span class="dv">1001</span><span class="sc">:</span><span class="dv">2000</span>], <span class="at">type=</span><span class="st">&quot;l&quot;</span>, </span>
+<span id="cb256-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb256-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;iteration&quot;</span>, <span class="at">ylab=</span><span class="fu">expression</span>(theta))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-168"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-168-1.png" alt="Left panel is the trace plot of first 1000 updates, second panel is the trace plot of second 1000 updates." width="672" />
+<p class="caption">
+Figure 17.2: Left panel is the trace plot of first 1000 updates, second panel is the trace plot of second 1000 updates.
+</p>
+</div>
+<p>Was 0 a good starting value? No, it was not. It looks like the target distribution has most of its probability between 9.0 and 11.0 or so. So was 0 a good starting value? No. Does it matter? Not really. It very quickly leaves that value and finds its way to the region of high posterior probability.</p>
+<p>When you’re thinking about MCMC where <span class="math inline">\(\theta^{(s)}\)</span> is the <span class="math inline">\(s\)</span>th iteration of a Markov chain, to “explore” the posterior distribution <span class="math inline">\(p(\theta | y)\)</span> it helps to think of <span class="math inline">\(\theta\)</span> as a particle moving through space. What space? This is a univariate problem, so “space” is just the real line. The “particle moving through space” means a <span class="math inline">\(\theta\)</span> value moving along the horizontal axis in figure <a href="generalized-linear-models-the-metropolis-algorithm.html#fig:hist">17.4</a>.</p>
+<p>Remember that the true mean is <span class="math inline">\(10.03\)</span>. Now suppose <span class="math inline">\(\theta^{(s)} = 9.5\)</span>,</p>
+<p>if <span class="math inline">\(\theta^* = 10.0\)</span> then <span class="math inline">\(\theta^{(s+1)} = 10.0\)</span> (we want to move to the region with higher probability)</p>
+<p>if <span class="math inline">\(\theta^* = 9.0\)</span> then we might accept or we might reject since we want more <span class="math inline">\(9.5\)</span>s in our sample than there are <span class="math inline">\(9.0\)</span>s, but that doesn’t mean we don’t ever want <span class="math inline">\(9.0\)</span>s.</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb257-1" aria-hidden="true" tabindex="-1"></a>segment <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fu">rep</span>(S<span class="sc">/</span><span class="dv">10</span>, <span class="dv">10</span>))</span>
+<span id="cb257-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(theta.chain <span class="sc">~</span> segment, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, <span class="at">ylab=</span><span class="fu">expression</span>(theta<span class="sc">~</span>chain));<span class="fu">rm</span>(segment)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-169"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-169-1.png" alt="Stationarity plot -- boxplots for 10 segments of chain" width="672" />
+<p class="caption">
+Figure 17.3: Stationarity plot – boxplots for 10 segments of chain
+</p>
+</div>
+<p>If the chain is stationary the boxplots in the stationarity plot should all look the same. In the first segment the chain was not stationary but by the second it was. By properties of this algorithm, once a chain is stationary it stays that way. The right way to state this conclusion is; “there’s no evidence of non-stationarity.”</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(theta.chain[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>)], <span class="at">freq=</span>F, <span class="at">right=</span>F, <span class="at">breaks=</span><span class="dv">40</span>, </span>
+<span id="cb258-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb258-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">&quot;&quot;</span>, <span class="at">xlab=</span><span class="fu">expression</span>(theta), <span class="at">ylab=</span><span class="st">&quot;density&quot;</span>,<span class="at">col=</span><span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb258-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb258-3" aria-hidden="true" tabindex="-1"></a>minny <span class="ot">&lt;-</span> <span class="fu">min</span>(theta.chain)</span>
+<span id="cb258-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb258-4" aria-hidden="true" tabindex="-1"></a>maxxy <span class="ot">&lt;-</span> <span class="fu">max</span>(theta.chain)</span>
+<span id="cb258-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb258-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb258-6" aria-hidden="true" tabindex="-1"></a>theta.vals <span class="ot">&lt;-</span> <span class="fu">seq</span>(minny, maxxy, <span class="at">length=</span><span class="dv">1000</span>)</span>
+<span id="cb258-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb258-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(theta.vals, <span class="fu">dnorm</span>(theta.vals, mu.n, <span class="fu">sqrt</span>(tau2.n)),<span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:hist"></span>
+<img src="bayesianS21_files/figure-html/hist-1.png" alt="Histogram of all 10,000 draws." width="672" />
+<p class="caption">
+Figure 17.4: Histogram of all 10,000 draws.
+</p>
+</div>
+<p>The black curve is the target distribution and it seems that indeed the sampled values match the target distribution well. So we can use <span class="math inline">\(\theta\)</span>-values generated from a Metropolis algorithm with <span class="math inline">\(p(\theta | y)\)</span> as the stationary distribution to approximate features of the posterior moments, probabilities and quantiles.</p>
+<p>What about that lousy starting value zero? Isn’t that going to mess up our approximations? Let’s see</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(theta.chain[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>]);mu.n</span></code></pre></div>
+<pre><code>## [1] 9.93</code></pre>
+<pre><code>## [1] 10.03</code></pre>
+<p>The answer is yes! The true posterior mean of this distribution is 10.03, the mean of the first 1000 draws is 9.93. So what do you do? Well first of all the longer you run the chain the less the starting value matters so there’s that but there’s also a common practice of so-called <strong>“burn-in”</strong></p>
+<p>The way burn in works is;</p>
+<p>Discard the first <span class="math inline">\(B\)</span> iterations. The first <span class="math inline">\(B\)</span> iterations are called the “burn-in” period what this does is <em>reduce dependence</em> on the starting value. If you want <span class="math inline">\(S\)</span> draws from the posterior distribution run the chain for <span class="math inline">\(B + S\)</span> iterations and discard the first <span class="math inline">\(B\)</span>.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(theta.chain[<span class="dv">1001</span><span class="sc">:</span><span class="dv">2000</span>]);mu.n</span></code></pre></div>
+<pre><code>## [1] 10.03</code></pre>
+<pre><code>## [1] 10.03</code></pre>
+<p>Notice how the mean for the next 1000 samples is much closer to the actual mean.</p>
+<div id="output-of-metropolis-algorithm" class="section level3" number="17.6.1">
+<h3><span class="header-section-number">17.6.1</span> Output of Metropolis Algorithm</h3>
+<p>Everything about the Metropolis algorithm is prescribed except <span class="math inline">\(J\)</span>, the proposal distribution. <span class="math inline">\(J\)</span> is determined by the user and commonly <span class="math inline">\(J(\theta|\theta^{(s)})\)</span> is Normal with mean <span class="math inline">\(\theta^{(s)}\)</span> but that still leaves the variance <span class="math inline">\(\delta^2\)</span> to be determined. How do we choose the variance? In the example we just did we set <span class="math inline">\(\delta^2 = 2.\)</span> Where did that come from? The variance in the jump proposal distribution is a tuning parameter that we can play around with to try to minimize autocorrelation in the resulting chain. In principle the algorithm should work regardless. In practice our choice for this value can have a huge impact on the performance of the algorithm</p>
+<p><strong>Continuing with the normal toy problem</strong></p>
+<p>Consider these 5 possibilities for <span class="math inline">\(\delta^2\)</span>, <span class="math inline">\(\delta^2 \in \{1/32,1/2,2,32,64\}\)</span>. From a tiny variance 1/32 to a huge variance 64.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-1" aria-hidden="true" tabindex="-1"></a>ACR <span class="ot">&lt;-</span> <span class="cn">NULL</span>;  </span>
+<span id="cb265-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-2" aria-hidden="true" tabindex="-1"></a>ACF <span class="ot">&lt;-</span> <span class="cn">NULL</span>;  theta.all.chains <span class="ot">&lt;-</span> <span class="cn">NULL</span>;</span>
+<span id="cb265-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (delta2 <span class="cf">in</span> <span class="dv">2</span><span class="sc">^</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>) ){ </span>
+<span id="cb265-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-5" aria-hidden="true" tabindex="-1"></a> S           <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb265-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-6" aria-hidden="true" tabindex="-1"></a> theta.chain <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S)</span>
+<span id="cb265-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-7" aria-hidden="true" tabindex="-1"></a> theta       <span class="ot">&lt;-</span> acs <span class="ot">&lt;-</span> <span class="dv">0</span> </span>
+<span id="cb265-8"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb265-9"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-9" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb265-10"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-10" aria-hidden="true" tabindex="-1"></a> { </span>
+<span id="cb265-11"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-11" aria-hidden="true" tabindex="-1"></a>  theta.star <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, theta, <span class="fu">sqrt</span>(delta2))</span>
+<span id="cb265-12"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-12" aria-hidden="true" tabindex="-1"></a>  log.r <span class="ot">&lt;-</span> <span class="fu">sum</span>( <span class="fu">dnorm</span>(y, theta.star, <span class="fu">sqrt</span>(sigma2), <span class="at">log=</span>T) <span class="sc">-</span> </span>
+<span id="cb265-13"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">dnorm</span>(y, theta,      <span class="fu">sqrt</span>(sigma2), <span class="at">log=</span>T) ) <span class="sc">+</span> </span>
+<span id="cb265-14"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-14" aria-hidden="true" tabindex="-1"></a>   <span class="fu">dnorm</span>(theta.star, mu, <span class="fu">sqrt</span>(tau2), <span class="at">log=</span>T) <span class="sc">-</span> </span>
+<span id="cb265-15"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-15" aria-hidden="true" tabindex="-1"></a>   <span class="fu">dnorm</span>(theta,      mu, <span class="fu">sqrt</span>(tau2), <span class="at">log=</span>T)</span>
+<span id="cb265-16"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">log</span>(<span class="fu">runif</span>(<span class="dv">1</span>)) <span class="sc">&lt;</span> log.r) { theta <span class="ot">&lt;-</span> theta.star; acs <span class="ot">&lt;-</span> acs<span class="sc">+</span><span class="dv">1</span> }</span>
+<span id="cb265-17"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-17" aria-hidden="true" tabindex="-1"></a>  theta.chain[s]   <span class="ot">&lt;-</span> theta</span>
+<span id="cb265-18"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-18" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb265-19"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-19" aria-hidden="true" tabindex="-1"></a> ACR <span class="ot">&lt;-</span> <span class="fu">c</span>(ACR, acs<span class="sc">/</span>s)</span>
+<span id="cb265-20"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-20" aria-hidden="true" tabindex="-1"></a> ACF <span class="ot">&lt;-</span> <span class="fu">c</span>(ACF, <span class="fu">acf</span>(theta.chain, <span class="at">plot=</span>F)<span class="sc">$</span>acf[<span class="dv">2</span>] )</span>
+<span id="cb265-21"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-21" aria-hidden="true" tabindex="-1"></a> theta.all.chains <span class="ot">&lt;-</span> <span class="fu">cbind</span>(theta.all.chains, theta.chain)</span>
+<span id="cb265-22"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb265-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><code>acs</code> is counting the “accepted proposals” so ACR is the acceptance rate. ACF is the lag 1 autocorrelation.</p>
+<p>We want acceptance rate to be????.</p>
+<p>We want the ACF to be as low as possible (it is necessarily positive). If we find that proposal variance <span class="math inline">\(\delta^2\)</span> is too low this means autocorrelation is high. If we find proposal variance is too high this also means autocorrelation is high. There’s a ‘sweet spot’ right in the middle. To minimize autocorrelation we want the proposal variance to be at that sweet spot not too big and not too small. How does this translate to acceptance rates? The answer is also; not too big and not too small.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb266-1" aria-hidden="true" tabindex="-1"></a>aa           <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cbind</span>(ACR,ACF),<span class="dv">2</span>)</span>
+<span id="cb266-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb266-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(aa) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;1/32&quot;</span>,<span class="st">&quot;1/2&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;32&quot;</span>,<span class="st">&quot;64&quot;</span>);aa</span></code></pre></div>
+<pre><code>##       ACR  ACF
+## 1/32 0.88 0.97
+## 1/2  0.58 0.76
+## 2    0.35 0.69
+## 32   0.10 0.88
+## 64   0.05 0.90</code></pre>
+<p>How are acceptance rates related to the proposal variance? inversely.</p>
+<p>The bigger the proposal variance the more often you’re going to propose jumps way out into the tails and the more rejections you’re going to have. This is a general property of the Metropolis algorithm. The higher the proposal variance the lower the acceptance rate. When it comes to proposal variance we don’t it to be too big or too small we want it somewhere in the middle so that must mean we want the acceptance rate somewhere in the middle, say 20% to 50%. The figure below will help illustrate this.</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb268-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb268-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(k <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)){ </span>
+<span id="cb268-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb268-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(theta.all.chains[<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>, k], <span class="at">type=</span><span class="st">&quot;l&quot;</span>, </span>
+<span id="cb268-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb268-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">xlab=</span><span class="st">&quot;iteration&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;theta&quot;</span>, </span>
+<span id="cb268-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb268-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">ylim=</span><span class="fu">range</span>(theta.all.chains));  <span class="fu">abline</span>(<span class="at">h=</span>mu.n, <span class="at">lty=</span><span class="dv">2</span>) }</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-174-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Plot on the left has a very low proposal variance so most of the jumps are getting accepted but you can see the autocorrelation is very high. We want the chain to be moving around a lot we don’t want it taking baby steps like this.</p>
+<p>The right-most plot shows what happens if the proposal variance is too big. Too many proposals are too far out in the tails and get rejected so the chain stays stuck for long stretches. The optimal case is somewhere in between, such as the middle plot.</p>
+</div>
+</div>
+<div id="the-metropolis-algorithm-for-poisson-regression" class="section level2" number="17.7">
+<h2><span class="header-section-number">17.7</span> The Metropolis algorithm for Poisson regression</h2>
+<p><span class="math inline">\(Y =\)</span> number of offspring female bird has</p>
+<p><span class="math inline">\(\log( E(Y|x) )= \log( \theta_x ) = \beta_1 + \beta_2x + \beta_3 x^2\)</span>.</p>
+<ul>
+<li>The quadratic is there because the relationship was not monotone.</li>
+<li>The log is there because the mean for a Poisson variable has to be positive as <span class="math inline">\(E(Y |x) = \boldsymbol\beta^T x\)</span> might take negative values, which is not good. Instead take <span class="math inline">\(E(Y|x) = \exp{(\boldsymbol\beta^T x )}&gt;0\)</span>.</li>
+</ul>
+<p>The parameters of this model are <span class="math inline">\(\beta_1, \beta_2, \beta_3\)</span>. We don’t need the <span class="math inline">\(\sigma^2\)</span> parameter because the mean parameter describes the variance parameter in a Poisson model.</p>
+<p>We will take diffuse priors because we want the posterior to depend mostly on the data
+not on the prior because our prior beliefs are weak. So take <span class="math inline">\(\beta_j \stackrel {\text{indep}} {\sim}\)</span> Normal(0,100).</p>
+<p>The acceptance ratio;</p>
+<p><span class="math display">\[
+\begin{array}{l}
+r =\frac{p\left(\boldsymbol{\beta}^{*} \mid \mathbf{X}, \boldsymbol{y}\right)}{p\left(\boldsymbol{\beta}^{(s)} \mid \mathbf{X}, \boldsymbol{y}\right)} =\frac{\prod_{i=1}^{n} \texttt{dpois}\left(y_{i}, \boldsymbol{x}_{i}^{T} \boldsymbol{\beta}^{*}\right)}{\prod_{i=1}^{n} \texttt{dpois}\left(y_{i}, \boldsymbol{x}_{i}^{T} \boldsymbol{\beta}^{(s)}\right)} \times \frac{\prod_{j=1}^{3} \texttt{dnorm}\left(\beta_{j}^{*}, 0,10\right)}{\prod_{j=1}^{3} \texttt{dnorm}\left(\beta_{j}^{(s)}, 0,10\right)}\\
+=\sum_{i=1}^n \left[ \texttt{log dpois}(y_{i}, \boldsymbol{x}_{i}^{T} \boldsymbol{\beta}^{*})- \texttt{log dpois}(y_{i}, \boldsymbol{x}_{i}^{T} \boldsymbol{\beta}^{*}) \right]+\\
+\sum_{j=1}^3\left[ \texttt{log dnorm}(\beta_{j}^{*},0,10)- \texttt{log dnorm}(\beta_{j}^{(s)},0,10) \right]
+\end{array}
+\]</span></p>
+<p>Let the jump proposal distribution <span class="math inline">\(J\)</span> be;</p>
+<p><span class="math inline">\(\boldsymbol \beta^* \sim\)</span> Normal<span class="math inline">\(_3(\)</span> mean <span class="math inline">\(= \boldsymbol \beta^{(s)}\)</span> , variance <span class="math inline">\(= \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1})\)</span>.</p>
+<p>Hoff gives reasoning for saying set the variance equal to <span class="math inline">\(\hat \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}\)</span> where <span class="math inline">\(\hat \sigma^2\)</span> is approximated by the sample variance of the <span class="math inline">\(\log(\boldsymbol y + 1/2)= \texttt{var(log(y+1/2))}\)</span></p>
+<p>We just need a thing to try first. If the accept probability &lt; 0.20 then make the proposal variance smaller if the accept probability &gt; 0.50 then make the proposal variance bigger.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit Bayesian Poisson regression model Y|x, beta ~ Poisson with </span></span>
+<span id="cb269-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-2" aria-hidden="true" tabindex="-1"></a><span class="co"># E(Y|x, beta) = beta1 + beta2*x + beta3*x^2 </span></span>
+<span id="cb269-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior is beta_j ~ indep Normal(mn=0, sd=10)</span></span>
+<span id="cb269-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> fledged  <span class="co"># vector of observed responses</span></span>
+<span id="cb269-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb269-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-7" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">1</span>,n), age, age<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb269-8"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-9"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(X) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n;  </span>
+<span id="cb269-10"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>,<span class="st">&quot;x2&quot;</span>,<span class="st">&quot;x3&quot;</span>)</span>
+<span id="cb269-11"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-12"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-12" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)[<span class="dv">1</span>];  </span>
+<span id="cb269-13"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-13" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)[<span class="dv">2</span>];</span>
+<span id="cb269-14"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-15"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-15" aria-hidden="true" tabindex="-1"></a>pmn.beta <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, p)   <span class="co"># prior expectation vector</span></span>
+<span id="cb269-16"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-16" aria-hidden="true" tabindex="-1"></a>psd.beta <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">10</span>, p)  <span class="co"># prior standard deviations </span></span>
+<span id="cb269-17"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-18"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-18" aria-hidden="true" tabindex="-1"></a>var.prop <span class="ot">&lt;-</span> <span class="fu">var</span>(<span class="fu">log</span>(y<span class="sc">+</span><span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)) <span class="sc">*</span> <span class="fu">solve</span>( <span class="fu">t</span>(X) <span class="sc">%*%</span> X) </span>
+<span id="cb269-19"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-20"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-20" aria-hidden="true" tabindex="-1"></a>S    <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb269-21"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-21" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, p);  </span>
+<span id="cb269-22"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-22" aria-hidden="true" tabindex="-1"></a>acs  <span class="ot">&lt;-</span> <span class="dv">0</span>;</span>
+<span id="cb269-23"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-24"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-24" aria-hidden="true" tabindex="-1"></a>beta.chain <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, p)</span>
+<span id="cb269-25"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-26"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb269-27"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-27" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb269-28"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-28" aria-hidden="true" tabindex="-1"></a> beta.p <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, beta, var.prop)[<span class="dv">1</span>,]</span>
+<span id="cb269-29"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-29" aria-hidden="true" tabindex="-1"></a> log.r  <span class="ot">&lt;-</span> <span class="fu">sum</span>( <span class="fu">dpois</span>(y, <span class="fu">exp</span>(X <span class="sc">%*%</span> beta.p), <span class="at">log=</span>T) ) <span class="sc">-</span> </span>
+<span id="cb269-30"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-30" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sum</span>( <span class="fu">dpois</span>(y, <span class="fu">exp</span>(X <span class="sc">%*%</span> beta  ), <span class="at">log=</span>T) ) <span class="sc">+</span> </span>
+<span id="cb269-31"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-31" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sum</span>( <span class="fu">dnorm</span>(beta.p, pmn.beta, psd.beta, <span class="at">log=</span>T) ) <span class="sc">-</span> </span>
+<span id="cb269-32"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-32" aria-hidden="true" tabindex="-1"></a>           <span class="fu">sum</span>( <span class="fu">dnorm</span>(beta  , pmn.beta, psd.beta, <span class="at">log=</span>T) )</span>
+<span id="cb269-33"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-33" aria-hidden="true" tabindex="-1"></a> <span class="do">###</span></span>
+<span id="cb269-34"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-34" aria-hidden="true" tabindex="-1"></a> <span class="cf">if</span>(<span class="fu">log</span>(<span class="fu">runif</span>(<span class="dv">1</span>)) <span class="sc">&lt;</span> log.r){ beta <span class="ot">&lt;-</span> beta.p;  acs <span class="ot">&lt;-</span> acs <span class="sc">+</span> <span class="dv">1</span> }</span>
+<span id="cb269-35"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-35" aria-hidden="true" tabindex="-1"></a> beta.chain[s,]   <span class="ot">&lt;-</span> beta</span>
+<span id="cb269-36"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb269-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb270-1" aria-hidden="true" tabindex="-1"></a>acs <span class="sc">/</span> S </span></code></pre></div>
+<pre><code>## [1] 0.4268</code></pre>
+<p>Acceptance rate should be between 20% and 50% so 42% is totally fine, no need to further tune the sample. It’s better to let the computer run 2 hours than to spend 4 hours tuning your chain and get your run time down to 30 minutes.</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make trace plots of the first 1000 updates</span></span>
+<span id="cb272-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,p))</span>
+<span id="cb272-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb272-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb272-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb272-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){ </span>
+<span id="cb272-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb272-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(beta.chain[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,j], <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;iteration&quot;</span>, </span>
+<span id="cb272-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb272-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">ylab=</span><span class="fu">paste</span>(<span class="st">&quot;beta_&quot;</span>, j, <span class="at">sep=</span><span class="st">&quot;&quot;</span>), <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb272-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb272-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-177-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>was (0,0,0) a good starting value? Not really, but not terrible either. If you want to throw away the first part of the chain as burn-in you can do that as well.</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample autocorrelation functions</span></span>
+<span id="cb273-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,p))</span>
+<span id="cb273-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb273-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb273-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb273-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){</span>
+<span id="cb273-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb273-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">acf</span>(beta.chain[,j], <span class="at">main=</span><span class="fu">paste</span>(<span class="st">&quot;beta_&quot;</span>, j, <span class="at">sep=</span><span class="st">&quot;&quot;</span>))</span>
+<span id="cb273-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb273-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-178-1.png" width="672" style="display: block; margin: auto;" />
+Autocorrelation is substantial</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effective sample sizes</span></span>
+<span id="cb274-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mcmcse)</span>
+<span id="cb274-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb274-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ess</span>(beta.chain)</span></code></pre></div>
+<pre><code>## [1] 889.0 785.8 599.0</code></pre>
+<p>If we had the goal of getting effective sample sizes of at least 1000 that goal is not met. We’d need more than 10000 iterations for that. But these effective sample sizes are fine.</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Approximate posterior densites of beta1, beta2, beta3</span></span>
+<span id="cb276-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,p))</span>
+<span id="cb276-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb276-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb276-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){ </span>
+<span id="cb276-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb276-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(<span class="fu">density</span>(beta.chain[,j], <span class="at">adj=</span><span class="dv">2</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb276-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb276-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">xlab=</span><span class="fu">paste</span>(<span class="st">&quot;beta_&quot;</span>, j, <span class="at">sep=</span><span class="st">&quot;&quot;</span>), <span class="at">ylab=</span><span class="st">&quot;p(beta|y)&quot;</span>)</span>
+<span id="cb276-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb276-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-180-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(beta.chain,<span class="dv">2</span>,mean)</span></code></pre></div>
+<pre><code>## [1]  0.2182  0.7217 -0.1414</code></pre>
+<p>We knew <span class="math inline">\(\hat \beta_3\)</span> would be negative because we have a quadratic with a peak not a quadratic with a valley.</p>
+<p>The point of this modeling was to get estimates of expected number of offspring by age so let’s look those!</p>
+<p>The expected number of offspring at age <span class="math inline">\(x = \exp(\beta_1 + \beta_2x + \beta_3x^2).\)</span>
+So for each value of <span class="math inline">\(x\)</span>, <span class="math inline">\(x = 1, 2, 3, 4, 5, 6\)</span> calculate <span class="math inline">\(\theta_x^{(s)} = \exp( \beta_1^{(s)} + \beta_2^{(s)} x + \beta_3^{(s)}x^2 ).\)</span> That will give us MCMC approximations to the expected number of offspring at each age</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior inference for E(Y|x) = beta1 + beta2*x + beta3*x^2</span></span>
+<span id="cb279-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-2" aria-hidden="true" tabindex="-1"></a>theta.chain <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, <span class="dv">6</span>)</span>
+<span id="cb279-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb279-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(theta.chain) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>S</span>
+<span id="cb279-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(theta.chain) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;theta_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>);</span>
+<span id="cb279-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb279-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb279-8"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-8" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb279-9"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-9" aria-hidden="true" tabindex="-1"></a> theta.chain[,x] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">as.vector</span>(beta.chain <span class="sc">%*%</span> <span class="fu">c</span>(<span class="dv">1</span>, x, x<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb279-10"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb279-11"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb279-12"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb279-12" aria-hidden="true" tabindex="-1"></a>(quants <span class="ot">&lt;-</span> <span class="fu">apply</span>(theta.chain, <span class="dv">2</span>, quantile, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>)))</span></code></pre></div>
+<pre><code>##       theta_1 theta_2 theta_3 theta_4 theta_5 theta_6
+## 2.5%    1.472   2.329   2.320   1.820   0.814  0.2006
+## 50%     2.243   3.007   3.045   2.328   1.349  0.5918
+## 97.5%   3.253   3.782   3.912   2.951   2.113  1.5986</code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(<span class="fu">t</span>(quants), <span class="at">type=</span><span class="st">&quot;b&quot;</span>, <span class="at">pch=</span><span class="dv">19</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">2</span>, </span>
+<span id="cb281-2"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb281-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;pink&quot;</span>), <span class="at">xlab=</span><span class="st">&quot;age x&quot;</span>, </span>
+<span id="cb281-3"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb281-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">&quot;E(Y|x)&quot;</span>, <span class="at">main=</span><span class="st">&quot;Expected offspring by age&quot;</span>)</span>
+<span id="cb281-4"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb281-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-5"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb281-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">pch=</span><span class="dv">19</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">2</span>, </span>
+<span id="cb281-6"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb281-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;pink&quot;</span>), </span>
+<span id="cb281-7"><a href="generalized-linear-models-the-metropolis-algorithm.html#cb281-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Posterior median&quot;</span>, <span class="st">&quot;95% posterior interval&quot;</span>),<span class="at">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-184-1.png" width="672" style="display: block; margin: auto;" />
+Here’s that quadratic shape. The peak is at 2-3 years and after that it tails off. The posterior distributions of <span class="math inline">\(\boldsymbol\beta\)</span> were pretty symmetric but these intervals are not! That’s because of the exponentiating.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="model-selection.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="model-selection.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="metropolis-hastings.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

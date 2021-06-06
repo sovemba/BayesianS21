@@ -1,1 +1,3 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/home/about/ for how to compile this example.
+
+********************************************************
+This is a compilation of *transcribed* lectures notes from [Ronald Neath, June 2021](http://stat.columbia.edu/department-directory/name/ronald-neath/) class on **BAYESIAN STATISTICS STATGR5224**. The course materials follow mostly from [A First Course in Bayesian Statistical Methods, Hoff(2009)](https://pdhoff.github.io/book/)

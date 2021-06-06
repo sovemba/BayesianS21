@@ -42,6 +42,10 @@ fig:shr
 fig:shrink
 fig:unnamed-chunk-130
 fig:unnamed-chunk-137
+fig:unnamed-chunk-166
+fig:unnamed-chunk-168
+fig:unnamed-chunk-169
+fig:hist
 intro
 example
 random-variables
@@ -150,3 +154,12 @@ bayesian-model-comparison
 example-oxygen-uptake-1
 gibbs-sampling-and-model-averaging
 generalized-linear-models-the-metropolis-algorithm
+example-song-sparrow-reproductive-success
+poisson-regression
+logistic-regression
+posterior-approximations
+the-metropolis-algorithm
+example-normal-distribution-with-known-variance
+output-of-metropolis-algorithm
+the-metropolis-algorithm-for-poisson-regression
+metropolis-hastings

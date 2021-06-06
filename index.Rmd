@@ -1,5 +1,5 @@
 --- 
-title: "Bayesian Statistics notes from summer 2021"
+title: "Bayesian Statistics lecture notes"
 author: "Chisom Onyishi"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -25,6 +25,9 @@ knitr::write_bib(c(
 
 # Belief and Probability {#intro}
 
+This is a compilation of *transcribed* lectures notes from [Ronald Neath, June 2021](http://stat.columbia.edu/department-directory/name/ronald-neath/) class on **BAYESIAN STATISTICS STATGR5224**. The course materials follow mostly from [A First Course in Bayesian Statistical Methods, Hoff(2009)](https://pdhoff.github.io/book/).
+
+<p>&nbsp;</p>
 
 <tt>The following notes, mostly transcribed from Neath(0503,2021) lecture, summarize sections(2.1-2.4) of Hoff(2009).</tt>
 
