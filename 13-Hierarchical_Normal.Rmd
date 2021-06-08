@@ -192,7 +192,7 @@ This is a "semi-conjugate" model. Not fully conjugate because our priors are ind
 
 We have all the tools! We can do posterior approximations using the Gibbs sampler. Yay for us!
  
-## Example: Math scores in U.S. public schools
+## Example: Math scores in U.S. public schools {#mathex2}
 
 ```{r include = FALSE}
 Data <- read.csv("/Users/OnyishiChisom/Desktop/DESKTOP STUFF/0Education ish/Columbia/Summer 2021/BAYESIAN STATISTICS STATGR5224/Lecture_notes/525_08b_Hierarchical_Normal/mathscores.csv", header=TRUE)

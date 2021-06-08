@@ -19,6 +19,7 @@ What's going on with our masterplan? We have jumped from 07a to 08a there was to
 
 We have a concrete problem to motivate us
 
+## Example: Math scores data {#mathex1}
 
 ```{r}
 y1 <- c(52.11, 57.65, 66.44, 44.68, 40.57, 35.04, 50.71, 66.17,

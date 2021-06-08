@@ -46,6 +46,10 @@ fig:unnamed-chunk-166
 fig:unnamed-chunk-168
 fig:unnamed-chunk-169
 fig:hist
+fig:unnamed-chunk-188
+fig:unnamed-chunk-189
+fig:unnamed-chunk-198
+fig:unnamed-chunk-209
 intro
 example
 random-variables
@@ -126,6 +130,7 @@ the-inverse-wishart-distribution
 full-conditional-distribution-of-the-covariance-matrix
 group-comparisons
 comparing-two-groups
+mathex1
 bayesmodel
 analysis-of-the-math-scores-data
 the-hierarchical-normal-model
@@ -133,7 +138,7 @@ postinf
 full-conditional-distributions-of-mu-and-tau2
 full-conditional-of-theta_j
 full-conditional-of-sigma2
-example-math-scores-in-u.s.-public-schools
+mathex2
 posterior-approximation
 mcmc-diagnostics-1
 shrinkage
@@ -163,3 +168,8 @@ example-normal-distribution-with-known-variance
 output-of-metropolis-algorithm
 the-metropolis-algorithm-for-poisson-regression
 metropolis-hastings
+why-does-the-metropolis-hastings-algorithm-work
+combining-the-metropolis-and-gibbs-algorithms
+example-historical-co_2-and-temperature-data
+a-regression-model-with-correlated-errors
+analysis-of-the-ice-core-data
