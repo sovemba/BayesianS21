@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Lecture 19 Linear Mixed-effects Models, aka, Hierarchical Linear Models | Bayesian Statistics lecture notes</title>
+  <meta name="description" content="Lecture 19 Linear Mixed-effects Models, aka, Hierarchical Linear Models | Bayesian Statistics lecture notes" />
+  <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Lecture 19 Linear Mixed-effects Models, aka, Hierarchical Linear Models | Bayesian Statistics lecture notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Lecture 19 Linear Mixed-effects Models, aka, Hierarchical Linear Models | Bayesian Statistics lecture notes" />
+  
+  
+  
+
+<meta name="author" content="Chisom Onyishi" />
+
+
+<meta name="date" content="2021-06-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="metropolis-hastings.html"/>
+
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#example"><i class="fa fa-check"></i><b>1.1</b> Example:</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#random-variables"><i class="fa fa-check"></i><b>1.2</b> Random Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#binomial"><i class="fa fa-check"></i><b>1.3</b> Binomial distribution</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#poisson"><i class="fa fa-check"></i><b>1.4</b> Poisson distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#continuous-random-variables"><i class="fa fa-check"></i><b>1.5</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#example-normalmu-10.75-sigma0.8"><i class="fa fa-check"></i><b>1.5.1</b> Example: Normal(<span class="math inline">\(\mu = 10.75, \sigma=0.8\)</span>)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exchangeability.html"><a href="exchangeability.html"><i class="fa fa-check"></i><b>2</b> Exchangeability</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="exchangeability.html"><a href="exchangeability.html#discrete-joint-distributions"><i class="fa fa-check"></i><b>2.1</b> Discrete joint distributions</a></li>
+<li class="chapter" data-level="2.2" data-path="exchangeability.html"><a href="exchangeability.html#bayesrule"><i class="fa fa-check"></i><b>2.2</b> Bayes’ rule and parameter estimation</a></li>
+<li class="chapter" data-level="2.3" data-path="exchangeability.html"><a href="exchangeability.html#independent-random-variables"><i class="fa fa-check"></i><b>2.3</b> Independent random variables</a></li>
+<li class="chapter" data-level="2.4" data-path="exchangeability.html"><a href="exchangeability.html#exchangeability-1"><i class="fa fa-check"></i><b>2.4</b> Exchangeability</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="binomial-1.html"><a href="binomial-1.html"><i class="fa fa-check"></i><b>3</b> Binomial</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="binomial-1.html"><a href="binomial-1.html#example---exchangeable-binary-data"><i class="fa fa-check"></i><b>3.1</b> Example - Exchangeable binary data</a></li>
+<li class="chapter" data-level="3.2" data-path="binomial-1.html"><a href="binomial-1.html#the-beta-distribution"><i class="fa fa-check"></i><b>3.2</b> The beta distribution</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="binomial-1.html"><a href="binomial-1.html#properties-of-the-beta-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Properties of the beta distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="binomial-1.html"><a href="binomial-1.html#binomial-distribution"><i class="fa fa-check"></i><b>3.3</b> Binomial distribution</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="binomial-1.html"><a href="binomial-1.html#posterior-inference-for-a-binomial-sampling-model"><i class="fa fa-check"></i><b>3.3.1</b> Posterior inference for a binomial sampling model</a></li>
+<li class="chapter" data-level="3.3.2" data-path="binomial-1.html"><a href="binomial-1.html#conjugacy"><i class="fa fa-check"></i><b>3.3.2</b> Conjugacy</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="binomial-1.html"><a href="binomial-1.html#combining-information"><i class="fa fa-check"></i><b>3.4</b> Combining information</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="binomial-1.html"><a href="binomial-1.html#example-1"><i class="fa fa-check"></i><b>3.4.1</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="binomial-1.html"><a href="binomial-1.html#prediction"><i class="fa fa-check"></i><b>3.5</b> Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="CI.html"><a href="CI.html"><i class="fa fa-check"></i><b>4</b> Confidence Intervals</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="CI.html"><a href="CI.html#confidence-intervals"><i class="fa fa-check"></i><b>4.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="4.2" data-path="CI.html"><a href="CI.html#how-do-we-compute-intervals"><i class="fa fa-check"></i><b>4.2</b> How do we compute intervals?</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="CI.html"><a href="CI.html#example-2"><i class="fa fa-check"></i><b>4.2.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="poisson-model.html"><a href="poisson-model.html"><i class="fa fa-check"></i><b>5</b> Poisson model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="poisson-model.html"><a href="poisson-model.html#posterior-inference-for-the-poisson-model"><i class="fa fa-check"></i><b>5.1</b> Posterior inference for the Poisson model</a></li>
+<li class="chapter" data-level="5.2" data-path="poisson-model.html"><a href="poisson-model.html#posterior-predictive-distribution"><i class="fa fa-check"></i><b>5.2</b> Posterior predictive distribution</a></li>
+<li class="chapter" data-level="5.3" data-path="poisson-model.html"><a href="poisson-model.html#example-birth-rates"><i class="fa fa-check"></i><b>5.3</b> Example: Birth rates</a></li>
+<li class="chapter" data-level="5.4" data-path="poisson-model.html"><a href="poisson-model.html#explaining-the-parameters-of-the-gamma-distribution"><i class="fa fa-check"></i><b>5.4</b> Explaining the parameters of the gamma distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="monte-carlo.html"><a href="monte-carlo.html#example-birth-rate"><i class="fa fa-check"></i><b>6.1</b> Example: birth rate</a></li>
+<li class="chapter" data-level="6.2" data-path="monte-carlo.html"><a href="monte-carlo.html#the-monte-carlo-method"><i class="fa fa-check"></i><b>6.2</b> The Monte Carlo method</a></li>
+<li class="chapter" data-level="6.3" data-path="monte-carlo.html"><a href="monte-carlo.html#example-numerical-evaluation"><i class="fa fa-check"></i><b>6.3</b> Example: Numerical evaluation</a></li>
+<li class="chapter" data-level="6.4" data-path="monte-carlo.html"><a href="monte-carlo.html#posterior-inference-for-arbitrary-functions"><i class="fa fa-check"></i><b>6.4</b> Posterior inference for arbitrary functions</a></li>
+<li class="chapter" data-level="6.5" data-path="monte-carlo.html"><a href="monte-carlo.html#example-log-odds"><i class="fa fa-check"></i><b>6.5</b> Example: Log-odds</a></li>
+<li class="chapter" data-level="6.6" data-path="monte-carlo.html"><a href="monte-carlo.html#example-functions-of-two-parameters"><i class="fa fa-check"></i><b>6.6</b> Example: Functions of two parameters</a></li>
+<li class="chapter" data-level="6.7" data-path="monte-carlo.html"><a href="monte-carlo.html#how-many-monte-carlo-samples-are-needed"><i class="fa fa-check"></i><b>6.7</b> How many Monte Carlo samples are needed?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="predictive.html"><a href="predictive.html"><i class="fa fa-check"></i><b>7</b> Predictive</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="predictive.html"><a href="predictive.html#sampling-for-predictive-distribution"><i class="fa fa-check"></i><b>7.1</b> Sampling for predictive distribution</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="predictive.html"><a href="predictive.html#example-birth-rate-1"><i class="fa fa-check"></i><b>7.1.1</b> Example: birth rate</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="predictive.html"><a href="predictive.html#example-let-d-tilde-y_1---tilde-y_2"><i class="fa fa-check"></i><b>7.2</b> Example: Let <span class="math inline">\(D = \tilde Y_1 - \tilde Y_2\)</span></a></li>
+<li class="chapter" data-level="7.3" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking"><i class="fa fa-check"></i><b>7.3</b> Posterior predictive model checking</a></li>
+<li class="chapter" data-level="7.4" data-path="predictive.html"><a href="predictive.html#posterior-predictive-model-checking-1"><i class="fa fa-check"></i><b>7.4</b> Posterior predictive model checking</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="normal-mean.html"><a href="normal-mean.html"><i class="fa fa-check"></i><b>8</b> Normal Mean</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="normal-mean.html"><a href="normal-mean.html#example-womens-height"><i class="fa fa-check"></i><b>8.1</b> Example: women’s height</a></li>
+<li class="chapter" data-level="8.2" data-path="normal-mean.html"><a href="normal-mean.html#inference-for-the-mean-conditional-on-the-variance"><i class="fa fa-check"></i><b>8.2</b> Inference for the mean, conditional on the variance</a></li>
+<li class="chapter" data-level="8.3" data-path="normal-mean.html"><a href="normal-mean.html#prediction-1"><i class="fa fa-check"></i><b>8.3</b> Prediction</a></li>
+<li class="chapter" data-level="8.4" data-path="normal-mean.html"><a href="normal-mean.html#example-midge-wing-length"><i class="fa fa-check"></i><b>8.4</b> Example: Midge wing length</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html"><i class="fa fa-check"></i><b>9</b> Joint inference for Normal mean and variance</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#marginal-posterior-of-sigma2"><i class="fa fa-check"></i><b>9.1</b> Marginal posterior of <span class="math inline">\(\sigma^2\)</span></a></li>
+<li class="chapter" data-level="9.2" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#example-midge-wing-length-1"><i class="fa fa-check"></i><b>9.2</b> Example: Midge wing length</a></li>
+<li class="chapter" data-level="9.3" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#monte-carlo-sampling"><i class="fa fa-check"></i><b>9.3</b> Monte Carlo sampling</a></li>
+<li class="chapter" data-level="9.4" data-path="joint-inference-for-normal-mean-and-variance.html"><a href="joint-inference-for-normal-mean-and-variance.html#summary-of-normal-formulas"><i class="fa fa-check"></i><b>9.4</b> Summary of Normal formulas</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html"><i class="fa fa-check"></i><b>10</b> Gibbs sampler</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#review-of-conjugate-prior-for-normal-model"><i class="fa fa-check"></i><b>10.1</b> Review of conjugate prior for normal model</a></li>
+<li class="chapter" data-level="10.2" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#a-semiconjugate-prior-distribution"><i class="fa fa-check"></i><b>10.2</b> A semiconjugate prior distribution</a></li>
+<li class="chapter" data-level="10.3" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#gibbs-sampling"><i class="fa fa-check"></i><b>10.3</b> Gibbs sampling</a></li>
+<li class="chapter" data-level="10.4" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-midge-wing-length-2"><i class="fa fa-check"></i><b>10.4</b> Example: Midge wing length</a></li>
+<li class="chapter" data-level="10.5" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#discrete-approximation-of-posterior-distribution"><i class="fa fa-check"></i><b>10.5</b> Discrete approximation of posterior distribution</a></li>
+<li class="chapter" data-level="10.6" data-path="gibbs-sampler.html"><a href="gibbs-sampler.html#example-3"><i class="fa fa-check"></i><b>10.6</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html"><i class="fa fa-check"></i><b>11</b> MCMC diagnostics</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#the-gibbs-sampler"><i class="fa fa-check"></i><b>11.1</b> The Gibbs sampler</a></li>
+<li class="chapter" data-level="11.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#distinguishing-estimation-from-approximation"><i class="fa fa-check"></i><b>11.2</b> Distinguishing estimation from approximation</a></li>
+<li class="chapter" data-level="11.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#introduction-to-mcmc-diagnostics"><i class="fa fa-check"></i><b>11.3</b> Introduction to MCMC diagnostics</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#example-mixture-of-normal-densities"><i class="fa fa-check"></i><b>11.3.1</b> Example: mixture of normal densities</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#discussion"><i class="fa fa-check"></i><b>11.4</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#how-does-autocorrelationslow-mixing-affect-our-mcmc-approximation"><i class="fa fa-check"></i><b>11.4.1</b> How does autocorrelation(slow mixing) affect our MCMC approximation?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#autocorrelation"><i class="fa fa-check"></i><b>11.4.2</b> Autocorrelation</a></li>
+<li class="chapter" data-level="11.4.3" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#sample-autocorrelation-function"><i class="fa fa-check"></i><b>11.4.3</b> Sample autocorrelation function</a></li>
+<li class="chapter" data-level="11.4.4" data-path="mcmc-diagnostics.html"><a href="mcmc-diagnostics.html#effective-sample-size"><i class="fa fa-check"></i><b>11.4.4</b> Effective sample size</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="multivariate-normal.html"><a href="multivariate-normal.html"><i class="fa fa-check"></i><b>12</b> Multivariate Normal</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="multivariate-normal.html"><a href="multivariate-normal.html#example-reading-comprehension"><i class="fa fa-check"></i><b>12.1</b> Example: Reading comprehension</a></li>
+<li class="chapter" data-level="12.2" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-multivariate-normal-density"><i class="fa fa-check"></i><b>12.2</b> The multivariate normal density</a></li>
+<li class="chapter" data-level="12.3" data-path="multivariate-normal.html"><a href="multivariate-normal.html#a-semiconjugate-prior-distribution-for-the-mean"><i class="fa fa-check"></i><b>12.3</b> A semiconjugate prior distribution for the mean</a></li>
+<li class="chapter" data-level="12.4" data-path="multivariate-normal.html"><a href="multivariate-normal.html#the-inverse-wishart-distribution"><i class="fa fa-check"></i><b>12.4</b> The inverse-Wishart distribution</a></li>
+<li class="chapter" data-level="12.5" data-path="multivariate-normal.html"><a href="multivariate-normal.html#full-conditional-distribution-of-the-covariance-matrix"><i class="fa fa-check"></i><b>12.5</b> Full conditional distribution of the covariance matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="group-comparisons.html"><a href="group-comparisons.html"><i class="fa fa-check"></i><b>13</b> Group comparisons</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="group-comparisons.html"><a href="group-comparisons.html#comparing-two-groups"><i class="fa fa-check"></i><b>13.1</b> Comparing two groups</a></li>
+<li class="chapter" data-level="13.2" data-path="group-comparisons.html"><a href="group-comparisons.html#mathex1"><i class="fa fa-check"></i><b>13.2</b> Example: Math scores data</a></li>
+<li class="chapter" data-level="13.3" data-path="group-comparisons.html"><a href="group-comparisons.html#bayesmodel"><i class="fa fa-check"></i><b>13.3</b> A Bayesian model</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="group-comparisons.html"><a href="group-comparisons.html#analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>13.3.1</b> Analysis of the math scores data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html"><i class="fa fa-check"></i><b>14</b> The hierarchical normal model</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#postinf"><i class="fa fa-check"></i><b>14.1</b> Posterior inference</a>
+<ul>
+<li class="chapter" data-level="14.1.1" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-distributions-of-mu-and-tau2"><i class="fa fa-check"></i><b>14.1.1</b> Full conditional distributions of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span></a></li>
+<li class="chapter" data-level="14.1.2" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-of-theta_j"><i class="fa fa-check"></i><b>14.1.2</b> Full conditional of <span class="math inline">\(\theta_j\)</span></a></li>
+<li class="chapter" data-level="14.1.3" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#full-conditional-of-sigma2"><i class="fa fa-check"></i><b>14.1.3</b> Full conditional of <span class="math inline">\(\sigma^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#mathex2"><i class="fa fa-check"></i><b>14.2</b> Example: Math scores in U.S. public schools</a></li>
+<li class="chapter" data-level="14.3" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#posterior-approximation"><i class="fa fa-check"></i><b>14.3</b> Posterior approximation</a></li>
+<li class="chapter" data-level="14.4" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#mcmc-diagnostics-1"><i class="fa fa-check"></i><b>14.4</b> MCMC diagnostics</a></li>
+<li class="chapter" data-level="14.5" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#shrinkage"><i class="fa fa-check"></i><b>14.5</b> Shrinkage</a></li>
+<li class="chapter" data-level="14.6" data-path="the-hierarchical-normal-model.html"><a href="the-hierarchical-normal-model.html#ranking-the-groups"><i class="fa fa-check"></i><b>14.6</b> Ranking the groups</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="linear-regression.html"><a href="linear-regression.html"><i class="fa fa-check"></i><b>15</b> Linear Regression</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="linear-regression.html"><a href="linear-regression.html#example-oxygen-uptake"><i class="fa fa-check"></i><b>15.1</b> Example: Oxygen uptake</a></li>
+<li class="chapter" data-level="15.2" data-path="linear-regression.html"><a href="linear-regression.html#least-squares-estimation"><i class="fa fa-check"></i><b>15.2</b> Least squares estimation</a></li>
+<li class="chapter" data-level="15.3" data-path="linear-regression.html"><a href="linear-regression.html#least-squares-estimation-for-oxygen-uptake-data"><i class="fa fa-check"></i><b>15.3</b> Least squares estimation for oxygen uptake data</a></li>
+<li class="chapter" data-level="15.4" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-estimation-for-a-regression-model"><i class="fa fa-check"></i><b>15.4</b> Bayesian estimation for a regression model</a></li>
+<li class="chapter" data-level="15.5" data-path="linear-regression.html"><a href="linear-regression.html#unit-information-prior"><i class="fa fa-check"></i><b>15.5</b> Unit information prior</a></li>
+<li class="chapter" data-level="15.6" data-path="linear-regression.html"><a href="linear-regression.html#zellners-g-prior"><i class="fa fa-check"></i><b>15.6</b> Zellner’s <span class="math inline">\(g\)</span>-prior</a></li>
+<li class="chapter" data-level="15.7" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-analysis-using-invariant-g-prior"><i class="fa fa-check"></i><b>15.7</b> Bayesian analysis using invariant <span class="math inline">\(g\)</span>-prior</a></li>
+<li class="chapter" data-level="15.8" data-path="linear-regression.html"><a href="linear-regression.html#bayesian-analysis-using-semiconjugate-prior"><i class="fa fa-check"></i><b>15.8</b> Bayesian analysis using semiconjugate prior</a>
+<ul>
+<li class="chapter" data-level="15.8.1" data-path="linear-regression.html"><a href="linear-regression.html#prediction-problem"><i class="fa fa-check"></i><b>15.8.1</b> Prediction problem</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="model-selection.html"><a href="model-selection.html"><i class="fa fa-check"></i><b>16</b> Model Selection</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="model-selection.html"><a href="model-selection.html#review"><i class="fa fa-check"></i><b>16.1</b> Review</a></li>
+<li class="chapter" data-level="16.2" data-path="model-selection.html"><a href="model-selection.html#bayesian-model-comparison"><i class="fa fa-check"></i><b>16.2</b> Bayesian model comparison</a></li>
+<li class="chapter" data-level="16.3" data-path="model-selection.html"><a href="model-selection.html#example-oxygen-uptake-1"><i class="fa fa-check"></i><b>16.3</b> Example: Oxygen uptake</a></li>
+<li class="chapter" data-level="16.4" data-path="model-selection.html"><a href="model-selection.html#gibbs-sampling-and-model-averaging"><i class="fa fa-check"></i><b>16.4</b> Gibbs sampling and model averaging</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html"><i class="fa fa-check"></i><b>17</b> Generalized Linear Models; the Metropolis Algorithm</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#example-song-sparrow-reproductive-success"><i class="fa fa-check"></i><b>17.1</b> Example: Song sparrow reproductive success</a></li>
+<li class="chapter" data-level="17.2" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#sec:poisson"><i class="fa fa-check"></i><b>17.2</b> Poisson regression</a></li>
+<li class="chapter" data-level="17.3" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#logistic-regression"><i class="fa fa-check"></i><b>17.3</b> Logistic regression</a></li>
+<li class="chapter" data-level="17.4" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#posterior-approximations"><i class="fa fa-check"></i><b>17.4</b> Posterior approximations</a></li>
+<li class="chapter" data-level="17.5" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#the-metropolis-algorithm"><i class="fa fa-check"></i><b>17.5</b> The Metropolis algorithm</a></li>
+<li class="chapter" data-level="17.6" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#example-normal-distribution-with-known-variance"><i class="fa fa-check"></i><b>17.6</b> Example: Normal distribution with known variance</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#output-of-metropolis-algorithm"><i class="fa fa-check"></i><b>17.6.1</b> Output of Metropolis Algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="generalized-linear-models-the-metropolis-algorithm.html"><a href="generalized-linear-models-the-metropolis-algorithm.html#the-metropolis-algorithm-for-poisson-regression-secmetpois"><i class="fa fa-check"></i><b>17.7</b> The Metropolis algorithm for Poisson regression {sec:metpois}</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="metropolis-hastings.html"><a href="metropolis-hastings.html"><i class="fa fa-check"></i><b>18</b> Metropolis-Hastings</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="metropolis-hastings.html"><a href="metropolis-hastings.html#why-does-the-metropolis-hastings-algorithm-work"><i class="fa fa-check"></i><b>18.1</b> Why does the Metropolis-Hastings algorithm work?</a></li>
+<li class="chapter" data-level="18.2" data-path="metropolis-hastings.html"><a href="metropolis-hastings.html#combining-the-metropolis-and-gibbs-algorithms"><i class="fa fa-check"></i><b>18.2</b> Combining the Metropolis and Gibbs algorithms</a></li>
+<li class="chapter" data-level="18.3" data-path="metropolis-hastings.html"><a href="metropolis-hastings.html#example-historical-co_2-and-temperature-data"><i class="fa fa-check"></i><b>18.3</b> Example: Historical CO<span class="math inline">\(_2\)</span> and temperature data</a></li>
+<li class="chapter" data-level="18.4" data-path="metropolis-hastings.html"><a href="metropolis-hastings.html#a-regression-model-with-correlated-errors"><i class="fa fa-check"></i><b>18.4</b> A regression model with correlated errors</a></li>
+<li class="chapter" data-level="18.5" data-path="metropolis-hastings.html"><a href="metropolis-hastings.html#analysis-of-the-ice-core-data"><i class="fa fa-check"></i><b>18.5</b> Analysis of the ice core data</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><i class="fa fa-check"></i><b>19</b> Linear Mixed-effects Models, aka, Hierarchical Linear Models</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#hierarchical-model-review"><i class="fa fa-check"></i><b>19.1</b> Hierarchical model review</a></li>
+<li class="chapter" data-level="19.2" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#hierarchical-linear-regression-model-for-math-scores-data"><i class="fa fa-check"></i><b>19.2</b> Hierarchical linear regression model for math scores data</a></li>
+<li class="chapter" data-level="19.3" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#bayesian-hierarchical-linear-regression-model"><i class="fa fa-check"></i><b>19.3</b> Bayesian hierarchical linear regression model</a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#full-conditionals"><i class="fa fa-check"></i><b>19.3.1</b> Full conditionals</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#bayesian-analysis-of-the-math-scores-data"><i class="fa fa-check"></i><b>19.4</b> Bayesian analysis of the math scores data</a>
+<ul>
+<li class="chapter" data-level="19.4.1" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#mcmc-diagnostics-2"><i class="fa fa-check"></i><b>19.4.1</b> MCMC diagnostics</a></li>
+<li class="chapter" data-level="19.4.2" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#posterior-summaries"><i class="fa fa-check"></i><b>19.4.2</b> Posterior summaries</a></li>
+<li class="chapter" data-level="19.4.3" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#posterior-predictive-simulation"><i class="fa fa-check"></i><b>19.4.3</b> Posterior predictive simulation</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Statistics lecture notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linear-mixed-effects-models-aka-hierarchical-linear-models" class="section level1" number="19">
+<h1><span class="header-section-number">Lecture 19</span> Linear Mixed-effects Models, aka, Hierarchical Linear Models</h1>
+<p><tt>The following notes, mostly transcribed from Neath(0607,2021) lecture, summarize sections (11.1-11.3) of Hoff(2009).</tt></p>
+<p>
+ 
+</p>
+<div id="hierarchical-model-review" class="section level2" number="19.1">
+<h2><span class="header-section-number">19.1</span> Hierarchical model review</h2>
+<p>The hierarchical normal model says <span class="math inline">\(Y_{i,j} \sim\)</span> Normal<span class="math inline">\((\theta_j, \sigma^2 )\)</span> where <span class="math inline">\(Y_{i,j} =\)</span> response for subject <span class="math inline">\(i\)</span> in group <span class="math inline">\(j\)</span>. There’s a different mean value in each group.</p>
+<p>Think about data sets that arise from two stages of sampling, studying a medical procedure by having <span class="math inline">\(m\)</span> different hospitals being tested. <span class="math inline">\(Y_{i,j} =\)</span> outcome for the <span class="math inline">\(i\)</span>th patient at the <span class="math inline">\(j\)</span>th hospital. The different medical centers are gonna be similar to each other but not exactly the same. It wouldn’t be appropriate just to combine the data <span class="math inline">\(Y_{i,j}\)</span> and pretend they are all independent observations from one big population because they’re not that, they are <span class="math inline">\(m\)</span> different populations. It also wouldn’t be the best analysis to analyze them completely separately because some of them may be very some sample sizes that we can’t learn anything from anyway.</p>
+<p>We’re going to apply this idea to regression modeling where we have <span class="math inline">\(m\)</span> different groups of observations. We believe there exists a different regression relationship within each group but the groups are themselves a sample from a population of groups. We’re going to use the same example that we used for chapter 8 where we have data on test scores of 10th graders from 100 different schools. Let <span class="math inline">\(Y_{i,j}=\)</span> test score for student <span class="math inline">\(i\)</span> at school <span class="math inline">\(j\)</span>, <span class="math inline">\(j=1,2,...,100\)</span>. <em>There are 1993 students total. These 1993 students are not an independent random sample from the population of 10th graders</em>. The 100 schools in the sample are a random sample from the population of US high schools. 1993 / 100 <span class="math inline">\(\approx\)</span> 20, so the within-school sample sizes are 20 on average. <em>So the student on which we collect the data are a random sample from all students at that school.</em></p>
+<p>Our model in chapter 8 said:</p>
+<p><span class="math inline">\(Y_{i,j} = \theta_j + \epsilon_{i,j}\)</span>, where</p>
+<p><span class="math inline">\(\theta_j\)</span> represents the mean score at school <span class="math inline">\(j\)</span> and <span class="math inline">\(\epsilon_{i,j}\)</span> is the student <span class="math inline">\(i\)</span> random variation</p>
+<p><span class="math inline">\(\theta_j \stackrel{\text{iid}}\sim\)</span> Normal<span class="math inline">\((\mu, \tau^2)\)</span></p>
+<p><span class="math inline">\(\epsilon_{i,j} \stackrel{\text{iid}}\sim\)</span> Normal<span class="math inline">\(( 0 , \sigma^2 )\)</span></p>
+<p>The the school means <span class="math inline">\(\theta_j\)</span> are themselves a random sample from the population of schools. Depending on how you define a parameter, there are either 3 or 103 parameters in this model. There is <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span> which describe the distribution of school means. <span class="math inline">\(\theta_j\)</span> and <span class="math inline">\(\sigma^2_j\)</span> describe the <span class="math inline">\(j\)</span>th school and it is a simplifying assumption that <span class="math inline">\(\sigma^2_j=\sigma^2\)</span> is the same for all <span class="math inline">\(j\)</span>. Hence, with this assumption we have 3 parameters: <span class="math inline">\(\mu, \tau^2, \sigma^2\)</span>.</p>
+<p>We attach prior distributions to these parameters</p>
+<p><span class="math inline">\(\mu\)</span> (Normal) = overall mean</p>
+<p><span class="math inline">\(\tau^2\)</span> (inverse-gamma) = between-schools</p>
+<p><span class="math inline">\(\sigma^2\)</span> (inverse-gamma) = within-schools variance.</p>
+<p>The model says <span class="math inline">\(\theta_j \stackrel{\text{iid}}\sim\)</span> Normal<span class="math inline">\(( \mu, \tau^2 )\)</span>. THIS IS NOT A PRIOR DISTRIBUTION. This is a sampling distribution (<span class="math inline">\(\theta_j\)</span> is not a parameter) because the probability distributions on <span class="math inline">\(\mu, ~\tau^2\)</span> and <span class="math inline">\(\sigma^2\)</span> describe our uncertainty. However, the probability distribution on <span class="math inline">\(\theta_j\)</span> describes the random sampling that makes up the experiment. The experiment is to sample a 100 schools and then sample between 5 and 30 students from each school. But if we repeated the experiment we would have different <span class="math inline">\(\theta_j\)</span>’s but we would have the same <span class="math inline">\(\mu, ~ \tau^2\)</span> and <span class="math inline">\(\sigma^2\)</span></p>
+</div>
+<div id="hierarchical-linear-regression-model-for-math-scores-data" class="section level2" number="19.2">
+<h2><span class="header-section-number">19.2</span> Hierarchical linear regression model for math scores data</h2>
+<p>We are considering the same data but now we have an additional variable.</p>
+<p>Response variable <span class="math inline">\(y_{i,j}\)</span> is test score for <span class="math inline">\(i\)</span> student at school <span class="math inline">\(j\)</span>. Predictor variable <span class="math inline">\(x_{i,j}\)</span> for the <span class="math inline">\((i,j)\)</span> student is the socioeconomic status score (SES) centered to have mean zero at each school. SES score is based on parents income and education level.</p>
+<p>What we’re interested in today is estimating the regression relationship <span class="math inline">\(y_{i,j} = \beta_{1,j} + \beta_{2,j} x_{i,j} + \epsilon_{i,j},\)</span> and how these relationships differ across schools. <span class="math inline">\(\beta_1\)</span> is the intercept term <span class="math inline">\(\beta_2\)</span> is the slope (the relationship between SES and test score) and it’s probably <span class="math inline">\(&gt; 0\)</span>. Note there’s a <span class="math inline">\(j\)</span>-subscript on those <span class="math inline">\(\beta\)</span>’s! because we are allowing that this regression relationship is different at different schools.</p>
+<p>We will need to group these data by schools for the modeling we want to do. For grouped data like these it’s convenient to store them in a list</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-1" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(nels<span class="sc">$</span>sch_id))</span>
+<span id="cb321-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-2" aria-hidden="true" tabindex="-1"></a>m   <span class="ot">&lt;-</span> <span class="fu">length</span>(ids) <span class="co"># number of schools = 100</span></span>
+<span id="cb321-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>();<span class="co"># list of response variables</span></span>
+<span id="cb321-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">list</span>();<span class="co"># regressor matrices for the 100 schools</span></span>
+<span id="cb321-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="cn">NULL</span>;</span>
+<span id="cb321-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb321-8"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb321-9"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-9" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb321-10"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-10" aria-hidden="true" tabindex="-1"></a> y[[j]] <span class="ot">&lt;-</span> nels[nels<span class="sc">$</span>sch_id<span class="sc">==</span>ids[j], <span class="dv">4</span>] </span>
+<span id="cb321-11"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-11" aria-hidden="true" tabindex="-1"></a> n[j]   <span class="ot">&lt;-</span> <span class="fu">sum</span>(nels<span class="sc">$</span>sch_id<span class="sc">==</span>ids[j]) </span>
+<span id="cb321-12"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-12" aria-hidden="true" tabindex="-1"></a> x.j    <span class="ot">&lt;-</span> nels[nels<span class="sc">$</span>sch_id<span class="sc">==</span>ids[j], <span class="dv">3</span>]</span>
+<span id="cb321-13"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-13" aria-hidden="true" tabindex="-1"></a> x.j    <span class="ot">&lt;-</span> (x.j <span class="sc">-</span> <span class="fu">mean</span>(x.j)) <span class="co">#centering</span></span>
+<span id="cb321-14"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-14" aria-hidden="true" tabindex="-1"></a> X[[j]] <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">1</span>, n[j]), x.j) </span>
+<span id="cb321-15"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb321-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The <span class="math inline">\(\texttt{x.j}\)</span> variable here is <span class="math inline">\(x_j-E(x_j)\)</span> so that <span class="math inline">\(\texttt{x.j}\)</span> have a mean of zero at each school.</p>
+<p>Regression quiz: When the <span class="math inline">\(x\)</span>-variable in regression model is centered to have mean zero what is the interpretation of the intercept term?</p>
+<p><span class="math inline">\(\beta_{1,j} = E(Y | X=0)\)</span>, “<span class="math inline">\(x=0\)</span>” means <span class="math inline">\(x\)</span> is the mean value. So centering the <span class="math inline">\(x\)</span>-variable makes the intercept term <span class="math inline">\(\beta_{1,j}\)</span> equal the expected test score for a student with exactly average socioeconomic status score (SES). In other words, intercept is mean of <span class="math inline">\(Y\)</span> at the mean value of each of the predictor variables.</p>
+<p>There are <span class="math inline">\(m = 100\)</span> schools in this data set so we are going to fit <span class="math inline">\(m=100\)</span> separate regressions.</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate OLS fits at each school</span></span>
+<span id="cb322-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-2" aria-hidden="true" tabindex="-1"></a>beta.hat.OLS <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, m, <span class="dv">2</span>)</span>
+<span id="cb322-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-3" aria-hidden="true" tabindex="-1"></a>sigma2.hat   <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, m)</span>
+<span id="cb322-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb322-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb322-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-6" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb322-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-7" aria-hidden="true" tabindex="-1"></a> fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y[[j]] <span class="sc">~</span> <span class="dv">0</span> <span class="sc">+</span> X[[j]]) <span class="co"># no intercept</span></span>
+<span id="cb322-8"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-8" aria-hidden="true" tabindex="-1"></a> beta.hat.OLS[j,] <span class="ot">&lt;-</span> fit<span class="sc">$</span>coef</span>
+<span id="cb322-9"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-9" aria-hidden="true" tabindex="-1"></a> sigma2.hat[j] <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>sigma<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb322-10"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">rm</span>(fit)</span>
+<span id="cb322-11"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb322-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">range</span>(nels[,<span class="dv">3</span>]), <span class="fu">range</span>(nels[,<span class="dv">4</span>]), <span class="at">type=</span><span class="st">&quot;n&quot;</span>, </span>
+<span id="cb323-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb323-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;SES&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Math score&quot;</span>)</span>
+<span id="cb323-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb323-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb323-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){ <span class="fu">abline</span>(beta.hat.OLS[j,], <span class="at">col=</span><span class="st">&quot;gray&quot;</span>) }</span>
+<span id="cb323-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb323-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb323-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb323-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">apply</span>(beta.hat.OLS, <span class="dv">2</span>, mean), <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:regs"></span>
+<img src="bayesianS21_files/figure-html/regs-1.png" alt="100 separate OLS fits in light gray, and the average slope / average intercept in solid black" width="672" />
+<p class="caption">
+Figure 19.1: 100 separate OLS fits in light gray, and the average slope / average intercept in solid black
+</p>
+</div>
+<p>This display has 100 gray lines “<span class="math inline">\(\hat y = \hat\beta_{1j} + \hat\beta_{2j}\texttt{SES}\)</span>
+for <span class="math inline">\(j = 1, …, 100\)</span>.” They are the 100 OLS regression lines for the 100 schools in the data set. The black line is the “average” of those 100 (the full pooled model estimate) where intercept = average of the intercepts and slope = average of the slopes. There are a few negative slopes which is not expected, but there are mostly positive associations. The fully pooled model is wrong because the data are not iid. The no pooling model is not wrong but does not give the most precise inference.</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(n, <span class="at">col =</span> <span class="st">&quot;pink&quot;</span>)</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-214-1.png" width="672" style="display: block; margin: auto;" />
+School specific sample size range from 4 to 32. Fitting a regression line to four points is certainly something we can do, but don’t expect a very accurate estimate.</p>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb325-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb325-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb325-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb325-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(n, beta.hat.OLS[,<span class="dv">1</span>], <span class="at">xlab=</span><span class="st">&quot;sample size&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;intercept&quot;</span>)</span>
+<span id="cb325-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb325-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(beta.hat.OLS[,<span class="dv">1</span>]), <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb325-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb325-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb325-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb325-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(n, beta.hat.OLS[,<span class="dv">2</span>], <span class="at">xlab=</span><span class="st">&quot;sample size&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;slope&quot;</span>)</span>
+<span id="cb325-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb325-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">mean</span>(beta.hat.OLS[,<span class="dv">2</span>]), <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/School-specific%20least-squares%20estimates%20versus%20school%20specific%20(group)%20sample%20size-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We have 100 pairs of <span class="math inline">\(\boldsymbol{\hat\beta}\)</span>’s (estimates) corresponding to the 100 schools and 100 sample sizes, and these plots of estimates versus group sample size. Are these values associated? From the plots, not really. However, there is a tendency for the extreme <span class="math inline">\(\beta\)</span>-values (both high and low) to occur at schools where sample size is low.</p>
+<p>Recall the normal hierarchical model; the “best estimate” of <span class="math inline">\(\theta_j\)</span> (the group <span class="math inline">\(j\)</span> mean) was not <span class="math inline">\(\bar y_j\)</span>(group mean) nor was it <span class="math inline">\(\bar y_\bullet\)</span> (grand mean), it was somewhere in between. We’re gonna see something similar here. The best estimate of the school <span class="math inline">\(j\)</span> regression relationship is not that school’s gray line and it’s not the black line either it’s somewhere in between. The bigger the sample size the closer it will be to gray line.</p>
+<p>Two extreme approaches to analyzing these data (1) At one extreme conduct 100 separate regression analyses and that’s our analysis! That’s not wrong it’s just not optimal since these estimates are subject to very high uncertainty (owing to the low sample sizes) and this does not make the best use of all the information we have available (2) At the other extreme combine all 100 schools into a single sample of size <span class="math inline">\(n=\)</span> 1993. The result would be the solid black line from that earlier plot. This would be wrong because it would way overstate our confidence because it pretends our data are a random sample of size <span class="math inline">\(n=\)</span> 1993 which they’re not. Also, it gives no basis for studying the between-school differences which might be of interest. The analysis that sits between these two extremes that optimally uses all the information available is the hierarchical regression model.</p>
+</div>
+<div id="bayesian-hierarchical-linear-regression-model" class="section level2" number="19.3">
+<h2><span class="header-section-number">19.3</span> Bayesian hierarchical linear regression model</h2>
+<p>We will describe this model in a hierarchical way i.e, at multiple levels. There’s the within-group level and between-group level.</p>
+<p>The <strong>within-group sampling model</strong> says:</p>
+<p><span class="math display">\[
+\mathbf{Y}_j \sim \text{Normal}_{nj}(\mathbf{X}_j\boldsymbol\beta_j, \sigma^2\mathbf{I})
+\]</span>
+we assume <span class="math inline">\(\sigma^2_j\)</span> is the same for all <span class="math inline">\(j\)</span>.</p>
+<p>The <strong>between-group sampling model</strong> says:</p>
+<p><span class="math display">\[
+\boldsymbol\beta_1,...,\boldsymbol\beta_m \stackrel{\text{iid}}\sim \text{Normal}_p(\boldsymbol\theta, \boldsymbol\Sigma)
+\]</span></p>
+<p>We will assume (mostly for convenience) that <span class="math inline">\(\boldsymbol\beta_j\)</span> for <span class="math inline">\(j = 1, …, m\)</span> are a random sample from a <span class="math inline">\(p\)</span>-variate normal distribution.</p>
+<p><span class="math inline">\(\mathbf Y_j\)</span> are observable <span class="math inline">\(\boldsymbol\beta_j\)</span> are unobservable but both are modeled by sampling distributions. The unknown model parameters
+consist of <span class="math inline">\(\sigma^2\)</span> (scalar) <span class="math inline">\(\boldsymbol\theta\)</span> ( <span class="math inline">\(p\)</span>-vector ) and <span class="math inline">\(\boldsymbol\Sigma\)</span> ( <span class="math inline">\(p \times p\)</span> positive-definite matrix ).</p>
+<p>We have the sampling distributions that will drive the likelihood part of our Bayesian model. We need prior distributions to describe our beliefs about <span class="math inline">\(\{~\boldsymbol\theta, \boldsymbol\Sigma, \sigma^2~\}\)</span> before observing the data.</p>
+<p>
+ 
+</p>
+<p>Attempt at Fig. 11.2. (Hoff) A representation of the hierarchical normal regression model.</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\boldsymbol\theta,\boldsymbol\Sigma \longrightarrow \boldsymbol\beta_1,...,\boldsymbol\beta_{m-1},\boldsymbol\beta_m \longrightarrow \mathbf{Y}_1,...,\mathbf{Y}_{m-1}, \mathbf{Y}_m\\[0.1cm]
+\sigma^2 \longrightarrow\mathbf{Y}_1,...,\mathbf{Y}_{m-1}, \mathbf{Y}_m\\[0.3cm]
+\end{array}
+\]</span></p>
+<p><span class="math inline">\(\boldsymbol\theta\)</span> and <span class="math inline">\(\boldsymbol\Sigma\)</span> are the mean and variance for the population of regression lines. In the hierarchical normal model there’s a whole population of school averages (the true group means). In this model there’s a whole population of regression parameters <span class="math inline">\((\boldsymbol\beta_j , \sigma^2_j ).\)</span> We observe a random sample of <span class="math inline">\(\boldsymbol\beta_j\)</span>’s from that population except we don’t exactly observe it. What actually happens is; within each sampled group we observe a random sample of units <span class="math inline">\(Y_{i,j}\)</span> within that group and from those observations we can make inference about the <span class="math inline">\(\boldsymbol\beta_j\)</span>.</p>
+<p>So how does <span class="math inline">\(\mathbf Y_1, \mathbf Y_2, …., \mathbf Y_{m-1}\)</span> inform our inference about
+<span class="math inline">\(\boldsymbol\beta_m?\)</span> Well <span class="math inline">\(\boldsymbol\beta_m\)</span> depends on <span class="math inline">\(\boldsymbol\theta\)</span> and <span class="math inline">\(\boldsymbol\Sigma,\)</span> and <span class="math inline">\(\mathbf Y_{m}\)</span> depends on <span class="math inline">\(\boldsymbol\beta_m\)</span>. Meanwhile <span class="math inline">\(\mathbf Y_1, …., \mathbf Y_{m-1}\)</span> depend on <span class="math inline">\(\boldsymbol\beta_1, …., \boldsymbol\beta_{m-1}\)</span> which in turn depend on <span class="math inline">\(\boldsymbol\theta\)</span> and <span class="math inline">\(\boldsymbol\Sigma\)</span> and therefore <span class="math inline">\(\mathbf Y_1, …., \mathbf Y_{m-1}\)</span> contain information about <span class="math inline">\(\boldsymbol\theta\)</span>, <span class="math inline">\(\boldsymbol\Sigma\)</span> and that in turn informs our inference about <span class="math inline">\(\boldsymbol\beta_m\)</span>.</p>
+<p>Arrows in this picture represent sampling distributions. The sampling distribution of <span class="math inline">\(\boldsymbol\beta_j\)</span> depends on <span class="math inline">\(\boldsymbol\theta\)</span> and <span class="math inline">\(\boldsymbol\Sigma\)</span> the sampling distributions of <span class="math inline">\(\mathbf{Y}_j\)</span> depend on <span class="math inline">\(\boldsymbol\beta_j\)</span> and <span class="math inline">\(\sigma^2\)</span>. There are no arrows pointing at <span class="math inline">\(\boldsymbol\theta\)</span>, <span class="math inline">\(\boldsymbol\Sigma\)</span> <span class="math inline">\(\sigma^2\)</span> which means we need to assign a prior distribution to them.</p>
+<p>BUT WHAT PRIORS? The usual priors! The semiconjugate prior distributions are used for <span class="math inline">\(\boldsymbol\theta, ~\boldsymbol\Sigma\)</span> and <span class="math inline">\(\sigma^2\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\boldsymbol{\theta} &amp; \sim \operatorname{Normal}_{p}\left(\boldsymbol{\mu}_{0}, \boldsymbol{\Lambda}_{0}\right)\\
+\boldsymbol{\Sigma} &amp; \sim \text { Inverse-Wishart}_{p}\left(\eta_{0}, \mathbf{S}_{0}^{-1}\right)\\
+\sigma^{2} &amp; \sim \text { Inverse-Gamma}\left(\nu_{0} / 2, \nu_{0} \sigma_{0}^{2} / 2\right)
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\eta_0\)</span> is the degrees of freedom (df), <span class="math inline">\(\mathbf{S}_0\)</span> is the prior scale matrix, <span class="math inline">\(\nu_0\)</span> is the prior df for <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\sigma^2_0\)</span> prior scale matrix. We do not need to do metropolis-hastings in this model because all these full conditionals have a nice form. So we can do the Gibbs sampler.</p>
+<p>What makes up the full conditionals?</p>
+<div id="full-conditionals" class="section level3" number="19.3.1">
+<h3><span class="header-section-number">19.3.1</span> Full conditionals</h3>
+<p>
+ 
+</p>
+<p><span class="math inline">\(\left\{\boldsymbol{\beta}_{j} \mid \boldsymbol{y}_{j}, \mathbf{X}_{j}, \boldsymbol{\theta}, \boldsymbol{\Sigma}, \sigma^{2}\right\}\)</span> has a <span class="math inline">\(p\)</span> -variate normal distribution with</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{Var}\left(\boldsymbol{\beta}_{j} \mid \boldsymbol{y}_{j}, \mathbf{X}_{j}, \boldsymbol{\theta}, \boldsymbol{\Sigma}, \sigma^{2}\right) &amp;=\left(\boldsymbol{\Sigma}^{-1}+\mathbf{X}_{j}^{T} \mathbf{X}_{j} / \sigma^{2}\right)^{-1} \\
+\mathbf{E}\left(\boldsymbol{\beta}_{j} \mid \boldsymbol{y}_{j}, \mathbf{X}_{j}, \boldsymbol{\theta}, \boldsymbol{\Sigma}, \sigma^{2}\right) &amp;=\left(\boldsymbol{\Sigma}^{-1}+\mathbf{X}_{j}^{T} \mathbf{X}_{j} / \sigma^{2}\right)^{-1}\left(\boldsymbol{\Sigma}^{-1} \boldsymbol{\theta}+\mathbf{X}_{j}^{T} \boldsymbol{y}_{j} / \sigma^{2}\right)
+\end{aligned}
+\]</span></p>
+<p>Posterior precision = prior precision + sampling precision</p>
+<p>Posterior expectation is a weighted average of the prior expectation <span class="math inline">\(\boldsymbol{\beta}\)</span> and sample estimate <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> weighted by their precisions.</p>
+<hr />
+<p><span class="math inline">\(\{~\boldsymbol{\theta} \mid \boldsymbol{\beta}_{1}, \ldots, \boldsymbol{\beta}_{m}, \boldsymbol{\Sigma}~\} \sim \operatorname{Normal}_{p}\left(\boldsymbol{\mu}_{m}, \boldsymbol{\Lambda}_{m}\right)\)</span></p>
+<p>where
+<span class="math display">\[
+\begin{aligned}
+\boldsymbol\Lambda_{m} &amp;=\left(\boldsymbol\Lambda_{0}^{-1}+m \boldsymbol\Sigma^{-1}\right)^{-1} \\
+\boldsymbol\mu_{m} &amp;=\left(\boldsymbol\Lambda_{0}^{-1}+m \boldsymbol\Sigma^{-1}\right)^{-1}\left(\boldsymbol\Lambda_{0}^{-1} \boldsymbol\mu_{0}+m \boldsymbol\Sigma^{-1} \bar{\boldsymbol\beta}\right)
+\end{aligned}
+\]</span>
+where <span class="math inline">\(\overline{\boldsymbol{\beta}}\)</span> is the vector average <span class="math inline">\(\frac{1}{m} \sum \boldsymbol{\beta}_{j}\)</span>.</p>
+<hr />
+<p><span class="math inline">\(\{~\boldsymbol{\Sigma} \mid \boldsymbol{\theta}, \boldsymbol{\beta}_{1}, \ldots, \boldsymbol{\beta}_{m} ~\} \sim\)</span> Inverse-Wishart<span class="math inline">\(_{p}\left(\eta_{0}+m,\left[\mathbf{S}_{0}+\mathbf{S}_{\theta}\right]^{-1}\right)\)</span></p>
+<p>where
+<span class="math display">\[
+\mathbf{S}_{\theta}=\sum_{j=1}^{m}\left(\boldsymbol{\beta}_{j}-\boldsymbol{\theta}\right)\left(\boldsymbol{\beta}_{j}-\boldsymbol{\theta}\right)^{T}
+\]</span></p>
+<p><span class="math inline">\(\mathbf{S}_\theta\)</span> is the “sum of squares matrix” for the variability of the <span class="math inline">\(\boldsymbol{\beta}_{j}\)</span> around <span class="math inline">\(\boldsymbol{\theta}\)</span>. Often we encounter <span class="math inline">\(\sum ( \mathbf{a}^T\mathbf{a}).\)</span> This here is <span class="math inline">\(\mathbf{aa}^T.\)</span> In mathematics this is called an outer product and it will give us a <span class="math inline">\(p \times p\)</span> matrix assuming <span class="math inline">\(\mathbf{a}\)</span> is <span class="math inline">\(p \times 1\)</span>.</p>
+<hr />
+<p><span class="math inline">\(\{~\sigma^{2} \mid \boldsymbol{y}, \mathbf{X}, \boldsymbol{\beta}~\} \sim \operatorname{Inverse-Gamma}\left(\left[\nu_{0}+\sum n_{j}\right] / 2,\left[\nu_{0} \sigma_{0}^{2}+\mathrm{SSR}\right] / 2\right)\)</span></p>
+<p>where
+<span class="math display">\[
+\mathrm{SSR}=\sum_{j=1}^{m} \sum_{i=1}^{n_{j}}\left(y_{i, j}-\boldsymbol{\beta}_{j}^{T} \boldsymbol{x}_{i, j}\right)^{2}
+\]</span>
+depends on the variability of the <span class="math inline">\(y_{i,j}\)</span> around their means.</p>
+<p>
+ 
+</p>
+</div>
+</div>
+<div id="bayesian-analysis-of-the-math-scores-data" class="section level2" number="19.4">
+<h2><span class="header-section-number">19.4</span> Bayesian analysis of the math scores data</h2>
+<p>First we need priors.</p>
+<p>Following Hoff Chapter 11, we will use unit information priors. Such a prior distribution represents the information of someone with unbiased but weak prior information.</p>
+<p>Take the prior expectation of <span class="math inline">\(\boldsymbol\theta\)</span>, <span class="math inline">\(\boldsymbol\mu_0\)</span>, to be the average of the <span class="math inline">\(\boldsymbol{\hat\beta}_{j_{ols}}\)</span> and prior variance <span class="math inline">\(\boldsymbol\Lambda_0\)</span> to be their sample covariance.</p>
+<p>For the prior distribution of <span class="math inline">\(\boldsymbol\Sigma\)</span>, by properties of the Wishart distribution the expectation matrix exists provided df is at least <span class="math inline">\(p + 2\)</span> so take prior df <span class="math inline">\(\eta_0 = p+2 = 4\)</span> and then take the prior sum of squares matrix to be the covariance matrix of <span class="math inline">\(\boldsymbol{\hat\beta}_{j_{ols}}\)</span>.</p>
+<p>For <span class="math inline">\(\sigma_0^2\)</span> take the average of the <span class="math inline">\(\hat\sigma^2\)</span> for the 100 different OLS fits.</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set prior parameters here</span></span>
+<span id="cb326-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb326-2" aria-hidden="true" tabindex="-1"></a>p        <span class="ot">&lt;-</span> <span class="fu">dim</span>(X[[<span class="dv">1</span>]])[<span class="dv">2</span>]  </span>
+<span id="cb326-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb326-3" aria-hidden="true" tabindex="-1"></a>mu<span class="fl">.0</span>     <span class="ot">&lt;-</span> <span class="fu">apply</span>(beta.hat.OLS, <span class="dv">2</span>, mean)</span>
+<span id="cb326-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb326-4" aria-hidden="true" tabindex="-1"></a>Lambda<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">cov</span>(beta.hat.OLS)</span>
+<span id="cb326-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb326-5" aria-hidden="true" tabindex="-1"></a>S<span class="fl">.0</span>      <span class="ot">&lt;-</span> <span class="fu">cov</span>(beta.hat.OLS) </span>
+<span id="cb326-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb326-6" aria-hidden="true" tabindex="-1"></a>eta<span class="fl">.0</span>    <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="dv">2</span>; nu<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="dv">1</span>;</span>
+<span id="cb326-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb326-7" aria-hidden="true" tabindex="-1"></a>sigma2<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">mean</span>(sigma2.hat)  </span></code></pre></div>
+<p><span class="math inline">\(S =\)</span> number of saved values, <span class="math inline">\(T =\)</span> thinning parameter.</p>
+<p>We run <span class="math inline">\(S \times T\)</span> total scans but save every <span class="math inline">\(T\)</span>-th update and get <span class="math inline">\(S\)</span> parameter values in the end. The reason thinning is a good idea in this problem is because there are <span class="math inline">\(m\times p = 100\times2=200\)</span> different <span class="math inline">\(\beta\)</span> parameters hence storage costs are non trivial in this problem.</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb327-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-2" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="dv">10</span>;</span>
+<span id="cb327-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-4" aria-hidden="true" tabindex="-1"></a>sigma2.chain <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, S);</span>
+<span id="cb327-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-5" aria-hidden="true" tabindex="-1"></a>theta.chain  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, p)</span>
+<span id="cb327-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-6" aria-hidden="true" tabindex="-1"></a>Sigma.chain  <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, p<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb327-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-7" aria-hidden="true" tabindex="-1"></a>beta.chain   <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, m<span class="sc">*</span>p)</span>
+<span id="cb327-8"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-9"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute inverse matrix once, not S*T times</span></span>
+<span id="cb327-10"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-10" aria-hidden="true" tabindex="-1"></a>Lambda0.inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(Lambda<span class="fl">.0</span>); </span>
+<span id="cb327-11"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-12"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting values </span></span>
+<span id="cb327-13"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-13" aria-hidden="true" tabindex="-1"></a>theta     <span class="ot">&lt;-</span> mu<span class="fl">.0</span>;  </span>
+<span id="cb327-14"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-14" aria-hidden="true" tabindex="-1"></a>sigma2    <span class="ot">&lt;-</span> sigma2<span class="fl">.0</span>; </span>
+<span id="cb327-15"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-15" aria-hidden="true" tabindex="-1"></a>beta      <span class="ot">&lt;-</span> beta.hat.OLS;  <span class="co"># beta is m x p</span></span>
+<span id="cb327-16"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb327-16" aria-hidden="true" tabindex="-1"></a>Sigma.inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(S<span class="fl">.0</span>)</span></code></pre></div>
+<p>Be mindful about how you store these values. If you look at the full conditionals you’ll see that <span class="math inline">\(\boldsymbol\Lambda_0^{-1}\)</span> appears a couple of places. Don’t do matrix inversion 10,000 times, do it once!</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now run it!</span></span>
+<span id="cb328-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span>
+<span id="cb328-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-3" aria-hidden="true" tabindex="-1"></a>run.time <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb328-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb328-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb328-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-6" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb328-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-7" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>T)</span>
+<span id="cb328-8"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-8" aria-hidden="true" tabindex="-1"></a> {</span>
+<span id="cb328-9"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">### </span></span>
+<span id="cb328-10"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Update the beta_j</span></span>
+<span id="cb328-11"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-11" aria-hidden="true" tabindex="-1"></a>  <span class="do">###</span></span>
+<span id="cb328-12"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m)</span>
+<span id="cb328-13"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-13" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb328-14"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-14" aria-hidden="true" tabindex="-1"></a>   V.j <span class="ot">&lt;-</span> <span class="fu">solve</span>( Sigma.inv <span class="sc">+</span> <span class="fu">t</span>(X[[j]]) <span class="sc">%*%</span> X[[j]] <span class="sc">/</span> sigma2 )</span>
+<span id="cb328-15"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-15" aria-hidden="true" tabindex="-1"></a>   m.j <span class="ot">&lt;-</span> V.j <span class="sc">%*%</span> ( Sigma.inv <span class="sc">%*%</span> theta <span class="sc">+</span> <span class="fu">t</span>(X[[j]]) <span class="sc">%*%</span> y[[j]] <span class="sc">/</span> sigma2 )</span>
+<span id="cb328-16"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-16" aria-hidden="true" tabindex="-1"></a>   beta[j,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>m.j, <span class="at">sigma=</span>V.j)[<span class="dv">1</span>,]</span>
+<span id="cb328-17"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb328-18"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">###</span></span>
+<span id="cb328-19"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Update theta</span></span>
+<span id="cb328-20"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-20" aria-hidden="true" tabindex="-1"></a>  <span class="do">###</span></span>
+<span id="cb328-21"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-21" aria-hidden="true" tabindex="-1"></a>  Lambda.m <span class="ot">&lt;-</span> <span class="fu">solve</span>( Lambda0.inv <span class="sc">+</span> m<span class="sc">*</span>Sigma.inv )</span>
+<span id="cb328-22"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-22" aria-hidden="true" tabindex="-1"></a>  mu.m     <span class="ot">&lt;-</span> Lambda.m <span class="sc">%*%</span> (Lambda0.inv <span class="sc">%*%</span> mu<span class="fl">.0</span> <span class="sc">+</span> </span>
+<span id="cb328-23"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-23" aria-hidden="true" tabindex="-1"></a>             Sigma.inv <span class="sc">%*%</span> <span class="fu">apply</span>(beta,<span class="dv">2</span>,sum) )</span>
+<span id="cb328-24"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-24" aria-hidden="true" tabindex="-1"></a>  theta    <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu.m, <span class="at">sigma=</span>Lambda.m)[<span class="dv">1</span>,]</span>
+<span id="cb328-25"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-25" aria-hidden="true" tabindex="-1"></a>  <span class="do">### </span></span>
+<span id="cb328-26"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Update Sigma matrix </span></span>
+<span id="cb328-27"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-27" aria-hidden="true" tabindex="-1"></a>  <span class="do">###</span></span>
+<span id="cb328-28"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-28" aria-hidden="true" tabindex="-1"></a>  m.theta   <span class="ot">&lt;-</span> <span class="fu">matrix</span>(theta, m, p, <span class="at">byrow=</span>T)</span>
+<span id="cb328-29"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-29" aria-hidden="true" tabindex="-1"></a>  S.theta   <span class="ot">&lt;-</span> <span class="fu">t</span>(beta <span class="sc">-</span> m.theta) <span class="sc">%*%</span> (beta <span class="sc">-</span> m.theta)</span>
+<span id="cb328-30"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-30" aria-hidden="true" tabindex="-1"></a>  Sigma.inv <span class="ot">&lt;-</span> <span class="fu">rWishart</span>(<span class="dv">1</span>, eta<span class="fl">.0</span><span class="sc">+</span>m, <span class="fu">solve</span>(S<span class="fl">.0</span> <span class="sc">+</span> S.theta))[,,<span class="dv">1</span>] </span>
+<span id="cb328-31"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-31" aria-hidden="true" tabindex="-1"></a>  <span class="do">### </span></span>
+<span id="cb328-32"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Update sigma2</span></span>
+<span id="cb328-33"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-33" aria-hidden="true" tabindex="-1"></a>  <span class="do">### </span></span>
+<span id="cb328-34"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-34" aria-hidden="true" tabindex="-1"></a>  SSR <span class="ot">&lt;-</span> <span class="dv">0</span> </span>
+<span id="cb328-35"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){ SSR <span class="ot">&lt;-</span> SSR <span class="sc">+</span> <span class="fu">sum</span>( (y[[j]] <span class="sc">-</span> X[[j]] <span class="sc">%*%</span> beta[j,])<span class="sc">^</span><span class="dv">2</span> ) }</span>
+<span id="cb328-36"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-36" aria-hidden="true" tabindex="-1"></a>  sigma2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">rgamma</span>(<span class="dv">1</span>, (nu<span class="fl">.0</span> <span class="sc">+</span> <span class="fu">sum</span>(n))<span class="sc">/</span><span class="dv">2</span>, (nu<span class="fl">.0</span><span class="sc">*</span>sigma2<span class="fl">.0</span> <span class="sc">+</span> SSR)<span class="sc">/</span><span class="dv">2</span> )</span>
+<span id="cb328-37"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-37" aria-hidden="true" tabindex="-1"></a>  <span class="do">### </span></span>
+<span id="cb328-38"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-38" aria-hidden="true" tabindex="-1"></a> } <span class="co"># at every t-th scan we&#39;ll save the results</span></span>
+<span id="cb328-39"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-39" aria-hidden="true" tabindex="-1"></a> sigma2.chain[s] <span class="ot">&lt;-</span> sigma2;  </span>
+<span id="cb328-40"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-40" aria-hidden="true" tabindex="-1"></a> theta.chain[s,] <span class="ot">&lt;-</span> theta;</span>
+<span id="cb328-41"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-41" aria-hidden="true" tabindex="-1"></a> Sigma.chain[s,] <span class="ot">&lt;-</span> <span class="fu">solve</span>(Sigma.inv);</span>
+<span id="cb328-42"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-42" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){ beta.chain[s, <span class="fu">seq</span>(j, j<span class="sc">+</span>(p<span class="dv">-1</span>)<span class="sc">*</span>m, m)] <span class="ot">&lt;-</span> beta[j,] }</span>
+<span id="cb328-43"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb328-44"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb328-45"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-45" aria-hidden="true" tabindex="-1"></a>run.time <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> run.time; run.time<span class="sc">/</span><span class="dv">60</span> <span class="co">#in minutes</span></span></code></pre></div>
+<pre><code>##     user   system  elapsed 
+## 5.218067 0.008383 5.232617</code></pre>
+<p>In the <span class="math inline">\(t = 1: T\)</span> loop the values <span class="math inline">\(\boldsymbol{\beta ,~\theta,~ \Sigma},~ \sigma^2\)</span> are getting updated in each iteration but then they’re just overwritten after the <span class="math inline">\(T\)</span>-th such iteration then we save the current values in <span class="math inline">\(\texttt{beta.chain, theta.chain, Sigma.chain, sigma2.chain}\)</span></p>
+<div id="mcmc-diagnostics-2" class="section level3" number="19.4.1">
+<h3><span class="header-section-number">19.4.1</span> MCMC diagnostics</h3>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb330-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(sigma2.chain)</span>
+<span id="cb330-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb330-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(theta.chain[,<span class="dv">1</span>])</span>
+<span id="cb330-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb330-4" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(theta.chain[,<span class="dv">2</span>])</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-218-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">acf</span>(theta.chain[,<span class="dv">1</span>], <span class="at">plot=</span>F)<span class="sc">$</span>acf[<span class="dv">2</span>],</span>
+<span id="cb331-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">acf</span>(theta.chain[,<span class="dv">2</span>], <span class="at">plot=</span>F)<span class="sc">$</span>acf[<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## [1]  0.06982 -0.01460</code></pre>
+<p>Happily the autocorrelation in the resulting chain is practically nil. Zero autocorrelation means your sample has equivalent information to an independent sample.</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mcmcse)</span>
+<span id="cb333-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ess</span>(sigma2.chain)</span></code></pre></div>
+<pre><code>## [1] 1000</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ess</span>(theta.chain)</span></code></pre></div>
+<pre><code>## [1] 1000 1000</code></pre>
+</div>
+<div id="posterior-summaries" class="section level3" number="19.4.2">
+<h3><span class="header-section-number">19.4.2</span> Posterior summaries</h3>
+<p>Consider the <span class="math inline">\(\theta_2 = E(\beta_{2j})\)</span> parameter, which represents the average slope (expected additional points per SD of SES score). It is the population mean slope parameter.</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(theta.chain[,<span class="dv">2</span>], <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">25</span>, .<span class="dv">5</span>, .<span class="dv">75</span>, .<span class="dv">975</span>))</span></code></pre></div>
+<pre><code>##  2.5%   25%   50%   75% 97.5% 
+## 1.822 2.193 2.380 2.573 2.910</code></pre>
+<p>95% posterior interval for <span class="math inline">\(\theta_2\)</span> is [1.82, 2.91]</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(theta.chain[,<span class="dv">2</span>], <span class="at">adj=</span><span class="dv">2</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>, </span>
+<span id="cb339-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">E</span>(beta[<span class="st">&quot;2j&quot;</span>])<span class="sc">*</span><span class="st">&quot;=&quot;</span><span class="sc">*</span>theta[<span class="dv">2</span>]),<span class="at">ylab=</span><span class="fu">expression</span>(<span class="fu">p</span>(theta[<span class="dv">2</span>]<span class="sc">*</span><span class="st">&quot;|&quot;</span><span class="sc">*</span>y)))</span>
+<span id="cb339-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">quantile</span>(theta.chain[,<span class="dv">2</span>], <span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>)), </span>
+<span id="cb339-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb339-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-222-1.png" width="672" style="display: block; margin: auto;" />
+<span class="math inline">\(\theta_2\)</span> is surely greater than one. This means that in the population in general there is positive association between SES and score on a math test score.</p>
+</div>
+<div id="posterior-predictive-simulation" class="section level3" number="19.4.3">
+<h3><span class="header-section-number">19.4.3</span> Posterior predictive simulation</h3>
+<p>Consider a 101st school not in the sample. What can we say about our posterior predictive distribution <span class="math inline">\(p(\boldsymbol{\tilde\beta}| \boldsymbol y) = \int\int{ p(\boldsymbol{\tilde\beta} | \boldsymbol\theta, \boldsymbol\Sigma ) p( \boldsymbol{\theta, \Sigma} | \boldsymbol y)\, d\boldsymbol\theta d\boldsymbol\Sigma }\)</span></p>
+<p>To sample from this posterior predictive distribution we take our samples <span class="math inline">\(\boldsymbol\theta^{(s)}\)</span> , <span class="math inline">\(\boldsymbol\Sigma^{(s)}\)</span> which are drawn from <span class="math inline">\(p(\boldsymbol\theta, \boldsymbol\Sigma | \boldsymbol y )\)</span></p>
+<p>For each saved scan, sample <span class="math inline">\(\boldsymbol{\tilde\beta}^{(s)} \sim\)</span> Normal<span class="math inline">\(_2( \boldsymbol\theta^{(s)} , \boldsymbol\Sigma^{(s)})\)</span> for <span class="math inline">\(s = 1, …, S\)</span></p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression line for an as-yet-unsampled school</span></span>
+<span id="cb340-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-2" aria-hidden="true" tabindex="-1"></a>beta.tilde <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, p)</span>
+<span id="cb340-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb340-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>S)</span>
+<span id="cb340-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-5" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb340-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-6" aria-hidden="true" tabindex="-1"></a> beta.tilde[s,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>theta.chain[s,],</span>
+<span id="cb340-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">sigma =</span> <span class="fu">matrix</span>(Sigma.chain[s,], <span class="dv">2</span>, <span class="dv">2</span>) )</span>
+<span id="cb340-8"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb340-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">density</span>(theta.chain[,<span class="dv">2</span>], <span class="at">adj=</span><span class="dv">2</span>)<span class="sc">$</span>y )</span></code></pre></div>
+<pre><code>## [1] 1.306</code></pre>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(beta.tilde[,<span class="dv">2</span>], <span class="at">adj=</span><span class="dv">2</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.31</span>), </span>
+<span id="cb343-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;slope parameter&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;posterior density&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb343-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb343-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(theta.chain[,<span class="dv">2</span>],<span class="at">adj=</span><span class="dv">2</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb343-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb343-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
+<span id="cb343-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend=</span><span class="fu">c</span>(<span class="fu">expression</span>(theta[<span class="dv">2</span>]), <span class="fu">expression</span>(<span class="fu">tilde</span>(beta[<span class="dv">2</span>]))))</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-225-1.png" width="672" style="display: block; margin: auto;" />
+In this figure the black curve represents the distribution of possible slopes at the as yet unsampled school. The gray curve is our posterior belief about the mean of this distribution. These two curves should have the same mean. In this case it looks like they don’t due to Monte Carlo error. The sampling variability (i.e., sampling of <span class="math inline">\(\boldsymbol{\tilde\beta}\)</span> ) dominates the posterior uncertainty.</p>
+<p>The probability of a negative association between SES and score on math test at this to-be-sampled school i.e., <span class="math inline">\(Pr(\tilde\beta_2 &lt; 0 | \boldsymbol y, \mathbf X),\)</span></p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(beta.tilde[,<span class="dv">2</span>] <span class="sc">&lt;</span> <span class="dv">0</span>)  </span></code></pre></div>
+<pre><code>## [1] 0.085</code></pre>
+<p>Small. but not negligible</p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-1" aria-hidden="true" tabindex="-1"></a>beta.hat <span class="ot">&lt;-</span> <span class="fu">apply</span>(beta.chain, <span class="dv">2</span>, mean)</span>
+<span id="cb346-2"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-3"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">range</span>(nels[,<span class="dv">3</span>]), <span class="fu">range</span>(nels[,<span class="dv">4</span>]), <span class="at">type=</span><span class="st">&quot;n&quot;</span>, </span>
+<span id="cb346-4"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;SES&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Math score&quot;</span>)</span>
+<span id="cb346-5"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-6"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){ <span class="fu">abline</span>(beta.hat[<span class="fu">c</span>(j,j<span class="sc">+</span>m)], <span class="at">col=</span><span class="st">&quot;gray&quot;</span>) }</span>
+<span id="cb346-7"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-8"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb346-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">apply</span>(theta.chain, <span class="dv">2</span>, mean), <span class="at">lwd=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-227"></span>
+<img src="bayesianS21_files/figure-html/unnamed-chunk-227-1.png" alt="Summary plot of school-specific estimated regression lines, with overall average regression line overlaid" width="672" />
+<p class="caption">
+Figure 19.2: Summary plot of school-specific estimated regression lines, with overall average regression line overlaid
+</p>
+</div>
+<p>Finally, to summarize our analysis, recall from figure <a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#fig:regs">19.1</a> that we had a very noisy set of estimated regression lines. We believe an improved set of estimates is given above based on the notion of “borrowing information” across schools.</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(beta.hat[<span class="dv">101</span><span class="sc">:</span><span class="dv">200</span>] <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 0.02</code></pre>
+<p>Only 2 of the 100 schools have negative slope.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="metropolis-hastings.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bayesianS21.pdf", "bayesianS21.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

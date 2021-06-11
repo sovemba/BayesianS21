@@ -106,16 +106,17 @@ the observed data are independent of $\mu$ and $\tau^2$.
 
 <p>&nbsp;</p>
 
-<p align="center">
-![](/Users/OnyishiChisom/Documents/Rmarkdown/bayesianS21/_bookdown_files/bayesianS21_files/figure-html/hierarchy.png){width=55%}
-</p>
+Attempt at Fig. 8.2. (Hoff) A representation of the basic hierarchical normal model.
+
+$$
+\begin{array}{c}
+\mu,\tau^2 \longrightarrow \theta_1,...,\theta_{m-1},\theta_m \longrightarrow \mathbf{Y}_1,...,\mathbf{Y}_{m-1}, \mathbf{Y}_m\\[0.1cm]
+\sigma^2 \longrightarrow\mathbf{Y}_1,...,\mathbf{Y}_{m-1}, \mathbf{Y}_m\\[0.3cm]
+\end{array}
+$$
 
 
-$$\text{Figure 8.3 on page 133}$$
-
-<p>&nbsp;</p>
-
-Looking at the figure notice that
+Notice that
 
 * $\mu$ and $\tau^2$ describe the population of schools
 * the $\theta_j$ are a sample from that population 
@@ -564,8 +565,7 @@ The smaller the sample size is the greater weight is given to the overall mean r
 Interpretation: While the average score was lower at school 82 the evidence of a "low true average" is stronger for school 46 because it was based on a larger sample size.
 
 How often does this happen? 
-Looking again at figure \@ref(fig:shrink), if there were no reorderings going on, the trend would be 
-monotone i.e., you wouldn't have any jumping around. However you see some jumping around in the top right. The school with the highest $\bar y$ does not have the highest $\hat \theta$. At least two schools are higher. What schools are those? 
+Looking again at figure \@ref(fig:shrink), if there were no reorderings going on, the trend would be monotone i.e., you wouldn't have any jumping around. However you see some jumping around in the top right. The school with the highest $\bar y$ does not have the highest $\hat \theta$. At least two schools are higher. What schools are those? 
 
 ```{r}
 order(ybar)[98:100];order(theta.hat)[98:100]

@@ -63,7 +63,7 @@ E(Y|x)=\exp\{\beta_1+\beta_2x+\beta_3x^2\} >0
 $$
 
 
-## Poisson regression
+## Poisson regression {#sec:poisson}
 
 The resulting model, 
 
@@ -337,7 +337,7 @@ The right-most plot shows what happens if the proposal variance is too big. Too 
 
 
 
-## The Metropolis algorithm for Poisson regression
+## The Metropolis algorithm for Poisson regression {sec:metpois}
 
 
 $Y =$ number of offspring female bird has
@@ -483,6 +483,7 @@ for (x in 1:6)
 
 (quants <- apply(theta.chain, 2, quantile, probs=c(.025, .5, .975)))
 ```
+
 ```{r include = FALSE}
 # Theta means
 theta.mean <- matrix(rep(NA,6), ncol = 6)
