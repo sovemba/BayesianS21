@@ -184,3 +184,10 @@ bayesian-analysis-of-the-math-scores-data
 mcmc-diagnostics-2
 posterior-summaries
 posterior-predictive-simulation
+stan-poisson-regression
+intro-to-stan
+song-sparrows-reproductive-success-example
+summary
+missing-data-and-imputation-7b
+generalized-linear-mixed-eﬀects-models-11b
+improper-priors

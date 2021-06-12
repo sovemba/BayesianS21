@@ -24,7 +24,7 @@
 <meta name="author" content="Chisom Onyishi" />
 
 
-<meta name="date" content="2021-06-11" />
+<meta name="date" content="2021-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="metropolis-hastings.html"/>
-
+<link rel="next" href="stan-poisson-regression.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Bayesian statistics notes</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Belief and Probability</a>
@@ -334,6 +334,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="19.4.2" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#posterior-summaries"><i class="fa fa-check"></i><b>19.4.2</b> Posterior summaries</a></li>
 <li class="chapter" data-level="19.4.3" data-path="linear-mixed-effects-models-aka-hierarchical-linear-models.html"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#posterior-predictive-simulation"><i class="fa fa-check"></i><b>19.4.3</b> Posterior predictive simulation</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="stan-poisson-regression.html"><a href="stan-poisson-regression.html"><i class="fa fa-check"></i><b>20</b> Stan; Poisson regression</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="stan-poisson-regression.html"><a href="stan-poisson-regression.html#intro-to-stan"><i class="fa fa-check"></i><b>20.1</b> Intro to Stan</a></li>
+<li class="chapter" data-level="20.2" data-path="stan-poisson-regression.html"><a href="stan-poisson-regression.html#song-sparrows-reproductive-success-example"><i class="fa fa-check"></i><b>20.2</b> Song sparrows reproductive success example</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>21</b> Summary</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="summary.html"><a href="summary.html#missing-data-and-imputation-7b"><i class="fa fa-check"></i><b>21.1</b> Missing data and imputation; 7b</a></li>
+<li class="chapter" data-level="21.2" data-path="summary.html"><a href="summary.html#generalized-linear-mixed-eﬀects-models-11b"><i class="fa fa-check"></i><b>21.2</b> Generalized linear mixed eﬀects models; 11b</a></li>
+<li class="chapter" data-level="21.3" data-path="summary.html"><a href="summary.html#improper-priors"><i class="fa fa-check"></i><b>21.3</b> Improper priors</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -604,8 +615,8 @@ depends on the variability of the <span class="math inline">\(y_{i,j}\)</span> a
 <span id="cb328-43"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-43" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb328-44"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb328-45"><a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html#cb328-45" aria-hidden="true" tabindex="-1"></a>run.time <span class="ot">&lt;-</span> <span class="fu">proc.time</span>() <span class="sc">-</span> run.time; run.time<span class="sc">/</span><span class="dv">60</span> <span class="co">#in minutes</span></span></code></pre></div>
-<pre><code>##     user   system  elapsed 
-## 5.218067 0.008383 5.232617</code></pre>
+<pre><code>##    user  system elapsed 
+##  5.3892  0.0356  5.4441</code></pre>
 <p>In the <span class="math inline">\(t = 1: T\)</span> loop the values <span class="math inline">\(\boldsymbol{\beta ,~\theta,~ \Sigma},~ \sigma^2\)</span> are getting updated in each iteration but then they’re just overwritten after the <span class="math inline">\(T\)</span>-th such iteration then we save the current values in <span class="math inline">\(\texttt{beta.chain, theta.chain, Sigma.chain, sigma2.chain}\)</span></p>
 <div id="mcmc-diagnostics-2" class="section level3" number="19.4.1">
 <h3><span class="header-section-number">19.4.1</span> MCMC diagnostics</h3>
@@ -691,8 +702,8 @@ Figure 19.2: Summary plot of school-specific estimated regression lines, with ov
           </div>
         </div>
       </div>
-<a href="metropolis-hastings.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="metropolis-hastings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stan-poisson-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

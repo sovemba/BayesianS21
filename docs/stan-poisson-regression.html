@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Lecture 8 Normal Mean | Bayesian Statistics lecture notes</title>
-  <meta name="description" content="Lecture 8 Normal Mean | Bayesian Statistics lecture notes" />
+  <title>Lecture 20 Stan; Poisson regression | Bayesian Statistics lecture notes</title>
+  <meta name="description" content="Lecture 20 Stan; Poisson regression | Bayesian Statistics lecture notes" />
   <meta name="generator" content="bookdown 0.22.2 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Lecture 8 Normal Mean | Bayesian Statistics lecture notes" />
+  <meta property="og:title" content="Lecture 20 Stan; Poisson regression | Bayesian Statistics lecture notes" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Lecture 8 Normal Mean | Bayesian Statistics lecture notes" />
+  <meta name="twitter:title" content="Lecture 20 Stan; Poisson regression | Bayesian Statistics lecture notes" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="predictive.html"/>
-<link rel="next" href="joint-inference-for-normal-mean-and-variance.html"/>
+<link rel="prev" href="linear-mixed-effects-models-aka-hierarchical-linear-models.html"/>
+<link rel="next" href="summary.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -366,162 +366,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="normal-mean" class="section level1" number="8">
-<h1><span class="header-section-number">Lecture 8</span> Normal Mean</h1>
-<p><tt>The following notes, mostly transcribed from Neath(0512,2021) lecture, summarize sections(5.1 and 5.2) of Hoff(2009).</tt></p>
+<div id="stan-poisson-regression" class="section level1" number="20">
+<h1><span class="header-section-number">Lecture 20</span> Stan; Poisson regression</h1>
+<p><tt>The following notes are mostly transcribed from Neath(0607,2021) lecture.</tt></p>
 <p>
  
 </p>
-<p>Where we been? where we going? Binomial model? check! Poisson model? check! Normal model? Next!</p>
-<p>Unlike Binomial and Poisson which are for discrete data, the normal distribution is a continuous distribution. It is completely characterized by the mean and standard deviation. Our notation will be mean <span class="math inline">\(= \mu = \theta\)</span>, standard deviation <span class="math inline">\(= \sigma\)</span>, variance <span class="math inline">\(= \sigma^2\)</span>.</p>
-<p>Normal distribution calculations are easy to do in R use</p>
+<div id="intro-to-stan" class="section level2" number="20.1">
+<h2><span class="header-section-number">20.1</span> Intro to Stan</h2>
+<p>Do you agree with this statement: Bayesian statistics is cool?</p>
+<p>Do you agree with this statement: Bayesian model-fitting is a lot more work than just fitting likelihood methods using <span class="math inline">\(\texttt{lm()}\)</span> and <span class="math inline">\(\texttt{glm()}\)</span> and such?</p>
+<p>In recent years (beginning around 2000 or so) there is an effort under way to change this. The question is: Is it possible to create user-friendly software with reasonable defaults that will allow users who aren’t programming experts to still fit such models? The first serious effort in this movement was a package called BUGS “Bayesian Inference using Gibbs Sampler.” There’s been others such as JAGS “just another Gibbs sampler” and NIMBLE (created and maintained by a group at UC Berkeley).</p>
+<p>The current state of the art among such programs is a program called Stan. It’s very general and very powerful. The output of Stan is a set of simulations from a posterior distribution in other words <em>everything we need</em> to do Bayesian inference. As an instructor for a course in Bayesian Statistics, there’s a question I struggle with a lot in the same way that if I were teaching Calculus, a question I would struggle with is do I allow graphing calculators? The art of Calculus is learning how to analyze functions from studying but how much is that relevant today when we hold machines in the palm of our hands that do those things for us? As an instructor for Bayesian Statistics, I want for us to get a good understanding of bayesian statistical models and how the simulation is done.</p>
+<p>Is Stan user-friendly? Simple? No. It takes a considerable investment of effort to become a proficient Stan user.</p>
+<p>The big news for today is that for pretty much everything we’ve done in this course there’s an easier way Or at least a way that is potentially easier if you’re willing to invest some effort in becoming proficient in Stan. I am more than willing to invest the effort to become proficient. I just haven’t yet. Some of you are not going to be doing much of these types of analyses after this course is over. For those of you who are it pays to become proficient in Stan.</p>
+<p>How does Stan work? You have to input the data (obviously), you have to describe your model to stan e.g., the prior, the sampling models etc. But that’s it. You do not have to derive a posterior distribution. You do not have to try a whole bunch of different values of tuning parameters in your Metropolis samplers. Stan effectively does that stuff for you.</p>
+<p>What’s the down side? You gotta learn it. It’s a new language. On this front the situation is better today than even just a few years ago in that it runs quite nicely within R and not just R, there’s Python Stan and others.</p>
+<p>Stan was developed at and is maintained at Columbia! Professor Gelman is the project leader. There are a whole community of contributors and there are 3 or 4 or 5 or so full time employees of Stan. They regularly meet in Watson Hall and if you become a Stan user you become part of this community and you can pose questions to these people and participate in different conferences and activities and such. Where Stan is lagging right now; there does not exist at this time at a level appropriate for our course a textbook with a large number of worked Stan examples. But there very likely will in a couple of years.</p>
+</div>
+<div id="song-sparrows-reproductive-success-example" class="section level2" number="20.2">
+<h2><span class="header-section-number">20.2</span> Song sparrows reproductive success example</h2>
+<p>Remember the Poisson regression problem we did in section <a href="generalized-linear-models-the-metropolis-algorithm.html#sec:poisson">17.2</a>.</p>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="stan-poisson-regression.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Section 10.1 of Hoff (2009)</span></span>
+<span id="cb349-2"><a href="stan-poisson-regression.html#cb349-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 52 birds, response is &#39;fledged&#39; -- number of offspring</span></span>
+<span id="cb349-3"><a href="stan-poisson-regression.html#cb349-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictor variable is age in years (1 to 5)</span></span>
+<span id="cb349-4"><a href="stan-poisson-regression.html#cb349-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb349-5"><a href="stan-poisson-regression.html#cb349-5" aria-hidden="true" tabindex="-1"></a>fledged <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, </span>
+<span id="cb349-6"><a href="stan-poisson-regression.html#cb349-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, </span>
+<span id="cb349-7"><a href="stan-poisson-regression.html#cb349-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb349-8"><a href="stan-poisson-regression.html#cb349-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb349-9"><a href="stan-poisson-regression.html#cb349-9" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, </span>
+<span id="cb349-10"><a href="stan-poisson-regression.html#cb349-10" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, </span>
+<span id="cb349-11"><a href="stan-poisson-regression.html#cb349-11" aria-hidden="true" tabindex="-1"></a>   <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="stan-poisson-regression.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Graphical summary of data: Boxplots by age</span></span>
+<span id="cb350-2"><a href="stan-poisson-regression.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(fledged <span class="sc">~</span> <span class="fu">as.factor</span>(age), <span class="at">range=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">&quot;pink&quot;</span>, </span>
+<span id="cb350-3"><a href="stan-poisson-regression.html#cb350-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">&quot;age&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;offspring&quot;</span>)</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-231-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><span class="math display">\[
+\log E(Y_i|x_i) = \beta_1+\beta_2x_i+\beta_3x_i^2
+\]</span>
+where <span class="math inline">\(Y_i\)</span> is a sample from a Poisson distribution.</p>
+<p>In this model <span class="math inline">\(x =\)</span> age of female bird, <span class="math inline">\(Y =\)</span> number of offspring that bird had. We observed two obvious things about this association (1) it’s positive then negative i.e., it’s not monotone. So it will require a quadratic term so we have <span class="math inline">\(\beta_1 + \beta_2x + \beta_3x^2.\)</span> (2) Expected number of offspring cannot be negative so maybe we don’t say <span class="math inline">\(E(Y|x) = \beta x\)</span> because that could be negative but rather <span class="math inline">\(E(Y|x) = \exp( \beta x ).\)</span> So that’s how we got to our model. Also, a probability distribution is not completely determined by its mean hence we need a distribution assumption also. So we’ll use Poisson.</p>
+<p>Let’s see if we get similar results as before using Stan. You need to install the R package <span class="math inline">\(\texttt{rstan}\)</span>.</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="stan-poisson-regression.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rstan)</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="stan-poisson-regression.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co"># description of our model</span></span>
+<span id="cb352-2"><a href="stan-poisson-regression.html#cb352-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> fledged  </span>
+<span id="cb352-3"><a href="stan-poisson-regression.html#cb352-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb352-4"><a href="stan-poisson-regression.html#cb352-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">1</span>,n), age, age<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb352-5"><a href="stan-poisson-regression.html#cb352-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(X) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n;  </span>
+<span id="cb352-6"><a href="stan-poisson-regression.html#cb352-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>,<span class="st">&quot;x2&quot;</span>,<span class="st">&quot;x3&quot;</span>)</span>
+<span id="cb352-7"><a href="stan-poisson-regression.html#cb352-7" aria-hidden="true" tabindex="-1"></a>n           <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)[<span class="dv">1</span>]</span>
+<span id="cb352-8"><a href="stan-poisson-regression.html#cb352-8" aria-hidden="true" tabindex="-1"></a>p           <span class="ot">&lt;-</span> <span class="fu">dim</span>(X)[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="stan-poisson-regression.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model using Stan</span></span>
+<span id="cb353-2"><a href="stan-poisson-regression.html#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior is beta_j ~ indep Normal(mn=0, sd=10)</span></span>
+<span id="cb353-3"><a href="stan-poisson-regression.html#cb353-3" aria-hidden="true" tabindex="-1"></a>run.time <span class="ot">&lt;-</span> <span class="fu">proc.time</span>()</span>
+<span id="cb353-4"><a href="stan-poisson-regression.html#cb353-4" aria-hidden="true" tabindex="-1"></a>stan_model <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb353-5"><a href="stan-poisson-regression.html#cb353-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb353-6"><a href="stan-poisson-regression.html#cb353-6" aria-hidden="true" tabindex="-1"></a><span class="st">  data{</span></span>
+<span id="cb353-7"><a href="stan-poisson-regression.html#cb353-7" aria-hidden="true" tabindex="-1"></a><span class="st">   int&lt;lower=0&gt; n; </span></span>
+<span id="cb353-8"><a href="stan-poisson-regression.html#cb353-8" aria-hidden="true" tabindex="-1"></a><span class="st">   int&lt;lower=0&gt; p;</span></span>
+<span id="cb353-9"><a href="stan-poisson-regression.html#cb353-9" aria-hidden="true" tabindex="-1"></a><span class="st">   int&lt;lower=0&gt; y[n]; </span></span>
+<span id="cb353-10"><a href="stan-poisson-regression.html#cb353-10" aria-hidden="true" tabindex="-1"></a><span class="st">   matrix[n,p] X;</span></span>
+<span id="cb353-11"><a href="stan-poisson-regression.html#cb353-11" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb353-12"><a href="stan-poisson-regression.html#cb353-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb353-13"><a href="stan-poisson-regression.html#cb353-13" aria-hidden="true" tabindex="-1"></a><span class="st">  parameters{</span></span>
+<span id="cb353-14"><a href="stan-poisson-regression.html#cb353-14" aria-hidden="true" tabindex="-1"></a><span class="st">   vector[p] beta;</span></span>
+<span id="cb353-15"><a href="stan-poisson-regression.html#cb353-15" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb353-16"><a href="stan-poisson-regression.html#cb353-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb353-17"><a href="stan-poisson-regression.html#cb353-17" aria-hidden="true" tabindex="-1"></a><span class="st">  model{</span></span>
+<span id="cb353-18"><a href="stan-poisson-regression.html#cb353-18" aria-hidden="true" tabindex="-1"></a><span class="st">   beta ~ normal(0, 10);</span></span>
+<span id="cb353-19"><a href="stan-poisson-regression.html#cb353-19" aria-hidden="true" tabindex="-1"></a><span class="st">   y ~ poisson_log(X*beta);</span></span>
+<span id="cb353-20"><a href="stan-poisson-regression.html#cb353-20" aria-hidden="true" tabindex="-1"></a><span class="st">  }</span></span>
+<span id="cb353-21"><a href="stan-poisson-regression.html#cb353-21" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="stan-poisson-regression.html#cb354-1" aria-hidden="true" tabindex="-1"></a>data     <span class="ot">&lt;-</span>  <span class="fu">list</span>(<span class="at">n=</span>n, <span class="at">p=</span>p, <span class="at">y=</span>y, <span class="at">X=</span>X);</span>
+<span id="cb354-2"><a href="stan-poisson-regression.html#cb354-2" aria-hidden="true" tabindex="-1"></a>fit_stan <span class="ot">&lt;-</span> <span class="fu">stan</span>(<span class="at">model_code=</span>stan_model, <span class="at">data=</span>data, </span>
+<span id="cb354-3"><a href="stan-poisson-regression.html#cb354-3" aria-hidden="true" tabindex="-1"></a> <span class="at">chains=</span><span class="dv">1</span>, <span class="at">iter=</span><span class="dv">6000</span>, <span class="at">warmup=</span><span class="dv">1000</span>, <span class="at">refresh =</span> <span class="dv">0</span>) </span>
+<span id="cb354-4"><a href="stan-poisson-regression.html#cb354-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-5"><a href="stan-poisson-regression.html#cb354-5" aria-hidden="true" tabindex="-1"></a>(<span class="fu">proc.time</span>() <span class="sc">-</span> run.time)<span class="sc">/</span><span class="dv">60</span> <span class="co"># elapsed time in minutes</span></span></code></pre></div>
+<pre><code>##    user  system elapsed 
+##  0.4337  0.0276  0.4857</code></pre>
+<p>A stan model requires three components: (1) data statement (Tell stan what values are known), (2) parameters statements (tell stan what’s unknown) and (3) the model statement <span class="math inline">\(\texttt{y ~ Poisson_log(X*beta)}\)</span> <span class="math inline">\(y\)</span> is Poisson with log expected value of <span class="math inline">\(\beta x\)</span>.</p>
+<p>“warmup” in Stan is the same thing we called “burn-in” before.</p>
+<p>
+ 
+</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="stan-poisson-regression.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_stan)<span class="sc">$</span>summary</span></code></pre></div>
+<pre><code>##             mean  se_mean      sd      2.5%       25%      50%      75%
+## beta[1]   0.2234 0.014585 0.43475  -0.67380  -0.06354   0.2371   0.5271
+## beta[2]   0.7190 0.011342 0.33310   0.09595   0.48920   0.7101   0.9465
+## beta[3]  -0.1412 0.001888 0.05707  -0.25690  -0.17946  -0.1395  -0.1030
+## lp__    -12.6975 0.036345 1.17219 -15.85503 -13.26755 -12.4025 -11.8346
+##             97.5%  n_eff Rhat
+## beta[1]   1.02925  888.5    1
+## beta[2]   1.39610  862.6    1
+## beta[3]  -0.03493  913.3    1
+## lp__    -11.35609 1040.2    1</code></pre>
+<p>We have 5,000 samples for the posterior distribution <span class="math inline">\(p(\beta | y, X)\)</span></p>
 <ul>
-<li> for density values</li>
-<li> for cdf-values; <span class="math inline">\(Pr(Y \le y | \theta, \sigma^2) = \texttt{pnorm}(y, \texttt{mean}=\theta, \texttt{sd} =\sqrt{\sigma^2} )\)</span></li>
+<li><span class="math inline">\(\texttt{se_mean = sd/sqrt{n_eff}}\)</span>.</li>
+<li><span class="math inline">\(\texttt{Rhat}\)</span> is a thing called the Gelman-Rubin statistic it’s a diagnostic of a not-yet-converged markov chain. If it’s bigger than 1.10 or so indicates you haven’t run the chain long enough.</li>
+<li>The last row of this table is a thing we haven’t talked about (and won’t)</li>
 </ul>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="normal-mean.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reproduce Figure 5.1 of Hoff (2009)</span></span>
-<span id="cb64-2"><a href="normal-mean.html#cb64-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, .<span class="dv">05</span>)</span>
-<span id="cb64-3"><a href="normal-mean.html#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="normal-mean.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y, <span class="fu">dnorm</span>(y, <span class="at">mean=</span><span class="dv">2</span>, <span class="at">sd=</span>.<span class="dv">5</span>), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">2</span>, </span>
-<span id="cb64-5"><a href="normal-mean.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">&quot;black&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;y&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;p(y|theta, sigma2)&quot;</span>);<span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
-<span id="cb64-6"><a href="normal-mean.html#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(y, <span class="fu">dnorm</span>(y, <span class="at">mean=</span><span class="dv">5</span>, <span class="at">sd=</span><span class="dv">2</span>), <span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span>
-<span id="cb64-7"><a href="normal-mean.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(y, <span class="fu">dnorm</span>(y, <span class="at">mean=</span><span class="dv">7</span>, <span class="at">sd=</span><span class="dv">1</span>), <span class="at">lty=</span><span class="dv">3</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb64-8"><a href="normal-mean.html#cb64-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
-<span id="cb64-9"><a href="normal-mean.html#cb64-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">legend=</span>legend)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
-<img src="bayesianS21_files/figure-html/unnamed-chunk-40-1.png" alt="Some normal densities." width="672" />
-<p class="caption">
-Figure 8.1: Some normal densities.
+<p>
+ 
 </p>
-</div>
-<p>A justification for the frequency with which the normal distribution is encountered in real-world applications is that any variable that is itself a sum or an average of a whole bunch of other variables (not necessarily observable quantities) will be well approximated by a normal distribution that’s because of the Central Limit Theorem. In practice, this means that the normal sampling model will be appropriate for data that result from the additive effects of a large number of factors.</p>
-<div id="example-womens-height" class="section level2" number="8.1">
-<h2><span class="header-section-number">8.1</span> Example: women’s height</h2>
-<p>1893 through 1989 (end of 19th century) women’s heights in inches in England.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="normal-mean.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(alr4)</span>
-<span id="cb65-2"><a href="normal-mean.html#cb65-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> Heights<span class="sc">$</span>dheight</span>
-<span id="cb65-3"><a href="normal-mean.html#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(y), <span class="fu">sd</span>(y))</span></code></pre></div>
-<pre><code>## [1] 63.751055  2.600053</code></pre>
-<p>You don’t need to have an argument like 05a slide 7 at the ready to justify using a normal distribution. If you have enough observations plot the data and see! If the histogram looks like a bell curve or even better if the “normal probability plot” or the so-called QQ-plot which stands for quantile-quantile resembles a straight line then a normal model is appropriate.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="normal-mean.html#cb67-1" aria-hidden="true" tabindex="-1"></a>yvals <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(y)<span class="sc">*</span><span class="fl">0.95</span>, <span class="fu">max</span>(y)<span class="sc">*</span><span class="fl">1.05</span>, <span class="at">length=</span><span class="dv">100</span>)</span>
-<span id="cb67-2"><a href="normal-mean.html#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-3"><a href="normal-mean.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y, <span class="at">freq=</span>F, <span class="at">right=</span>F, <span class="at">breaks=</span><span class="dv">20</span>, <span class="at">xlab=</span><span class="st">&quot;Height in inches&quot;</span>, </span>
-<span id="cb67-4"><a href="normal-mean.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">&quot;&quot;</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>, <span class="at">col=</span><span class="st">&quot;gray&quot;</span>)</span>
-<span id="cb67-5"><a href="normal-mean.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(y), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb67-6"><a href="normal-mean.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(yvals, <span class="fu">dnorm</span>(yvals, <span class="fu">mean</span>(y), <span class="fu">sd</span>(y)), <span class="at">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb67-7"><a href="normal-mean.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;population&quot;</span>,<span class="st">&quot;sample&quot;</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="st">&quot;red&quot;</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">bty=</span><span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-42"></span>
-<img src="bayesianS21_files/figure-html/unnamed-chunk-42-1.png" alt="Height data and a normal density" width="672" />
-<p class="caption">
-Figure 8.2: Height data and a normal density
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="stan-poisson-regression.html#cb358-1" aria-hidden="true" tabindex="-1"></a>Results <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit_stan)<span class="sc">$</span>summary[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb358-2"><a href="stan-poisson-regression.html#cb358-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(Results, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##          2.5%   25%   50%   75% 97.5%
+## beta[1] -0.67 -0.06  0.24  0.53  1.03
+## beta[2]  0.10  0.49  0.71  0.95  1.40
+## beta[3] -0.26 -0.18 -0.14 -0.10 -0.03</code></pre>
+<p>
+ 
 </p>
-</div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="normal-mean.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(y)</span></code></pre></div>
-<p><img src="bayesianS21_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="inference-for-the-mean-conditional-on-the-variance" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> Inference for the mean, conditional on the variance</h2>
-<p>Our interest in this course is; How do you do Bayesian inference about the mean <span class="math inline">\(\theta\)</span> and the variance <span class="math inline">\(\sigma^2\)</span> in a normal model.
-<span class="math display">\[
-p(y_1,...,y_n|\theta, \sigma^2)=\left(2 \pi \sigma^{2}\right)^{-n / 2} \exp \left\{-\frac{1}{2} \sum\left(\frac{{y_{i}-\theta}}{\sigma}\right)^{2}\right\}
-\]</span></p>
-<p>From this we can see a two-dimensional sufficient statistic. Because the density only depends on the data set through <span class="math inline">\(\sum y_i\)</span> and <span class="math inline">\(\sum y_i^2\)</span>. That means <span class="math inline">\(\sum y_i\)</span> and <span class="math inline">\(\sum y_i^2\)</span> are a sufficient statistic and since there exists a one to one mapping between these two statistics and <span class="math inline">\((\bar y, s^2)\)</span> that means <span class="math inline">\((\bar y, s^2)\)</span> is a sufficient statistic.
-<span class="math display">\[\bar y=\frac{1}{n}\sum y_i ~; \quad s^2=\frac{1}{n-1}\sum(y_i-\bar y)^2\]</span>
-This is a feature of the normal distribution. We will take the problem of inference about <span class="math inline">\((\bar y, s^2)\)</span> and break it into two pieces.</p>
-<p>How will we do that? We will write</p>
-<p><span class="math inline">\(p(\theta , \sigma^2 | y_1, …, y_n)= p(\theta | \sigma^2, y_1, …, y_n) \times p( \sigma^2 | y_1, …, y_n).\)</span></p>
-<p>Today we will only work on the first one; that is “inference about the mean of a normal distribution assuming the variance is known” or equivalently “inference about the normal mean conditional on the variance.”</p>
-<p><span class="math display">\[
-p(y_1,...,y_n|\theta,\sigma^2) = c\times e^{-\frac{1}{2\sigma^2}\sum (y_i - \theta)^2}  \propto  e^{c_1(\theta - c_2)^2}
-\]</span></p>
-<p>The “likelihood” as a function of <span class="math inline">\(\theta\)</span> is <span class="math inline">\(e^{\text{quadratic in }\theta}.\)</span> So the conjugate prior <span class="math inline">\(p(\theta|\sigma^2)\)</span> will be a distribution whose density consists of <span class="math inline">\(e^{\text{quadratic in }\theta}\)</span>. What probability distribution has a density that is <span class="math inline">\(e^{\text{quadratic thing }}?\)</span> The normal distribution! We have just proven the conjugate prior for the mean in a normal sampling model is the normal distribution.</p>
-<p>Suppose <span class="math inline">\(\theta \sim \text{Normal}( \mu_0, \tau_0^2 ),\)</span> where <span class="math inline">\(\tau_0^2\)</span> is the prior variance, <span class="math inline">\(\{Y_1, …, Y_n | \theta\}\sim\text{iid Normal}( \theta, \sigma^2)\)</span> (where <span class="math inline">\(\sigma^2\)</span> is known) then <span class="math inline">\(\{\theta | y_1, …., y_n\} \sim \text{Normal}\)</span> because it’s a conjugate prior. i.e.,</p>
-<p><span class="math display">\[
-p(\theta | y_1, …, y_n, \sigma^2) \propto \exp\bigg\{ -\frac{1}{2} \bigg( \frac{\theta-b/a}{1/\sqrt{a}}\bigg)^2 \bigg\}
-\]</span></p>
-<p>where <span class="math inline">\(a = (1/\tau_0^2)+(n/\sigma^2) \text{ and } b = (\mu_0/\tau_0^2)+(\sum y_i/\sigma^2).\)</span> Thus <span class="math inline">\(p(\theta | y, \sigma^2)\)</span> has the same shape as a normal density with mean of <span class="math inline">\(b/a\)</span> and a standard deviation of <span class="math inline">\(1/\sqrt a\)</span> therefore <span class="math inline">\(\{\theta | y, \sigma^2\}\)</span> is normally distributed with mean <span class="math inline">\(= b/a\)</span> and sd <span class="math inline">\(= 1/\sqrt a.\)</span> So we have <span class="math inline">\(\{\theta | y_1, …, y_n , \sigma^2\} \sim \text{ Normal}(\mu_n , \tau_n^2)\)</span>.</p>
-<p>So there’s a very sensible notational convention being employed here <span class="math inline">\(\mu_0\)</span> is prior mean (after observing 0 data) <span class="math inline">\(\mu_n\)</span> is posterior mean after observing <span class="math inline">\(n\)</span> data points. <span class="math inline">\(\tau_0^2\)</span> is the prior variance prior to observing data (after observing 0 cases), <span class="math inline">\(\tau_n^2\)</span> is the variance after observing the data <span class="math inline">\(n\)</span> observations. <span class="math inline">\(\tau_n^2 &lt; \tau_0^2, ~~\mu_n\)</span> should be an average between <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\bar y\)</span>.</p>
-<p>Let’s interpret the parameters in the posterior distribution. First for the posterior variance we have; <span class="math inline">\(1 / \tau_n^2 = 1 / \tau_0^2 + n / \sigma^2\)</span>. It’s not the variances that add together, it’s the inverses added together, which makes sense because the uncertainty is decreasing.</p>
-<p>Definition: <strong>precision</strong> = 1 / variance. Think of precision as quantifying information and we have; posterior information = prior information + data information = <span class="math inline">\((1/\tau_0^2)+(n/\sigma^2)=a\)</span>. Data information = information in <span class="math inline">\(n\)</span> observations times the information in a single observation. Data information is also the information in a single observation of <span class="math inline">\(\bar y,~ \bar y \sim \text{Normal}(\theta, \sigma^2 / n)\)</span> so the variance of <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(\sigma^2 / n\)</span> so the precision for <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(n / \sigma^2\)</span> so the information contained in <span class="math inline">\(\bar y\)</span> is <span class="math inline">\(n / \sigma^2=\)</span> data information.</p>
-<p>What about the posterior mean?
-<span class="math display">\[
-\mu_{n}=\frac{1/{\tau}_{0}^{2}}{1/{\tau}_{0}^{2}+n/{\sigma}^{2}} \mu_{0}+\frac{n/{\sigma}^{2}}{1/{\tau}_{0}^{2}+n /{\sigma}^{2}} \bar{y}
-\]</span></p>
-<p><span class="math inline">\(\mu_n =\)</span> weighted average of <span class="math inline">\(\mu_0\)</span> and <span class="math inline">\(\bar y\)</span>. Weight given to <span class="math inline">\(\mu_0\)</span> is proportional to <span class="math inline">\(1/\tau_0^2\)</span>(the prior precision), weight given to <span class="math inline">\(\bar y\)</span> is proportional to <span class="math inline">\(n / \sigma^2\)</span> the “data information.”</p>
-</div>
-<div id="prediction-1" class="section level2" number="8.3">
-<h2><span class="header-section-number">8.3</span> Prediction</h2>
-<p>Let <span class="math inline">\(\tilde Y\)</span> be an (<span class="math inline">\(n+1\)</span>)st observation that has not as yet been observed but which we wish to predict based on observed values of <span class="math inline">\(Y_1, …, Y_n\)</span>. To find the posterior predictive distribution, we use the fact that</p>
-<p><span class="math display">\[
-\tilde Y|\theta,\sigma^2 \sim N(\theta, \tilde e) \iff \tilde Y=\theta + \tilde e \text{ where } \tilde e \sim N(\theta, \sigma^2)
-\]</span>
-The posterior predictive mean and variance of <span class="math inline">\(\tilde Y\)</span> are</p>
-<p><span class="math display">\[
-\begin{aligned}
-\mathrm{E}\left[\tilde{Y} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] &amp;=\mathrm{E}\left[\theta+\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
-&amp;=\mathrm{E}\left[\theta \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right]+\mathrm{E}\left[\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
-&amp;=\mu_{n}+0=\mu_{n}
-\end{aligned}
-\]</span>
-and</p>
-<p><span class="math display">\[
-\begin{aligned}
-\operatorname{Var}\left[\tilde{Y} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] &amp;=\operatorname{Var}\left[\theta+\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
-&amp;=\operatorname{Var}\left[\theta \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right]+\operatorname{Var}\left[\tilde{\epsilon} \mid y_{1}, \ldots, y_{n}, \sigma^{2}\right] \\
-&amp;=\tau_{n}^{2}+\sigma^{2}
-\end{aligned}
-\]</span></p>
-<p>So <span class="math inline">\(\{\tilde Y | y_1, …., y_n, \sigma^2\} \sim \text{Normal}(\mu_n, \tau_n^2+\sigma^2).\)</span> Note that there are two sources of uncertainty (variance) in our predictions (1) we don’t know what <span class="math inline">\(\theta\)</span> is! <span class="math inline">\(\theta|y \sim \text{Normal}(\mu_n , \tau_n^2 )\)</span> (2) even if we knew <span class="math inline">\(\theta\)</span> exactly <span class="math inline">\(\tilde Y \sim \text{Normal}( \theta , \sigma^2 )\)</span> won’t equal <span class="math inline">\(\theta\)</span> exactly.</p>
-</div>
-<div id="example-midge-wing-length" class="section level2" number="8.4">
-<h2><span class="header-section-number">8.4</span> Example: Midge wing length</h2>
-<p>Goal is: Estimate the mean wing length for a species of midge (a fly), i.e., we wish to make inference about the population mean <span class="math inline">\(\theta\)</span>.</p>
-<p>Current data: <span class="math inline">\(n = 9\)</span> observations, <span class="math inline">\(\bar y = 1.804\)</span></p>
-<p>Prior information : For other similar species the mean wing length is about <span class="math inline">\(1.9\)</span>mm so this will be our prior mean <span class="math inline">\(\mu_0\)</span>.</p>
-<p>In this case, <span class="math inline">\(\theta =\)</span> mean wing length, which means <span class="math inline">\(Pr(\theta &gt; 0) = 1.\)</span> This is not a property of the normal model since the normal model spans both negative and positive values. So we need to find a way to get our prior to have mass only on <span class="math inline">\(\theta &gt; 0\)</span>. Our prior variance is gotten by; back into <span class="math inline">\(\tau_0\)</span> so that prior probability of <span class="math inline">\(\theta &lt; 0\)</span> is small. So we want</p>
-<p><span class="math display">\[
-\mu_0-2\tau_0&gt;0\implies1.9&gt;2\tau_0\implies 0.95 &gt; \tau_0
-\]</span></p>
-<p>So we will use <span class="math inline">\(\tau_0 = .95\)</span> as our prior variance.</p>
-<p>We have a prior distribution <span class="math inline">\(\theta \sim \text{Normal}( \mu_0 = 1.9,\tau_0^2 = .95^2)\)</span>, we have data <span class="math inline">\(\{Y_1, …, Y_9 | \theta\} \sim \text{ iid Normal}(\theta, \sigma^2)\)</span>. The posterior is <span class="math inline">\(\{\theta | y_1, …, y_9, \sigma^2\} \sim \text{Normal}( \mu_n, \tau_n^2 )\)</span> where <span class="math inline">\(1/\tau_n^2 = (1 / \tau_0^2) + (n/\sigma^2).\)</span></p>
-<p>We need <span class="math inline">\(\sigma^2\)</span> to finish this problem. Set <span class="math inline">\(\sigma^2 = \text{sample variance} = s^2\)</span>.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="normal-mean.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb69-2"><a href="normal-mean.html#cb69-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.64</span>, <span class="fl">1.70</span>, <span class="fl">1.72</span>, <span class="fl">1.74</span>, <span class="fl">1.82</span>, <span class="fl">1.82</span>, <span class="fl">1.82</span>, <span class="fl">1.90</span>, <span class="fl">2.08</span>)</span>
-<span id="cb69-3"><a href="normal-mean.html#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior </span></span>
-<span id="cb69-4"><a href="normal-mean.html#cb69-4" aria-hidden="true" tabindex="-1"></a>mu<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fl">1.9</span>;  tau<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fl">0.95</span>;  tau2<span class="fl">.0</span> <span class="ot">&lt;-</span> tau<span class="fl">.0</span><span class="sc">^</span><span class="dv">2</span>;</span>
-<span id="cb69-5"><a href="normal-mean.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculations</span></span>
-<span id="cb69-6"><a href="normal-mean.html#cb69-6" aria-hidden="true" tabindex="-1"></a>ybar   <span class="ot">&lt;-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb69-7"><a href="normal-mean.html#cb69-7" aria-hidden="true" tabindex="-1"></a>s2     <span class="ot">&lt;-</span> <span class="fu">var</span>(y) <span class="co"># = sum((y-mean(y))^2)/(length(y)-1)</span></span>
-<span id="cb69-8"><a href="normal-mean.html#cb69-8" aria-hidden="true" tabindex="-1"></a>n      <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb69-9"><a href="normal-mean.html#cb69-9" aria-hidden="true" tabindex="-1"></a>sigma  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(s2)</span>
-<span id="cb69-10"><a href="normal-mean.html#cb69-10" aria-hidden="true" tabindex="-1"></a>mu.n   <span class="ot">&lt;-</span> (mu<span class="fl">.0</span><span class="sc">/</span>tau2<span class="fl">.0</span> <span class="sc">+</span> n<span class="sc">*</span>ybar<span class="sc">/</span>s2) <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>tau2<span class="fl">.0</span> <span class="sc">+</span> n<span class="sc">/</span>s2) </span>
-<span id="cb69-11"><a href="normal-mean.html#cb69-11" aria-hidden="true" tabindex="-1"></a>tau2.n <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span><span class="sc">/</span>tau2<span class="fl">.0</span> <span class="sc">+</span> n<span class="sc">/</span>s2) </span>
-<span id="cb69-12"><a href="normal-mean.html#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(ybar, s2)</span></code></pre></div>
-<pre><code>## [1] 1.80444 0.01688</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="normal-mean.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mu.n, tau2.n)</span></code></pre></div>
-<pre><code>## [1] 1.804643 0.001871</code></pre>
-<p>So <span class="math inline">\(\{\theta|y_1,...,y_9,\sigma^2=0.017\} \sim \text{Normal}(1.805,0.002)\)</span></p>
-<p>Notice <span class="math inline">\(\bar y = 1.804,\)</span> <span class="math inline">\(\mu_0 = 1.9,\)</span> and <span class="math inline">\(\mu_0 = 1.805.\)</span> So we’re giving a lot more weight to the data than to the prior. This makes sense because our 9 observations are from the species we’re interested in. However, our prior was a similar species but not the one we’re interested in.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="normal-mean.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% posterior interval; qnorm(c(.025, .975), mu.n, sqrt(tau2.n))</span></span>
-<span id="cb73-2"><a href="normal-mean.html#cb73-2" aria-hidden="true" tabindex="-1"></a>(CI <span class="ot">&lt;-</span> mu.n<span class="sc">+</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fl">1.96</span><span class="sc">*</span><span class="fu">sqrt</span>(tau2.n))</span></code></pre></div>
-<pre><code>## [1] 1.720 1.889</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="normal-mean.html#cb75-1" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">4</span>, .<span class="dv">01</span>)</span>
-<span id="cb75-2"><a href="normal-mean.html#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-3"><a href="normal-mean.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(theta, <span class="fu">dnorm</span>(theta, <span class="at">mean=</span>mu.n, <span class="at">sd=</span><span class="fu">sqrt</span>(tau2.n)), </span>
-<span id="cb75-4"><a href="normal-mean.html#cb75-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">ylab=</span><span class="st">&quot;p(theta|y,sigma2=0.017)&quot;</span>)</span>
-<span id="cb75-5"><a href="normal-mean.html#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(theta, <span class="fu">dnorm</span>(theta, <span class="at">mean=</span>mu<span class="fl">.0</span>, <span class="at">sd=</span><span class="fu">sqrt</span>(tau2<span class="fl">.0</span>)), </span>
-<span id="cb75-6"><a href="normal-mean.html#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&quot;gray&quot;</span>)</span>
-<span id="cb75-7"><a href="normal-mean.html#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>CI, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>)</span>
-<span id="cb75-8"><a href="normal-mean.html#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;black&quot;</span>), </span>
-<span id="cb75-9"><a href="normal-mean.html#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Prior&quot;</span>, <span class="st">&quot;Posterior&quot;</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
-<img src="bayesianS21_files/figure-html/unnamed-chunk-46-1.png" alt="Prior and conditional posterior distributions for the population mean wing length." width="672" />
-<p class="caption">
-Figure 8.3: Prior and conditional posterior distributions for the population mean wing length.
+<p>If you want the samples themselves easy enough</p>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="stan-poisson-regression.html#cb360-1" aria-hidden="true" tabindex="-1"></a>beta.sims <span class="ot">&lt;-</span> <span class="fu">extract</span>(fit_stan)<span class="sc">$</span>beta;<span class="fu">head</span>(beta.sims,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##           
+## iterations    [,1]   [,2]    [,3]
+##       [1,] -0.1908 0.8781 -0.1561
+##       [2,]  0.1824 0.6834 -0.1295
+##       [3,]  0.2664 0.6443 -0.1268</code></pre>
+<p>The rows are iterations of the sampler the columns are the three components of <span class="math inline">\(\boldsymbol\beta\)</span>.</p>
+<p>
+ 
 </p>
-</div>
-<p>We have very high posterior belief that the mean wing length is close to 1.8.</p>
-<p>In this example, we were pretending that the population variance <span class="math inline">\(\sigma^2\)</span> (variance of midge wing lengths ) was known to be <span class="math inline">\(s^2 =0.017\)</span>. In fact we don’t know it! As a result, it is possible that this interval is narrower than it should be because it fails to account for our uncertainty about the population variance <span class="math inline">\(\sigma^2.\)</span> We deal with this in the next lecture.</p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="stan-poisson-regression.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make trace plots of the first 1000 updates</span></span>
+<span id="cb362-2"><a href="stan-poisson-regression.html#cb362-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,p))</span>
+<span id="cb362-3"><a href="stan-poisson-regression.html#cb362-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb362-4"><a href="stan-poisson-regression.html#cb362-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){ </span>
+<span id="cb362-5"><a href="stan-poisson-regression.html#cb362-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(beta.sims[<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>,j], <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;iteration&quot;</span>, </span>
+<span id="cb362-6"><a href="stan-poisson-regression.html#cb362-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">ylab=</span><span class="fu">paste</span>(<span class="st">&quot;beta_&quot;</span>, j, <span class="at">sep=</span><span class="st">&quot;&quot;</span>), <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb362-7"><a href="stan-poisson-regression.html#cb362-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-239-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="stan-poisson-regression.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample autocorrelation functions</span></span>
+<span id="cb363-2"><a href="stan-poisson-regression.html#cb363-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,p))</span>
+<span id="cb363-3"><a href="stan-poisson-regression.html#cb363-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb363-4"><a href="stan-poisson-regression.html#cb363-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){</span>
+<span id="cb363-5"><a href="stan-poisson-regression.html#cb363-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">acf</span>(beta.sims[,j], <span class="at">main=</span><span class="fu">paste</span>(<span class="st">&quot;beta_&quot;</span>, j, <span class="at">sep=</span><span class="st">&quot;&quot;</span>))</span>
+<span id="cb363-6"><a href="stan-poisson-regression.html#cb363-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-240-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Whatever Stan is doing is better than the Metropolis algorithm. the autocorrelation is basically zero! Stan is doing a thing called <strong>Hamiltonian Monte Carlo</strong> which is not unrelated to Metropolis-Hastings but it’s not Metropolis-Hastings.</p>
+<p>
+ 
+</p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="stan-poisson-regression.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Approximate posterior densites of beta1, beta2, beta3</span></span>
+<span id="cb364-2"><a href="stan-poisson-regression.html#cb364-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,p))</span>
+<span id="cb364-3"><a href="stan-poisson-regression.html#cb364-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb364-4"><a href="stan-poisson-regression.html#cb364-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){ </span>
+<span id="cb364-5"><a href="stan-poisson-regression.html#cb364-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(<span class="fu">density</span>(beta.sims[,j], <span class="at">adj=</span><span class="dv">2</span>), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb364-6"><a href="stan-poisson-regression.html#cb364-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">xlab=</span><span class="fu">paste</span>(<span class="st">&quot;beta_&quot;</span>, j, <span class="at">sep=</span><span class="st">&quot;&quot;</span>), <span class="at">ylab=</span><span class="st">&quot;p(beta|y)&quot;</span>)</span>
+<span id="cb364-7"><a href="stan-poisson-regression.html#cb364-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-241-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+ 
+</p>
+<p>Posterior inference for <span class="math inline">\(E(Y|x) = \beta_1 + \beta_2x + \beta_3x^2\)</span></p>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="stan-poisson-regression.html#cb365-1" aria-hidden="true" tabindex="-1"></a>S                    <span class="ot">&lt;-</span> <span class="fu">dim</span>(beta.sims)[<span class="dv">1</span>]</span>
+<span id="cb365-2"><a href="stan-poisson-regression.html#cb365-2" aria-hidden="true" tabindex="-1"></a>theta.sims           <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, S, <span class="dv">6</span>)</span>
+<span id="cb365-3"><a href="stan-poisson-regression.html#cb365-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(theta.sims) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>S;  </span>
+<span id="cb365-4"><a href="stan-poisson-regression.html#cb365-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(theta.sims) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;theta_&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">sep=</span><span class="st">&quot;&quot;</span>);</span>
+<span id="cb365-5"><a href="stan-poisson-regression.html#cb365-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb365-6"><a href="stan-poisson-regression.html#cb365-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb365-7"><a href="stan-poisson-regression.html#cb365-7" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb365-8"><a href="stan-poisson-regression.html#cb365-8" aria-hidden="true" tabindex="-1"></a> theta.sims[,x] <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">as.vector</span>(beta.sims <span class="sc">%*%</span> <span class="fu">c</span>(<span class="dv">1</span>, x, x<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb365-9"><a href="stan-poisson-regression.html#cb365-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb365-10"><a href="stan-poisson-regression.html#cb365-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb365-11"><a href="stan-poisson-regression.html#cb365-11" aria-hidden="true" tabindex="-1"></a>quants <span class="ot">&lt;-</span> <span class="fu">apply</span>(theta.sims, <span class="dv">2</span>, quantile, <span class="at">probs=</span><span class="fu">c</span>(.<span class="dv">025</span>, .<span class="dv">5</span>, .<span class="dv">975</span>))</span>
+<span id="cb365-12"><a href="stan-poisson-regression.html#cb365-12" aria-hidden="true" tabindex="-1"></a>quants</span></code></pre></div>
+<pre><code>##       theta_1 theta_2 theta_3 theta_4 theta_5 theta_6
+## 2.5%    1.498   2.370   2.362   1.831  0.8006  0.1942
+## 50%     2.251   2.999   3.042   2.326  1.3426  0.5873
+## 97.5%   3.156   3.764   3.845   2.915  2.1010  1.5463</code></pre>
+<p>Do the results agree with what we did in a previous lecture – <a href="#sec:metpois"><strong>??</strong></a>?</p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="stan-poisson-regression.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(<span class="fu">t</span>(quants), <span class="at">type=</span><span class="st">&quot;b&quot;</span>, <span class="at">pch=</span><span class="dv">19</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">2</span>, </span>
+<span id="cb367-2"><a href="stan-poisson-regression.html#cb367-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;pink&quot;</span>, <span class="st">&quot;black&quot;</span>, <span class="st">&quot;pink&quot;</span>), <span class="at">xlab=</span><span class="st">&quot;age x&quot;</span>, </span>
+<span id="cb367-3"><a href="stan-poisson-regression.html#cb367-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">&quot;E(Y|x)&quot;</span>, <span class="at">main=</span><span class="st">&quot;Expected offspring by age&quot;</span>)</span>
+<span id="cb367-4"><a href="stan-poisson-regression.html#cb367-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb367-5"><a href="stan-poisson-regression.html#cb367-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">inset=</span>.<span class="dv">05</span>, <span class="at">pch=</span><span class="dv">19</span>, <span class="at">lty=</span><span class="dv">1</span>, <span class="at">lwd=</span><span class="dv">2</span>, </span>
+<span id="cb367-6"><a href="stan-poisson-regression.html#cb367-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;pink&quot;</span>), </span>
+<span id="cb367-7"><a href="stan-poisson-regression.html#cb367-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;Posterior median&quot;</span>, <span class="st">&quot;95% posterior interval&quot;</span>),<span class="at">cex=</span><span class="fl">0.7</span>)</span></code></pre></div>
+<p><img src="bayesianS21_files/figure-html/unnamed-chunk-243-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>They sure do. Pretty much perfect agreement!</p>
 
 </div>
 </div>
@@ -530,8 +555,8 @@ Figure 8.3: Prior and conditional posterior distributions for the population mea
           </div>
         </div>
       </div>
-<a href="predictive.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="joint-inference-for-normal-mean-and-variance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="linear-mixed-effects-models-aka-hierarchical-linear-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

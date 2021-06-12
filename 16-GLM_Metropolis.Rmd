@@ -337,7 +337,7 @@ The right-most plot shows what happens if the proposal variance is too big. Too 
 
 
 
-## The Metropolis algorithm for Poisson regression {sec:metpois}
+## The Metropolis algorithm for Poisson regression {#sec:metpois}
 
 
 $Y =$ number of offspring female bird has
